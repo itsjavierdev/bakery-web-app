@@ -1,9 +1,8 @@
 <x-guest>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
 
+    @push('pagetitle', 'Restablecer contraseña')
+
+    <x-authentication-card>
         <x-inputs.validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('password.update') }}">

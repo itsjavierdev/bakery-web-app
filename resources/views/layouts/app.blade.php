@@ -6,43 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@stack('pagetitle')</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/icons.css'])
 
     <!-- Styles -->
     @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
-    <x-banner />
+    <x-message-alert />
 
-    <div class="min-h-screen bg-gray-100">
-        @livewire('livewire.navigation-menu')
+    <div class="flex bg-white md:bg-gray-100" id="wrapper">
 
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
+        <x-sidebar>
+            @livewire('livewire.navigation-menu')
+        </x-sidebar>
 
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
+        <div id="body" class="w-full h-screen overflow-y-auto scroll-smooth scrollbar-index">
+            <div class="md:shadow-md md:bg-white md:rounded-lg md:my-2 md:me-2 relative min-h-[98%]">
+
+                <x-topbar />
+
+                <!-- Page Content -->
+                <main>
+                    {{ $slot }}
+                </main>
+            </div>
+        </div>
     </div>
+
 
     @stack('modals')
 
     @livewireScripts
+
+    @stack('js')
 </body>
 
 </html>

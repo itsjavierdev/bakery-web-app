@@ -60,10 +60,6 @@
             <x-button wire:click="confirmLogout" wire:loading.attr="disabled">
                 {{ __('Log Out Other Browser Sessions') }}
             </x-button>
-
-            <x-action-message class="ms-3" on="loggedOut">
-                {{ __('Done.') }}
-            </x-action-message>
         </div>
 
         <!-- Log Out Other Devices Confirmation Modal -->
@@ -86,9 +82,9 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
+                <x-button color="outline" wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
-                </x-secondary-button>
+                </x-button>
 
                 <x-button class="ms-3" wire:click="logoutOtherBrowserSessions" wire:loading.attr="disabled">
                     {{ __('Log Out Other Browser Sessions') }}

@@ -37,27 +37,19 @@
                     </span>
                 </div>
 
-                <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
+                <x-button color="outline" class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
                     {{ __('Select A New Photo') }}
-                </x-secondary-button>
+                </x-button>
 
                 @if ($this->user->profile_photo_path)
-                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
+                    <x-button color="outline" type="button" class="mt-2" wire:click="deleteProfilePhoto">
                         {{ __('Remove Photo') }}
-                    </x-secondary-button>
+                    </x-button>
                 @endif
 
                 <x-inputs.error for="photo" class="mt-2" />
             </div>
         @endif
-
-        <!-- Name -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-inputs.label for="name" value="{{ __('Name') }}" />
-            <x-inputs.text id="name" type="text" class="mt-1 block w-full" wire:model="state.name" required
-                autocomplete="name" />
-            <x-inputs.error for="name" class="mt-2" />
-        </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
@@ -88,10 +80,6 @@
     </x-slot>
 
     <x-slot name="actions">
-        <x-action-message class="me-3" on="saved">
-            {{ __('Saved.') }}
-        </x-action-message>
-
         <x-button wire:loading.attr="disabled" wire:target="photo">
             {{ __('Save') }}
         </x-button>
