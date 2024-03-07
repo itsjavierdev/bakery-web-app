@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <footer class="flex flex-row justify-between px-6 py-4 border-t-2 bg-gray-100 text-end">
+    <footer class="flex flex-row justify-between px-6 py-4 border-t-medium bg-gray-100 text-end">
         {{ $footer }}
     </footer>
 </x-modal>

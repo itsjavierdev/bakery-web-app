@@ -7,8 +7,8 @@
             </button>
             <!-- Logo-->
             <div class="flex justify-center">
-                <a href="{{ route('/') }}">
-                    <x-logo class="bg-gray-801 rounded-full p-2" width=80 />
+                <a href="{{ route('/') }}" class="focus:bg-gray-200 rounded-full  focus:outline-none">
+                    <x-logo class="rounded-full p-2" width=80 />
                 </a>
             </div>
         </header>

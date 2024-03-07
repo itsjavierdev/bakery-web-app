@@ -1,7 +1,7 @@
 <!-- Topbar for mobile -->
 <nav class="md:hidden w-full h-auto flex items-center justify-between bg-white p-3 shadow sticky top-0 z-20">
     <!-- Sidebar button-->
-    <button class="flex items center ms-2">
+    <button class="flex items center ms-2 focus:outline-none focus:bg-gray-100 rounded-full p-2">
         <i class="icon-bars text-2xl text-gray-800"></i>
     </button>
 
@@ -18,9 +18,8 @@
     </x-settings-dropdown>
 </nav>
 <!-- Sidebar button in large screens -->
-<div class="hidden md:block md:absolute top-6 left-3 z-10">
-    <button class="flex items center ms-2">
-
+<div class="hidden md:block md:absolute top-4 left-3 z-10">
+    <button class="flex items center focus:outline-none focus:bg-gray-100 rounded-full p-2">
         <i class="icon-x text-xl text-gray-800 "></i>
     </button>
 </div>
