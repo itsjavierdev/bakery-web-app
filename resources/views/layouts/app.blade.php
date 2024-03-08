@@ -13,7 +13,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/icons.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/sidebar.js', 'resources/css/icons.css'])
 
     <!-- Styles -->
     @livewireStyles
@@ -22,14 +22,14 @@
 <body class="font-sans antialiased">
     <x-message-alert />
 
-    <div class="flex bg-white md:bg-gray-100" id="wrapper">
+    <div class="flex bg-white md:bg-yellow-50 " id="wrapper">
 
         <x-sidebar>
             @livewire('livewire.navigation-menu')
         </x-sidebar>
 
-        <div id="body" class="w-full h-screen overflow-y-auto scroll-smooth scrollbar-index">
-            <div class="md:shadow-md md:bg-white md:rounded-lg md:my-2 md:me-2 relative min-h-[98%]">
+        <div id="body" class="w-full h-screen overflow-y-scroll scroll-smooth scrollbar-index">
+            <div class="md:shadow-md md:bg-white md:rounded-lg md:my-2 md:me-2 relative min-h-[98%]" id="content">
 
                 <x-topbar />
 

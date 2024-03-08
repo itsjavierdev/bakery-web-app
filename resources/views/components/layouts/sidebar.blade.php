@@ -1,13 +1,13 @@
 <aside id="sidebar"
-    class="min-h-screen overflow-y-auto z-30 md:z-0 md:bg-gray-100 bg-gray-200 transition-all duration-300 md:relative top-0 left-0 fixed flex flex-col justify-between md:w-48 w-0">
+    class="min-h-screen overflow-y-auto z-30 md:z-0 bg-yellow-50  md:relative top-0 left-0 fixed flex flex-col justify-between md:w-48 w-0 md:mx-1">
     <div>
         <header class="w-full h-auto px-2 py-2 flex flex-col">
-            <button class="flex justify-end absolute md:hidden right-5 top-5">
+            <button id="closeSidebarMobile" class="flex justify-end absolute md:hidden right-5 top-5">
                 <i class="icon-x text-xl text-gray-800"></i>
             </button>
             <!-- Logo-->
             <div class="flex justify-center">
-                <a href="{{ route('/') }}" class="focus:bg-gray-200 rounded-full  focus:outline-none">
+                <a href="{{ route('/') }}" class="focus:bg-yellow-100 rounded-full  focus:outline-none">
                     <x-logo class="rounded-full p-2" width=80 />
                 </a>
             </div>

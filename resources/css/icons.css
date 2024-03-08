@@ -1,11 +1,11 @@
 @font-face {
     font-family: "BakeryIcons";
-    src: url("../../public/icons/BakeryIcons.eot?p61vjp");
-    src: url("../../public/icons/BakeryIcons.eot?p61vjp#iefix")
+    src: url("../../public/icons/BakeryIcons.eot?ijdfgm");
+    src: url("../../public/icons/BakeryIcons.eot?ijdfgm#iefix")
             format("embedded-opentype"),
-        url("../../public/icons/BakeryIcons.ttf?p61vjp") format("truetype"),
-        url("../../public/icons/BakeryIcons.woff?p61vjp") format("woff"),
-        url("../../public/icons/BakeryIcons.svg?p61vjp#BakeryIcons")
+        url("../../public/icons/BakeryIcons.ttf?ijdfgm") format("truetype"),
+        url("../../public/icons/BakeryIcons.woff?ijdfgm") format("woff"),
+        url("../../public/icons/BakeryIcons.svg?ijdfgm#BakeryIcons")
             format("svg");
     font-weight: normal;
     font-style: normal;
@@ -28,6 +28,18 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-sidebar:before {
+    content: "\e939";
+}
+.icon-tiktok:before {
+    content: "\e936";
+}
+.icon-hide-sidebar:before {
+    content: "\e937";
+}
+.icon-show-sidebar:before {
+    content: "\e938";
+}
 .icon-artisan:before {
     content: "\e900";
 }

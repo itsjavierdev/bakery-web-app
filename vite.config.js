@@ -8,6 +8,7 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/css/icons.css",
                 "resources/js/app.js",
+                "resources/js/sidebar.js",
             ],
             refresh: true,
         }),

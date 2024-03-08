@@ -5,3 +5,13 @@
 [x-cloak] {
     display: none;
 }
+
+.scrollbar-index {
+    scrollbar-gutter: stable;
+    scrollbar-color: #c7c7c7 #fff;
+    scrollbar-width: auto;
+}
+
+.sidebar {
+    transition: width 0.3s ease-in-out;
+}
