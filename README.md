@@ -1,66 +1,233 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<p>   
+    <img src="https://github.com/itsjavierdev/bakery-admin/assets/156542069/07c18365-f44e-48f7-8c9a-8ed801165ed2" alt="logo" align="left" width="80" height="auto" ></img>
 </p>
 
-## About Laravel
+# System for Bakery San Xavier
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project, an Bakery System, provides a robust platform for the bakery San Xaview to streamline their operations and enable customers to conveniently place orders online. It features a user-friendly interface for product browsing, a secure shopping cart system, and a seamless checkout process. The application is designed to enhance the efficiency of bakery businesses by digitizing the ordering process and providing a smooth online experience for customers. And a admin part for the staff and the bakery owner to administrate the content of the customer part content, and receive and create orders, and see the analytics products, sales and others functions. Developers can explore the codebase to understand the implementation details.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 💻 Technologies:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white) ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
-## Learning Laravel
+## 👩🏻‍💻 Installation:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+First you have to configure your laravel environment
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Then clone this repository with
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+git clone git@github.com:itsjavierdev/bakery-system.git
+```
 
-## Laravel Sponsors
+### Run all this command lines in the laragon terminal
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Install composer and node module
 
-### Premium Partners
+```
+composer install
+npm i
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Create .env and generate encryption key
 
-## Contributing
+```
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Clean cache in framework
 
-## Code of Conduct
+```
+composer dump-autoload
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Create symbolic link from public folder to storage folder
 
-## Security Vulnerabilities
+```
+php artisan storage:link
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Run the migrations, to set the database and seeders
 
-## License
+```
+php artisan migrate --seed
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🏃🏻‍♂️ Run the aplication:
+
+#### Run these two command line in different terminal
+
+For run the styles
+
+```
+npm run dev
+```
+
+For run the server
+
+```
+php artisan serve
+```
+
+## 🔑 First Authenticate:
+
+#### Email
+
+`test@example.com`
+
+#### Password
+
+`password`
+
+## 📁 File Structure guide
+
+#### Controllers
+
+I use livewire so, the controllers just was used for static routes controller with and without params
+
+```
+└─  app
+   └─  Http
+      └─ Controllers
+         ├─ Controller.php
+         └─ UserProfileController.php   //controller for set the profile user account
+```
+
+#### Livewire components
+
+Components where separate in folders for each CRUD or HU
+
+```
+└─ app
+   └─ Livewire
+      ├─ Profile
+      │  ├─ DeleteUserForm.php
+      │  └─ LogoutOtherBrowserSessionsForm.php
+      │  └─ ...
+      └─ NavigationMenu.php  //all the sidebar nav-links
+```
+
+#### Views
+
+```
+└─ resources
+   └─ views
+      ├─ components      //all components blade (jestream default and custom)
+      ├─ layouts         //layout for all app
+      ├─ livewire        //dinamic livewire components /(used in pages, or with a layout)
+      └─ pages         //all static views
+```
+
+#### Components
+
+The components were separate in atoms, molecules, organisms, templates, and layout
+
+```
+├─ components
+  ├─ atoms            //all basics components, generally a html tag with styles and/or functionality
+  │  ├─ inputs        //all inputs components (text, checkbox, date, label, error)
+  │  │  └─ ...
+  │  └─ ...
+  ├─ layouts          //all components used in layout for all pages (sidebar, topbar)
+  │  └─ ...
+  ├─ molecules        //more complex components, generally use more than one html tag, and some atoms components
+  │  └─ ...
+  ├─ organisms        //more complex components, generally use some atoms and molecules components
+  │  └─ ...
+  └─ templates        //blade components that is used like a template for some section (use mora than one x-slot)
+     └─ ...
+```
+
+#### Layouts
+
+```
+├─ layouts
+  ├─ app-header.blade.php  //layout for almost everything function, with a title or header (use app.blade.php)
+  ├─ app.blade.php         //layout for almost everything function
+  └─ guest.blade.php       //layout for the authentication flow pages
+```
+
+#### Pages and dinamics livewire components
+
+In pages folder goes the static views in separate folders for each HU flow that has a static view
+In livewire folder goes the livewire components that is used in a pages view or a view dinamic used with a layout
+Except the "/" view (dashboard) that goes separately without any folder
+
+```
+├─ livewire
+|  ├─ profile                                           //(example) all section for the profile pages used in pages/profile/index.blade.php
+│  │  └─ logout-other-browser-sessions-form.balde.php
+│  │  └─ ...
+|  └─ navigation-menu.blade.php
+├─ pages
+│  ├─ auth
+│  │  ├─ forgot-password.blade.php
+│  │  └─ ...
+│  ├─ profile
+│  │  └─ index.blade.php
+│  └─ dashboard.blade.php
+```
+
+#### All usable components
+
+All basics components with the theme application
+
+```
+├─ components
+  ├─ atoms
+  │  ├─ inputs
+  │  │  └─ checkbox, date, txt, select, label, error, validation-error(list)
+  │  ├─ button.blade.php                //button simple with colors gray, blue, yellow, orange, red.
+  │  ├─ secondary-button.blade.php      //button simple white with outline
+  │  ├─ dropdown-link.blade.php         //a single item for dropdown
+  │  ├─ logo.blade.php                  //app logo in a tag
+  │  ├─ modal.blade.php                 //modal with alpine
+  │  ├─ nav-link.blade.php              //single nav item for sidebar
+  │  └─ section-border.blade.php        //border for separate sections responsive
+  ├─ layouts
+  │  ├─ sidebar.blade.php              //animated sidebar responsive
+  │  └─ topbar.blade.php               //topbar for mobile (with a toggle button for sidebar in large screens)
+  ├─ molecules
+  │  ├─ dropdown.blade.php
+  │  └─ message-alert.blade.php         //see more below
+  ├─ organisms
+  │  └─ settings-dropdown.blade.php     //dropdown for user responsive isMobile prop (for change from sidebar to topbar)
+  └─ templates
+  │  ├─ action-section.blade.php        //template with a title, description, and a main content
+  │  ├─ authentication-card.blade.php   //template for authentication flow pages
+  │  ├─ confirmation-modal.blade.php    //modal for confirmations like delete something, with a title, content and footer for the buttons
+  │  ├─ dialog-modal.blade.php          //dialog-modal, for forms in a modal, with title, a content and footer for the buttons
+  │  ├─ form-section.blade.php          //form with a title description and actions for button
+  │  └─ section-title.blade.php         //for a section, set the title and description appart of the content (like profile sections)
+```
+
+###### message-alert.blade.php
+
+A component or message alerts like success, warning, and error
+
+use in a php class with for the same view with livewire:
+
+```
+use Laravel\Jetstream\InteractsWithBanner;
+
+use InteractsWithBanner;
+
+public function proof()
+{
+    $this->banner('Message') //success (green)
+    $this->dangerBanner('Message') //danger (red)
+    $this->warningBanner('Message') //warning (gray)
+}
+```
+
+or in a redirect with:
+
+```
+public function proof()
+{
+    session()->flash('flash.bannerStyle', 'success');  (success, danger) (if dont passed this session flash, default is warning)
+    session()->flash('flash.banner', 'message');
+    return redirect()->ro('route')
+}
+```
