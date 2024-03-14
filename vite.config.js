@@ -9,6 +9,7 @@ export default defineConfig({
                 "resources/css/icons.css",
                 "resources/js/app.js",
                 "resources/js/sidebar.js",
+                "resources/js/selectAllPermissions.js",
             ],
             refresh: true,
         }),
