@@ -106,6 +106,12 @@ Components where separate in folders for each CRUD or HU
       │  ├─ DeleteUserForm.php
       │  └─ LogoutOtherBrowserSessionsForm.php
       │  └─ ...
+      ├─ Roles //Almost every section of the app, has a crud with that methods
+      │  ├─ Create.php
+      │  └─ Delete.php
+      │  └─ Read.php
+      │  └─ Update.php
+      │  └─ ...
       └─ NavigationMenu.  //all the sidebar nav-links
 ```
 
@@ -161,7 +167,11 @@ Except the "/" view (dashboard) that goes separately without any folder
 ├─ livewire
 |  ├─ others  //dont have a specifict section
 |  ├─ profile  //(example) all section for the profile pages used in pages/profile/index.blade.php
-│  │  └─ logout-other-browser-sessions-form.balde.php
+│  │  └─ logout-other-browser-sessions-form.blade.php
+│  │  └─ ...
+|  ├─ roles  //almost every section in the app has a CRUD, but the view just have create/update, because delete and read use a abstract class
+│  │  └─ create.php
+│  │  └─ update.php
 │  │  └─ ...
 |  └─ navigation-menu.blade.php
 ├─ pages
@@ -181,7 +191,7 @@ All basics components with the theme application
 ├─ components
   ├─ atoms
   │  ├─ inputs
-  │  │  └─ checkbox, date, txt, select, label, error, validation-error(list)
+  │  │  └─ //checkbox, date, txt, select, label, error, validation-error(list)
   │  ├─ table  //all table tags html components (th, tr, table)
   │  │  ├─ columns  //columns customize for the table (where go a single row and column data)
   │  │  └─ table, th, td
@@ -213,6 +223,8 @@ All basics components with the theme application
   │  ├─ confirmation-modal.blade.php  //modal for confirmations like delete something, with a title, content and footer for the buttons
   │  ├─ dialog-modal.blade.php  //dialog-modal, for forms in a modal, with title, a content and footer for the buttons
   │  ├─ form-section.blade.php  //form with a title description and actions for button
+  │  ├─ form-template.blade.php  //layout to create / update form, with content and footer actions
+  │  ├─ permissions-card.blade.php  //layout to show the roles by group
   │  └─ section-title.blade.php  //for a section, set the title and description appart of the content (like profile sections)
 ```
 
@@ -273,7 +285,7 @@ class UsersTable extends Datatable
 Create the columns for show in the table
 
 ```php
-use App\Views\Table\Column
+use App\Views\Table\Column;
 
 public function columns() : array
 {
@@ -322,3 +334,42 @@ And finally add the component to the view
    <livewire:example></livewire:example>
 ```
 
+#### DeleteRow 
+
+A livewire component abstract for delete row with the delete button in a datatable, or other site
+
+It open a modal confirmation to delete, an with the confirm delete de row of the model
+
+Make a livewire component with
+
+```
+php artisan make:livewire ExampleDelete
+```
+
+```php
+use App\Livewire\Others\DeleteRow;
+
+class ExampleDelete extends DeleteRow
+{
+}
+```
+
+Passes the model 
+
+```php
+use App\Models\Model;
+
+public function model()
+    {
+        return Model::class;
+    }
+```
+
+Passes the class to re render after the delete (to show the changes)
+
+```php
+public function componentToRenderAfterDelete()
+    {
+        return Read::class;
+    }
+```
