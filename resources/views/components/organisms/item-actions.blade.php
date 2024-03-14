@@ -14,14 +14,14 @@
         @endif
         @if (in_array('update', $actions))
             <x-button-action color="orange">
-                <a href="" tabindex="-1">
+                <a tabindex="-1" href="{{ route($model . '.edit', [$item_id]) }}">
                     <i class="icon-pen text-2xl"></i>
 
                 </a>
             </x-button-action>
         @endif
         @if (in_array('delete', $actions))
-            <x-button-action color="red">
+            <x-button-action color="red" wire:click="$dispatch('confirmDelete', {id: {{ $item_id }}})">
                 <i class="icon-trash text-2xl"></i>
             </x-button-action>
         @endif
