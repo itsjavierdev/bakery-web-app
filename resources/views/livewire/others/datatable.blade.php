@@ -88,7 +88,7 @@
                             {{ '' }}
                         @else
                             <div>
-                                <strong class="text-neutral-600">{{ $column->key }}:</strong>
+                                <strong class="text-neutral-600">{{ $column->label }}:</strong>
                                 <span>{{ $row[$column->key] }}</span>
                             </div>
                         @endif
