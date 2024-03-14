@@ -14,7 +14,7 @@
     </div>
     <hr class="mx-6 md:mx-0">
     <!--CONTENT-->
-    <div class="p-6">
+    <div>
         {{ $slot }}
     </div>
 </x-app>
