@@ -39,7 +39,7 @@ class Update extends Component
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:15|alpha|unique:roles,name,' . $this->role_id,
+            'name' => 'required|min:3|max:30|regex:/^[a-zA-Z\s]+$/|unique:roles,name,' . $this->role_id,
             'selected_permissions' => 'required|array'
         ];
     }
@@ -62,6 +62,6 @@ class Update extends Component
         $permissionNames = Permission::whereIn('id', $this->selected_permissions)->pluck('name')->toArray();
         $role->syncPermissions($permissionNames);
 
-        return redirect()->to('roles')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Rol creado correctamente');
+        return redirect()->to('roles')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Rol actualizado correctamente');
     }
 }

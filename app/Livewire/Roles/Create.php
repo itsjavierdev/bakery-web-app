@@ -6,13 +6,12 @@ use Livewire\Component;
 use Livewire\Attributes\Rule;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Http\Request;
 
 class Create extends Component
 {
 
     //validation rules
-    #[Rule('required|min:3|max:15|alpha|unique:roles,name', as: 'nombre')]
+    #[Rule('required|min:3|max:30|regex:/^[a-zA-Z\s]+$/|unique:roles,name', as: 'nombre')]
     public $name;
     #[Rule('required|array', as: 'permisos')]
     public $selected_permissions = [];
