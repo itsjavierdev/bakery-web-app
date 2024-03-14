@@ -95,7 +95,10 @@
                     @endforeach
 
                     <x-slot name="footer">
-                        <x-item-actions :actions="$this->actions()" model="{{ $model }}" item_id="{{ $row['id'] }}" />
+                        @if ($this->actions() ?? false)
+                            <x-item-actions :actions="$this->actions()" model="{{ $model }}"
+                                item_id="{{ $row['id'] }}" />
+                        @endif
                     </x-slot>
                 </x-card-mobile>
             @endforeach
