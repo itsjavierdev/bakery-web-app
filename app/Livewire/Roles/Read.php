@@ -21,12 +21,14 @@ class Read extends Datatable
         return [
             Column::make('id', 'ID'),
             Column::make('name', 'Nombre'),
+            Column::make('created_at', 'Fecha de registro')->date(),
         ];
     }
 
     public function actions(): array
     {
         return [
+            'detail',
             'update',
             'delete'
         ];

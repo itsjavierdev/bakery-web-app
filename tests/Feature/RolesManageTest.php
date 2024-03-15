@@ -9,6 +9,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Livewire\Roles;
+use Carbon\Carbon;
 
 class RolesManageTest extends TestCase
 {
@@ -98,7 +99,19 @@ class RolesManageTest extends TestCase
 
         // Verify that the role was deleted from the database
         $this->assertFalse(Role::where('id', $this->role->id)->exists());
+    }
 
+    public function test_can_view_role_details()
+    {
+        // Display the role details
+        $response = $this->actingAs($this->user)->get('/roles/' . $this->role->id);
 
+        // Verify that the role details are displayed
+        $response->assertStatus(200);
+        $response->assertSee($this->role->name);
+        $response->assertSee(Carbon::parse($this->role->created_at)->isoFormat('DD MMM YYYY'));
+        $response->assertSee(Carbon::parse($this->role->updated_at)->isoFormat('DD MMM YYYY'));
+        $response->assertSee($this->permissionCreate->module);
+        $response->assertSee($this->permissionCreate->description);
     }
 }

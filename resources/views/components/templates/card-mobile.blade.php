@@ -1,8 +1,10 @@
 <div class='bg-white border border-gray-300 rounded-lg overflow-hidden'>
-    <header
-        class="flex justify-between border-b font-medium border-gray-300 bg-gray-100 text-neutral-500 text-bold py-2.5 px-3.5">
-        {{ $header ?? '' }}
-    </header>
+    @if ($header ?? false)
+        <header
+            class="flex justify-between border-b font-medium border-gray-300 bg-gray-100 text-neutral-500 text-bold py-2.5 px-3.5">
+            {{ $header ?? '' }}
+        </header>
+    @endif
 
     <div class="rounded overflow-hidden *:flex *:justify-between *:p-2.5 odd:*:bg-white even:*:bg-gray-50">
         {{ $slot }}

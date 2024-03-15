@@ -18,4 +18,5 @@ Route::middleware([
     })->name('roles.index');
     Route::get('roles/create', Roles\Create::class)->name('roles.create');
     Route::get('/roles/{role}/edit', Roles\Update::class)->name('roles.edit');
+    Route::get('/roles/{role}', Roles\Detail::class)->name('roles.show');
 });

@@ -17,10 +17,9 @@ abstract class Datatable extends Component
     public $search = '';
     public $search_column = '';
 
-    public function render()
-    {
-        return view('livewire.others.datatable');
-    }
+    public $has_id_column = false;
+    public $has_created_at_column = false;
+
 
     //abstract methods
     public abstract function query(): \Illuminate\Database\Eloquent\Builder;
@@ -31,6 +30,16 @@ abstract class Datatable extends Component
 
     public abstract function actions(): array;
 
+    //id and created_at columns
+    public function mount()
+    {
+        $this->has_id_column = array_search('id', array_column($this->columns(), 'key')) !== false;
+        $this->has_created_at_column = array_search('created_at', array_column($this->columns(), 'key')) !== false;
+    }
+    public function render()
+    {
+        return view('livewire.others.datatable');
+    }
     //query for show data
     public function data()
     {
@@ -79,7 +88,7 @@ abstract class Datatable extends Component
     {
         if ($column && $column->isDate) {
             \DB::statement("SET lc_time_names = 'es_ES';");
-            $query->orWhereRaw("DATE_FORMAT($column->key, '%d %b %Y') LIKE ?", ["%$this->search%"]);
+            $query->orWhereRaw("DATE_FORMAT($column->key, '%d %b. %Y') LIKE ?", ["%$this->search%"]);
         } else {
             $query->orWhere($column->key, 'like', '%' . $this->search . '%');
         }

@@ -1,4 +1,4 @@
-<div class="w-full px-2 flex flex-col sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
+<div {{ $attributes->merge(['class' => 'w-full px-2 flex flex-col sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5']) }}>
     <div class="w-full h-full mb-4 bg-white rounded-lg border-medium border-gray-300 overflow-hidden">
         <header>
             <x-inputs.label

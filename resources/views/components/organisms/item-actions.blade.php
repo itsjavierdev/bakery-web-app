@@ -4,7 +4,9 @@
     <div class="flex flex-row md:gap-2 w-full md:w-auto md:p-2">
         @if (in_array('detail', $actions))
             <x-button-action color="sky">
-                <i class="icon-bars text-2xl"></i>
+                <a tabindex="-1" href="{{ route($routesPrefix . '.show', [$item_id]) }}">
+                    <i class="icon-bars text-2xl"></i>
+                </a>
             </x-button-action>
         @endif
         @if (in_array('delivery', $actions))

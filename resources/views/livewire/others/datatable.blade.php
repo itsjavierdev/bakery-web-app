@@ -1,27 +1,35 @@
 <div>
     <x-datatable-propierties :columns="$this->columns()" />
 
+    <!--table in large screens-->
     <x-table>
         <!--Header with sort-->
         <thead>
             <tr>
-                @foreach ($this->columns() as $column)
-                    <x-th wire:click="sort('{{ $column->key }}')">
-                        <h3> {{ $column->label }}</h3>
-                        @if ($sort_by === $column->key)
-                            @if ($sort_direction == 'asc')
-                                <i class="icon-asc float-right text-xl mt-1"></i>
-                            @else
-                                <i class="icon-sort-desc float-right text-xl mt-1"></i>
-                            @endif
+                <!--id && created_at column header-->
+                @if ($has_id_column || $has_created_at_column)
+                    <x-th-filter key="id" sort_by="{{ $sort_by }}" sort_direction="{{ $sort_direction }}">
+                        @if ($has_id_column)
+                            ID
                         @else
-                            <i class="icon-sort float-right text-xl mt-1"></i>
+                            Fecha de registro
                         @endif
-                    </x-th>
+                    </x-th-filter>
+                @endif
+
+                <!--Columns header-->
+                @foreach ($this->columns() as $column)
+                    @if ($column->key != 'id' && $column->key != 'created_at')
+                        <x-th-filter key="{{ $column->key }}" sort_by="{{ $sort_by }}"
+                            sort_direction="{{ $sort_direction }}">
+                            {{ $column->label }}
+                        </x-th-filter>
+                    @endif
                 @endforeach
 
+                <!--Actions columns header-->
                 @if ($this->actions() ?? false)
-                    <x-th>Acciones</x-th>
+                    <x-th class="!cursor-default">Acciones</x-th>
                 @endif
             </tr>
         </thead>
@@ -31,14 +39,28 @@
                 <!--Data-->
                 @foreach ($this->data() as $row)
                     <x-tr>
-                        @foreach ($this->columns() as $column)
-                            <td>
-                                <div class="p-2 flex items-center">
-                                    <x-dynamic-component :component="$column->component" :value="$row[$column->key]">
-                                    </x-dynamic-component>
-                                </div>
+                        <!--id && created data-->
+                        @if ($has_id_column || $has_created_at_column)
+                            <td class="p-2">
+                                <x-columns.id id="{{ $row['id'] }}" created_at="{{ $row['created_at'] }}"
+                                    has_id_column="{{ $has_id_column }}"
+                                    has_created_at_column="{{ $has_created_at_column }}" />
+
                             </td>
+                        @endif
+
+                        <!--All other data in row-->
+                        @foreach ($this->columns() as $column)
+                            @if ($column->key != 'id' && $column->key != 'created_at')
+                                <td>
+                                    <div class="p-2 flex items-center">
+                                        <x-dynamic-component :component="$column->component" :value="$row[$column->key]">
+                                        </x-dynamic-component>
+                                    </div>
+                                </td>
+                            @endif
                         @endforeach
+
                         <!--Actions-->
                         @if ($this->actions() ?? false)
                             <x-item-actions :actions="$this->actions()" routesPrefix="{{ $this->routesPrefix() }}"
@@ -47,7 +69,7 @@
                     </x-tr>
                 @endforeach
             @else
-                <!--Empty-->
+                <!--Empty or not found in filter-->
                 <x-tr>
                     <td class="text-center p-2" colspan="100%">
                         No se encontraron registros
@@ -59,14 +81,29 @@
         @if ($this->data()->count() > 10)
             <tfoot class="bg-gray-100 text-neutral-500 border-t-medium border-gray-300">
                 <tr>
-                    @foreach ($this->columns() as $column)
-                        <x-th>
-                            {{ $column->label }}
+                    <!--id && created_at footer-->
+                    @if ($has_id_column || $has_created_at_column)
+                        <x-th class="!cursor-default">
+                            @if ($has_id_column)
+                                ID
+                            @else
+                                Fecha de registro
+                            @endif
                         </x-th>
+                    @endif
+
+                    <!--All others column footer-->
+                    @foreach ($this->columns() as $column)
+                        @if ($column->key != 'id' && $column->key != 'created_at')
+                            <x-th class="!cursor-default">
+                                {{ $column->label }}
+                            </x-th>
+                        @endif
                     @endforeach
 
+                    <!--Actions footer-->
                     @if ($this->actions() ?? false)
-                        <x-th>Acciones</x-th>
+                        <x-th class="!cursor-default">Acciones</x-th>
                     @endif
                 </tr>
             </tfoot>
@@ -78,16 +115,18 @@
         @if (!$this->data()->isEmpty())
             @foreach ($this->data() as $row)
                 <x-card-mobile>
-                    <x-slot name="header">
-                        <span class="capitalize"><strong class="text-blue-600 mr-1"># {{ $row['id'] }}</strong>
-                            {{ $row['created_at']->diffForHumans() }}
-                        </span>
-                    </x-slot>
+                    <!--Header if has id or created_at column-->
+                    @if ($has_id_column || $has_created_at_column)
+                        <x-slot name="header">
+                            <x-columns.id id="{{ $row['id'] }}" created_at="{{ $row['created_at'] }}"
+                                has_id_column="{{ $has_id_column }}"
+                                has_created_at_column="{{ $has_created_at_column }}" />
+                        </x-slot>
+                    @endif
 
+                    <!--All other columns show in rows-->
                     @foreach ($this->columns() as $column)
-                        @if ($column->key == 'id' || $column->key == 'created_at')
-                            {{ '' }}
-                        @else
+                        @if ($column->key != 'id' && $column->key != 'created_at')
                             <div>
                                 <strong class="text-neutral-600">{{ $column->label }}:</strong>
                                 <span>{{ $row[$column->key] }}</span>
@@ -95,6 +134,7 @@
                         @endif
                     @endforeach
 
+                    <!--Actions-->
                     <x-slot name="footer">
                         @if ($this->actions() ?? false)
                             <x-item-actions :actions="$this->actions()" routesPrefix="{{ $this->routesPrefix() }}"
@@ -104,10 +144,12 @@
                 </x-card-mobile>
             @endforeach
         @else
-            <!--Empty-->
+            <!--Empty or not found in filter-->
             <div class="p-3 text-center">No se encontraron registros</div>
         @endif
     </div>
+
+    <!--Pagination-->
     <div class="pt-3">
         {{ $this->data()->links(data: ['scrollTo' => 'main']) }}
     </div>

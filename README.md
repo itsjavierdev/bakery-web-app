@@ -111,6 +111,7 @@ Components where separate in folders for each CRUD or HU
       │  └─ Delete.php
       │  └─ Read.php
       │  └─ Update.php
+      │  └─ Detail.php
       │  └─ ...
       └─ NavigationMenu.  //all the sidebar nav-links
 ```
@@ -169,9 +170,10 @@ Except the "/" view (dashboard) that goes separately without any folder
 |  ├─ profile  //(example) all section for the profile pages used in pages/profile/index.blade.php
 │  │  └─ logout-other-browser-sessions-form.blade.php
 │  │  └─ ...
-|  ├─ roles  //almost every section in the app has a CRUD, but the view just have create/update, because delete and read use a abstract class
+|  ├─ roles  //almost every section in the app has a CRUD, but the view just have create, update and detail, because delete and read use a abstract class
 │  │  └─ create.php
 │  │  └─ update.php
+│  │  └─ detail.php
 │  │  └─ ...
 |  └─ navigation-menu.blade.php
 ├─ pages
@@ -200,6 +202,7 @@ All basics components with the theme application
   │  ├─ secondary-button.blade.php  //button simple white with outline
   │  ├─ dropdown-link.blade.php  //a single item for dropdown
   │  ├─ logo.blade.php  //app logo in a tag
+  │  ├─ date-format.blade.php  //formate a text (date) to isoFormat('DD MMM YYYY')
   │  ├─ modal.blade.php  //modal with alpine
   │  ├─ nav-link.blade.php  //single nav item for sidebar
   │  └─ section-border.blade.php  //border for separate sections responsive
@@ -208,6 +211,8 @@ All basics components with the theme application
   │  └─ topbar.blade.php  //topbar for mobile (with a toggle button for sidebar in large screens)
   ├─ molecules
   │  ├─ dropdown.blade.php
+  │  ├─ detail-row.blade.php //a single row for show single data column in detail of a role for example
+  │  ├─ th-filters.blade.php //a th with order filter
   │  └─ message-alert.blade.php  //success alert (warning and danger too)
   │  └─ orderby.blade.php  //order by a column for the data table mobile
   │  └─ search.blade.php  //search input with the by column filter
@@ -218,6 +223,7 @@ All basics components with the theme application
   │  └─ settings-dropdown.blade.php  //dropdown for user responsive isMobile prop (for change from sidebar to topbar)
   └─ templates
   │  ├─ card-mobile.blade.php  //cards component for a table responsive
+  │  ├─ detail-show.blade.php  //template for detail view
   │  ├─ action-section.blade.php  //template with a title, description, and a main content
   │  ├─ authentication-card.blade.php  //template for authentication flow pages
   │  ├─ confirmation-modal.blade.php  //modal for confirmations like delete something, with a title, content and footer for the buttons
@@ -381,7 +387,7 @@ public function componentToRenderAfterDelete()
 }
 ```
 
-Set the confirmation messages
+Set the confirmation messages, pasa un array vacio para poner los valores por defecto
 
 ```php
 protected function confirmationMessages(): array
@@ -389,6 +395,13 @@ protected function confirmationMessages(): array
     return [
         'title' => 'Eliminar Rol',
         'description' => '¿Estás seguro de que quieres eliminar este rol?'
+        'success'=>'Rol eliminado correctamente'
     ];
 }
+```
+
+Put the livewire component in your page, can passes a route name if wanna redirect after delete
+
+```php
+<livewire:example redirect="example.index">
 ```

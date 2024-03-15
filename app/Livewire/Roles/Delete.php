@@ -19,7 +19,8 @@ class Delete extends DeleteRow
     {
         return [
             'title' => 'Eliminar Rol',
-            'description' => '¿Estás seguro de que quieres eliminar este rol?'
+            'description' => '¿Estás seguro de que quieres eliminar este rol?',
+            'success' => 'Rol eliminado correctamente'
         ];
     }
 }

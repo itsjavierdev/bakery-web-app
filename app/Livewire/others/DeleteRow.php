@@ -11,22 +11,32 @@ abstract class DeleteRow extends Component
 
     //for open confirmation modal
     public $open = false;
+
     //role id to delete
     public $delete_id;
+
     //confirmation messages
-    public $confirmation_messages = ['title' => 'Eliminar registro', 'description' => '¿Estás seguro de eliminar este registro?'];
+    public $confirmation_messages = ['title' => 'Eliminar registro', 'description' => '¿Estás seguro de eliminar este registro?', 'success' => 'Registro eliminado correctamente'];
+
+    //if redirect after delete
+    public $redirect = null;
 
     protected $listeners = ['delete', 'confirmDelete'];
+
+    //model to delete
+    abstract protected function model();
+
+    //if not redirect after delete, render livewire component
+    abstract protected function componentToRenderAfterDelete();
+
+    //confirmation messages
+    abstract protected function confirmationMessages(): array;
 
     public function render()
     {
         return view('livewire.others.delete-row');
     }
-    abstract protected function model();
-
-    abstract protected function componentToRenderAfterDelete();
-
-    abstract protected function confirmationMessages(): array;
+    //mount confirmation messages
     public function mount()
     {
         $this->confirmation_messages = $this->confirmationMessages();
@@ -43,10 +53,16 @@ abstract class DeleteRow extends Component
     {
         $row = $this->model()::findOrFail($id);
         $row->delete();
-        //reset component and updating table
-        $this->dispatch('render')->to($this->componentToRenderAfterDelete());
-        $this->reset();
+        //if redirect after delete
+        if ($this->redirect ?? false) {
+            return redirect()->route($this->redirect)->with('flash.banner', $this->confirmation_messages['success'])->with('flash.bannerStyle', 'success');
+        } else {
+            //if not redirect, render component
+            $this->dispatch('render')->to($this->componentToRenderAfterDelete());
+            $this->reset();
 
-        $this->banner('Registro eliminado correctamente');
+            $this->banner($this->confirmation_messages['success']);
+        }
+
     }
 }
