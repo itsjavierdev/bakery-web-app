@@ -15,4 +15,12 @@ class Delete extends DeleteRow
     {
         return Read::class;
     }
+    protected function confirmationMessages(): array
+    {
+        return [
+            'title' => 'Eliminar Rol',
+            'description' => '¿Estás seguro de que quieres eliminar este rol?'
+        ];
+    }
 }
+

@@ -25,6 +25,8 @@ abstract class Datatable extends Component
     //abstract methods
     public abstract function query(): \Illuminate\Database\Eloquent\Builder;
 
+    public abstract function routesPrefix(): string;
+
     public abstract function columns(): array;
 
     public abstract function actions(): array;

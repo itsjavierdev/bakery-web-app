@@ -13,14 +13,16 @@
                     <x-slot name="header">
                         <x-inputs.checkbox type="checkbox" class="mr-2 module-checkbox"
                             data-module="{{ $module }}" />
-                        {{ $module }}
+                        <span>{{ $module }}</span>
                     </x-slot>
                     @foreach ($modulePermissions as $permission)
                         <li class="flex items-center mb-2">
-                            <x-inputs.checkbox name="roles" wire:model="selected_permissions"
-                                value="{{ $permission['id'] }}" class="mr-2 permission-checkbox"
-                                data-module="{{ $module }}" />
-                            <span>{{ $permission['description'] }}</span>
+                            <x-inputs.label class="cursor-pointer">
+                                <x-inputs.checkbox name="roles" wire:model="selected_permissions"
+                                    value="{{ $permission['id'] }}" class="mr-2 permission-checkbox"
+                                    data-module="{{ $module }}" />
+                                <span>{{ $permission['description'] }}</span>
+                            </x-inputs.label>
                         </li>
                     @endforeach
                 </x-permissions-card>

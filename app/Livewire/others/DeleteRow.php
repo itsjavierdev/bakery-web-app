@@ -13,20 +13,31 @@ abstract class DeleteRow extends Component
     public $open = false;
     //role id to delete
     public $delete_id;
+    //confirmation messages
+    public $confirmation_messages = ['title' => 'Eliminar registro', 'description' => '¿Estás seguro de eliminar este registro?'];
 
     protected $listeners = ['delete', 'confirmDelete'];
+
     public function render()
     {
         return view('livewire.others.delete-row');
     }
     abstract protected function model();
+
     abstract protected function componentToRenderAfterDelete();
+
+    abstract protected function confirmationMessages(): array;
+    public function mount()
+    {
+        $this->confirmation_messages = $this->confirmationMessages();
+    }
     //open modal and set id to delete in confirm
     public function confirmDelete($id)
     {
         $this->delete_id = $id;
         $this->open = true;
     }
+
     //delete role in confirm
     public function delete($id)
     {

@@ -41,7 +41,8 @@
                         @endforeach
                         <!--Actions-->
                         @if ($this->actions() ?? false)
-                            <x-item-actions :actions="$this->actions()" model="{{ $model }}" item_id="{{ $row['id'] }}" />
+                            <x-item-actions :actions="$this->actions()" routesPrefix="{{ $this->routesPrefix() }}"
+                                item_id="{{ $row['id'] }}" />
                         @endif
                     </x-tr>
                 @endforeach
@@ -96,7 +97,7 @@
 
                     <x-slot name="footer">
                         @if ($this->actions() ?? false)
-                            <x-item-actions :actions="$this->actions()" model="{{ $model }}"
+                            <x-item-actions :actions="$this->actions()" routesPrefix="{{ $this->routesPrefix() }}"
                                 item_id="{{ $row['id'] }}" />
                         @endif
                     </x-slot>

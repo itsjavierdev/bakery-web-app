@@ -318,12 +318,19 @@ Add the name of the used model and pass it
 ```php
 use App\Models\User;
 
-public $model = "user"
-
 public function query() : \Illuminate\Database\Eloquent\Builder
 {
     return User::query();
 }
+```
+
+Set routes prefix (for update, detail or some router prefix name)
+
+```php
+public function routesPrefix(): string
+    {
+        return 'example';
+    }
 ```
 
 Remove the render method of your livewire class
@@ -331,7 +338,7 @@ Remove the render method of your livewire class
 And finally add the component to the view
 
 ``` html
-   <livewire:example></livewire:example>
+   <livewire:example>
 ```
 
 #### DeleteRow 
@@ -360,16 +367,28 @@ Passes the model
 use App\Models\Model;
 
 public function model()
-    {
-        return Model::class;
-    }
+{
+    return Model::class;
+}
 ```
 
 Passes the class to re render after the delete (to show the changes)
 
 ```php
 public function componentToRenderAfterDelete()
-    {
-        return Read::class;
-    }
+{
+    return Read::class;
+}
+```
+
+Set the confirmation messages
+
+```php
+protected function confirmationMessages(): array
+{
+    return [
+        'title' => 'Eliminar Rol',
+        'description' => '¿Estás seguro de que quieres eliminar este rol?'
+    ];
+}
 ```

@@ -1,4 +1,4 @@
-@props(['actions', 'model', 'item_id'])
+@props(['actions', 'routesPrefix', 'item_id'])
 
 <td>
     <div class="flex flex-row md:gap-2 w-full md:w-auto md:p-2">
@@ -14,7 +14,7 @@
         @endif
         @if (in_array('update', $actions))
             <x-button-action color="orange">
-                <a tabindex="-1" href="{{ route($model . '.edit', [$item_id]) }}">
+                <a tabindex="-1" href="{{ route($routesPrefix . '.edit', [$item_id]) }}">
                     <i class="icon-pen text-2xl"></i>
 
                 </a>

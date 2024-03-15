@@ -7,7 +7,7 @@
         </a>
     </x-slot>
     <div class="p-6">
-        <livewire:roles.read model="roles" />
+        <livewire:roles.read />
     </div>
     <livewire:roles.delete />
 </x-app-header>
