@@ -14,7 +14,7 @@
     </div>
     <hr class="mx-6 md:mx-0">
     <!--CONTENT-->
-    <div>
+    <div class="flex-grow flex flex-col">
         {{ $slot }}
     </div>
 </x-app>

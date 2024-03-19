@@ -29,12 +29,13 @@
         </x-sidebar>
 
         <div id="body" class="w-full h-screen overflow-y-scroll scroll-smooth scrollbar-index">
-            <div class="md:shadow-md md:bg-white md:rounded-lg md:my-2 md:me-2 relative min-h-[98%]" id="content">
+            <div class="md:shadow-md md:bg-white md:rounded-lg md:my-2 md:me-2 relative min-h-[100%] md:min-h-[98%]  flex flex-col"
+                id="content">
 
                 <x-topbar />
 
                 <!-- Page Content -->
-                <main>
+                <main class="flex-grow flex flex-col">
                     {{ $slot }}
                 </main>
             </div>
