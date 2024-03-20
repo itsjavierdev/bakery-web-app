@@ -51,7 +51,6 @@ class Create extends Component
             'CI_extension' => 'extensión',
             'CI' => 'carnet de identidad',
             'birthdate' => 'fecha de nacimiento',
-            'extension' => 'extensión'
         ];
     }
     //Custom messages error

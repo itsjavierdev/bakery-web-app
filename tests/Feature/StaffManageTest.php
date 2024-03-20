@@ -67,4 +67,26 @@ class StaffManageTest extends TestCase
         $response->assertSee('12345678');
         $response->assertSee('12345678 SC');
     }
+    public function test_a_staff_can_be_updated()
+    {
+        // Update the staff in live wire component
+        Livewire::test(StaffLivewire\Update::class, ['staff' => $this->staff->id])
+            ->set('name', 'Mario')
+            ->set('surname', 'Vargas')
+            ->set('phone', '75525723')
+            ->set('CI_number', '13315002')
+            ->set('CI_extension', 'LP')
+            ->set('birthdate', '1990-01-12')
+            ->call('update')
+            ->assertRedirect('personal')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Personal actualizado correctamente');
+
+        // Verify that the staff was updated in the database
+        $this->assertTrue(Staff::where('name', 'Mario')->exists());
+        $this->assertTrue(Staff::where('surname', 'Vargas')->exists());
+        $this->assertTrue(Staff::where('phone', '75525723')->exists());
+        $this->assertTrue(Staff::where('CI', '13315002 LP')->exists());
+        $this->assertTrue(Staff::where('birthdate', '1990-01-12')->exists());
+    }
 }
