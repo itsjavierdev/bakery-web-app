@@ -2,12 +2,25 @@
 
 namespace App\Livewire\Staff;
 
-use Livewire\Component;
+use App\Models\Staff;
+use App\Livewire\Others\DeleteRow;
 
-class Delete extends Component
+class Delete extends DeleteRow
 {
-    public function render()
+    public function model()
     {
-        return view('livewire.staff.delete');
+        return Staff::class;
+    }
+    public function componentToRenderAfterDelete()
+    {
+        return Read::class;
+    }
+    protected function confirmationMessages(): array
+    {
+        return [
+            'title' => 'Eliminar Personal',
+            'description' => '¿Estás seguro de que quieres eliminar este personal?',
+            'success' => 'Personal eliminado correctamente'
+        ];
     }
 }

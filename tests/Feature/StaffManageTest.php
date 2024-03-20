@@ -31,7 +31,7 @@ class StaffManageTest extends TestCase
             'birthdate' => '1990-01-01',
         ]);
     }
-    public function test_a_role_can_be_created(): void
+    public function test_a_staff_can_be_created(): void
     {
         // Create the staff in live wire component
         Livewire::test(StaffLivewire\Create::class)
@@ -88,5 +88,20 @@ class StaffManageTest extends TestCase
         $this->assertTrue(Staff::where('phone', '75525723')->exists());
         $this->assertTrue(Staff::where('CI', '13315002 LP')->exists());
         $this->assertTrue(Staff::where('birthdate', '1990-01-12')->exists());
+    }
+
+    public function test_a_staff_can_be_deleted()
+    {
+        // Exceute the delete action in the live wire component
+        Livewire::test(StaffLivewire\Delete::class)
+            ->call('confirmDelete', $this->staff->id)
+            ->assertSet('delete_id', $this->staff->id)
+            ->assertSet('open', true)
+            ->call('delete', $this->staff->id)
+            ->assertDispatched('render')
+            ->assertDispatched('banner-message', style: 'success', message: 'Registro eliminado correctamente');
+
+        // Verify that the staff was deleted from the database
+        $this->assertFalse(Staff::where('id', $this->staff->id)->exists());
     }
 }
