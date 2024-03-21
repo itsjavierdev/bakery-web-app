@@ -1,6 +1,6 @@
 <x-app-header title="Mi perfil" titleAlign="center">
     <div class="p-6">
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto py-2 md:py-5 lg:px-8">
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                 @livewire('livewire.profile.update-profile-information-form')
 

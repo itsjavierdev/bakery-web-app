@@ -5,6 +5,7 @@ namespace App\Livewire\Staff;
 use App\Livewire\Others\Datatable;
 use App\Views\Table\Column;
 use App\Models\Staff;
+use Illuminate\Support\Facades\Auth;
 
 class Read extends Datatable
 {
@@ -12,7 +13,11 @@ class Read extends Datatable
 
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
-        return Staff::query();
+        $user = Auth::user();
+
+        // Obtener los registros de staff que no están asociados con el usuario autenticado
+        return Staff::where('id', '!=', $user->staff_id);
+
     }
 
     public function columns(): array
@@ -23,6 +28,7 @@ class Read extends Datatable
             Column::make('surname', 'Apellido'),
             Column::make('phone', 'Telefono'),
             Column::make('CI', 'CI'),
+            Column::make('is_employed', 'Empleado')->component('columns.boolean'),
         ];
     }
 

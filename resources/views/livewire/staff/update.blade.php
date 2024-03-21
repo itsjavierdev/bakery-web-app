@@ -45,6 +45,13 @@
         <x-inputs.date class="w-full mt-2" wire:model="birthdate" />
         <x-inputs.error for="birthdate" />
     </div>
+    <div class="mb-4 max-w-2xl">
+        <x-inputs.label>
+            <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="is_employed" />
+            <span>Empleado en la empresa</span>
+        </x-inputs.label>
+        <x-inputs.error for="is_employed" />
+    </div>
     <x-slot name="footer">
         <x-button wire:click="update">
             Actualizar

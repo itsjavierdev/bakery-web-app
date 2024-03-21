@@ -19,6 +19,7 @@ class Update extends Component
     public $CI_extension;
     public $CI;
     public $birthdate;
+    public $is_employed;
 
     //Mount data in inputs
     public function mount($staff)
@@ -31,6 +32,7 @@ class Update extends Component
         $this->CI_number = substr($this->staff->CI, 0, 8);
         $this->CI_extension = substr($this->staff->CI, -2);
         $this->birthdate = $this->staff->birthdate;
+        $this->is_employed = $this->staff->is_employed == '1' ? true : false;
     }
 
     public function render()
@@ -53,6 +55,7 @@ class Update extends Component
             'CI_extension' => ['required', 'string', 'max:2', Rule::in(['SC', 'CB', 'LP', 'PO', 'OR', 'CH', 'TJ', 'BE', 'PA'])],
             'CI' => 'unique:staff,CI,' . $this->staff_id,
             'birthdate' => 'required|date|before:' . $maxDate . '|after:' . $minDate,
+            'is_employed' => 'required|boolean'
         ];
     }
     //Custom attributes names
@@ -65,7 +68,8 @@ class Update extends Component
             'CI_number' => 'carnet de identidad',
             'CI_extension' => 'extensión',
             'CI' => 'carnet de identidad',
-            'birthdate' => 'fecha de nacimiento'
+            'birthdate' => 'fecha de nacimiento',
+            'is_employed' => 'Empleado en la empresa'
         ];
     }
     //Custom messages error
@@ -93,6 +97,7 @@ class Update extends Component
             'phone' => $this->phone,
             'CI' => $this->CI,
             'birthdate' => $this->birthdate,
+            'is_employed' => $this->is_employed,
         ]);
 
         return redirect()->to('personal')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Personal actualizado correctamente');

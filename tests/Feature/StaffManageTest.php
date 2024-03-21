@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use App\Livewire\Staff as StaffLivewire;
 use App\Models\User;
 use App\Models\Staff;
 use Tests\TestCase;
+use Carbon\Carbon;
 
 class StaffManageTest extends TestCase
 {
@@ -77,6 +77,7 @@ class StaffManageTest extends TestCase
             ->set('CI_number', '13315002')
             ->set('CI_extension', 'LP')
             ->set('birthdate', '1990-01-12')
+            ->set('is_employed', false)
             ->call('update')
             ->assertRedirect('personal')
             ->assertSessionHas('flash.bannerStyle', 'success')
@@ -88,6 +89,8 @@ class StaffManageTest extends TestCase
         $this->assertTrue(Staff::where('phone', '75525723')->exists());
         $this->assertTrue(Staff::where('CI', '13315002 LP')->exists());
         $this->assertTrue(Staff::where('birthdate', '1990-01-12')->exists());
+        $this->assertTrue(Staff::where('is_employed', '0')->exists());
+
     }
 
     public function test_a_staff_can_be_deleted()
@@ -103,5 +106,23 @@ class StaffManageTest extends TestCase
 
         // Verify that the staff was deleted from the database
         $this->assertFalse(Staff::where('id', $this->staff->id)->exists());
+    }
+
+
+    public function test_can_view_staff_details()
+    {
+        // Display the staff details
+        $response = $this->actingAs($this->user)->get('/personal/' . $this->staff->id);
+
+        // Verify that the staff details are displayed
+        $response->assertStatus(200);
+        $response->assertSee($this->staff->id);
+        $response->assertSee($this->staff->name);
+        $response->assertSee($this->staff->surname);
+        $response->assertSee($this->staff->phone);
+        $response->assertSee($this->staff->CI);
+        $response->assertSee(Carbon::parse($this->staff->birthdate)->isoFormat('DD MMM YYYY'));
+        $response->assertSee(Carbon::parse($this->staff->created_at)->isoFormat('DD MMM YYYY'));
+        $response->assertSee(Carbon::parse($this->staff->updated_at)->isoFormat('DD MMM YYYY'));
     }
 }
