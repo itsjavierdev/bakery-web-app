@@ -129,7 +129,8 @@
                         @if ($column->key != 'id' && $column->key != 'created_at')
                             <div>
                                 <strong class="text-neutral-600">{{ $column->label }}:</strong>
-                                <span>{{ $row[$column->key] }}</span>
+                                <span> <x-dynamic-component :component="$column->component" :value="$row[$column->key]">
+                                    </x-dynamic-component></span>
                             </div>
                         @endif
                     @endforeach

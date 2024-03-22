@@ -1,4 +1,4 @@
-<div class="h-full flex-grow flex flex-col justify-between ">
+<div {{ $attributes->merge(['class' => 'h-full flex-grow flex flex-col justify-between']) }}>
     <div class="px-6 pt-6 pb-4">
         {{ $slot }}
     </div>

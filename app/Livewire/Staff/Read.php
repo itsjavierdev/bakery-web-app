@@ -6,6 +6,7 @@ use App\Livewire\Others\Datatable;
 use App\Views\Table\Column;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Read extends Datatable
 {
@@ -13,10 +14,14 @@ class Read extends Datatable
 
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
+        //get authenticated user to show all staff except the authenticated user
         $user = Auth::user();
-
-        // Obtener los registros de staff que no están asociados con el usuario autenticado
-        return Staff::where('id', '!=', $user->staff_id);
+        // Union of staff and users table to get the email and role of the user
+        return Staff::leftJoin('users', 'staff.id', '=', 'users.staff_id')
+            ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->select('staff.id', 'is_employed', 'users.email AS email', 'roles.name AS role', DB::raw('CONCAT(staff.name, " ", staff.surname) AS full_name'))
+            ->where('staff.id', '!=', $user->staff_id);
 
     }
 
@@ -24,10 +29,9 @@ class Read extends Datatable
     {
         return [
             Column::make('id', 'ID'),
-            Column::make('name', 'Nombre'),
-            Column::make('surname', 'Apellido'),
-            Column::make('phone', 'Telefono'),
-            Column::make('CI', 'CI'),
+            Column::make('full_name', 'Nombre completo'),
+            Column::make('email', 'Email'),
+            Column::make('role', 'Rol'),
             Column::make('is_employed', 'Empleado')->component('columns.boolean'),
         ];
     }

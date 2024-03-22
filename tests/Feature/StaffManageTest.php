@@ -64,8 +64,6 @@ class StaffManageTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Javier');
         $response->assertSee('Vargas');
-        $response->assertSee('12345678');
-        $response->assertSee('12345678 SC');
     }
     public function test_a_staff_can_be_updated()
     {
