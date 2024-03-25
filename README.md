@@ -101,10 +101,13 @@ Components where separate in folders for each CRUD or HU
 ```php
 └─ app
    └─ Livewire
+      ├─ Forms  //for separate validation rules in livewire components with more than one
+      │  └─ Staff //are separate in same livewire folder sections
+      │      └─ ...
       ├─ Others  //dont have and specifict section
       ├─ Profile
       │  ├─ DeleteUserForm.php
-      │  └─ LogoutOtherBrowserSessionsForm.php
+      │  ├─ LogoutOtherBrowserSessionsForm.php
       │  └─ ...
       ├─ Roles //Almost every section of the app, has a crud with that methods
       │  ├─ Create.php
@@ -193,12 +196,13 @@ All basics components with the theme application
 ├─ components
   ├─ atoms
   │  ├─ inputs
-  │  │  └─ //checkbox, date, txt, select, label, error, validation-error(list)
+  │  │  └─ //checkbox, date, txt, select, label, error, validation-error(list), group (div for group label, error and input with styles)
   │  ├─ table  //all table tags html components (th, tr, table)
   │  │  ├─ columns  //columns customize for the table (where go a single row and column data)
   │  │  └─ table, th, td
   │  ├─ button-action.blade.php  //button responsive for the row data crud (has red, sky, green and orange)
   │  ├─ button.blade.php  //button simple with colors gray, blue, yellow, orange, red.
+  │  ├─ button-rounded.blade.php  //button for icons with rounded ring on focus (has red, sky, green and orange)
   │  ├─ secondary-button.blade.php  //button simple white with outline
   │  ├─ dropdown-link.blade.php  //a single item for dropdown
   │  ├─ logo.blade.php  //app logo in a tag

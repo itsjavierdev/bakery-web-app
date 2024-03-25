@@ -35,12 +35,12 @@ class StaffManageTest extends TestCase
     {
         // Create the staff in live wire component
         Livewire::test(StaffLivewire\Create::class)
-            ->set('name', 'Cristhian')
-            ->set('surname', 'Justiniano')
-            ->set('phone', '75525722')
-            ->set('CI_number', '13315000')
-            ->set('CI_extension', 'SC')
-            ->set('birthdate', '1990-01-01')
+            ->set('staff_create.name', 'Cristhian')
+            ->set('staff_create.surname', 'Justiniano')
+            ->set('staff_create.phone', '75525722')
+            ->set('staff_create.CI_number', '13315000')
+            ->set('staff_create.CI_extension', 'SC')
+            ->set('staff_create.birthdate', '1990-01-01')
             ->call('save')
             ->assertRedirect('personal')
             ->assertSessionHas('flash.bannerStyle', 'success')
