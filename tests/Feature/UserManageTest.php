@@ -117,4 +117,15 @@ class UserManageTest extends TestCase
         // Verify that the user was created in the database
         $this->assertTrue(User::where('email', 'prueba@gmail.com')->exists());
     }
+
+    public function test_can_view_user_details()
+    {
+        // Display the user details in personal view
+        $response = $this->actingAs($this->user)->get('/personal/' . $this->staffWithUser->id);
+
+        // Verify that the user details are displayed
+        $response->assertStatus(200);
+        $response->assertSee($this->userWithStaff->email);
+        $response->assertSee($this->role->name);
+    }
 }

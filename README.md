@@ -200,9 +200,9 @@ All basics components with the theme application
   │  ├─ table  //all table tags html components (th, tr, table)
   │  │  ├─ columns  //columns customize for the table (where go a single row and column data)
   │  │  └─ table, th, td
-  │  ├─ button-action.blade.php  //button responsive for the row data crud (has red, sky, green and orange)
+  │  ├─ button-action.blade.php  //button responsive for the row data crud (has red, sky, green, gray and orange)
   │  ├─ button.blade.php  //button simple with colors gray, blue, yellow, orange, red.
-  │  ├─ button-rounded.blade.php  //button for icons with rounded ring on focus (has red, sky, green and orange)
+  │  ├─ button-rounded.blade.php  //button for icons with rounded ring on focus (has red, sky, gray, green and orange)
   │  ├─ secondary-button.blade.php  //button simple white with outline
   │  ├─ dropdown-link.blade.php  //a single item for dropdown
   │  ├─ logo.blade.php  //app logo in a tag

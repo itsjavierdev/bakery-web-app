@@ -8,12 +8,18 @@ use App\Models\Staff;
 class Detail extends Component
 {
     public $staff;
+    public $user;
+    public $role;
 
     public $actions = ['update', 'delete'];
 
     public function mount($staff)
     {
         $this->staff = Staff::findOrFail($staff);
+        $this->user = $this->staff->user;
+        if ($this->user) {
+            $this->role = $this->user->roles->first();
+        }
     }
 
     public function render()

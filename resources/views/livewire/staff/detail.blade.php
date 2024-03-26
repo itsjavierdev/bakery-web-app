@@ -33,6 +33,14 @@
                 <x-detail-row title="Fecha de modificación">
                     <x-date-format>{{ $staff->updated_at }}</x-date-format>
                 </x-detail-row>
+                @if ($this->user)
+                    <x-detail-row title="Correo electronico">
+                        <p>{{ $user->email }}</p>
+                    </x-detail-row>
+                    <x-detail-row title="Rol">
+                        <p>{{ $role->name }}</p>
+                    </x-detail-row>
+                @endif
             </div>
             <x-slot name="actions">
                 <x-item-actions :actions="$actions" routesPrefix="personal" item_id="{{ $staff->id }}" />
