@@ -1,4 +1,4 @@
-@props(['align' => 'right', 'width', 'contentClasses', 'dropdownClasses' => ''])
+@props(['align' => 'right', 'width', 'contentClasses' => '', 'dropdownClasses' => ''])
 
 @php
     switch ($align) {

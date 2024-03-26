@@ -74,6 +74,23 @@
                         @endif
                     @endif
                     <h2 class="text-lg text-gray-700 text-center font-medium">Cuenta en el sistema</h2>
+                    <!--Delete account button-->
+                    @if ($has_account)
+                        <x-dropdown width="">
+                            <x-slot name="trigger">
+                                <x-button-rounded color="gray" tabindex="-1">
+                                    <i class="icon-dots text-lg "></i>
+                                </x-button-rounded>
+                            </x-slot>
+                            <x-slot name="content">
+                                <x-button color="red"
+                                    wire:click="$dispatch('confirmDelete', {id: {{ $user_update->user->id }}})">
+                                    Eliminar cuenta
+                                </x-button>
+                            </x-slot>
+                        </x-dropdown>
+                        <livewire:users.delete redirect="personal.index" />
+                    @endif
                 </x-inputs.label>
             </div>
             <!--Account form-->
@@ -96,6 +113,17 @@
                     <x-inputs.text wire:model="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
                     <x-inputs.error for="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
                 </x-inputs.group>
+                @if ($has_account)
+                    <!--Is active-->
+                    <x-inputs.group>
+                        <x-inputs.label>
+                            <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="user_update.is_active" />
+                            <span>Cuenta activa</span>
+                        </x-inputs.label>
+
+                        <x-inputs.error for="user_update.is_active" />
+                    </x-inputs.group>
+                @endif
                 @if ($add_account)
                     <!--Password-->
                     <x-inputs.group>
@@ -108,16 +136,6 @@
                         <x-inputs.label value="Confirmar contraseña" />
                         <x-inputs.text type="password" wire:model="user_create.password_confirmation" />
                         <x-inputs.error for="user_create.password_confirmation" />
-                    </x-inputs.group>
-                @endif
-                @if ($has_account)
-                    <!--Is active-->
-                    <x-inputs.group>
-                        <x-inputs.label>
-                            <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="user_update.is_active" />
-                            <span>Cuenta activa</span>
-                        </x-inputs.label>
-                        <x-inputs.error for="user_update.is_active" />
                     </x-inputs.group>
                 @endif
 

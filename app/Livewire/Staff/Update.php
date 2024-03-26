@@ -8,6 +8,7 @@ use App\Livewire\Forms\User\UpdateFormUser;
 use App\Livewire\Forms\User\CreateFormUser;
 use Spatie\Permission\Models\Role;
 use App\Models\Staff;
+use App\Models\User;
 
 class Update extends Component
 {
@@ -19,6 +20,7 @@ class Update extends Component
     public $has_account = false;
     public $add_account = false;
     public $staff;
+    public $user;
     public $roles;
 
     //CI extensions
@@ -33,22 +35,25 @@ class Update extends Component
         'PA',
         'BN'
     ];
+    protected $listeners = ['render'];
     //Mount data in inputs
     public function mount(Staff $staff)
     {
         //set all roles in select input
         $this->roles = Role::all();
         $this->staff = $staff;
+        $this->user = $staff->user;
 
-        if ($this->staff->user) {
+        if ($this->user) {
             $this->has_account = true;
-            $this->user_update->setUser($this->staff->user);
+            $this->user_update->setUser($this->user);
         }
         $this->staff_update->setStaff($this->staff);
     }
 
     public function render()
     {
+
         return view('livewire.staff.update')->layout('layouts.app-header', ['title' => 'Editar personal']);
     }
 
