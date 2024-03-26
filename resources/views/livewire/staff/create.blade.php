@@ -1,7 +1,7 @@
 <x-form-template>
     <div class="flex flex-col md:flex-row w-full gap-5 md:gap-10">
         <div class="w-full">
-            <h2 class="text-lg text-gray-700 text-center w-full mb-4">Informacion del personal</h2>
+            <h2 class="text-lg text-gray-700 text-center font-medium w-full mb-4">Informacion del personal</h2>
             <!--Name-->
             <x-inputs.group>
                 <x-inputs.label value="Nombre" />
@@ -39,7 +39,7 @@
                         <x-atoms.inputs.error for="staff_create.CI_extension" />
                     </div>
                 </div>
-                <x-inputs.error for="CI" />
+                <x-inputs.error for="staff_create.CI" />
             </x-inputs.group>
             <!--Birthdate-->
             <x-inputs.group>
@@ -56,7 +56,6 @@
             <!--Add and account button-->
             <div class="flex justify-center mb-1">
                 <x-inputs.label class="flex justify-center items-center cursor-pointer gap-1 w-fit">
-                    <h2 class="text-lg text-gray-700 text-center">Agregar cuenta en el sistema</h2>
                     <!--Change button in add account-->
                     @if ($add_account)
                         <x-button-rounded color="red" wire:click="$set('add_account', false)">
@@ -67,6 +66,7 @@
                             <i class="icon-plus text-2xl"></i>
                         </x-button-rounded>
                     @endif
+                    <h2 class="text-lg text-gray-700 text-center font-medium">Cuenta en el sistema</h2>
                 </x-inputs.label>
             </div>
             <!--Account form-->

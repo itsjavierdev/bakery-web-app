@@ -4,7 +4,7 @@
     $classes =
         $active ?? false
             ? 'bg-yellow-500 text-gray-50 font-bold rounded-lg hover:bg-yellow-400 hover:text-white focus:ring-yellow-500 focus:ring-2 focus:ring-offset-2'
-            : 'text-gray-600 hover:text-gray-500 focus:bg-gray-200';
+            : 'text-gray-600 hover:text-gray-500 focus:bg-yellow-100';
 @endphp
 
 <a

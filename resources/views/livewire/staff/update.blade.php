@@ -1,57 +1,131 @@
 <x-form-template>
-    <div class="mb-4 max-w-2xl">
-        <x-inputs.label value="Nombre" />
-        <x-inputs.text class="w-full mt-2" wire:model="name" />
-        <x-inputs.error for="name" />
-    </div>
-    <div class="mb-4 max-w-2xl">
-        <x-inputs.label value="Apellido" />
-        <x-inputs.text class="w-full mt-2" wire:model="surname" />
-        <x-inputs.error for="surname" />
-    </div>
-    <div class="mb-4 max-w-2xl">
-        <x-inputs.label value="Telefono" />
-        <x-inputs.text type="tel" class="w-full mt-2" wire:model="phone" />
-        <x-inputs.error for="phone" />
-    </div>
-    <div class="mb-4 max-w-2xl">
-        <div class="flex flex-row gap-4">
-            <div class="w-full">
-                <x-inputs.label value="Carnet de identidad" />
-                <x-inputs.text class="w-full mt-2" wire:model="CI_number" />
-                <x-inputs.error for="CI_number" />
-            </div>
-            <div class="w-full">
-                <x-inputs.label value="Extensión" />
-                <x-atoms.inputs.select class="w-full mt-2" wire:model.blur="CI_extension">
-                    <option value="">Seleccionar</option>
-                    <option value="SC">SC</option>
-                    <option value="LP">LP</option>
-                    <option value="CB">CB</option>
-                    <option value="PO">PO</option>
-                    <option value="OR">OR</option>
-                    <option value="CH">CH</option>
-                    <option value="TJ">TJ</option>
-                    <option value="BE">BE</option>
-                    <option value="PA">PA</option>
-                </x-atoms.inputs.select>
-                <x-atoms.inputs.error for="CI_extension" />
-            </div>
+    <div class="flex flex-col md:flex-row w-full gap-5 md:gap-10">
+        <div class="w-full">
+            <h2 class="text-lg text-gray-700 text-center font-medium w-full mb-4">Informacion del personal</h2>
+            <!--Name-->
+            <x-inputs.group>
+                <x-inputs.label value="Nombre" />
+                <x-inputs.text wire:model="staff_update.name" />
+                <x-inputs.error for="staff_update.name" />
+            </x-inputs.group>
+            <!--Surname-->
+            <x-inputs.group>
+                <x-inputs.label value="Apellido" />
+                <x-inputs.text wire:model="staff_update.surname" />
+                <x-inputs.error for="staff_update.surname" />
+            </x-inputs.group>
+            <!--Phone-->
+            <x-inputs.group>
+                <x-inputs.label value="Telefono" />
+                <x-inputs.text type="tel" wire:model="staff_update.phone" />
+                <x-inputs.error for="staff_update.phone" />
+            </x-inputs.group>
+            <!--Identity card-->
+            <x-inputs.group>
+                <div class="flex flex-row gap-4">
+                    <div class="w-full">
+                        <x-inputs.label value="Carnet de identidad" />
+                        <x-inputs.text wire:model="staff_update.CI_number" />
+                        <x-inputs.error for="staff_update.CI_number" />
+                    </div>
+                    <div class="w-full">
+                        <x-inputs.label value="Extensión" />
+                        <x-atoms.inputs.select wire:model.blur="staff_update.CI_extension">
+                            <option value="">Seleccionar</option>
+                            @foreach ($extensions as $extension)
+                                <option value="{{ $extension }}">{{ $extension }}</option>
+                            @endforeach
+                        </x-atoms.inputs.select>
+                        <x-atoms.inputs.error for="staff_update.CI_extension" />
+                    </div>
+                </div>
+                <x-inputs.error for="staff_update.CI" />
+            </x-inputs.group>
+            <!--Birthdate-->
+            <x-inputs.group>
+                <x-inputs.label value="Fecha de nacimiento" />
+                <x-inputs.date wire:model="staff_update.birthdate" />
+                <x-inputs.error for="staff_update.birthdate" />
+            </x-inputs.group>
+            <!--Is employed-->
+            <x-inputs.group>
+                <x-inputs.label>
+                    <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="staff_update.is_employed" />
+                    <span>Empleado en la empresa</span>
+                </x-inputs.label>
+                <x-inputs.error for="staff_update.is_employed" />
+            </x-inputs.group>
         </div>
-        <x-inputs.error for="CI" />
+        <hr class="md:hidden">
+        <div class="w-full">
+            <!--Add and account button-->
+            <div class="flex justify-center mb-1">
+                <x-inputs.label class="flex justify-center items-center cursor-pointer gap-1 w-fit">
+                    <!--Change button in add account-->
+                    @if (!$has_account)
+                        @if ($add_account)
+                            <x-button-rounded color="red" wire:click="$set('add_account', false)">
+                                <i class="icon-minus text-2xl"></i>
+                            </x-button-rounded>
+                        @else
+                            <x-button-rounded color="green" wire:click="$set('add_account', true)">
+                                <i class="icon-plus text-2xl"></i>
+                            </x-button-rounded>
+                        @endif
+                    @endif
+                    <h2 class="text-lg text-gray-700 text-center font-medium">Cuenta en el sistema</h2>
+                </x-inputs.label>
+            </div>
+            <!--Account form-->
+            @if ($add_account || $has_account)
+                <!--Role-->
+                <x-inputs.group>
+                    <x-inputs.label value="Rol" />
+                    <x-atoms.inputs.select
+                        wire:model.blur="{{ $has_account ? 'user_update.role' : 'user_create.role' }}">
+                        <option value="">Seleccionar</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </x-atoms.inputs.select>
+                    <x-atoms.inputs.error for="{{ $has_account ? 'user_update.role' : 'user_create.role' }}" />
+                </x-inputs.group>
+                <!--Email-->
+                <x-inputs.group>
+                    <x-inputs.label value="Correo electronico" />
+                    <x-inputs.text wire:model="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
+                    <x-inputs.error for="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
+                </x-inputs.group>
+                @if ($add_account)
+                    <!--Password-->
+                    <x-inputs.group>
+                        <x-inputs.label value="Contraseña" />
+                        <x-inputs.text type="password" wire:model="user_create.password" />
+                        <x-inputs.error for="user_create.password" />
+                    </x-inputs.group>
+                    <!--Confirm password-->
+                    <x-inputs.group>
+                        <x-inputs.label value="Confirmar contraseña" />
+                        <x-inputs.text type="password" wire:model="user_create.password_confirmation" />
+                        <x-inputs.error for="user_create.password_confirmation" />
+                    </x-inputs.group>
+                @endif
+                @if ($has_account)
+                    <!--Is active-->
+                    <x-inputs.group>
+                        <x-inputs.label>
+                            <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="user_update.is_active" />
+                            <span>Cuenta activa</span>
+                        </x-inputs.label>
+                        <x-inputs.error for="user_update.is_active" />
+                    </x-inputs.group>
+                @endif
+
+            @endif
+        </div>
     </div>
-    <div class="mb-4 max-w-2xl">
-        <x-inputs.label value="Fecha de nacimiento" />
-        <x-inputs.date class="w-full mt-2" wire:model="birthdate" />
-        <x-inputs.error for="birthdate" />
-    </div>
-    <div class="mb-4 max-w-2xl">
-        <x-inputs.label>
-            <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="is_employed" />
-            <span>Empleado en la empresa</span>
-        </x-inputs.label>
-        <x-inputs.error for="is_employed" />
-    </div>
+
+    <!--Actions-->
     <x-slot name="footer">
         <x-button wire:click="update">
             Actualizar

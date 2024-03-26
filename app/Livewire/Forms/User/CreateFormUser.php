@@ -8,13 +8,9 @@ use App\Models\Staff;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use App\Actions\Fortify\PasswordValidationRules;
-use App\Livewire\Forms\Staff\CreateFormStaff;
 
 class CreateFormUser extends Form
 {
-
-    public CreateFormStaff $staff_create;
-
     use PasswordValidationRules;
     //account inputs
     public $email;
@@ -55,14 +51,11 @@ class CreateFormUser extends Form
     }
 
 
-    public function save($staff)
+    public function store(Staff $staff)
     {
         $this->staff = $staff;
 
         $this->validate();
-
-        //create the staff
-        $this->staff = Staff::create($staff);
 
         //find the role to assign
         $this->role = Role::find($this->role);

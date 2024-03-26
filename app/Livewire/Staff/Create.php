@@ -42,14 +42,15 @@ class Create extends Component
 
     public function save()
     {
-        $staff = $this->staff_create->create();
+        $this->staff_create->validate();
 
         //if the user wants to add an account
         if ($this->add_account) {
-            $this->user_create->save($staff);
+            $staff = $this->staff_create->store();
+            $this->user_create->store($staff);
         } else {
             //if the user does not want to add an account, the staff is stored
-            $this->staff_create->store($staff);
+            $this->staff_create->store();
         }
 
         return redirect()->to('personal')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Personal creado correctamente');

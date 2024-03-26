@@ -17,6 +17,9 @@ class UserManageTest extends TestCase
     protected $user;
     protected $another_user;
     protected $role;
+    protected $staff;
+    protected $userWithStaff;
+    protected $staffWithUser;
 
     protected function setUp(): void
     {
@@ -25,6 +28,15 @@ class UserManageTest extends TestCase
         //Create example data
         $this->user = User::factory()->create()->assignRole($this->role);
         $this->another_user = User::factory()->create()->assignRole($this->role);
+
+        $this->staff = Staff::factory()->create();
+
+        $this->staffWithUser = Staff::factory()->create();
+        $this->userWithStaff = User::create([
+            'email' => 'javier@gmail.com',
+            'password' => 'Test.123',
+            'staff_id' => $this->staffWithUser->id,
+        ])->assignRole($this->role);
     }
 
     public function test_a_user_can_be_created_in_create_staff(): void
@@ -50,6 +62,30 @@ class UserManageTest extends TestCase
         // Verify that the user was created in the database
         $this->assertTrue(User::where('email', 'test@gmail.com')->exists());
     }
+    public function test_a_user_can_be_created_in_update_staff(): void
+    {
+        // Create the user in live wire component
+        Livewire::test(StaffLivewire\Update::class, ['staff' => $this->staff->id])
+            ->set('staff_update.name', 'Cristhian')
+            ->set('staff_update.surname', 'Justiniano')
+            ->set('staff_update.phone', '75525722')
+            ->set('staff_update.CI_number', '13315000')
+            ->set('staff_update.CI_extension', 'SC')
+            ->set('staff_update.birthdate', '1990-01-01')
+            ->set('staff_update.is_employed', false)
+            ->set('add_account', 'true')
+            ->set('user_create.role', $this->role->id)
+            ->set('user_create.email', 'test@gmail.com')
+            ->set('user_create.password', 'Test.123')
+            ->set('user_create.password_confirmation', 'Test.123')
+            ->call('update')
+            ->assertRedirect('personal')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Personal actualizado correctamente');
+
+        // Verify that the user was created in the database
+        $this->assertTrue(User::where('email', 'test@gmail.com')->exists());
+    }
     public function test_can_display_list_of_user(): void
     {
         // Display the list of user
@@ -59,5 +95,26 @@ class UserManageTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee($this->another_user->email);
         $response->assertSee($this->role->name);
+    }
+    public function test_a_user_can_be_updated(): void
+    {
+        // Update the user in live wire component
+        Livewire::test(StaffLivewire\Update::class, ['staff' => $this->staffWithUser->id])
+            ->set('staff_update.name', 'Cristhian')
+            ->set('staff_update.surname', 'Justiniano')
+            ->set('staff_update.phone', '75525722')
+            ->set('staff_update.CI_number', '13315000')
+            ->set('staff_update.CI_extension', 'SC')
+            ->set('staff_update.birthdate', '1990-01-01')
+            ->set('staff_update.is_employed', false)
+            ->set('user_update.role', $this->role->id)
+            ->set('user_update.email', 'prueba@gmail.com')
+            ->call('update')
+            ->assertRedirect('personal')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Personal actualizado correctamente');
+
+        // Verify that the user was created in the database
+        $this->assertTrue(User::where('email', 'prueba@gmail.com')->exists());
     }
 }
