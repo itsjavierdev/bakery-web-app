@@ -4,13 +4,13 @@ namespace App\Livewire\Staff;
 
 use App\Livewire\Others\Datatable;
 use App\Views\Table\Column;
+use App\Views\Table\Filter;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Read extends Datatable
 {
-    protected $listeners = ['render'];
 
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
@@ -20,19 +20,36 @@ class Read extends Datatable
         return Staff::leftJoin('users', 'staff.id', '=', 'users.staff_id')
             ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
             ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
-            ->select('staff.id', 'is_employed', 'users.email AS email', 'roles.name AS role', DB::raw('CONCAT(staff.name, " ", staff.surname) AS full_name'))
+            ->select('staff.*', 'is_employed', 'users.email AS email', 'roles.name AS role', DB::raw('CONCAT(staff.name, " ", staff.surname) AS full_name'))
             ->where('staff.id', '!=', $user->staff_id);
 
     }
-
     public function columns(): array
     {
         return [
-            Column::make('id', 'ID'),
-            Column::make('full_name', 'Nombre completo'),
-            Column::make('email', 'Email'),
-            Column::make('role', 'Rol'),
+            Column::make('id', 'ID')->isDefault(),
+            Column::make('created_at', 'Fecha de registro'),
+            Column::make('full_name', 'Nombre completo')->isDefault(),
+            Column::make('email', 'Email')->isDefault(),
+            Column::make('role', 'Rol')->isDefault(),
+            Column::make('phone', 'Telefono'),
+            Column::make('CI', 'Carnet'),
+            Column::make('birthdate', 'Fecha de nacimiento'),
             Column::make('is_employed', 'Empleado')->component('columns.boolean'),
+        ];
+    }
+    public function filters(): array
+    {
+        return [
+            Filter::make('staff.id', 'ID'),
+            Filter::make('staff.name', 'Nombre'),
+            Filter::make('surname', 'Apellido'),
+            Filter::make('email', 'Email'),
+            Filter::make('phone', 'Telefono'),
+            Filter::make('roles.name', 'Rol'),
+            Filter::make('CI', 'Carnet'),
+            Filter::make('birthdate', 'Fecha de nacimiento'),
+            Filter::make('staff.created_at', 'Fecha de registro'),
         ];
     }
 

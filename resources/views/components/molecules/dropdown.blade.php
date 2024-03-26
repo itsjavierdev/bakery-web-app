@@ -1,4 +1,4 @@
-@props(['align' => 'right', 'width', 'contentClasses' => '', 'dropdownClasses' => ''])
+@props(['align' => 'right', 'width', 'contentClasses' => '', 'dropdownClasses' => '', 'triggerClasses' => ''])
 
 @php
     switch ($align) {
@@ -23,8 +23,9 @@
 
 @endphp
 
-<div class="relative" x-data="{ open: false }" @click.away="open = false" @close.stop="open = false">
-    <div @click="open = ! open">
+<div {{ $attributes->merge(['class' => 'relative']) }} x-data="{ open: false }" @click.away="open = false"
+    @close.stop="open = false">
+    <div @click="open = ! open" class="{{ $triggerClasses }}">
         {{ $trigger }}
     </div>
 

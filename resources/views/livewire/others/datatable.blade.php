@@ -1,5 +1,5 @@
 <div>
-    <x-datatable-propierties :columns="$this->columns()" />
+    <x-datatable-propierties />
 
     <!--table in large screens-->
     <x-table>
@@ -19,7 +19,7 @@
 
                 <!--Columns header-->
                 @foreach ($this->columns() as $column)
-                    @if ($column->key != 'id' && $column->key != 'created_at')
+                    @if ($column->key != 'id' && $column->key != 'created_at' && in_array($column->key, $selected_columns))
                         <x-th-filter key="{{ $column->key }}" sort_by="{{ $sort_by }}"
                             sort_direction="{{ $sort_direction }}">
                             {{ $column->label }}
@@ -51,7 +51,7 @@
 
                         <!--All other data in row-->
                         @foreach ($this->columns() as $column)
-                            @if ($column->key != 'id' && $column->key != 'created_at')
+                            @if ($column->key != 'id' && $column->key != 'created_at' && in_array($column->key, $selected_columns))
                                 <td>
                                     <div class="p-2 flex items-center">
                                         <x-dynamic-component :component="$column->component" :value="$row[$column->key]">
@@ -94,7 +94,7 @@
 
                     <!--All others column footer-->
                     @foreach ($this->columns() as $column)
-                        @if ($column->key != 'id' && $column->key != 'created_at')
+                        @if ($column->key != 'id' && $column->key != 'created_at' && in_array($column->key, $selected_columns))
                             <x-th class="!cursor-default">
                                 {{ $column->label }}
                             </x-th>
@@ -126,7 +126,7 @@
 
                     <!--All other columns show in rows-->
                     @foreach ($this->columns() as $column)
-                        @if ($column->key != 'id' && $column->key != 'created_at')
+                        @if ($column->key != 'id' && $column->key != 'created_at' && in_array($column->key, $selected_columns))
                             <div>
                                 <strong class="text-neutral-600">{{ $column->label }}:</strong>
                                 <span> <x-dynamic-component :component="$column->component" :value="$row[$column->key]">

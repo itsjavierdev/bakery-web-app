@@ -20,24 +20,40 @@ abstract class Datatable extends Component
     public $has_id_column = false;
     public $has_created_at_column = false;
 
+    //selected columns to show by the user
+    public $selected_columns;
+
 
     //abstract methods
+
+
+    protected $listeners = ['render'];
     public abstract function query(): \Illuminate\Database\Eloquent\Builder;
 
     public abstract function routesPrefix(): string;
 
     public abstract function columns(): array;
 
+    public abstract function filters(): array;
+
     public abstract function actions(): array;
 
     //id and created_at columns
     public function mount()
     {
-        $this->has_id_column = array_search('id', array_column($this->columns(), 'key')) !== false;
-        $this->has_created_at_column = array_search('created_at', array_column($this->columns(), 'key')) !== false;
+        //set the default columns
+        $this->selected_columns = collect($this->columns())
+            ->filter(function ($column) {
+                return $column->default === true;
+            })
+            ->pluck('key')
+            ->toArray();
     }
     public function render()
     {
+
+        $this->has_id_column = in_array('id', $this->selected_columns);
+        $this->has_created_at_column = in_array('created_at', $this->selected_columns);
         return view('livewire.others.datatable');
     }
     //query for show data
@@ -72,11 +88,11 @@ abstract class Datatable extends Component
         $query->where(function ($query) {
             if ($this->search_column !== '') {
                 //specific column search
-                $column = collect($this->columns())->firstWhere('key', $this->search_column);
+                $column = collect($this->filters())->firstWhere('key', $this->search_column);
                 $this->columnSearchFilter($query, $column);
             } else {
                 //all columns search
-                foreach ($this->columns() as $column) {
+                foreach ($this->filters() as $column) {
                     $this->columnSearchFilter($query, $column);
                 }
             }

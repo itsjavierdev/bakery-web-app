@@ -13,19 +13,19 @@ class Column
     //column label
     public string $label;
 
-    //if the column is date with accesor isoFormat('DD MMM YYYY')
-    public bool $isDate = false;
+    //column default
+    public bool $default = false;
 
-    public function __construct($key, $label, $isDate = false)
+    public function __construct($key, $label, $default = false)
     {
         $this->key = $key;
         $this->label = $label;
-        $this->isDate = $isDate;
+        $this->default = $default;
     }
 
-    public static function make($key, $label, $isDate = false)
+    public static function make($key, $label, $default = false)
     {
-        return new static($key, $label, $isDate);
+        return new static($key, $label, $default);
     }
     public function component($component)
     {
@@ -33,9 +33,9 @@ class Column
 
         return $this;
     }
-    public function date()
+    public function isDefault()
     {
-        $this->isDate = true;
+        $this->default = true;
         return $this;
     }
 }

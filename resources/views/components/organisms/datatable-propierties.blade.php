@@ -1,9 +1,10 @@
-@props(['columns'])
-
 <div {{ $attributes->merge(['class' => 'flex justify-between flex-col md:flex-row gap-5 pb-4']) }}>
-    <x-show-entries />
+    <div class="flex gap-3">
+        <x-show-columns />
+        <x-show-entries />
+    </div>
 
-    <x-orderby :columns="$columns" />
+    <x-orderby />
 
     <x-search />
 </div>

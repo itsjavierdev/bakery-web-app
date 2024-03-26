@@ -2,8 +2,8 @@
     <x-inputs.select wire:model.change="search_column"
         class="w-2/5 md:w-2/6 rounded-l-none border-l-0 md:rounded-r-none md:border-r-0 md:rounded-l-md md:border-l">
         <option value="">Todo</option>
-        @foreach ($this->columns() as $column)
-            <option value="{{ $column->key }}">{{ $column->label }}</option>
+        @foreach ($this->filters() as $filter)
+            <option value="{{ $filter->key }}">{{ $filter->label }}</option>
         @endforeach
     </x-inputs.select>
     <x-inputs.text wire:model.change="search"

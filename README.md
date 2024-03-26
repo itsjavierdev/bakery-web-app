@@ -300,14 +300,30 @@ use App\Views\Table\Column;
 public function columns() : array
 {
   return [
-       Column::make('name', 'Name'),
+      Column::make('content', 'Content'),
+      //set which column in show defaul (the other user can select to show)
+       Column::make('name', 'Name')->isDefault(),
        //if has date in a isoFormat so you can search in that format
-       Column::make('created_at', 'Created At')->date(),       
+       Column::make('created_at', 'Created At'),       
        //with another component to show                             
-       Column::make('created_at', 'Created At')->date()->component('columns.users.status'), 
+       Column::make('created_at', 'Created At')->component('columns.users.status'), 
    ];
 }
 ```
+
+Set the columns for search filter
+
+```php
+ public function filters(): array
+    {
+        return [
+            Filter::make('id', 'ID'),
+            //in joins with ambiguous columns name, passes liked this
+            Filter::make('staff.name', 'Nombre'),
+            //for filter in 
+            Filter::make('created_at', 'Fecha de registro')->date(),
+        ];
+    }
 
 Create an array to set the actions buttons you are going to use
 

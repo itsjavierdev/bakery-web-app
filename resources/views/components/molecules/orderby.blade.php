@@ -1,9 +1,8 @@
-@props(['columns'])
 <!--Order by mobile screens-->
 <div {{ $attributes->merge(['class' => 'md:hidden flex']) }}>
     <!--Sort attribute-->
     <x-inputs.select wire:model.change="sort_by" class="w-3/5 rounded-e-none border-r-0">
-        @foreach ($columns as $index => $column)
+        @foreach ($this->columns() as $index => $column)
             <option value="{{ $column->key }}">
                 @if ($index === 0)
                     Ordenar por:

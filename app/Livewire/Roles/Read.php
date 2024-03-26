@@ -4,12 +4,12 @@ namespace App\Livewire\Roles;
 
 use App\Livewire\Others\Datatable;
 use App\Views\Table\Column;
+use App\Views\Table\Filter;
 use Spatie\Permission\Models\Role;
 
 
 class Read extends Datatable
 {
-    protected $listeners = ['render'];
 
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
@@ -19,9 +19,17 @@ class Read extends Datatable
     public function columns(): array
     {
         return [
-            Column::make('id', 'ID'),
-            Column::make('name', 'Nombre'),
-            Column::make('created_at', 'Fecha de registro')->date(),
+            Column::make('id', 'ID')->isDefault(),
+            Column::make('name', 'Nombre')->isDefault(),
+            Column::make('created_at', 'Fecha de registro'),
+        ];
+    }
+    public function filters(): array
+    {
+        return [
+            Filter::make('id', 'ID'),
+            Filter::make('name', 'Nombre'),
+            Filter::make('created_at', 'Fecha de registro')->date(),
         ];
     }
 
