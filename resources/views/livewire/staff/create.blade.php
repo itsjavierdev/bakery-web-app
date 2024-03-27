@@ -30,13 +30,13 @@
                     </div>
                     <div>
                         <x-inputs.label value="Extensión" />
-                        <x-atoms.inputs.select wire:model.blur="staff_create.CI_extension">
+                        <x-inputs.select wire:model="staff_create.CI_extension">
                             <option value="">Seleccionar</option>
                             @foreach ($extensions as $extension)
                                 <option value="{{ $extension }}">{{ $extension }}</option>
                             @endforeach
-                        </x-atoms.inputs.select>
-                        <x-atoms.inputs.error for="staff_create.CI_extension" />
+                        </x-inputs.select>
+                        <x-inputs.error for="staff_create.CI_extension" />
                     </div>
                 </div>
                 <x-inputs.error for="staff_create.CI" />
@@ -58,12 +58,12 @@
                 <x-inputs.label class="flex justify-center items-center cursor-pointer gap-1 w-fit">
                     <!--Change button in add account-->
                     @if ($add_account)
-                        <x-button-rounded color="red" wire:click="$set('add_account', false)">
-                            <i class="icon-minus text-2xl"></i>
+                        <x-button-rounded wire:click="$set('add_account', false)">
+                            <i class="icon-minus text-2xl text-red-700"></i>
                         </x-button-rounded>
                     @else
-                        <x-button-rounded color="green" wire:click="$set('add_account', true)">
-                            <i class="icon-plus text-2xl"></i>
+                        <x-button-rounded wire:click="$set('add_account', true)">
+                            <i class="icon-plus text-2xl text-green-700"></i>
                         </x-button-rounded>
                     @endif
                     <h2 class="text-lg text-gray-700 text-center font-medium">Cuenta en el sistema</h2>
@@ -74,13 +74,13 @@
                 <!--Role-->
                 <x-inputs.group>
                     <x-inputs.label value="Rol" />
-                    <x-atoms.inputs.select wire:model.blur="user_create.role">
+                    <x-inputs.select wire:model="user_create.role">
                         <option value="">Seleccionar</option>
                         @foreach ($roles as $role)
                             <option value="{{ $role->id }}">{{ $role->name }}</option>
                         @endforeach
-                    </x-atoms.inputs.select>
-                    <x-atoms.inputs.error for="user_create.role" />
+                    </x-inputs.select>
+                    <x-inputs.error for="user_create.role" />
                 </x-inputs.group>
                 <!--Email-->
                 <x-inputs.group>

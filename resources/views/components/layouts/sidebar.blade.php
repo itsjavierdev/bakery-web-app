@@ -5,12 +5,7 @@
             <button id="closeSidebarMobile" class="flex justify-end absolute md:hidden right-5 top-5">
                 <i class="icon-x text-xl text-gray-800"></i>
             </button>
-            <!-- Logo-->
-            <div class="flex justify-center">
-                <a href="{{ route('/') }}" class="focus:bg-yellow-100 rounded-full  focus:outline-none">
-                    <x-logo class="rounded-full p-2" width=80 />
-                </a>
-            </div>
+
         </header>
 
         {{ $slot }}

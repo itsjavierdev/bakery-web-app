@@ -7,6 +7,6 @@
         @endforeach
     </x-inputs.select>
     <x-inputs.text wire:model.change="search"
-        class="w-3/5 md:w-4/6 rounded-r-none border-r md:rounded-l-none md:border-l md:rounded-r-md md:border-r"
+        class="w-3/5 md:w-4/6 pr-10 rounded-r-none border-r md:rounded-l-none md:border-l md:rounded-r-md md:border-r"
         placeholder="Buscar" />
 </div>

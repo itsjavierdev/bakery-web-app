@@ -12,7 +12,7 @@
         <div class="flex flex-col gap-2 p-3">
             @foreach ($this->columns() as $column)
                 <label>
-                    <x-inputs.checkbox wire:model.blur="selected_columns" value="{{ $column->key }}" />
+                    <x-inputs.checkbox wire:model.live="selected_columns" value="{{ $column->key }}" />
                     {{ $column->label }}
                 </label>
             @endforeach

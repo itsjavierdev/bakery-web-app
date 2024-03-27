@@ -30,13 +30,13 @@
                     </div>
                     <div class="w-full">
                         <x-inputs.label value="Extensión" />
-                        <x-atoms.inputs.select wire:model.blur="staff_update.CI_extension">
+                        <x-inputs.select wire:model="staff_update.CI_extension">
                             <option value="">Seleccionar</option>
                             @foreach ($extensions as $extension)
                                 <option value="{{ $extension }}">{{ $extension }}</option>
                             @endforeach
-                        </x-atoms.inputs.select>
-                        <x-atoms.inputs.error for="staff_update.CI_extension" />
+                        </x-inputs.select>
+                        <x-inputs.error for="staff_update.CI_extension" />
                     </div>
                 </div>
                 <x-inputs.error for="staff_update.CI" />
@@ -64,12 +64,12 @@
                     <!--Change button in add account-->
                     @if (!$has_account)
                         @if ($add_account)
-                            <x-button-rounded color="red" wire:click="$set('add_account', false)">
-                                <i class="icon-minus text-2xl"></i>
+                            <x-button-rounded wire:click="$set('add_account', false)">
+                                <i class="icon-minus text-2xl text-red-700"></i>
                             </x-button-rounded>
                         @else
-                            <x-button-rounded color="green" wire:click="$set('add_account', true)">
-                                <i class="icon-plus text-2xl"></i>
+                            <x-button-rounded wire:click="$set('add_account', true)">
+                                <i class="icon-plus text-2xl text-green-700"></i>
                             </x-button-rounded>
                         @endif
                     @endif
@@ -78,8 +78,8 @@
                     @if ($has_account)
                         <x-dropdown width="">
                             <x-slot name="trigger">
-                                <x-button-rounded color="gray" tabindex="-1">
-                                    <i class="icon-dots text-lg "></i>
+                                <x-button-rounded tabindex="-1">
+                                    <i class="icon-dots text-lg text-gray-700"></i>
                                 </x-button-rounded>
                             </x-slot>
                             <x-slot name="content">
@@ -98,14 +98,13 @@
                 <!--Role-->
                 <x-inputs.group>
                     <x-inputs.label value="Rol" />
-                    <x-atoms.inputs.select
-                        wire:model.blur="{{ $has_account ? 'user_update.role' : 'user_create.role' }}">
+                    <x-inputs.select wire:model="{{ $has_account ? 'user_update.role' : 'user_create.role' }}">
                         <option value="">Seleccionar</option>
                         @foreach ($roles as $role)
                             <option value="{{ $role->id }}">{{ $role->name }}</option>
                         @endforeach
-                    </x-atoms.inputs.select>
-                    <x-atoms.inputs.error for="{{ $has_account ? 'user_update.role' : 'user_create.role' }}" />
+                    </x-inputs.select>
+                    <x-inputs.error for="{{ $has_account ? 'user_update.role' : 'user_create.role' }}" />
                 </x-inputs.group>
                 <!--Email-->
                 <x-inputs.group>
