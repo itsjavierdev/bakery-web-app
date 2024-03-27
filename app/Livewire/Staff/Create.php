@@ -37,7 +37,7 @@ class Create extends Component
     }
     public function render()
     {
-        return view('livewire.staff.create')->layout('layouts.app-header', ['title' => 'Agregar personal']);
+        return view('livewire.staff.create')->layout('layouts.app-header', ['title' => 'Agregar personal', 'titleAlign' => 'center']);
     }
 
     public function save()

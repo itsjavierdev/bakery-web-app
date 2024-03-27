@@ -1,7 +1,7 @@
-<div class='bg-white border border-gray-300 rounded-lg overflow-hidden'>
+<div class='bg-white border-medium border-gray-300 rounded-lg overflow-hidden'>
     @if ($header ?? false)
         <header
-            class="flex justify-between border-b font-medium border-gray-300 bg-gray-100 text-neutral-500 text-bold py-2.5 px-3.5">
+            class="flex justify-between border-b-medium font-medium border-gray-300 bg-gray-100 text-neutral-500 text-bold py-2.5 px-3.5">
             {{ $header ?? '' }}
         </header>
     @endif

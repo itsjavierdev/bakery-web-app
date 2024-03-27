@@ -25,7 +25,7 @@ class Create extends Component
     //render with layout
     public function render()
     {
-        return view('livewire.roles.create')->layout('layouts.app-header', ['title' => 'Agregar rol']);
+        return view('livewire.roles.create')->layout('layouts.app-header', ['title' => 'Agregar rol', 'titleAlign' => 'center']);
     }
     public function save()
     {

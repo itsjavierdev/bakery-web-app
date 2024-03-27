@@ -33,7 +33,7 @@ class Update extends Component
     //render with layout
     public function render()
     {
-        return view('livewire.roles.update')->layout('layouts.app-header', ['title' => 'Editar rol']);
+        return view('livewire.roles.update')->layout('layouts.app-header', ['title' => 'Editar rol', 'titleAlign' => 'center']);
     }
     //Validation rules
     public function rules()

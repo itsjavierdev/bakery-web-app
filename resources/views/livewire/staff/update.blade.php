@@ -73,7 +73,13 @@
                             </x-button-rounded>
                         @endif
                     @endif
+                    @if ($has_account)
+                        <div class="w-10"></div>
+                    @endif
                     <h2 class="text-lg text-gray-700 text-center font-medium">Cuenta en el sistema</h2>
+                    @if (!$has_account)
+                        <div class="w-10"></div>
+                    @endif
                     <!--Delete account button-->
                     @if ($has_account)
                         <x-dropdown width="">

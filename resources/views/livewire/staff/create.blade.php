@@ -67,6 +67,7 @@
                         </x-button-rounded>
                     @endif
                     <h2 class="text-lg text-gray-700 text-center font-medium">Cuenta en el sistema</h2>
+                    <div class="w-10"></div>
                 </x-inputs.label>
             </div>
             <!--Account form-->

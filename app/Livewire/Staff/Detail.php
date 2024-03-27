@@ -24,6 +24,6 @@ class Detail extends Component
 
     public function render()
     {
-        return view('livewire.staff.detail')->layout('layouts.app-header', ['title' => 'Detalle de Personal']);
+        return view('livewire.staff.detail')->layout('layouts.app-header', ['title' => 'Detalle de Personal', 'titleAlign' => 'center']);
     }
 }

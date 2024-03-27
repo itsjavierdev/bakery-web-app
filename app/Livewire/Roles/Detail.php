@@ -15,7 +15,7 @@ class Detail extends Component
 
     public function render()
     {
-        return view('livewire.roles.detail')->layout('layouts.app-header', ['title' => 'Detalle del Rol']);
+        return view('livewire.roles.detail')->layout('layouts.app-header', ['title' => 'Detalle del Rol', 'titleAlign' => 'center']);
     }
 
     public function mount($role)

@@ -54,7 +54,7 @@ class Update extends Component
     public function render()
     {
 
-        return view('livewire.staff.update')->layout('layouts.app-header', ['title' => 'Editar personal']);
+        return view('livewire.staff.update')->layout('layouts.app-header', ['title' => 'Editar personal', 'titleAlign' => 'center']);
     }
 
     public function update()
