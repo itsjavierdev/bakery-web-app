@@ -1,11 +1,17 @@
 <x-app-header title="Mi perfil" titleAlign="center">
     <div class="p-6">
         <div class="max-w-7xl mx-auto py-2 md:py-5 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('livewire.profile.update-profile-information-form')
+            @can('profile.update')
+                @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+                    @livewire('livewire.profile.update-profile-information-form')
 
+                    <x-section-border />
+                @endif
+            @else
+                @livewire('profile.profile-information')
                 <x-section-border />
-            @endif
+            @endcan
+
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
                 <div class="mt-10 sm:mt-0">

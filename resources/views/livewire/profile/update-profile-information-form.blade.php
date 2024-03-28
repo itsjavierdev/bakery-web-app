@@ -8,74 +8,65 @@
     </x-slot>
 
     <x-slot name="form">
-        <!-- Profile Photo -->
-        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-            <div x-data="{ photoName: null, photoPreview: null }" class="col-span-6 sm:col-span-4">
-                <!-- Profile Photo File Input -->
-                <input type="file" id="photo" class="hidden" wire:model.live="photo" x-ref="photo"
-                    x-on:change="
-                                    photoName = $refs.photo.files[0].name;
-                                    const reader = new FileReader();
-                                    reader.onload = (e) => {
-                                        photoPreview = e.target.result;
-                                    };
-                                    reader.readAsDataURL($refs.photo.files[0]);
-                            " />
-
-                <x-inputs.label for="photo" value="{{ __('Photo') }}" />
-
-                <!-- Current Profile Photo -->
-                <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}"
-                        class="rounded-full h-20 w-20 object-cover">
-                </div>
-
-                <!-- New Profile Photo Preview -->
-                <div class="mt-2" x-show="photoPreview" style="display: none;">
-                    <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
-                        x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
-                    </span>
-                </div>
-
-                <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Select A New Photo') }}
-                </x-secondary-button>
-
-                @if ($this->user->profile_photo_path)
-                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
-                    </x-secondary-button>
-                @endif
-
-                <x-inputs.error for="photo" class="mt-2" />
+        <!-- ID -->
+        <div class="col-span-6 md:col-span-5">
+            <x-inputs.label value="ID" />
+            <div class=" flex gap-3 items-center bg-gray-100 py-2.5 px-4 rounded-md">
+                <p>{{ $state['id'] }}</p>
             </div>
-        @endif
-
+        </div>
+        <!-- Role -->
+        <div class="col-span-6 md:col-span-5">
+            <x-inputs.label value="Rol" />
+            <div class=" flex gap-3 items-center bg-gray-100 py-2.5 px-4 rounded-md">
+                <p>{{ $state['role']->name }}</p>
+            </div>
+        </div>
+        <!-- Name -->
+        <div class="col-span-6 md:col-span-5">
+            <x-inputs.label value="Nombre" />
+            <x-inputs.text class="mt-1 block w-full" wire:model="state.name" />
+            <x-inputs.error for="state.name" class="mt-2" />
+        </div>
+        <!-- Surname -->
+        <div class="col-span-6 md:col-span-5">
+            <x-inputs.label value="Apellido" />
+            <x-inputs.text class="mt-1 block w-full" wire:model="state.surname" />
+            <x-inputs.error for="state.surname" class="mt-2" />
+        </div>
+        <!-- Phone -->
+        <div class="col-span-6 md:col-span-5">
+            <x-inputs.label value="Telefono" />
+            <x-inputs.text class="mt-1 block w-full" wire:model="state.phone" />
+            <x-inputs.error for="state.phone" class="mt-2" />
+        </div>
+        <!-- Identity card-->
+        <div class="col-span-6 md:col-span-5">
+            <div class="flex flex-row gap-4">
+                <div class="w-full">
+                    <x-inputs.label value="Carnet de identidad" />
+                    <x-inputs.text wire:model="state.CI_number" />
+                    <x-inputs.error for="state.CI_number" />
+                </div>
+                <div class="w-full">
+                    <x-inputs.label value="Extensión" />
+                    <x-inputs.select wire:model="state.CI_extension">
+                        <option value="">Seleccionar</option>
+                        @foreach ($extensions as $extension)
+                            <option value="{{ $extension }}">{{ $extension }}</option>
+                        @endforeach
+                    </x-inputs.select>
+                    <x-inputs.error for="state.CI_extension" />
+                </div>
+            </div>
+            <x-inputs.error for="state.CI" />
+        </div>
         <!-- Email -->
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-6 sm:col-span-5">
             <x-inputs.label for="email" value="{{ __('Email') }}" />
             <x-inputs.text id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required
                 autocomplete="username" />
             <x-inputs.error for="email" class="mt-2" />
-
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) &&
-                    !$this->user->hasVerifiedEmail())
-                <p class="text-sm mt-2">
-                    {{ __('Your email address is unverified.') }}
-
-                    <button type="button"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        wire:click.prevent="sendEmailVerification">
-                        {{ __('Click here to re-send the verification email.') }}
-                    </button>
-                </p>
-
-                @if ($this->verificationLinkSent)
-                    <p class="mt-2 font-medium text-sm text-green-600">
-                        {{ __('A new verification link has been sent to your email address.') }}
-                    </p>
-                @endif
-            @endif
         </div>
     </x-slot>
 
