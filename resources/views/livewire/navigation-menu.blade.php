@@ -8,4 +8,8 @@
     <x-nav-link href="{{ route('personal.index') }}" :active="Str::startsWith(request()->route()->getName(), 'personal.')">
         {{ __('Personal') }}
     </x-nav-link>
+
+    <x-nav-link href="{{ route('categorias.index') }}" :active="Str::startsWith(request()->route()->getName(), 'categorias.')">
+        {{ __('Categorias') }}
+    </x-nav-link>
 </nav>

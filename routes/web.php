@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Roles;
 use App\Livewire\Staff;
+use App\Livewire\Categories;
 
 include __DIR__ . '/livewire.php';
 
@@ -29,4 +30,12 @@ Route::middleware([
     Route::get('personal/create', Staff\Create::class)->name('personal.create');
     Route::get('/personal/{staff}/edit', Staff\Update::class)->name('personal.edit');
     Route::get('/personal/{staff}', Staff\Detail::class)->name('personal.show');
+
+    //Categories routes
+    Route::get('categorias', function () {
+        return view('pages.categories.index');
+    })->name('categorias.index');
+    Route::get('categorias/create', Categories\Create::class)->name('categorias.create');
+    Route::get('/categorias/{category}/edit', Categories\Update::class)->name('categorias.edit');
+    Route::get('/categorias/{category}', Categories\Detail::class)->name('categorias.show');
 });
