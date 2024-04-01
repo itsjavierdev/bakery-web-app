@@ -34,7 +34,7 @@ class Read extends Datatable
             Column::make('role', 'Rol')->isDefault(),
             Column::make('phone', 'Telefono'),
             Column::make('CI', 'Carnet'),
-            Column::make('birthdate', 'Fecha de nacimiento'),
+            Column::make('birthdate', 'Fecha de nacimiento')->component('columns.date'),
             Column::make('is_employed', 'Empleado')->component('columns.boolean'),
         ];
     }
@@ -48,7 +48,7 @@ class Read extends Datatable
             Filter::make('phone', 'Telefono'),
             Filter::make('roles.name', 'Rol'),
             Filter::make('CI', 'Carnet'),
-            Filter::make('birthdate', 'Fecha de nacimiento'),
+            Filter::make('birthdate', 'Fecha de nacimiento')->date(),
             Filter::make('staff.created_at', 'Fecha de registro'),
         ];
     }

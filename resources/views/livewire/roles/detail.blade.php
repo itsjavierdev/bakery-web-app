@@ -14,7 +14,7 @@
                     <x-date-format>{{ $role->created_at }}</x-date-format>
                 </x-detail-row>
 
-                <x-detail-row title="Fecha de registro">
+                <x-detail-row title="Fecha de modificación">
                     <x-date-format>{{ $role->updated_at }}</x-date-format>
                 </x-detail-row>
 

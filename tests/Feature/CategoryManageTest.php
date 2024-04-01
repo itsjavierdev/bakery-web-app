@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Category;
 use Livewire\Livewire;
 use App\Livewire\Categories as CategoriesLivewire;
 use App\Models\User;
+use Carbon\Carbon;
 
 class CategoryManageTest extends TestCase
 {
@@ -63,6 +63,19 @@ class CategoryManageTest extends TestCase
 
     }
 
+    public function test_can_view_category_details()
+    {
+        // Display the category details
+        $response = $this->actingAs($this->user)->get('/categorias/' . $this->category->id);
+
+        // Verify that the category details are displayed
+        $response->assertStatus(200);
+        $response->assertSee($this->category->id);
+        $response->assertSee($this->category->name);
+        $response->assertSee(Carbon::parse($this->category->created_at)->isoFormat('DD MMM YYYY'));
+        $response->assertSee(Carbon::parse($this->category->updated_at)->isoFormat('DD MMM YYYY'));
+    }
+
     public function test_a_category_can_be_deleted()
     {
         // Exceute the delete action in the live wire component
@@ -77,4 +90,5 @@ class CategoryManageTest extends TestCase
         // Verify that the category was deleted from the database
         $this->assertFalse(Category::where('id', $this->category->id)->exists());
     }
+
 }
