@@ -9,4 +9,5 @@
     <div class="p-6">
         <livewire:categories.read />
     </div>
+    <livewire:categories.delete />
 </x-app-header>

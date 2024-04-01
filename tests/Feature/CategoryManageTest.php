@@ -48,7 +48,7 @@ class CategoryManageTest extends TestCase
         $response->assertSee($this->category->name);
     }
 
-    public function test_a_staff_can_be_updated()
+    public function test_a_category_can_be_updated()
     {
         // Update the category in live wire component
         Livewire::test(CategoriesLivewire\Update::class, ['category' => $this->category->id])
@@ -63,4 +63,18 @@ class CategoryManageTest extends TestCase
 
     }
 
+    public function test_a_category_can_be_deleted()
+    {
+        // Exceute the delete action in the live wire component
+        Livewire::test(CategoriesLivewire\Delete::class)
+            ->call('confirmDelete', $this->category->id)
+            ->assertSet('delete_id', $this->category->id)
+            ->assertSet('open', true)
+            ->call('delete', $this->category->id)
+            ->assertDispatched('render')
+            ->assertDispatched('banner-message', style: 'success', message: 'Registro eliminado correctamente');
+
+        // Verify that the category was deleted from the database
+        $this->assertFalse(Category::where('id', $this->category->id)->exists());
+    }
 }
