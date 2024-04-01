@@ -48,4 +48,19 @@ class CategoryManageTest extends TestCase
         $response->assertSee($this->category->name);
     }
 
+    public function test_a_staff_can_be_updated()
+    {
+        // Update the category in live wire component
+        Livewire::test(CategoriesLivewire\Update::class, ['category' => $this->category->id])
+            ->set('name', 'Panes')
+            ->call('update')
+            ->assertRedirect('categorias')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Categoría actualizada correctamente');
+
+        // Verify that the category was updated in the database
+        $this->assertTrue(Category::where('name', 'Panes')->exists());
+
+    }
+
 }
