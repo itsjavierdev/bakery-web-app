@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Roles;
 use App\Livewire\Staff;
 use App\Livewire\Categories;
+use App\Livewire\Products;
 
 include __DIR__ . '/livewire.php';
 
@@ -38,4 +39,13 @@ Route::middleware([
     Route::get('categorias/create', Categories\Create::class)->name('categorias.create');
     Route::get('/categorias/{category}/edit', Categories\Update::class)->name('categorias.edit');
     Route::get('/categorias/{category}', Categories\Detail::class)->name('categorias.show');
+
+
+    //Categories routes
+    Route::get('productos', function () {
+        return view('pages.products.index');
+    })->name('productos.index');
+    Route::get('productos/create', Products\Create::class)->name('productos.create');
+    Route::get('/productos/{product}/edit', Products\Update::class)->name('productos.edit');
+    Route::get('/productos/{product}', Products\Detail::class)->name('productos.show');
 });
