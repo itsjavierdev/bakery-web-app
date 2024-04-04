@@ -16,6 +16,6 @@ class Detail extends Component
     }
     public function render()
     {
-        return view('livewire.categories.detail')->layout('layouts.app-header', ['title' => 'Detalle de categoría']);
+        return view('livewire.categories.detail')->layout('layouts.app-header', ['title' => 'Detalle de categoría', 'titleAlign' => 'center']);
     }
 }

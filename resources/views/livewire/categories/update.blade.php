@@ -2,7 +2,7 @@
     <!--Name-->
     <x-inputs.group>
         <x-inputs.label value="Nombre" />
-        <x-inputs.text class="w-full mt-2" wire:model="name" />
+        <x-inputs.text wire:model="name" />
         <x-inputs.error for="name" />
     </x-inputs.group>
     <!--Actions-->

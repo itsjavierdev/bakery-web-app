@@ -40,6 +40,6 @@ class Update extends Component
 
     public function render()
     {
-        return view('livewire.categories.update')->layout('layouts.app-header', ['title' => 'Actualizar categoría']);
+        return view('livewire.categories.update')->layout('layouts.app-header', ['title' => 'Actualizar categoría', 'titleAlign' => 'center']);
     }
 }

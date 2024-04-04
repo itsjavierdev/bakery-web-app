@@ -1,10 +1,10 @@
 <x-form-template>
-    <div class="mb-4 max-w-3xl">
+    <x-inputs.group>
         <x-inputs.label value="Nombre" />
-        <x-inputs.text class="w-full mt-2" wire:model="name" />
+        <x-inputs.text wire:model="name" />
         <x-inputs.error for="name" />
 
-    </div>
+    </x-inputs.group>
     <div>
         <h3>Permisos</h3>
         <div class="flex flex-wrap -mx-2 mt-2">

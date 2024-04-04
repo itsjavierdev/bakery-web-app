@@ -14,7 +14,7 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.categories.create')->layout('layouts.app-header', ['title' => 'Agregar categoría']);
+        return view('livewire.categories.create')->layout('layouts.app-header', ['title' => 'Agregar categoría', 'titleAlign' => 'center']);
     }
     public function save()
     {
