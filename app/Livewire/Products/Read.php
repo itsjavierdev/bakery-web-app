@@ -26,7 +26,7 @@ class Read extends Datatable
             Column::make('category', 'Categoría')->isDefault(),
             Column::make('description', 'Descripción'),
             Column::make('bag_quantity', 'Cantidad por paquete'),
-            Column::make('discontinued', 'Descontinuado')->component('columns.boolean'),
+            Column::make('discontinued', 'Vigente')->component('columns.inverted-boolean'),
         ];
     }
     public function filters(): array

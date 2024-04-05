@@ -32,7 +32,8 @@ class ProductManageTest extends TestCase
 
         $this->user = User::factory()->create();
         $this->product = Product::factory()->create([
-            'price' => 100.5
+            'price' => 100.5,
+            'category_id' => $this->category->id,
         ]);
     }
 
@@ -82,5 +83,23 @@ class ProductManageTest extends TestCase
         $response->assertSee(Carbon::parse($this->product->created_at)->isoFormat('DD MMM YYYY'));
         $response->assertSee($this->product->name);
         $response->assertSee($this->product->price);
+    }
+
+    public function test_can_view_product_details()
+    {
+        // Display the product details
+        $response = $this->actingAs($this->user)->get('/productos/' . $this->product->id);
+
+        // Verify that the product details are displayed
+        $response->assertStatus(200);
+        $response->assertSee($this->product->id);
+        $response->assertSee($this->product->name);
+        $response->assertSee($this->product->price);
+        $response->assertSee($this->product->bag_quantity);
+        $response->assertSee($this->product->description);
+        $response->assertSee($this->product->slug);
+        $response->assertSee($this->category->name);
+        $response->assertSee(Carbon::parse($this->product->created_at)->isoFormat('DD MMM YYYY'));
+        $response->assertSee(Carbon::parse($this->product->updated_at)->isoFormat('DD MMM YYYY'));
     }
 }
