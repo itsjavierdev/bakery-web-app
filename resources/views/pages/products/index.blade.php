@@ -9,4 +9,5 @@
     <div class="p-6">
         <livewire:products.read />
     </div>
+    <livewire:products.delete />
 </x-app-header>

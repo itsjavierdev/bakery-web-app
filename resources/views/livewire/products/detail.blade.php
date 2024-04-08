@@ -1,4 +1,5 @@
 <div class="p-6">
+    <livewire:products.delete redirect="productos.index" />
     <x-detail-show>
         <div>
             <x-detail-row title="ID">

@@ -23,6 +23,7 @@ class ProductManageTest extends TestCase
     protected $category;
     protected $product;
     protected $user;
+    protected $product_image;
 
     protected function setUp(): void
     {
@@ -34,6 +35,10 @@ class ProductManageTest extends TestCase
         $this->product = Product::factory()->create([
             'price' => 100.5,
             'category_id' => $this->category->id,
+        ]);
+        $this->product_image = ProductImage::create([
+            'product_id' => $this->product->id,
+            'path' => 'products/1.jpg',
         ]);
     }
 
@@ -83,6 +88,26 @@ class ProductManageTest extends TestCase
         $response->assertSee(Carbon::parse($this->product->created_at)->isoFormat('DD MMM YYYY'));
         $response->assertSee($this->product->name);
         $response->assertSee($this->product->price);
+    }
+
+    public function test_a_product_can_be_deleted()
+    {
+        // Verify that the product an image exists in the database
+        $this->assertTrue(Product::where('id', $this->product->id)->exists());
+        $this->assertTrue(ProductImage::where('product_id', $this->product->id)->exists());
+
+        // Exceute the delete action in the live wire component
+        Livewire::test(ProductsLivewire\Delete::class)
+            ->call('confirmDelete', $this->product->id)
+            ->assertSet('delete_id', $this->product->id)
+            ->assertSet('open', true)
+            ->call('delete', $this->product->id)
+            ->assertDispatched('render')
+            ->assertDispatched('banner-message', style: 'success', message: 'Registro eliminado correctamente');
+
+        // Verify that the product and image was deleted from the database
+        $this->assertFalse(Product::where('id', $this->product->id)->exists());
+        $this->assertFalse(ProductImage::where('product_id', $this->product->id)->exists());
     }
 
     public function test_can_view_product_details()
