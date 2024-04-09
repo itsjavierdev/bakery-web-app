@@ -85,7 +85,7 @@ class CategoryManageTest extends TestCase
             ->assertSet('open', true)
             ->call('delete', $this->category->id)
             ->assertDispatched('render')
-            ->assertDispatched('banner-message', style: 'success', message: 'Registro eliminado correctamente');
+            ->assertDispatched('banner-message', style: 'success', message: 'Categoría eliminada correctamente');
 
         // Verify that the category was deleted from the database
         $this->assertFalse(Category::where('id', $this->category->id)->exists());

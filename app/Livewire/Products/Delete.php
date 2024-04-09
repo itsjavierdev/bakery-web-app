@@ -20,7 +20,7 @@ class Delete extends DeleteRow
         return [
             'title' => 'Eliminar Producto',
             'description' => '¿Estás seguro de que quieres eliminar este producto?',
-            'success' => 'Producto eliminado correctamente'
+            'success' => 'Producto eliminado correctamente',
         ];
     }
 }

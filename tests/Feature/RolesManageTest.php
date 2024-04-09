@@ -95,7 +95,7 @@ class RolesManageTest extends TestCase
             ->assertSet('open', true)
             ->call('delete', $this->role->id)
             ->assertDispatched('render')
-            ->assertDispatched('banner-message', style: 'success', message: 'Registro eliminado correctamente');
+            ->assertDispatched('banner-message', style: 'success', message: 'Rol eliminado correctamente');
 
         // Verify that the role was deleted from the database
         $this->assertFalse(Role::where('id', $this->role->id)->exists());

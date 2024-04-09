@@ -100,7 +100,7 @@ class StaffManageTest extends TestCase
             ->assertSet('open', true)
             ->call('delete', $this->staff->id)
             ->assertDispatched('render')
-            ->assertDispatched('banner-message', style: 'success', message: 'Registro eliminado correctamente');
+            ->assertDispatched('banner-message', style: 'success', message: 'Personal eliminado correctamente');
 
         // Verify that the staff was deleted from the database
         $this->assertFalse(Staff::where('id', $this->staff->id)->exists());

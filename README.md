@@ -420,6 +420,15 @@ protected function confirmationMessages(): array
 }
 ```
 
+if has related model (category with products relateds) passes the model/s name to confirm before it
+
+```php
+public function relatedModels(): array
+    {
+        return ['product'];
+    }
+
+```
 Put the livewire component in your page, can passes a route name if wanna redirect after delete
 
 ```php

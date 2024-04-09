@@ -31,7 +31,7 @@
     <!--Description-->
     <x-inputs.group>
         <x-inputs.label value="Descripción" />
-        <x-inputs.text wire:model="description" />
+        <x-inputs.textarea wire:model="description"></x-inputs.textarea>
         <x-inputs.error for="description" />
     </x-inputs.group>
     <!--Images-->
@@ -41,32 +41,34 @@
         <x-inputs.file wire:model="new_images" accept="image/*" multiple />
         <x-inputs.error for="new_images.*" />
         <x-inputs.error for="images" />
-        <div wire:sortable="updateImagesOrder" class="flex gap-5 flex-wrap  mt-5">
+        <ul wire:sortable="updateImagesOrder" class="flex gap-5 flex-wrap  mt-5">
             @foreach ($sorted_images as $image)
                 @if (is_object($image['path']))
                     <!--New images-->
-                    <div wire:sortable.item="{{ $image['temp_id'] }}" wire:key="image-{{ $image['temp_id'] }}"
+                    <li wire:sortable.item="{{ $image['temp_id'] }}" wire:key="image-{{ $image['temp_id'] }}"
                         class="relative">
-                        <img wire:sortable.handle src="{{ $image['path']->temporaryUrl() }}"
-                            class="w-28 h-28 object-cover rounded ">
+                        <div wire:sortable.handle>
+                            <img src="{{ $image['path']->temporaryUrl() }}" class="w-28 h-28 object-cover rounded ">
+                        </div>
                         <button wire:click="deleteImage('{{ $image['temp_id'] }}')"
                             class="absolute -right-1 -top-1 bg-gray-200 rounded-full w-6 h-6 flex justify-center items-center border-medium border-gray-300">
                             <i class="icon-x text-gray-500"></i>
                         </button>
-                    </div>
+                    </li>
                 @else
                     <!--Old images-->
-                    <div wire:sortable.item="{{ $image['id'] }}" wire:key="image-{{ $image['id'] }}" class="relative">
-                        <img wire:sortable.handle src="{{ asset('storage/' . $image['path']) }}"
-                            class="w-28 h-28 object-cover rounded ">
+                    <li wire:sortable.item="{{ $image['id'] }}" wire:key="image-{{ $image['id'] }}" class="relative">
+                        <div wire:sortable.handle>
+                            <img src="{{ asset('storage/' . $image['path']) }}" class="w-28 h-28 object-cover rounded ">
+                        </div>
                         <button wire:click="deleteImage('{{ $image['id'] }}')"
                             class="absolute -right-1 -top-1 bg-gray-200 rounded-full w-6 h-6 flex justify-center items-center border-medium border-gray-300">
                             <i class="icon-x text-gray-500"></i>
                         </button>
-                    </div>
+                    </li>
                 @endif
             @endforeach
-        </div>
+        </ul>
     </x-inputs.group>
     <x-slot name="footer">
         <x-button wire:click="update">

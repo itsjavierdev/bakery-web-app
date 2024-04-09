@@ -80,8 +80,6 @@ class Update extends Component
                 (isset($image['id']) && $image['id'] != $identifier) ||
                 (isset($image['temp_id']) && $image['temp_id'] != $identifier));
         });
-        //index the array
-        $this->images = array_values($this->images);
 
     }
     public function update()

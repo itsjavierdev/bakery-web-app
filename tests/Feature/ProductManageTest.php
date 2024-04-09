@@ -137,7 +137,7 @@ class ProductManageTest extends TestCase
             ->assertSet('open', true)
             ->call('delete', $this->product->id)
             ->assertDispatched('render')
-            ->assertDispatched('banner-message', style: 'success', message: 'Registro eliminado correctamente');
+            ->assertDispatched('banner-message', style: 'success', message: 'Producto eliminado correctamente');
 
         // Verify that the product and image was deleted from the database
         $this->assertFalse(Product::where('id', $this->product->id)->exists());

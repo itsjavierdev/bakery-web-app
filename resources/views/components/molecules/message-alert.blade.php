@@ -26,7 +26,7 @@
     class="fixed bottom-0 sm:bottom-5 rounded-none max-w-screen-sm inset-x-0 mx-auto z-50 p-2 sm:p-3 sm:rounded-lg"
     style="display: none;">
     <div class="py-0 px-3">
-        <div class="flex items-center justify-between flex-wrap">
+        <div class="flex items-center justify-between flex-wrap ">
             <div class="w-0 flex-1 flex items-center min-w-0">
                 <!-- Banner icon -->
                 <span class="flex p-2 rounded-lg"
@@ -50,7 +50,7 @@
                 </span>
 
                 <!-- Message -->
-                <p class="ms-3 font-medium text-sm text-white truncate" x-text="message"></p>
+                <p class="ms-3 font-medium text-sm text-white" x-text="message"></p>
             </div>
 
             <!-- Remove banner -->

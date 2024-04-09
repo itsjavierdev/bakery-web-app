@@ -19,6 +19,7 @@ class Create extends Component
     public $bag_quantity;
     public $description;
     public $images = [];
+    public $temporary_images = [];
 
     public $categories;
     public function mount()
@@ -28,7 +29,9 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.products.create')->layout('layouts.app-header', ['title' => 'Crear Producto', 'titleALign' => 'center']);
+        $sorted_images = collect($this->temporary_images)->sortBy('position')->toArray();
+
+        return view('livewire.products.create', ['sorted_images' => $sorted_images])->layout('layouts.app-header', ['title' => 'Crear Producto', 'titleALign' => 'center']);
     }
     //validation rules
     public function rules()
@@ -40,7 +43,7 @@ class Create extends Component
             'bag_quantity' => 'required|integer|between:1,100',
             'description' => 'string|max:255',
             'images.*' => 'image|max:1024',
-            'images' => 'required|array|min:1',
+            'temporary_images' => 'required|array|min:1',
         ];
     }
     //custom attributes names
@@ -53,7 +56,7 @@ class Create extends Component
             'bag_quantity' => 'cantidad por bolsa',
             'description' => 'descripción',
             'images.*' => 'imágenes',
-            'images' => 'imágenes'
+            'temporary_images' => 'imágenes'
         ];
     }
     //custom messages error
@@ -78,16 +81,48 @@ class Create extends Component
             'description' => $this->description,
         ]);
 
-        $position = 0;
-        foreach ($this->images as $image) {
+        foreach ($this->temporary_images as $image) {
             ProductImage::create([
                 'product_id' => $product->id,
-                'path' => $image->store('products'),
-                'position' => $position,
+                'path' => $image['path']->store('products'),
+                'position' => $image['position'],
             ]);
-            $position++;
         }
 
         redirect()->to('productos')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Producto creado correctamente');
+    }
+    public function updatedImages()
+    {
+        $position = 1;
+        foreach ($this->images as $image) {
+            $this->temporary_images[] = [
+                'temp_id' => uniqid(),
+                'path' => $image,
+                'position' => $position,
+            ];
+            $position++;
+        }
+        ;
+    }
+    //delete image in the temporary array (nothing is saved in the database)
+    public function deleteImage($identifier)
+    {
+        $this->temporary_images = array_filter($this->temporary_images, function ($image) use ($identifier) {
+            return $image['temp_id'] != $identifier;
+        });
+
+    }
+
+    public function updateImagesOrder($list)
+    {
+        //change the position of the images
+        foreach ($list as $item) {
+            foreach ($this->temporary_images as &$image) {
+                if ($image['temp_id'] == $item['value']) {
+                    $image['position'] = $item['order'];
+                    break;
+                }
+            }
+        }
     }
 }
