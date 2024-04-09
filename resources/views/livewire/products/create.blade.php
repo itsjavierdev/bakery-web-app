@@ -37,8 +37,7 @@
     </x-inputs.group>
     <x-inputs.group>
         <x-inputs.label value="Imagenes" />
-        <input type="file" wire:model="images" accept="image/*" multiple
-            class="w-full bg-transparent border p-1.5 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 file:border-none file:rounded-sm file:mr-2 file:text-gray-800">
+        <x-inputs.file wire:model="images" accept="image/*" multiple />
         <x-inputs.error for="images.*" />
         <x-inputs.error for="images" />
     </x-inputs.group>

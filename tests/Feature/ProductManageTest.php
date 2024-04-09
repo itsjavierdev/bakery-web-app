@@ -39,6 +39,7 @@ class ProductManageTest extends TestCase
         $this->product_image = ProductImage::create([
             'product_id' => $this->product->id,
             'path' => 'products/1.jpg',
+            'position' => 1,
         ]);
     }
 
@@ -88,6 +89,39 @@ class ProductManageTest extends TestCase
         $response->assertSee(Carbon::parse($this->product->created_at)->isoFormat('DD MMM YYYY'));
         $response->assertSee($this->product->name);
         $response->assertSee($this->product->price);
+    }
+
+    public function test_a_product_can_be_updated_with_images()
+    {
+        Storage::fake('products');
+
+        // Update the product in live wire component
+        Livewire::test(ProductsLivewire\Update::class, ['product' => $this->product])
+            ->set('name', 'Nombre del Producto')
+            ->set('category_id', $this->category->id)
+            ->set('price', 123.45)
+            ->set('bag_quantity', '50')
+            ->set('description', 'Nueva descripción del producto')
+            ->set('old_images', [$this->product_image])
+            ->set('new_images', [UploadedFile::fake()->image('new_image.jpg')])
+            ->call('update')
+            ->assertRedirect('productos')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Producto actualizado correctamente');
+
+
+        // Verify that the product was updated in the database
+        $this->assertTrue(Product::where('name', 'Nombre del Producto')->exists());
+        $this->assertTrue(Product::where('category_id', $this->category->id)->exists());
+        $this->assertTrue(Product::where('bag_quantity', '50')->exists());
+        $this->assertTrue(Product::where('description', 'Nueva descripción del producto')->exists());
+
+        //verify that the image was updated in the database
+        $this->assertDatabaseHas('product_images', [
+            'product_id' => $this->product->id,
+            'position' => 2,
+        ]);
+
     }
 
     public function test_a_product_can_be_deleted()

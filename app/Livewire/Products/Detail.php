@@ -18,7 +18,7 @@ class Detail extends Component
     public function mount(Product $product)
     {
         $this->product = $product;
-        $this->images = ProductImage::where('product_id', $product->id)->get();
+        $this->images = ProductImage::where('product_id', $product->id)->orderBy('position')->get();
     }
 
     public function render()

@@ -18,8 +18,6 @@ class Create extends Component
     public $price;
     public $bag_quantity;
     public $description;
-
-    public $id;
     public $images = [];
 
     public $categories;
@@ -32,6 +30,7 @@ class Create extends Component
     {
         return view('livewire.products.create')->layout('layouts.app-header', ['title' => 'Crear Producto', 'titleALign' => 'center']);
     }
+    //validation rules
     public function rules()
     {
         return [
@@ -39,11 +38,12 @@ class Create extends Component
             'category_id' => 'required',
             'price' => 'required|numeric|between:0,999.9',
             'bag_quantity' => 'required|integer|between:1,100',
-            'description' => 'required|string|max:255',
+            'description' => 'string|max:255',
             'images.*' => 'image|max:1024',
             'images' => 'required|array|min:1',
         ];
     }
+    //custom attributes names
     public function validationAttributes()
     {
         return [
@@ -53,6 +53,16 @@ class Create extends Component
             'bag_quantity' => 'cantidad por bolsa',
             'description' => 'descripción',
             'images.*' => 'imágenes',
+            'images' => 'imágenes'
+        ];
+    }
+    //custom messages error
+    public function messages()
+    {
+        return [
+            'name.regex' => 'El campo nombre solo puede contener letras.',
+            'images.*.image' => 'El campo imágenes solo puede contener imágenes.',
+            'images.*.max' => 'El campo imágenes no puede pesar más de 1MB.',
         ];
     }
 
@@ -68,11 +78,14 @@ class Create extends Component
             'description' => $this->description,
         ]);
 
+        $position = 0;
         foreach ($this->images as $image) {
             ProductImage::create([
                 'product_id' => $product->id,
                 'path' => $image->store('products'),
+                'position' => $position,
             ]);
+            $position++;
         }
 
         redirect()->to('productos')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Producto creado correctamente');
