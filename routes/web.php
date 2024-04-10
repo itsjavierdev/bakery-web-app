@@ -5,6 +5,7 @@ use App\Livewire\Roles;
 use App\Livewire\Staff;
 use App\Livewire\Categories;
 use App\Livewire\Products;
+use App\Livewire\DeliveryTimes;
 
 include __DIR__ . '/livewire.php';
 
@@ -40,7 +41,6 @@ Route::middleware([
     Route::get('/categorias/{category}/edit', Categories\Update::class)->name('categorias.edit');
     Route::get('/categorias/{category}', Categories\Detail::class)->name('categorias.show');
 
-
     //Categories routes
     Route::get('productos', function () {
         return view('pages.products.index');
@@ -48,4 +48,12 @@ Route::middleware([
     Route::get('productos/create', Products\Create::class)->name('productos.create');
     Route::get('/productos/{product}/edit', Products\Update::class)->name('productos.edit');
     Route::get('/productos/{product}', Products\Detail::class)->name('productos.show');
+
+    //Delivery Times routes
+    Route::get('horarios', function () {
+        return view('pages.delivery-times.index');
+    })->name('horarios.index');
+    Route::get('horarios/create', DeliveryTimes\Create::class)->name('horarios.create');
+    Route::get('/horarios/{deliverytimes}/edit', DeliveryTimes\Update::class)->name('horarios.edit');
+    Route::get('/horarios/{deliverytimes}', DeliveryTimes\Detail::class)->name('horarios.show');
 });

@@ -16,4 +16,8 @@
     <x-nav-link href="{{ route('productos.index') }}" :active="Str::startsWith(request()->route()->getName(), 'productos.')">
         {{ __('Productos') }}
     </x-nav-link>
+
+    <x-nav-link href="{{ route('horarios.index') }}" :active="Str::startsWith(request()->route()->getName(), 'horarios.')">
+        {{ __('horarios') }}
+    </x-nav-link>
 </nav>
