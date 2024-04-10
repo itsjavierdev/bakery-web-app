@@ -27,20 +27,20 @@ class DeliveryTimesManageTest extends TestCase
             'available' => true
         ]);
     }
-    // public function test_a_delivery_time_can_be_created(): void
-    // {
-    //     // Create the delivery time in live wire component
-    //     Livewire::test(DeliveryTimes\Create::class)
-    //         ->set('time', '10:00')
-    //         ->set('available', true)
-    //         ->call('save')
-    //         ->assertRedirect('delivery-times')
-    //         ->assertSessionHas('flash.bannerStyle', 'success')
-    //         ->assertSessionHas('flash.banner', 'Hora de entrega creada correctamente');
+    public function test_a_delivery_time_can_be_created(): void
+    {
+        // Create the delivery time in live wire component
+        Livewire::test(DeliveryTimes\Create::class)
+            ->set('time', '11:00')
+            ->set('available', false)
+            ->call('save')
+            ->assertRedirect('horarios')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Horario creado correctamente');
 
-    //     // Verify that the delivery time was created in the database
-    //     $this->assertTrue(DeliveryTime::where('time', '10:00')->exists());
-    // }
+        // Verify that the delivery time was created in the database
+        $this->assertTrue(DeliveryTime::where('time', '11:00')->exists());
+    }
 
     public function test_can_display_list_of_delivery_times(): void
     {

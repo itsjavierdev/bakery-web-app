@@ -42,6 +42,6 @@ class Read extends Datatable
 
     public function routesPrefix(): string
     {
-        return 'categorias';
+        return 'horarios';
     }
 }
