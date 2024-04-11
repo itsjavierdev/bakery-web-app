@@ -15,7 +15,7 @@ class Detail extends Component
 
     public function mount($staff)
     {
-        $this->staff = Staff::findOrFail($staff);
+        $this->staff = Staff::find($staff);
         $this->user = $this->staff->user;
         if ($this->user) {
             $this->role = $this->user->roles->first();

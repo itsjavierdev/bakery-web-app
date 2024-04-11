@@ -20,7 +20,7 @@ class Detail extends Component
 
     public function mount($role)
     {
-        $this->role = Role::findOrFail($role);
+        $this->role = Role::find($role);
         $this->permissions = $this->role->permissions->groupBy('module')->all();
     }
 }

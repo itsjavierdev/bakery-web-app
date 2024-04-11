@@ -53,7 +53,7 @@ abstract class DeleteRow extends Component
     //delete role in confirm
     public function delete($id)
     {
-        $row = $this->model()::findOrFail($id);
+        $row = $this->model()::find($id);
         // Verificar relaciones
         foreach ($this->relatedModels() as $relation) {
             if ($row->$relation()->exists()) {

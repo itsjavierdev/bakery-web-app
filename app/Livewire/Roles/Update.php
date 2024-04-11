@@ -21,7 +21,7 @@ class Update extends Component
         //Get all permissions grouped by module for show all
         $this->permissions = Permission::all()->groupBy('module')->all();
 
-        $this->role = Role::findOrFail($role);
+        $this->role = Role::find($role);
         $this->name = $this->role->name;
         $this->role_id = $this->role->id;
         //Get the permissions of the role
@@ -56,7 +56,7 @@ class Update extends Component
     {
         $this->validate();
 
-        $role = Role::findOrFail($this->role->id);
+        $role = Role::find($this->role->id);
         $role->update(['name' => $this->name]);
         //Update permissions
         $permissionNames = Permission::whereIn('id', $this->selected_permissions)->pluck('name')->toArray();

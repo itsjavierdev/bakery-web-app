@@ -52,6 +52,20 @@ class DeliveryTimesManageTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee($this->delivery_time->time);
     }
+
+    public function test_can_view_delivery_time_details(): void
+    {
+        // Display the delivery time details
+        $response = $this->actingAs($this->user)->get('/horarios/' . $this->delivery_time->id);
+
+        // Verify that the delivery time details are displayed
+        $response->assertStatus(200);
+        $response->assertSee($this->delivery_time->id);
+        $response->assertSee($this->delivery_time->time);
+        $response->assertSee(Carbon::parse($this->delivery_time->created_at)->isoFormat('DD MMM YYYY'));
+        $response->assertSee(Carbon::parse($this->delivery_time->updated_at)->isoFormat('DD MMM YYYY'));
+    }
+
     public function test_a_delivery_time_can_be_updated(): void
     {
         // Update the delivery time in live wire component
@@ -80,4 +94,5 @@ class DeliveryTimesManageTest extends TestCase
         // Verify that the delivery time was deleted from the database
         $this->assertFalse(DeliveryTime::where('id', $this->delivery_time->id)->exists());
     }
+
 }

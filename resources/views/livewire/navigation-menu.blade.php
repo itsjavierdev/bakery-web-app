@@ -18,6 +18,6 @@
     </x-nav-link>
 
     <x-nav-link href="{{ route('horarios.index') }}" :active="Str::startsWith(request()->route()->getName(), 'horarios.')">
-        {{ __('horarios') }}
+        {{ __('Horarios') }}
     </x-nav-link>
 </nav>
