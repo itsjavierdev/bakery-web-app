@@ -9,4 +9,5 @@
     <div class="p-6">
         <livewire:delivery-times.read />
     </div>
+    <livewire:delivery-times.delete />
 </x-app-header>
