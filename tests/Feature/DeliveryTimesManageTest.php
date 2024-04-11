@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use SebastianBergmann\Type\VoidType;
 use Tests\TestCase;
 use App\Models\DeliveryTime;
 use Livewire\Livewire;
@@ -50,5 +51,19 @@ class DeliveryTimesManageTest extends TestCase
         // Verify that the delivery times are displayed
         $response->assertStatus(200);
         $response->assertSee($this->deliveryTime->time);
+    }
+    public function test_a_delivery_time_can_be_updated(): void
+    {
+        // Update the delivery time in live wire component
+        Livewire::test(DeliveryTimes\Update::class, ['deliverytime' => $this->deliveryTime->id])
+            ->set('time', '11:00')
+            ->set('available', false)
+            ->call('update')
+            ->assertRedirect('horarios')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Horario actualizado correctamente');
+
+        // Verify that the delivery time was updated in the database
+        $this->assertTrue(DeliveryTime::where('time', '11:00')->exists());
     }
 }

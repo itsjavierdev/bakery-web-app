@@ -54,6 +54,6 @@ Route::middleware([
         return view('pages.delivery-times.index');
     })->name('horarios.index');
     Route::get('horarios/create', DeliveryTimes\Create::class)->name('horarios.create');
-    Route::get('/horarios/{deliverytimes}/edit', DeliveryTimes\Update::class)->name('horarios.edit');
-    Route::get('/horarios/{deliverytimes}', DeliveryTimes\Detail::class)->name('horarios.show');
+    Route::get('/horarios/{deliverytime}/edit', DeliveryTimes\Update::class)->name('horarios.edit');
+    Route::get('/horarios/{deliverytime}', DeliveryTimes\Detail::class)->name('horarios.show');
 });
