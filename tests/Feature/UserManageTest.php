@@ -89,7 +89,7 @@ class UserManageTest extends TestCase
     public function test_can_display_list_of_user(): void
     {
         // Display the list of user
-        $response = $this->actingAs($this->user)->get('/personal');
+        $response = $this->actingAs($this->user)->get('admin/personal');
 
         // Verify that the user are displayed
         $response->assertStatus(200);
@@ -121,7 +121,7 @@ class UserManageTest extends TestCase
     public function test_can_view_user_details()
     {
         // Display the user details in personal view
-        $response = $this->actingAs($this->user)->get('/personal/' . $this->staffWithUser->id);
+        $response = $this->actingAs($this->user)->get('admin/personal/' . $this->staffWithUser->id);
 
         // Verify that the user details are displayed
         $response->assertStatus(200);

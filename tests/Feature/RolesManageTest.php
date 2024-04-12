@@ -60,7 +60,7 @@ class RolesManageTest extends TestCase
     public function test_can_display_list_of_roles(): void
     {
         // Display the list of roles
-        $response = $this->actingAs($this->user)->get('/roles');
+        $response = $this->actingAs($this->user)->get('admin/roles');
 
         // Verify that the roles are displayed
         $response->assertStatus(200);
@@ -104,7 +104,7 @@ class RolesManageTest extends TestCase
     public function test_can_view_role_details()
     {
         // Display the role details
-        $response = $this->actingAs($this->user)->get('/roles/' . $this->role->id);
+        $response = $this->actingAs($this->user)->get('admin/roles/' . $this->role->id);
 
         // Verify that the role details are displayed
         $response->assertStatus(200);

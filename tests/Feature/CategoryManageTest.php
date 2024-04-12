@@ -41,7 +41,7 @@ class CategoryManageTest extends TestCase
     public function test_can_display_list_of_categories(): void
     {
         // Display the list of categories
-        $response = $this->actingAs($this->user)->get('/categorias');
+        $response = $this->actingAs($this->user)->get('admin/categorias');
 
         // Verify that the categories are displayed
         $response->assertStatus(200);
@@ -66,7 +66,7 @@ class CategoryManageTest extends TestCase
     public function test_can_view_category_details()
     {
         // Display the category details
-        $response = $this->actingAs($this->user)->get('/categorias/' . $this->category->id);
+        $response = $this->actingAs($this->user)->get('admin/categorias/' . $this->category->id);
 
         // Verify that the category details are displayed
         $response->assertStatus(200);

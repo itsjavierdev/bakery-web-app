@@ -58,7 +58,7 @@ class StaffManageTest extends TestCase
     public function test_can_display_list_of_staff(): void
     {
         // Display the list of staff
-        $response = $this->actingAs($this->user)->get('/personal');
+        $response = $this->actingAs($this->user)->get('admin/personal');
 
         // Verify that the staff are displayed
         $response->assertStatus(200);
@@ -110,7 +110,7 @@ class StaffManageTest extends TestCase
     public function test_can_view_staff_details()
     {
         // Display the staff details
-        $response = $this->actingAs($this->user)->get('/personal/' . $this->staff->id);
+        $response = $this->actingAs($this->user)->get('admin/personal/' . $this->staff->id);
 
         // Verify that the staff details are displayed
         $response->assertStatus(200);

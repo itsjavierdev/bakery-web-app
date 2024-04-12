@@ -46,7 +46,7 @@ class DeliveryTimesManageTest extends TestCase
     public function test_can_display_list_of_delivery_times(): void
     {
         // Display the list of delivery times
-        $response = $this->actingAs($this->user)->get('/horarios');
+        $response = $this->actingAs($this->user)->get('admin/horarios');
 
         // Verify that the delivery times are displayed
         $response->assertStatus(200);
@@ -56,7 +56,7 @@ class DeliveryTimesManageTest extends TestCase
     public function test_can_view_delivery_time_details(): void
     {
         // Display the delivery time details
-        $response = $this->actingAs($this->user)->get('/horarios/' . $this->delivery_time->id);
+        $response = $this->actingAs($this->user)->get('admin/horarios/' . $this->delivery_time->id);
 
         // Verify that the delivery time details are displayed
         $response->assertStatus(200);

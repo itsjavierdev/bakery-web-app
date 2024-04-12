@@ -81,7 +81,7 @@ class ProductManageTest extends TestCase
     public function test_can_display_list_of_products(): void
     {
         // Display the list of products
-        $response = $this->actingAs($this->user)->get('/productos');
+        $response = $this->actingAs($this->user)->get('admin/productos');
 
         // Verify that the products are displayed
         $response->assertStatus(200);
@@ -147,7 +147,7 @@ class ProductManageTest extends TestCase
     public function test_can_view_product_details()
     {
         // Display the product details
-        $response = $this->actingAs($this->user)->get('/productos/' . $this->product->id);
+        $response = $this->actingAs($this->user)->get('admin/productos/' . $this->product->id);
 
         // Verify that the product details are displayed
         $response->assertStatus(200);
