@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
-use App\Livewire\Staff as StaffLivewire;
+use App\Livewire\Admin\Staff as StaffLivewire;
 use App\Models\User;
 use App\Models\Staff;
 use Tests\TestCase;

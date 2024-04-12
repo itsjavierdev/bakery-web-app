@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Category;
 use Livewire\Livewire;
-use App\Livewire\Categories as CategoriesLivewire;
+use App\Livewire\Admin\Categories as CategoriesLivewire;
 use App\Models\User;
 use Carbon\Carbon;
 

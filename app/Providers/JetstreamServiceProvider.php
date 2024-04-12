@@ -5,11 +5,11 @@ namespace App\Providers;
 use App\Actions\Jetstream\DeleteUser;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
-use App\Livewire\Profile\DeleteUserForm;
-use App\Livewire\Profile\LogoutOtherBrowserSessionsForm;
-use App\Livewire\NavigationMenu;
-use App\Livewire\Profile\UpdatePasswordForm;
-use App\Livewire\Profile\UpdateInformationForm;
+use App\Livewire\Admin\Profile\DeleteUserForm;
+use App\Livewire\Admin\Profile\LogoutOtherBrowserSessionsForm;
+use App\Livewire\Admin\NavigationMenu;
+use App\Livewire\Admin\Profile\UpdatePasswordForm;
+use App\Livewire\Admin\Profile\UpdateInformationForm;
 use Illuminate\View\Compilers\BladeCompiler;
 use Livewire\Livewire;
 
@@ -22,11 +22,11 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->callAfterResolving(BladeCompiler::class, function () {
             if (config('jetstream.stack') === 'livewire' && class_exists(Livewire::class)) {
-                Livewire::component('livewire.navigation-menu', NavigationMenu::class);
-                Livewire::component('livewire.profile.update-profile-information-form', UpdateInformationForm::class);
-                Livewire::component('livewire.profile.update-password-form', UpdatePasswordForm::class);
-                Livewire::component('livewire.profile.logout-other-browser-sessions-form', LogoutOtherBrowserSessionsForm::class);
-                Livewire::component('livewire.profile.delete-user-form', DeleteUserForm::class);
+                Livewire::component('livewire.admin.navigation-menu', NavigationMenu::class);
+                Livewire::component('livewire.admin.profile.update-profile-information-form', UpdateInformationForm::class);
+                Livewire::component('livewire.admin.profile.update-password-form', UpdatePasswordForm::class);
+                Livewire::component('livewire.admin.profile.logout-other-browser-sessions-form', LogoutOtherBrowserSessionsForm::class);
+                Livewire::component('livewire.admin.profile.delete-user-form', DeleteUserForm::class);
             }
         });
     }

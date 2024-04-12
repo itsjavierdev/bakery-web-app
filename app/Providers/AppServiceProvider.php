@@ -20,12 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/atoms');
-        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/atoms/table');
-        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/molecules');
-        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/organisms');
-        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/templates');
-        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/layouts');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/admin');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/admin/atoms');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/admin/atoms/table');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/admin/molecules');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/admin/organisms');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/admin/templates');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/admin/layouts');
         Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/layouts');
     }
 }

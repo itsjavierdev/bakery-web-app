@@ -61,19 +61,19 @@ class FortifyServiceProvider extends ServiceProvider
     protected function configurePathViews(): void
     {
         Fortify::loginView(function () {
-            return view('pages.auth.login');
+            return view('pages.admin.auth.login');
         });
 
         Fortify::requestPasswordResetLinkView(function () {
-            return view('pages.auth.forgot-password');
+            return view('pages.admin.auth.forgot-password');
         });
 
         Fortify::resetPasswordView(function ($request) {
-            return view('pages.auth.reset-password', ['request' => $request]);
+            return view('pages.admin.auth.reset-password', ['request' => $request]);
         });
 
         Fortify::confirmPasswordView(function () {
-            return view('pages.auth.confirm-password');
+            return view('pages.admin.auth.confirm-password');
         });
     }
 }

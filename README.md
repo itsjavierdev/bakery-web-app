@@ -98,25 +98,29 @@ I use livewire so, the controllers just was used for static routes controller wi
 
 Components where separate in folders for each CRUD or HU
 
+Customer and admin parts are separates in different folders
+
 ```php
 └─ app
    └─ Livewire
       ├─ Forms  //for separate validation rules in livewire components with more than one
-      │  └─ Staff //are separate in same livewire folder sections
-      │      └─ ...
+      │  └─ Admin //are separate in same livewire folder sections
+      │      └─ Staff
+      │          └─ ...
       ├─ Others  //dont have and specifict section
-      ├─ Profile
-      │  ├─ DeleteUserForm.php
-      │  ├─ LogoutOtherBrowserSessionsForm.php
-      │  └─ ...
-      ├─ Roles //Almost every section of the app, has a crud with that methods
-      │  ├─ Create.php
-      │  └─ Delete.php
-      │  └─ Read.php
-      │  └─ Update.php
-      │  └─ Detail.php
-      │  └─ ...
-      └─ NavigationMenu.  //all the sidebar nav-links
+      └─ Admin  
+         ├─ Profile
+         │  ├─ DeleteUserForm.php
+         │  ├─ LogoutOtherBrowserSessionsForm.php
+         │  └─ ...
+         ├─ Roles //Almost every section of the app, has a crud with that methods
+         │  ├─ Create.php
+         │  └─ Delete.php
+         │  └─ Read.php
+         │  └─ Update.php
+         │  └─ Detail.php
+         │  └─ ...
+         └─ NavigationMenu.  //all the sidebar nav-links
 ```
 
 #### Views
@@ -136,28 +140,29 @@ The components were separate in atoms, molecules, organisms, templates, and layo
 
 ```php
 ├─ components
-  ├─ atoms  //all basics components, generally a html tag with styles and/or functionality
-  │  ├─ inputs  //all inputs components (text, checkbox, date, label, error)
-  │  ├─ table  //all table tags html components (th, tr, table)
-  │  │  ├─ columns  //columns customize for the table (where go a single row and column data)
-  │  │  └─ ...
-  │  └─ ...
-  ├─ layouts  //all components used in layout for all pages (sidebar, topbar)
-  │  └─ ...
-  ├─ molecules  //more complex components, generally use more than one html tag, and some atoms components
-  │  └─ ...
-  ├─ organisms  //more complex components, generally use some atoms and molecules components
-  │  └─ ...
-  └─ templates  //blade components that is used like a template for some section (use mora than one x-slot)
-     └─ ...
+    └─ admin
+        ├─ atoms  //all basics components, generally a html tag with styles and/or functionality
+        │  ├─ inputs  //all inputs components (text, checkbox, date, label, error)
+        │  ├─ table  //all table tags html components (th, tr, table)
+        │  │  ├─ columns  //columns customize for the table (where go a single row and column data)
+        │  │  └─ ...
+        │  └─ ...
+        ├─ layouts  //all components used in layout for all pages (sidebar, topbar)
+        │  └─ ...
+        ├─ molecules  //more complex components, generally use more than one html tag, and some atoms components
+        │  └─ ...
+        ├─ organisms  //more complex components, generally use some atoms and molecules components
+        │  └─ ...
+        └─ templates  //blade components that is used like a template for some section (use mora than one x-slot)
+            └─ ...
 ```
 
 #### Layouts
 
 ```php
 ├─ layouts
-  ├─ app-header.blade.  //layout for almost everything function, with a title or header (use app.blade.php)
-  ├─ app.blade.php  //layout for almost everything function
+  ├─ admin-header.blade.  //layout for almost everything function in admin, with a title or header (use app.blade.php)
+  ├─ admin.blade.php  //layout for almost everything function in admin
   └─ guest.blade.php  //layout for the authentication flow pages
 ```
 
@@ -167,25 +172,29 @@ In pages folder goes the static views in separate folders for each HU flow that 
 In livewire folder goes the livewire components that is used in a pages view or a view dinamic used with a layout
 Except the "/" view (dashboard) that goes separately without any folder
 
+all admin feature are in a admin folder
+
 ```php
 ├─ livewire
 |  ├─ others  //dont have a specifict section
-|  ├─ profile  //(example) all section for the profile pages used in pages/profile/index.blade.php
-│  │  └─ logout-other-browser-sessions-form.blade.php
-│  │  └─ ...
-|  ├─ roles  //almost every section in the app has a CRUD, but the view just have create, update and detail, because delete and read use a abstract class
-│  │  └─ create.php
-│  │  └─ update.php
-│  │  └─ detail.php
-│  │  └─ ...
-|  └─ navigation-menu.blade.php
+|  └─ admin  //group of admin module
+|     ├─ profile  //(example) all section for the profile pages used in pages/profile/index.blade.php
+|     │  └─ logout-other-browser-sessions-form.blade.php
+|     │  └─ ...
+|     ├─ roles  //almost every section in the app has a CRUD, but the view just have create, update and detail, because delete and read use a abstract class
+|     │  └─ create.php
+|     │  └─ update.php
+|     │  └─ detail.php
+|     │  └─ ...
+|     └─ navigation-menu.blade.php
 ├─ pages
-│  ├─ auth
-│  │  ├─ forgot-password.blade.php
-│  │  └─ ...
-│  ├─ profile
-│  │  └─ index.blade.php
-│  └─ dashboard.blade.php
+|  ├─ admin  
+|  │  ├─ auth
+|  │  │  ├─ forgot-password.blade.php
+|  │  │  └─ ...
+|  │  ├─ profile
+|  │  │  └─ index.blade.php
+|  │  └─ dashboard.blade.php
 ```
 
 #### All usable components
@@ -194,48 +203,49 @@ All basics components with the theme application
 
 ```php
 ├─ components
-  ├─ atoms
-  │  ├─ inputs
-  │  │  └─ //checkbox, date, txt, select, label, error, validation-error(list), group (div for group label, error and input with styles)
-  │  ├─ table  //all table tags html components (th, tr, table)
-  │  │  ├─ columns  //columns customize for the table (where go a single row and column data)
-  │  │  └─ table, th, td
-  │  ├─ button-action.blade.php  //button responsive for the row data crud
-  │  ├─ button.blade.php  //button simple with colors gray, blue, yellow, orange, red.
-  │  ├─ button-rounded.blade.php  //button for icons 
-  │  ├─ secondary-button.blade.php  //button simple white with outline
-  │  ├─ dropdown-link.blade.php  //a single item for dropdown
-  │  ├─ logo.blade.php  //app logo in a tag
-  │  ├─ date-format.blade.php  //formate a text (date) to isoFormat('DD MMM YYYY')
-  │  ├─ modal.blade.php  //modal with alpine
-  │  ├─ nav-link.blade.php  //single nav item for sidebar
-  │  └─ section-border.blade.php  //border for separate sections responsive
-  ├─ layouts
-  │  ├─ sidebar.blade.php  //animated sidebar responsive
-  │  └─ topbar.blade.php  //topbar for mobile (with a toggle button for sidebar in large screens)
-  ├─ molecules
-  │  ├─ dropdown.blade.php
-  │  ├─ detail-row.blade.php //a single row for show single data column in detail of a role for example
-  │  ├─ th-filters.blade.php //a th with order filter
-  │  └─ message-alert.blade.php  //success alert (warning and danger too)
-  │  └─ orderby.blade.php  //order by a column for the data table mobile
-  │  └─ search.blade.php  //search input with the by column filter
-  │  └─ show-entries.blade.php  //how much entrie show in a page input component
-  ├─ organisms
-  │  └─ datatable-propierties.blade.  //orderby search and show-entrie for the datatable
-  │  └─ item-actions.blade.php  //all 4 action for the row data crud
-  │  └─ settings-dropdown.blade.php  //dropdown for user responsive isMobile prop (for change from sidebar to topbar)
-  └─ templates
-  │  ├─ card-mobile.blade.php  //cards component for a table responsive
-  │  ├─ detail-show.blade.php  //template for detail view
-  │  ├─ action-section.blade.php  //template with a title, description, and a main content
-  │  ├─ authentication-card.blade.php  //template for authentication flow pages
-  │  ├─ confirmation-modal.blade.php  //modal for confirmations like delete something, with a title, content and footer for the buttons
-  │  ├─ dialog-modal.blade.php  //dialog-modal, for forms in a modal, with title, a content and footer for the buttons
-  │  ├─ form-section.blade.php  //form with a title description and actions for button
-  │  ├─ form-template.blade.php  //layout to create / update form, with content and footer actions
-  │  ├─ permissions-card.blade.php  //layout to show the roles by group
-  │  └─ section-title.blade.php  //for a section, set the title and description appart of the content (like profile sections)
+    └─  admin
+        ├─ atoms
+        │  ├─ inputs
+        │  │  └─ //checkbox, date, txt, select, label, error, validation-error(list), group (div for group label, error and input with styles)
+        │  ├─ table  //all table tags html components (th, tr, table)
+        │  │  ├─ columns  //columns customize for the table (where go a single row and column data)
+        │  │  └─ table, th, td
+        │  ├─ button-action.blade.php  //button responsive for the row data crud
+        │  ├─ button.blade.php  //button simple with colors gray, blue, yellow, orange, red.
+        │  ├─ button-rounded.blade.php  //button for icons 
+        │  ├─ secondary-button.blade.php  //button simple white with outline
+        │  ├─ dropdown-link.blade.php  //a single item for dropdown
+        │  ├─ logo.blade.php  //app logo in a tag
+        │  ├─ date-format.blade.php  //formate a text (date) to isoFormat('DD MMM YYYY')
+        │  ├─ modal.blade.php  //modal with alpine
+        │  ├─ nav-link.blade.php  //single nav item for sidebar
+        │  └─ section-border.blade.php  //border for separate sections responsive
+        ├─ layouts
+        │  ├─ sidebar.blade.php  //animated sidebar responsive
+        │  └─ topbar.blade.php  //topbar for mobile (with a toggle button for sidebar in large screens)
+        ├─ molecules
+        │  ├─ dropdown.blade.php
+        │  ├─ detail-row.blade.php //a single row for show single data column in detail of a role for example
+        │  ├─ th-filters.blade.php //a th with order filter
+        │  └─ message-alert.blade.php  //success alert (warning and danger too)
+        │  └─ orderby.blade.php  //order by a column for the data table mobile
+        │  └─ search.blade.php  //search input with the by column filter
+        │  └─ show-entries.blade.php  //how much entrie show in a page input component
+        ├─ organisms
+        │  └─ datatable-propierties.blade.  //orderby search and show-entrie for the datatable
+        │  └─ item-actions.blade.php  //all 4 action for the row data crud
+        │  └─ settings-dropdown.blade.php  //dropdown for user responsive isMobile prop (for change from sidebar to topbar)
+        └─ templates
+        │  ├─ card-mobile.blade.php  //cards component for a table responsive
+        │  ├─ detail-show.blade.php  //template for detail view
+        │  ├─ action-section.blade.php  //template with a title, description, and a main content
+        │  ├─ authentication-card.blade.php  //template for authentication flow pages
+        │  ├─ confirmation-modal.blade.php  //modal for confirmations like delete something, with a title, content and footer for the buttons
+        │  ├─ dialog-modal.blade.php  //dialog-modal, for forms in a modal, with title, a content and footer for the buttons
+        │  ├─ form-section.blade.php  //form with a title description and actions for button
+        │  ├─ form-template.blade.php  //layout to create / update form, with content and footer actions
+        │  ├─ permissions-card.blade.php  //layout to show the roles by group
+        │  └─ section-title.blade.php  //for a section, set the title and description appart of the content (like profile sections)
 ```
 
 ## How use some components
@@ -306,7 +316,7 @@ public function columns() : array
        //if has date in a isoFormat so you can search in that format
        Column::make('created_at', 'Created At'),       
        //with another component to show                             
-       Column::make('created_at', 'Created At')->component('columns.users.status'), 
+       Column::make('created_at', 'Created At')->component('admin.atoms.table.columns.users.status'), 
    ];
 }
 ```

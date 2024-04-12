@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Livewire\Profile\UpdateInformationForm;
-use App\Livewire\Profile\ProfileInformation;
+use App\Livewire\Admin\Profile\UpdateInformationForm;
+use App\Livewire\Admin\Profile\ProfileInformation;
 use Livewire\Livewire;
 use Tests\TestCase;
 use Spatie\Permission\Models\Role;

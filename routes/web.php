@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Roles;
-use App\Livewire\Staff;
-use App\Livewire\Categories;
-use App\Livewire\Products;
-use App\Livewire\DeliveryTimes;
+use App\Livewire\Admin\Roles;
+use App\Livewire\Admin\Staff;
+use App\Livewire\Admin\Categories;
+use App\Livewire\Admin\Products;
+use App\Livewire\Admin\DeliveryTimes;
 
 include __DIR__ . '/livewire.php';
 
@@ -19,7 +19,7 @@ Route::middleware([
     })->name('/');
     //Role routes
     Route::get('roles', function () {
-        return view('pages.roles.index');
+        return view('pages.admin.roles.index');
     })->name('roles.index');
     Route::get('roles/create', Roles\Create::class)->name('roles.create');
     Route::get('/roles/{role}/edit', Roles\Update::class)->name('roles.edit');
@@ -27,7 +27,7 @@ Route::middleware([
 
     //Staff routes
     Route::get('personal', function () {
-        return view('pages.staff.index');
+        return view('pages.admin.staff.index');
     })->name('personal.index');
     Route::get('personal/create', Staff\Create::class)->name('personal.create');
     Route::get('/personal/{staff}/edit', Staff\Update::class)->name('personal.edit');
@@ -35,7 +35,7 @@ Route::middleware([
 
     //Categories routes
     Route::get('categorias', function () {
-        return view('pages.categories.index');
+        return view('pages.admin.categories.index');
     })->name('categorias.index');
     Route::get('categorias/create', Categories\Create::class)->name('categorias.create');
     Route::get('/categorias/{category}/edit', Categories\Update::class)->name('categorias.edit');
@@ -43,7 +43,7 @@ Route::middleware([
 
     //Categories routes
     Route::get('productos', function () {
-        return view('pages.products.index');
+        return view('pages.admin.products.index');
     })->name('productos.index');
     Route::get('productos/create', Products\Create::class)->name('productos.create');
     Route::get('/productos/{product}/edit', Products\Update::class)->name('productos.edit');
@@ -51,7 +51,7 @@ Route::middleware([
 
     //Delivery Times routes
     Route::get('horarios', function () {
-        return view('pages.delivery-times.index');
+        return view('pages.admin.delivery-times.index');
     })->name('horarios.index');
     Route::get('horarios/create', DeliveryTimes\Create::class)->name('horarios.create');
     Route::get('/horarios/{deliverytime}/edit', DeliveryTimes\Update::class)->name('horarios.edit');

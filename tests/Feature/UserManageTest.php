@@ -7,7 +7,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Staff;
 use Livewire\Livewire;
-use App\Livewire\Staff as StaffLivewire;
+use App\Livewire\Admin\Staff as StaffLivewire;
 use Spatie\Permission\Models\Role;
 
 class UserManageTest extends TestCase

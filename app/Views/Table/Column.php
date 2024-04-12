@@ -5,7 +5,7 @@ namespace App\Views\Table;
 class Column
 {
     //default component
-    public string $component = 'table.columns.default';
+    public string $component = 'admin.atoms.table.columns.default';
 
     //column key
     public string $key;
