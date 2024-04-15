@@ -6,6 +6,7 @@ use App\Livewire\Admin\Staff;
 use App\Livewire\Admin\Categories;
 use App\Livewire\Admin\Products;
 use App\Livewire\Admin\DeliveryTimes;
+use App\Livewire\Admin\Customers;
 
 include __DIR__ . '/livewire.php';
 
@@ -56,4 +57,12 @@ Route::middleware([
     Route::get('admin/horarios/create', DeliveryTimes\Create::class)->name('horarios.create');
     Route::get('admin/horarios/{deliverytime}/edit', DeliveryTimes\Update::class)->name('horarios.edit');
     Route::get('admin/horarios/{deliverytime}', DeliveryTimes\Detail::class)->name('horarios.show');
+
+    //Customer routes
+    Route::get('admin/clientes', function () {
+        return view('pages.admin.customers.index');
+    })->name('clientes.index');
+    Route::get('admin/clientes/create', Customers\Create::class)->name('clientes.create');
+    Route::get('admin/clientes/{customer}/edit', Customers\Update::class)->name('clientes.edit');
+    Route::get('admin/clientes/{customer}', Customers\Detail::class)->name('clientes.show');
 });

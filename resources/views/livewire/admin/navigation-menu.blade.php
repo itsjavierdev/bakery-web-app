@@ -20,4 +20,8 @@
     <x-nav-link href="{{ route('horarios.index') }}" :active="Str::startsWith(request()->route()->getName(), 'horarios.')">
         {{ __('Horarios') }}
     </x-nav-link>
+
+    <x-nav-link href="{{ route('clientes.index') }}" :active="Str::startsWith(request()->route()->getName(), 'clientes.')">
+        {{ __('Clientes') }}
+    </x-nav-link>
 </nav>
