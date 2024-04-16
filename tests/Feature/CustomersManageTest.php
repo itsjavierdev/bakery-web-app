@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Customer;
 use App\Models\CustomerAccount;
+use App\Livewire\Admin\Customers as CustomersLivewire;
 use Carbon\Carbon;
 
 class CustomersManageTest extends TestCase
@@ -31,6 +32,23 @@ class CustomersManageTest extends TestCase
             'password' => '12345678',
         ]);
     }
+
+    protected function test_a_customer_can_be_created()
+    {
+        // Create the customer in live wire component
+        Livewire::test(CustomersLivewire\Create::class)
+            ->set('name', 'Javier')
+            ->set('surname', 'Vargas')
+            ->set('phone', '12345678')
+            ->call('save')
+            ->assertRedirect('admin/clientes')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Cliente creado correctamente');
+
+        // Verify that the customer was created in the database
+        $this->assertTrue(Customer::where('name', 'Javier')->exists());
+    }
+
     protected function test_can_display_list_of_customers()
     {
         // Display the list of customers
@@ -44,4 +62,5 @@ class CustomersManageTest extends TestCase
         $response->assertSee($this->customer_account->email);
         $response->assertSee(Carbon::parse($this->customer->created_at)->isoFormat('DD MMM YYYY'));
     }
+
 }

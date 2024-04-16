@@ -81,7 +81,7 @@ class Update extends Component
         ]);
         session()->flash('flash.banner', 'Horario actualizado correctamente');
         session()->flash('flash.bannerStyle', 'success');
-        return redirect()->to('horarios');
+        return redirect()->to('admin/horarios');
     }
 
     public function render()

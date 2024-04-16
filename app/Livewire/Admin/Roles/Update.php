@@ -62,6 +62,6 @@ class Update extends Component
         $permissionNames = Permission::whereIn('id', $this->selected_permissions)->pluck('name')->toArray();
         $role->syncPermissions($permissionNames);
 
-        return redirect()->to('roles')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Rol actualizado correctamente');
+        return redirect()->to('admin/roles')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Rol actualizado correctamente');
     }
 }

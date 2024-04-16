@@ -57,6 +57,6 @@ class Create extends Component
 
         DeliveryTime::create(['time' => $this->time, 'available' => $this->available]);
 
-        return redirect()->to('horarios')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Horario creado correctamente');
+        return redirect()->to('admin/horarios')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Horario creado correctamente');
     }
 }

@@ -55,7 +55,7 @@ class UserManageTest extends TestCase
             ->set('user_create.password', 'Test.123')
             ->set('user_create.password_confirmation', 'Test.123')
             ->call('save')
-            ->assertRedirect('personal')
+            ->assertRedirect('admin/personal')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Personal creado correctamente');
 
@@ -79,7 +79,7 @@ class UserManageTest extends TestCase
             ->set('user_create.password', 'Test.123')
             ->set('user_create.password_confirmation', 'Test.123')
             ->call('update')
-            ->assertRedirect('personal')
+            ->assertRedirect('admin/personal')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Personal actualizado correctamente');
 
@@ -110,7 +110,7 @@ class UserManageTest extends TestCase
             ->set('user_update.role', $this->role->id)
             ->set('user_update.email', 'prueba@gmail.com')
             ->call('update')
-            ->assertRedirect('personal')
+            ->assertRedirect('admin/personal')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Personal actualizado correctamente');
 

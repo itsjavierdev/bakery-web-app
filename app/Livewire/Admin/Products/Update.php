@@ -118,7 +118,7 @@ class Update extends Component
             }
         }
 
-        redirect()->to('productos')->with('flash.banner', 'Producto actualizado correctamente')->with('flash.bannerStyle', 'success');
+        redirect()->to('admin/productos')->with('flash.banner', 'Producto actualizado correctamente')->with('flash.bannerStyle', 'success');
     }
 
 

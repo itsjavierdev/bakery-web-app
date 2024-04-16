@@ -30,7 +30,7 @@ class CategoryManageTest extends TestCase
         Livewire::test(CategoriesLivewire\Create::class)
             ->set('name', 'Empanadas')
             ->call('save')
-            ->assertRedirect('categorias')
+            ->assertRedirect('admin/categorias')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Categoría creada correctamente');
 
@@ -54,7 +54,7 @@ class CategoryManageTest extends TestCase
         Livewire::test(CategoriesLivewire\Update::class, ['category' => $this->category->id])
             ->set('name', 'Panes')
             ->call('update')
-            ->assertRedirect('categorias')
+            ->assertRedirect('admin/categorias')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Categoría actualizada correctamente');
 

@@ -35,7 +35,7 @@ class DeliveryTimesManageTest extends TestCase
             ->set('time', '11:00')
             ->set('available', false)
             ->call('save')
-            ->assertRedirect('horarios')
+            ->assertRedirect('admin/horarios')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Horario creado correctamente');
 
@@ -73,7 +73,7 @@ class DeliveryTimesManageTest extends TestCase
             ->set('time', '11:00')
             ->set('available', false)
             ->call('update')
-            ->assertRedirect('horarios')
+            ->assertRedirect('admin/horarios')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Horario actualizado correctamente');
 

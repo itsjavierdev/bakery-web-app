@@ -53,6 +53,6 @@ class Create extends Component
             $this->staff_create->store();
         }
 
-        return redirect()->to('personal')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Personal creado correctamente');
+        return redirect()->to('admin/personal')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Personal creado correctamente');
     }
 }

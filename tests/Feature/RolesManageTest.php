@@ -45,7 +45,7 @@ class RolesManageTest extends TestCase
             ->set('name', 'Repartidor')
             ->set('selected_permissions', [$this->permissionCreate->id])
             ->call('save')
-            ->assertRedirect('roles')
+            ->assertRedirect('admin/roles')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Rol creado correctamente');
 
@@ -73,7 +73,7 @@ class RolesManageTest extends TestCase
             ->set('name', 'Super Admin')
             ->set('selected_permissions', [$this->permissionEdit->id])
             ->call('update')
-            ->assertRedirect('roles')
+            ->assertRedirect('admin/roles')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Rol actualizado correctamente');
 

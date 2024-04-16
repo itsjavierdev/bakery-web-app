@@ -21,6 +21,6 @@ class Create extends Component
         $this->validate();
         Category::create(['name' => $this->name]);
 
-        return redirect()->to('categorias')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Categoría creada correctamente');
+        return redirect()->to('admin/categorias')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Categoría creada correctamente');
     }
 }

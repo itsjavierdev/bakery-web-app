@@ -89,7 +89,7 @@ class Create extends Component
             ]);
         }
 
-        redirect()->to('productos')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Producto creado correctamente');
+        redirect()->to('admin/productos')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Producto creado correctamente');
     }
     public function updatedImages()
     {

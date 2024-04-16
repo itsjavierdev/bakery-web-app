@@ -42,7 +42,7 @@ class StaffManageTest extends TestCase
             ->set('staff_create.CI_extension', 'SC')
             ->set('staff_create.birthdate', '1990-01-01')
             ->call('save')
-            ->assertRedirect('personal')
+            ->assertRedirect('admin/personal')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Personal creado correctamente');
 
@@ -77,7 +77,7 @@ class StaffManageTest extends TestCase
             ->set('staff_update.birthdate', '1990-01-12')
             ->set('staff_update.is_employed', false)
             ->call('update')
-            ->assertRedirect('personal')
+            ->assertRedirect('admin/personal')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Personal actualizado correctamente');
 

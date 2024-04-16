@@ -37,7 +37,7 @@ class Create extends Component
         //Attach the permissions to the role
         $role->permissions()->attach($this->selected_permissions);
 
-        return redirect()->to('roles')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Rol creado correctamente');
+        return redirect()->to('admin/roles')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Rol creado correctamente');
         ;
     }
 }

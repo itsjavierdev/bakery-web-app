@@ -35,7 +35,7 @@ class Update extends Component
     {
         $this->validate();
         $this->category->update(['name' => $this->name]);
-        return redirect()->to('categorias')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Categoría actualizada correctamente');
+        return redirect()->to('admin/categorias')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Categoría actualizada correctamente');
     }
 
     public function render()

@@ -61,7 +61,7 @@ class ProductManageTest extends TestCase
             ->set('description', 'lorem ipsum')
             ->set('images', [UploadedFile::fake()->image('avatar.jpg')])
             ->call('save')
-            ->assertRedirect('productos')
+            ->assertRedirect('admin/productos')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Producto creado correctamente');
 
@@ -105,7 +105,7 @@ class ProductManageTest extends TestCase
             ->set('old_images', [$this->product_image])
             ->set('new_images', [UploadedFile::fake()->image('new_image.jpg')])
             ->call('update')
-            ->assertRedirect('productos')
+            ->assertRedirect('admin/productos')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Producto actualizado correctamente');
 

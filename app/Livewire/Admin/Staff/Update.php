@@ -72,6 +72,6 @@ class Update extends Component
         $this->staff_update->update();
 
 
-        return redirect()->to('personal')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Personal actualizado correctamente');
+        return redirect()->to('admin/personal')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Personal actualizado correctamente');
     }
 }
