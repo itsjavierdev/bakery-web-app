@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Customer;
 use App\Models\CustomerAccount;
+use Livewire\Livewire;
 use App\Livewire\Admin\Customers as CustomersLivewire;
 use Carbon\Carbon;
 
@@ -61,6 +62,24 @@ class CustomersManageTest extends TestCase
         $response->assertSee($this->customer->phone);
         $response->assertSee($this->customer_account->email);
         $response->assertSee(Carbon::parse($this->customer->created_at)->isoFormat('DD MMM YYYY'));
+    }
+
+    protected function test_a_customer_can_be_updated()
+    {
+        // Update the customer in live wire component
+        Livewire::test(CustomersLivewire\Update::class, ['customer' => $this->customer])
+            ->set('name', 'Javier')
+            ->set('surname', 'Vargas')
+            ->set('phone', '12345678')
+            ->call('update')
+            ->assertRedirect('admin/clientes')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Cliente actualizado correctamente');
+
+        // Verify that the customer was updated in the database
+        $this->assertTrue(Customer::where('name', 'Javier')->exists());
+        $this->assertTrue(Customer::where('surname', 'Vargas')->exists());
+        $this->assertTrue(Customer::where('phone', '12345678')->exists());
     }
 
 }
