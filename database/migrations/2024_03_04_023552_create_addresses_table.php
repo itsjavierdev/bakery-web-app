@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('alias', 20)->unique()->nullable();
             $table->string('address', 60);
             $table->string('reference', 30)->nullable();
+            $table->boolean('is_active')->default(true);
 
             $table->foreignId('customer_id')
                 ->nullable()

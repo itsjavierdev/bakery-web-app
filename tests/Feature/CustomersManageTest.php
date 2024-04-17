@@ -104,7 +104,6 @@ class CustomersManageTest extends TestCase
         $this->assertFalse(Customer::where('id', $this->customer->id)->exists());
     }
 
-
     public function test_can_view_customer_details()
     {
         // Display the customer details
