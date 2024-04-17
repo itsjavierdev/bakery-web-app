@@ -13,6 +13,8 @@ class Update extends Component
     public $name;
     public $surname;
     public $phone;
+    public $email;
+
     //validation rules
     public function rules()
     {
@@ -20,6 +22,7 @@ class Update extends Component
             'name' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
             'surname' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
             'phone' => 'required|integer|min:60000000|max:80090000|unique:customers,phone,' . $this->customer->id,
+            'email' => 'string|email|max:255|unique:customers,email,' . $this->customer->id
         ];
 
     }
@@ -30,6 +33,7 @@ class Update extends Component
             'name' => 'nombre',
             'surname' => 'apellido',
             'phone' => 'teléfono',
+            'email' => 'correo electrónico'
         ];
     }
     //Custom messages error
@@ -50,6 +54,7 @@ class Update extends Component
         $this->name = $this->customer->name;
         $this->surname = $this->customer->surname;
         $this->phone = $this->customer->phone;
+        $this->email = $this->customer->email;
     }
     public function render()
     {
@@ -61,7 +66,8 @@ class Update extends Component
         $this->customer->update([
             'name' => $this->name,
             'surname' => $this->surname,
-            'phone' => $this->phone
+            'phone' => $this->phone,
+            'email' => $this->email
         ]);
 
         return redirect()->to('admin/clientes')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Cliente actualizado correctamente');

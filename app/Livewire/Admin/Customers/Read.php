@@ -15,8 +15,7 @@ class Read extends Datatable
 
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
-        return Customer::leftJoin('customer_accounts', 'customers.id', '=', 'customer_accounts.customer_id')
-            ->select('customers.*', 'customer_accounts.email AS email', DB::raw('CONCAT(customers.name, " ", customers.surname) AS full_name'));
+        return Customer::select('*', DB::raw('CONCAT(name, " ", surname) AS full_name'));
     }
 
     public function columns(): array
@@ -32,11 +31,11 @@ class Read extends Datatable
     public function filters(): array
     {
         return [
-            Filter::make('customers.id', 'ID'),
+            Filter::make('id', 'ID'),
             Filter::make('name', 'Nombre'),
             Filter::make('surname', 'Apellido'),
             Filter::make('phone', 'Telefono'),
-            Filter::make('customers.created_at', 'Fecha de registro')->date(),
+            Filter::make('created_at', 'Fecha de registro')->date(),
         ];
     }
 

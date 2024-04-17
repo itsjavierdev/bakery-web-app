@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Customer extends Model
 {
@@ -34,5 +35,14 @@ class Customer extends Model
     public function customerAccount()
     {
         return $this->hasOne(CustomerAccount::class);
+    }
+
+    public function email(): Attribute
+    {
+        return Attribute::make(
+            set: function ($value) {
+                return $value ?: null;
+            }
+        );
     }
 }

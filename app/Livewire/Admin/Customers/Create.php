@@ -15,6 +15,8 @@ class Create extends Component
     public $surname;
     #[Rule('required|integer|min:60000000|max:80090000|unique:customers,phone', as: 'teléfono')]
     public $phone;
+    #[Rule('string|email|max:255|unique:customers,email', as: 'correo electronico')]
+    public $email = '';
 
     //Custom messages error
     public function messages()
@@ -39,7 +41,8 @@ class Create extends Component
         Customer::create([
             'name' => $this->name,
             'surname' => $this->surname,
-            'phone' => $this->phone
+            'phone' => $this->phone,
+            'email' => $this->email
         ]);
 
         return redirect()->to('admin/clientes')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Cliente creado correctamente');

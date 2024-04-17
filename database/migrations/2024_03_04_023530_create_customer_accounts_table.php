@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('customer_accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 

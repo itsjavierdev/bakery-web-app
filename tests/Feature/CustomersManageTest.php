@@ -41,6 +41,7 @@ class CustomersManageTest extends TestCase
             ->set('name', 'Javier')
             ->set('surname', 'Vargas')
             ->set('phone', '12345678')
+            ->set('email', 'juan@email.com')
             ->call('save')
             ->assertRedirect('admin/clientes')
             ->assertSessionHas('flash.bannerStyle', 'success')
@@ -71,6 +72,7 @@ class CustomersManageTest extends TestCase
             ->set('name', 'Javier')
             ->set('surname', 'Vargas')
             ->set('phone', '12345678')
+            ->set('email', 'javier@email.com')
             ->call('update')
             ->assertRedirect('admin/clientes')
             ->assertSessionHas('flash.bannerStyle', 'success')
@@ -80,6 +82,7 @@ class CustomersManageTest extends TestCase
         $this->assertTrue(Customer::where('name', 'Javier')->exists());
         $this->assertTrue(Customer::where('surname', 'Vargas')->exists());
         $this->assertTrue(Customer::where('phone', '12345678')->exists());
+        $this->assertTrue(Customer::where('email', 'javier@email.com')->exists());
     }
 
 }

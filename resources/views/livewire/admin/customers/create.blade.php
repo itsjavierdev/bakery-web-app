@@ -17,6 +17,12 @@
         <x-inputs.text wire:model="phone" />
         <x-inputs.error for="phone" />
     </x-inputs.group>
+    <!--Email-->
+    <x-inputs.group>
+        <x-inputs.label value="Correo electronico" />
+        <x-inputs.text wire:model="email" />
+        <x-inputs.error for="email" />
+    </x-inputs.group>
     <!--Actions-->
     <x-slot name="footer">
         <x-button wire:click="save">

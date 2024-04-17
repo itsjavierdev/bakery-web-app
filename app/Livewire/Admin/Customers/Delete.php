@@ -2,12 +2,25 @@
 
 namespace App\Livewire\Admin\Customers;
 
-use Livewire\Component;
+use App\Models\Customer;
+use App\Livewire\Others\DeleteRow;
 
-class Delete extends Component
+class Delete extends DeleteRow
 {
-    public function render()
+    public function model()
     {
-        return view('livewire.admin.customers.delete');
+        return Customer::class;
+    }
+    public function componentToRenderAfterDelete()
+    {
+        return Read::class;
+    }
+    protected function confirmationMessages(): array
+    {
+        return [
+            'title' => 'Eliminar cliente',
+            'description' => '¿Estás seguro de que quieres eliminar este cliente?',
+            'success' => 'Cliente eliminado correctamente'
+        ];
     }
 }

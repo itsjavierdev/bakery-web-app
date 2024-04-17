@@ -9,4 +9,5 @@
     <div class="p-6">
         <livewire:admin.customers.read />
     </div>
+    <livewire:admin.customers.delete />
 </x-admin-header>
