@@ -24,4 +24,8 @@
     <x-nav-link href="{{ route('clientes.index') }}" :active="Str::startsWith(request()->route()->getName(), 'clientes.')">
         {{ __('Clientes') }}
     </x-nav-link>
+
+    <x-nav-link href="{{ route('pedidos.index') }}" :active="Str::startsWith(request()->route()->getName(), 'pedidos.')">
+        {{ __('Pedidos') }}
+    </x-nav-link>
 </nav>

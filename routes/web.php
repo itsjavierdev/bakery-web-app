@@ -7,6 +7,7 @@ use App\Livewire\Admin\Categories;
 use App\Livewire\Admin\Products;
 use App\Livewire\Admin\DeliveryTimes;
 use App\Livewire\Admin\Customers;
+use App\Livewire\Admin\Orders;
 
 include __DIR__ . '/livewire.php';
 
@@ -65,4 +66,12 @@ Route::middleware([
     Route::get('admin/clientes/create', Customers\Create::class)->name('clientes.create');
     Route::get('admin/clientes/{customer}/edit', Customers\Update::class)->name('clientes.edit');
     Route::get('admin/clientes/{customer}', Customers\Detail::class)->name('clientes.show');
+
+    //Customer routes
+    Route::get('admin/pedidos', function () {
+        return view('pages.admin.orders.index');
+    })->name('pedidos.index');
+    Route::get('admin/pedidos/create', Orders\Create::class)->name('pedidos.create');
+    Route::get('admin/pedidos/{order}/edit', Orders\Update::class)->name('pedidos.edit');
+    Route::get('admin/pedidos/{order}', Orders\Detail::class)->name('pedidos.show');
 });
