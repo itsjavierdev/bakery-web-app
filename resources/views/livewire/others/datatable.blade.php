@@ -2,7 +2,7 @@
     <x-datatable-propierties />
 
     <!--table in large screens-->
-    <x-table>
+    <x-table class="hidden md:block">
         <!--Header with sort-->
         <thead>
             <tr>
@@ -63,8 +63,13 @@
 
                         <!--Actions-->
                         @if ($this->actions() ?? false)
-                            <x-item-actions :actions="$this->actions()" routesPrefix="{{ $this->routesPrefix() }}"
-                                item_id="{{ $row['id'] }}" />
+                            @if ($add ?? false)
+                                <x-item-actions :actions="['add']" routesPrefix="{{ $this->routesPrefix() }}"
+                                    item_id="{{ $row['id'] }}" />
+                            @else
+                                <x-item-actions :actions="$this->actions()" routesPrefix="{{ $this->routesPrefix() }}"
+                                    item_id="{{ $row['id'] }}" />
+                            @endif
                         @endif
                     </x-tr>
                 @endforeach
@@ -138,8 +143,13 @@
                     <!--Actions-->
                     <x-slot name="footer">
                         @if ($this->actions() ?? false)
-                            <x-item-actions :actions="$this->actions()" routesPrefix="{{ $this->routesPrefix() }}"
-                                item_id="{{ $row['id'] }}" />
+                            @if ($add ?? false)
+                                <x-item-actions :actions="['add']" routesPrefix="{{ $this->routesPrefix() }}"
+                                    item_id="{{ $row['id'] }}" />
+                            @else
+                                <x-item-actions :actions="$this->actions()" routesPrefix="{{ $this->routesPrefix() }}"
+                                    item_id="{{ $row['id'] }}" />
+                            @endif
                         @endif
                     </x-slot>
                 </x-card-mobile>

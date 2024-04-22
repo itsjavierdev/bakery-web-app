@@ -23,10 +23,9 @@ abstract class Datatable extends Component
     //selected columns to show by the user
     public $selected_columns;
 
+    public $add = null;
 
     //abstract methods
-
-
     protected $listeners = ['render'];
     public abstract function query(): \Illuminate\Database\Eloquent\Builder;
 

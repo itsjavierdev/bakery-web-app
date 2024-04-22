@@ -15,7 +15,7 @@ class Read extends Datatable
 
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
-        return Customer::select('*', DB::raw('CONCAT(name, " ", surname) AS full_name'));
+        return Customer::query()->select('*', DB::raw('CONCAT_WS(" ", NULLIF(name, ""), NULLIF(surname, "")) AS full_name'));
     }
 
     public function columns(): array

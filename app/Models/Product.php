@@ -27,14 +27,14 @@ class Product extends Model
         return $this->belongsTo(Featured::class);
     }
 
-    public function order()
+    public function orders()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->belongsToMany(Order::class, 'order_details');
     }
 
-    public function sale()
+    public function sales()
     {
-        return $this->belongsToMany(Sale::class);
+        return $this->belongsToMany(Sale::class, 'sale_details');
     }
 
     use Sluggable;

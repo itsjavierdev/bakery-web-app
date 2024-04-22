@@ -26,8 +26,8 @@ class Sale extends Model
         return $this->hasMany(Payment::class);
     }
 
-    public function product()
+    public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class, 'sale_details');
     }
 }

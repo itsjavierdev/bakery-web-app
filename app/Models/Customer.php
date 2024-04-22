@@ -45,4 +45,13 @@ class Customer extends Model
             }
         );
     }
+
+    public function phone(): Attribute
+    {
+        return Attribute::make(
+            set: function ($value) {
+                return $value ?: null;
+            }
+        );
+    }
 }

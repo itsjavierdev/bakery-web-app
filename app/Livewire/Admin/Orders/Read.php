@@ -15,7 +15,18 @@ class Read extends Datatable
         return Order::leftJoin('delivery_times', 'orders.delivery_time_id', '=', 'delivery_times.id')
             ->leftJoin('addresses', 'orders.address_id', '=', 'addresses.id')
             ->leftJoin('customers', 'orders.customer_id', '=', 'customers.id')
-            ->select('orders.id AS id', DB::raw('CONCAT(orders.delivery_date, " ", delivery_times.time) AS delivery_datetime'), 'orders.total AS total', 'addresses.address AS address', DB::raw('CONCAT(customers.name, " ", customers.surname) AS customer'), DB::raw('CONCAT(customers.phone, " ", customers.email) AS customer_info'), 'orders.created_at AS created_at', 'orders.paid as paid', 'orders.paid_amount', DB::raw('CONCAT(orders.total, " ", orders.paid_amount) AS paid_info'));
+            ->select(
+                'orders.id AS id',
+                'addresses.address AS address',
+                'orders.created_at AS created_at',
+                'orders.paid as paid',
+                'orders.paid_amount',
+                'orders.total AS total',
+                DB::raw('CONCAT(orders.delivery_date, " ", delivery_times.time) AS delivery_datetime'),
+                DB::raw('CONCAT_WS(" ", NULLIF(customers.name, ""), NULLIF(customers.surname, "")) AS customer'),
+                DB::raw('CONCAT_WS(" ", NULLIF(customers.phone,""), NULLIF(customers.email,"")) AS customer_info'),
+                DB::raw('CONCAT(COALESCE(orders.total, 0), " ", COALESCE(orders.paid_amount, 0)) AS paid_info')
+            );
     }
 
     public function columns(): array

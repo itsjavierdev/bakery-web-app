@@ -14,7 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->decimal('product_price', 4, 1);
             $table->integer('quantity');
-            $table->decimal('subtotal', 5, 1);
+            $table->boolean('by_bag');
+            $table->decimal('subtotal', 6, 1);
 
             $table->foreignId('order_id')
                 ->constrained()

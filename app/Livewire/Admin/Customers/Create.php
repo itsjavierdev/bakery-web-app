@@ -15,7 +15,7 @@ class Create extends Component
     public $surname;
     #[Rule('required|integer|min:60000000|max:80090000|unique:customers,phone', as: 'teléfono')]
     public $phone;
-    #[Rule('string|email|max:255|unique:customers,email', as: 'correo electronico')]
+    #[Rule('nullable|string|email|max:255|unique:customers,email', as: 'correo electronico')]
     public $email = '';
 
     //Custom messages error

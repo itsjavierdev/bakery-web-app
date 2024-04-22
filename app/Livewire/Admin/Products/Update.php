@@ -138,7 +138,7 @@ class Update extends Component
             'category_id' => 'required',
             'price' => 'required|numeric|between:0,999.9',
             'bag_quantity' => 'required|integer|between:1,100',
-            'description' => 'string|max:255',
+            'description' => 'nullable|string|max:255',
             'new_images.*' => 'image|max:1024',
             'images' => 'required|array|min:1',
         ];

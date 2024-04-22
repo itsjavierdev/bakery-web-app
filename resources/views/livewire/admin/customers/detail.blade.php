@@ -29,11 +29,11 @@
                         <i class="icon-x text-red-500 text-lg"></i>
                     @endif
                 </x-detail-row>
-                <x-detail-row title="Permisos" classContent="flex flex-wrap -mx-2 mt-2" isResponsive>
+                <x-detail-row title="Direcciones" classContent="flex flex-wrap -mx-2 mt-2" isResponsive>
                     @foreach ($addresses as $address)
                         <x-permissions-card>
                             <x-slot name="header">
-                                <div class="w-full px-1 py-2 {{ $address->is_active ? 'bg-green-200' : '' }} rounded-t">
+                                <div>
                                 </div>
                             </x-slot>
                             <p>{{ $address->address }}</p>

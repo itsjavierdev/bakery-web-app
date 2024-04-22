@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->date('delivery_date');
-            $table->decimal('total', 6, 1);
-            $table->decimal('paid_amount', 6, 1)->nullable();
+            $table->decimal('total', 7, 1);
+            $table->decimal('paid_amount', 7, 1)->nullable();
             $table->boolean('paid')->default(false);
             $table->string('notes')->nullable();
 

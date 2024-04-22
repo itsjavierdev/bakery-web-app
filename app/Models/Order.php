@@ -26,8 +26,8 @@ class Order extends Model
         return $this->belongsTo(DeliveryTime::class);
     }
 
-    public function product()
+    public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class, 'order_details');
     }
 }

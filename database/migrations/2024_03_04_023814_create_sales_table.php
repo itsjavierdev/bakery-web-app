@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->decimal('total', 6, 1);
+            $table->decimal('total', 7, 1);
             $table->integer('total_items');
             $table->boolean('paid')->default(false);
 

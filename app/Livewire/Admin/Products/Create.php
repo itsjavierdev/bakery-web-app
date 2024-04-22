@@ -41,7 +41,7 @@ class Create extends Component
             'category_id' => 'required',
             'price' => 'required|numeric|between:0,999.9',
             'bag_quantity' => 'required|integer|between:1,100',
-            'description' => 'string|max:255',
+            'description' => 'nullable|string|max:255',
             'images.*' => 'image|max:1024',
             'temporary_images' => 'required|array|min:1',
         ];

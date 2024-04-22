@@ -25,12 +25,12 @@
                 <div class="flex flex-row gap-4">
                     <div class="w-full">
                         <x-inputs.label value="Carnet de identidad" />
-                        <x-inputs.text wire:model="staff_update.CI_number" />
+                        <x-inputs.text class="mt-2" wire:model="staff_update.CI_number" />
                         <x-inputs.error for="staff_update.CI_number" />
                     </div>
                     <div class="w-full">
                         <x-inputs.label value="Extensión" />
-                        <x-inputs.select wire:model="staff_update.CI_extension">
+                        <x-inputs.select class="mt-2" wire:model="staff_update.CI_extension">
                             <option value="">Seleccionar</option>
                             @foreach ($extensions as $extension)
                                 <option value="{{ $extension }}">{{ $extension }}</option>

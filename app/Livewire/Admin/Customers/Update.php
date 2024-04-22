@@ -22,7 +22,7 @@ class Update extends Component
             'name' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
             'surname' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
             'phone' => 'required|integer|min:60000000|max:80090000|unique:customers,phone,' . $this->customer->id,
-            'email' => 'string|email|max:255|unique:customers,email,' . $this->customer->id
+            'email' => 'nullable|string|email|max:255|unique:customers,email,' . $this->customer->id
         ];
 
     }

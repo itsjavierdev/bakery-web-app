@@ -27,5 +27,10 @@
                 <i class="icon-trash text-2xl text-red-700"></i>
             </x-button-action>
         @endif
+        @if (in_array('add', $actions))
+            <x-button-action wire:click="$dispatch('add-{{ $routesPrefix }}', {id: {{ $item_id }}})">
+                <i class="icon-plus text-2xl text-blue-700"></i>
+            </x-button-action>
+        @endif
     </div>
 </td>

@@ -20,7 +20,7 @@ class Read extends Datatable
         return Staff::leftJoin('users', 'staff.id', '=', 'users.staff_id')
             ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
             ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
-            ->select('staff.*', 'is_employed', 'users.email AS email', 'roles.name AS role', DB::raw('CONCAT(staff.name, " ", staff.surname) AS full_name'))
+            ->select('staff.*', 'is_employed', 'users.email AS email', 'roles.name AS role', DB::raw('CONCAT_WS(" ", NULLIF(staff.name, ""), NULLIF(staff.surname,"")) AS full_name'))
             ->where('staff.id', '!=', $user->staff_id);
 
     }
