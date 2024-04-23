@@ -2,12 +2,26 @@
 
 namespace App\Livewire\Admin\Orders;
 
-use Livewire\Component;
+use App\Livewire\Others\DeleteRow;
+use App\Models\Order;
 
-class Delete extends Component
+class Delete extends DeleteRow
 {
-    public function render()
+
+    public function model()
     {
-        return view('livewire.admin.orders.delete');
+        return Order::class;
+    }
+    public function componentToRenderAfterDelete()
+    {
+        return Read::class;
+    }
+    protected function confirmationMessages(): array
+    {
+        return [
+            'title' => 'Eliminar Pedido',
+            'description' => '¿Estás seguro de que quieres eliminar este pedido?',
+            'success' => 'Pedido eliminado correctamente',
+        ];
     }
 }

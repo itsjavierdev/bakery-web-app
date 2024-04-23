@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\OrderDetail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use SebastianBergmann\Type\VoidType;
@@ -26,6 +27,7 @@ class OrdersManageTest extends TestCase
     protected $customer;
     protected $product;
     protected $delivery_time;
+    protected $order_detail;
 
     protected function setUp(): void
     {
@@ -63,6 +65,15 @@ class OrdersManageTest extends TestCase
             'customer_id' => $this->customer->id,
             'paid' => 1,
             'paid_amount' => 100,
+        ]);
+
+        $this->order_detail = OrderDetail::create([
+            'order_id' => $this->order->id,
+            'product_id' => $this->product->id,
+            'quantity' => 1,
+            'by_bag' => 0,
+            'product_price' => 100,
+            'subtotal' => 100,
         ]);
     }
 
@@ -115,5 +126,24 @@ class OrdersManageTest extends TestCase
 
         // Verify that the product was updated in the database
         $this->assertTrue(Order::where('notes', 'other note')->exists());
+    }
+
+    public function test_a_order_can_be_deleted(): void
+    {
+        // Verify that the product an image exists in the database
+        $this->assertTrue(Order::where('id', $this->order->id)->exists());
+        $this->assertTrue(OrderDetail::where('order_id', $this->order->id)->exists());
+
+        Livewire::test(Orders\Delete::class)
+            ->call('confirmDelete', $this->order->id)
+            ->assertSet('delete_id', $this->order->id)
+            ->assertSet('open', true)
+            ->call('delete', $this->order->id)
+            ->assertDispatched('render')
+            ->assertDispatched('banner-message', style: 'success', message: 'Pedido eliminado correctamente');
+
+        // Verify that the product was deleted from the database
+        $this->assertFalse(Order::where('id', $this->order->id)->exists());
+        $this->assertFalse(OrderDetail::where('order_id', $this->order->id)->exists());
     }
 }
