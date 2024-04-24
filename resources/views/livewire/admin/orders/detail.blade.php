@@ -32,7 +32,7 @@
             </x-detail-row>
             <x-detail-row isResponsive title="Productos" classContent="flex flex-wrap gap-4">
                 <x-table class="mt-2">
-                    <thead>
+                    <thead class="border-b-medium border-gray-300">
                         <tr>
                             <x-th>Producto</x-th>
                             <x-th>Precio</x-th>
@@ -66,7 +66,7 @@
                         @endforeach
                     </tbody>
 
-                    <tfoot>
+                    <tfoot class="border-t-medium border-gray-300 bg-gray-100">
                         <x-tr>
                             <td class="p-2" colspan="4">
                                 TOTAL

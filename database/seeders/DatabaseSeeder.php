@@ -2,10 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Address;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Staff;
 use App\Models\Category;
+use App\Models\DeliveryTime;
+use App\Models\Order;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,7 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
 
         Product::factory(10)->create();
-
 
         Staff::factory(5)->create();
 
@@ -37,5 +40,7 @@ class DatabaseSeeder extends Seeder
         foreach ($users as $user) {
             $user->assignRole('Administrador');
         }
+
+        OrderDetail::factory(10)->create();
     }
 }

@@ -115,7 +115,7 @@
                 <x-inputs.label value="Detalle" />
                 <div>
                     <x-table>
-                        <thead>
+                        <thead class="border-b-medium border-gray-300">
                             <tr>
                                 <x-th>Producto</x-th>
                                 <x-th>Precio</x-th>
@@ -140,8 +140,11 @@
                                         <x-inputs.text type="number"
                                             wire:model.change="products.{{ $index }}.quantity" />
                                     </td>
-                                    <td class="p-2 flex items-center justify-center">
-                                        <x-inputs.checkbox wire:model.change="products.{{ $index }}.by_bag" />
+                                    <td class="p-2 h-full">
+                                        <div class="flex items-center justify-center">
+                                            <x-inputs.checkbox
+                                                wire:model.change="products.{{ $index }}.by_bag" />
+                                        </div>
                                     </td>
                                     <td class="p-2">
                                         {{ $product['subtotal'] }}
@@ -157,15 +160,15 @@
                             @endforeach
                         </tbody>
 
-                        <tfoot>
+                        <tfoot class="border-t-medium border-gray-300 bg-gray-100">
                             <x-tr>
-                                <td class="p-2" colspan="4">
+                                <td class="px-2" colspan="4">
                                     {{ $total ? 'TOTAL' : '' }}
                                 </td>
-                                <td class="p-2">
+                                <td class="px-2">
                                     {{ $total ? $total : '' }}
                                 </td>
-                                <td class="p-2">
+                                <td class="px-2">
                                     <x-button-rounded wire:click="toggleModal('productos')">
                                         <i class="icon-plus text-2xl text-blue-500"></i>
                                     </x-button-rounded>

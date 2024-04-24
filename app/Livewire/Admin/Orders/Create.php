@@ -205,7 +205,6 @@ class Create extends Component
             'customer.name' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
             'address.address' => 'nullable|string|min:5|max:100',
             'notes' => 'nullable|string|max:255',
-            'total_paid' => 'nullable|numeric|between:0,99999.9',
             'products' => 'required|array|min:1',
             'products.*.quantity' => 'required|integer|min:1',
             'delivery_time' => 'required|exists:delivery_times,id',
@@ -222,6 +221,17 @@ class Create extends Component
             $rules['customer.email'] = 'nullable|string|email|max:255|unique:customers,email';
 
         }
+        $rules['total_paid'] = [
+            'nullable',
+            'numeric',
+            'between:0,99999.9',
+            function ($attribute, $value, $fail) {
+                if ($value > $this->total) {
+                    $fail('El monto pagado no puede ser mayor que el total.');
+                }
+            },
+        ];
+
         return $rules;
 
     }
