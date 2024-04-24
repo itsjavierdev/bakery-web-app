@@ -46,7 +46,7 @@
             <x-inputs.group>
                 <x-inputs.label value="Dirección" />
                 <div class="flex gap-2">
-                    <x-inputs.text wire:model="address.address" :disabled="$address['id'] ? true : false" />
+                    <x-inputs.text wire:model="address.address" :disabled="$add_address ? false : true" />
                     <x-secondary-button wire:click="toggleModal('dirección')" tabindex="-1"><i
                             class="icon-bars text-2xl"></i></x-secondary-button>
                     @if ($add_address)
@@ -144,7 +144,7 @@
                                         <x-inputs.checkbox wire:model.change="products.{{ $index }}.by_bag" />
                                     </td>
                                     <td class="p-2">
-                                        Bs {{ $product['subtotal'] }}
+                                        {{ $product['subtotal'] }}
 
                                     </td>
 
@@ -163,7 +163,7 @@
                                     {{ $total ? 'TOTAL' : '' }}
                                 </td>
                                 <td class="p-2">
-                                    {{ $total ? 'Bs ' . $total : '' }}
+                                    {{ $total ? $total : '' }}
                                 </td>
                                 <td class="p-2">
                                     <x-button-rounded wire:click="toggleModal('productos')">

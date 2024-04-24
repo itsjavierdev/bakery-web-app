@@ -38,7 +38,7 @@ class Read extends Datatable
             Column::make('customer', 'Cliente')->isDefault(),
             Column::make('customer_info', 'Información cliente')->component('admin.atoms.table.columns.orders.customer-info'),
             Column::make('total', 'Total'),
-            Column::make('paid_info', 'Estado')->component('admin.atoms.table.columns.orders.paid-info')->isDefault(),
+            Column::make('paid_info', 'Deuda')->component('admin.atoms.table.columns.orders.paid-info')->isDefault(),
             Column::make('created_at', 'Fecha de registro')->isDefault(),
         ];
     }

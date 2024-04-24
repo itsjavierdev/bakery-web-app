@@ -33,10 +33,10 @@
                 @endforeach
             </x-detail-row>
             <x-detail-row title="Fecha de registro">
-                <x-date-format>{{ $product->category->created_at }}</x-date-format>
+                <x-date-format>{{ $product->created_at }}</x-date-format>
             </x-detail-row>
             <x-detail-row title="Fecha de modificación">
-                <x-date-format>{{ $product->category->updated_at }}</x-date-format>
+                <x-date-format>{{ $product->updated_at }}</x-date-format>
             </x-detail-row>
 
         </div>

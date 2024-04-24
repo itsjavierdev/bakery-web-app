@@ -128,6 +128,23 @@ class OrdersManageTest extends TestCase
         $this->assertTrue(Order::where('notes', 'other note')->exists());
     }
 
+    public function test_can_view_orders_details(): void
+    {
+        // Display the order details
+        $response = $this->actingAs($this->user)->get('admin/pedidos/' . $this->order->id);
+
+        // Verify that the order details are displayed
+        $response->assertStatus(200);
+        $response->assertSee($this->order->id);
+        $response->assertSee($this->customer->name);
+        $response->assertSee($this->customer->surname);
+        $response->assertSee($this->order->total);
+        $response->assertSee($this->product->name);
+        $response->assertSee($this->order_detail->quantity);
+        $response->assertSee($this->order_detail->product_price);
+        $response->assertSee($this->order_detail->subtotal);
+    }
+
     public function test_a_order_can_be_deleted(): void
     {
         // Verify that the product an image exists in the database

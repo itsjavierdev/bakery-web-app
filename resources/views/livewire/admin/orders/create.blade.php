@@ -144,7 +144,7 @@
                                         <x-inputs.checkbox wire:model.change="products.{{ $index }}.by_bag" />
                                     </td>
                                     <td class="p-2">
-                                        Bs {{ $product['subtotal'] }}
+                                        {{ $product['subtotal'] }}
 
                                     </td>
 
@@ -163,7 +163,7 @@
                                     {{ $total ? 'TOTAL' : '' }}
                                 </td>
                                 <td class="p-2">
-                                    {{ $total ? 'Bs ' . $total : '' }}
+                                    {{ $total ? $total : '' }}
                                 </td>
                                 <td class="p-2">
                                     <x-button-rounded wire:click="toggleModal('productos')">
