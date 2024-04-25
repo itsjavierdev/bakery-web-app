@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Address;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\SaleDetail;
 use App\Models\User;
 use App\Models\Staff;
 use App\Models\Category;
@@ -42,5 +43,7 @@ class DatabaseSeeder extends Seeder
         }
 
         OrderDetail::factory(10)->create();
+
+        SaleDetail::factory(10)->create();
     }
 }
