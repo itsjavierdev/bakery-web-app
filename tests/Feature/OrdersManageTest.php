@@ -33,9 +33,8 @@ class OrdersManageTest extends TestCase
     {
         parent::setUp();
 
-
         $this->user = User::factory()->create();
-        //Create example data
+
         $this->product = Product::factory()->create();
 
         $this->delivery_time = DeliveryTime::create([
@@ -83,16 +82,16 @@ class OrdersManageTest extends TestCase
             ->set('customer', ['id' => $this->customer->id, 'name' => $this->customer->name])
             ->set('address', ['id' => $this->address->id, 'address' => $this->address->address])
             ->set('notes', 'Some notes')
-            ->set('total_paid', 100) // Cambiar según sea necesario
+            ->set('total_paid', 100)
             ->set('delivery_time', $this->delivery_time->id)
-            ->set('delivery_date', now()->addDays(1)->toDateString()) // Cambiar según sea necesario
-            ->call('addProduct', $this->product->id) // Agregar producto
+            ->set('delivery_date', now()->addDays(1)->toDateString())
+            ->call('addProduct', $this->product->id)
             ->call('save')
             ->assertRedirect('admin/pedidos')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Pedido creado correctamente');
 
-        // Verify that the product was created in the database
+        // Verify that the order was created in the database
         $this->assertTrue(Order::where('notes', 'Some notes')->exists());
     }
 
@@ -115,16 +114,16 @@ class OrdersManageTest extends TestCase
             ->set('customer', ['id' => $this->customer->id, 'name' => $this->customer->name])
             ->set('address', ['id' => $this->address->id, 'address' => $this->address->address])
             ->set('notes', 'other note')
-            ->set('total_paid', 100) // Cambiar según sea necesario
+            ->set('total_paid', 100)
             ->set('delivery_time', $this->delivery_time->id)
-            ->set('delivery_date', now()->addDays(1)->toDateString()) // Cambiar según sea necesario
-            ->call('addProduct', $this->product->id) // Agregar producto
+            ->set('delivery_date', now()->addDays(1)->toDateString())
+            ->call('addProduct', $this->product->id)
             ->call('update')
             ->assertRedirect('admin/pedidos')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Pedido actualizado correctamente');
 
-        // Verify that the product was updated in the database
+        // Verify that the order was updated in the database
         $this->assertTrue(Order::where('notes', 'other note')->exists());
     }
 
@@ -147,7 +146,7 @@ class OrdersManageTest extends TestCase
 
     public function test_a_order_can_be_deleted(): void
     {
-        // Verify that the product an image exists in the database
+        // Verify that the order exists in the database
         $this->assertTrue(Order::where('id', $this->order->id)->exists());
         $this->assertTrue(OrderDetail::where('order_id', $this->order->id)->exists());
 
@@ -159,7 +158,7 @@ class OrdersManageTest extends TestCase
             ->assertDispatched('render')
             ->assertDispatched('banner-message', style: 'success', message: 'Pedido eliminado correctamente');
 
-        // Verify that the product was deleted from the database
+        // Verify that the order was deleted from the database
         $this->assertFalse(Order::where('id', $this->order->id)->exists());
         $this->assertFalse(OrderDetail::where('order_id', $this->order->id)->exists());
     }

@@ -259,7 +259,7 @@ class Update extends Component
             'numeric',
             'between:0,99999.9',
             function ($attribute, $value, $fail) {
-                if ($value > $this->total) {
+                if ($value > ($this->total + 1)) {
                     $fail('El monto pagado no puede ser mayor que el total.');
                 }
             },

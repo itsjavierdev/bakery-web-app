@@ -13,6 +13,7 @@ use App\Models\Sale;
 use App\Models\Customer;
 use App\Models\Product;
 use Livewire\Livewire;
+use App\Livewire\Admin\Sales;
 use App\Models\User;
 
 class SalesManageTest extends TestCase
@@ -61,6 +62,23 @@ class SalesManageTest extends TestCase
             'product_price' => 100,
             'subtotal' => 100,
         ]);
+    }
+
+    public function test_a_order_can_be_created(): void
+    {
+        $this->actingAs($this->user);
+
+        Livewire::test(Sales\Create::class)
+            ->set('customer', ['id' => $this->customer->id, 'name' => $this->customer->name])
+            ->set('total_paid', 100)
+            ->call('addProduct', $this->product->id)
+            ->call('save')
+            ->assertRedirect('admin/ventas')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Venta creada correctamente');
+
+        // Verify that the sale was created in the database
+        $this->assertTrue(Sale::where('customer_id', $this->customer->id)->exists());
     }
 
     public function test_can_display_list_of_sales(): void
