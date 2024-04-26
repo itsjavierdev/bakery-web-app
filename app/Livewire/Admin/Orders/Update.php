@@ -42,7 +42,7 @@ class Update extends Component
     public function mount(Order $order)
     {
         $this->$order = Order::find($order);
-        $this->customer = ['id' => $order->customer->id, 'name' => $order->customer->name];
+        $this->customer = ['id' => $this->order->customer->id, 'name' => $this->order->customer->name];
         $this->address = ['id' => $order->address ? $order->address->id : null, 'address' => $order->address ? $order->address->address : ''];
         $this->delivery_date = $order->delivery_date;
         $this->delivery_time = $order->delivery_time_id;

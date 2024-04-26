@@ -81,6 +81,6 @@ Route::middleware([
         return view('pages.admin.sales.index');
     })->name('ventas.index');
     Route::get('admin/ventas/create', Sales\Create::class)->name('ventas.create');
-    Route::get('admin/ventas/{sales}/edit', Sales\Update::class)->name('ventas.edit');
-    Route::get('admin/ventas/{sales}', Sales\Detail::class)->name('ventas.show');
+    Route::get('admin/ventas/{sale}/edit', Sales\Update::class)->name('ventas.edit');
+    Route::get('admin/ventas/{sale}', Sales\Detail::class)->name('ventas.show');
 });

@@ -6,7 +6,6 @@ use App\Models\Customer;
 use App\Models\Payment;
 use App\Models\Sale;
 use App\Models\Product;
-use App\Models\Order;
 use Livewire\Component;
 use Livewire\Attributes\On;
 

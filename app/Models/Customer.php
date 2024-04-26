@@ -12,22 +12,22 @@ class Customer extends Model
 
     protected $guarded = [];
 
-    public function address()
+    public function addresses()
     {
         return $this->hasMany(Address::class);
     }
 
-    public function order()
+    public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
-    public function sale()
+    public function sales()
     {
         return $this->hasMany(Sale::class);
     }
 
-    public function payment()
+    public function payments()
     {
         return $this->hasMany(Payment::class);
     }

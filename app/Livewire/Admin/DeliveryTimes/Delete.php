@@ -9,7 +9,7 @@ class Delete extends DeleteRow
 {
     public function relatedModels(): array
     {
-        return ['order'];
+        return ['orders'];
     }
     public function model()
     {

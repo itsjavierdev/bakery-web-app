@@ -17,12 +17,12 @@ class Staff extends Model
         return $this->hasOne(User::class);
     }
 
-    public function sale()
+    public function sales()
     {
         return $this->hasMany(Sale::class);
     }
 
-    public function payment()
+    public function payments()
     {
         return $this->hasMany(Payment::class);
     }

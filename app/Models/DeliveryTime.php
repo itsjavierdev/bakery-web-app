@@ -11,7 +11,7 @@ class DeliveryTime extends Model
 
     protected $guarded = [];
 
-    public function order()
+    public function orders()
     {
         return $this->hasMany(Order::class);
     }

@@ -6,8 +6,6 @@ namespace Tests\Feature;
 use App\Models\SaleDetail;
 use App\Models\Staff;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use SebastianBergmann\Type\VoidType;
 use Tests\TestCase;
 use App\Models\Sale;
 use App\Models\Customer;
@@ -94,5 +92,29 @@ class SalesManageTest extends TestCase
         $response->assertSee($this->staff->name);
         $response->assertSee($this->staff->surname);
         $response->assertSee($this->sale->total);
+    }
+    public function test_a_sale_can_be_updated()
+    {
+        $this->actingAs($this->user);
+
+        $product = Product::factory()->create();
+
+        // Verify that the sale has the product
+        $this->assertTrue(Sale::whereHas('products', function ($query) use ($product) {
+            $query->where('products.id', $this->product->id);
+        })->exists());
+
+        Livewire::test(Sales\Update::class, ['sale' => $this->sale])
+            ->set('customer', ['id' => $this->customer->id, 'name' => $this->customer->name])
+            ->call('addProduct', $product->id)
+            ->call('update')
+            ->assertRedirect('admin/ventas')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Venta actualizada correctamente');
+
+        // Verify that the sale was updated with the other product in the database
+        $this->assertTrue(Sale::whereHas('products', function ($query) use ($product) {
+            $query->where('products.id', $product->id);
+        })->exists());
     }
 }
