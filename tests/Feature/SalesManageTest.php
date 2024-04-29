@@ -118,6 +118,21 @@ class SalesManageTest extends TestCase
         })->exists());
     }
 
+    public function test_can_view_sales_details()
+    {
+        // Display the sale details
+        $response = $this->actingAs($this->user)->get('admin/ventas/' . $this->sale->id);
+
+        // Verify that the sale details are displayed
+        $response->assertStatus(200);
+        $response->assertSee($this->sale->id);
+        $response->assertSee($this->customer->name);
+        $response->assertSee($this->customer->surname);
+        $response->assertSee($this->staff->name);
+        $response->assertSee($this->staff->surname);
+        $response->assertSee($this->sale->total);
+    }
+
     public function test_a_sale_can_be_deleted()
     {
         // Verify that the sale exists
