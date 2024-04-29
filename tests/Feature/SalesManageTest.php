@@ -117,4 +117,21 @@ class SalesManageTest extends TestCase
             $query->where('products.id', $product->id);
         })->exists());
     }
+
+    public function test_a_sale_can_be_deleted()
+    {
+        // Verify that the sale exists
+        $this->assertTrue(Sale::where('id', $this->sale->id)->exists());
+
+        Livewire::test(Sales\Delete::class)
+            ->call('confirmDelete', $this->sale->id)
+            ->assertSet('delete_id', $this->sale->id)
+            ->assertSet('open', true)
+            ->call('delete', $this->sale->id)
+            ->assertDispatched('render')
+            ->assertDispatched('banner-message', style: 'success', message: 'Venta eliminada correctamente');
+
+        // Verify that the sale was deleted in the database
+        $this->assertFalse(Sale::where('id', $this->sale->id)->exists());
+    }
 }
