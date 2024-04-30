@@ -97,10 +97,15 @@ class Update extends Component
             ]);
             $this->customer['id'] = $customer->id;
         }
+        $total_quantity = collect($this->products)->sum(function ($product) {
+            // Si by_bag es true, multiplica la cantidad por bag_quantity
+            return $product['by_bag'] ? $product['quantity'] * $product['bag_quantity'] : $product['quantity'];
+        });
         // Create the sale
         $this->sale->update([
             'total' => $this->total,
             'customer_id' => $this->customer['id'],
+            'total_quantity' => $total_quantity,
             'staff_id' => auth()->user()->staff->id,
         ]);
 

@@ -86,6 +86,10 @@ class Create extends Component
                 $this->address['id'] = $address->id;
             }
         }
+        $total_quantity = collect($this->products)->sum(function ($product) {
+            // Si by_bag es true, multiplica la cantidad por bag_quantity
+            return $product['by_bag'] ? $product['quantity'] * $product['bag_quantity'] : $product['quantity'];
+        });
 
         // Create the order
         $order = Order::create([
@@ -94,6 +98,7 @@ class Create extends Component
             'paid_amount' => $this->total_paid,
             'paid' => $this->total_paid == $this->total ? true : false,
             'notes' => $this->notes,
+            'total_quantity' => $total_quantity,
             'customer_id' => $this->customer['id'],
             'address_id' => $this->address['id'],
             'delivery_time_id' => $this->delivery_time,

@@ -116,13 +116,17 @@ class Update extends Component
                 $this->address['id'] = $address->id;
             }
         }
-
+        $total_quantity = collect($this->products)->sum(function ($product) {
+            // Si by_bag es true, multiplica la cantidad por bag_quantity
+            return $product['by_bag'] ? $product['quantity'] * $product['bag_quantity'] : $product['quantity'];
+        });
         // update the order
         $this->order->update([
             'delivery_date' => $this->delivery_date,
             'total' => $this->total,
             'paid_amount' => $this->total_paid,
             'paid' => $this->total_paid == $this->total ? true : false,
+            'total_quantity' => $total_quantity,
             'notes' => $this->notes,
             'customer_id' => $this->customer['id'],
             'address_id' => $this->address['id'],

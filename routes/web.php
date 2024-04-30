@@ -18,7 +18,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('admin', function () {
-        return view('pages.dashboard');
+        return view('pages.admin.dashboard');
     })->name('/');
     //Role routes
     Route::get('admin/roles', function () {

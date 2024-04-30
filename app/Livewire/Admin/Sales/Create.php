@@ -64,12 +64,17 @@ class Create extends Component
             ]);
             $this->customer['id'] = $customer->id;
         }
+        $total_quantity = collect($this->products)->sum(function ($product) {
+            // Si by_bag es true, multiplica la cantidad por bag_quantity
+            return $product['by_bag'] ? $product['quantity'] * $product['bag_quantity'] : $product['quantity'];
+        });
         // Create the sale
         $sale = Sale::create([
             'total' => $this->total,
             'paid_amount' => $this->total_paid,
             'paid' => $this->total_paid == $this->total ? true : false,
             'customer_id' => $this->customer['id'],
+            'total_quantity' => $total_quantity,
             'staff_id' => auth()->user()->staff->id,
         ]);
         if ($this->total_paid > 0) {

@@ -60,6 +60,7 @@ class OrdersManageTest extends TestCase
             'total' => 100,
             'address_id' => $this->address->id,
             'customer_id' => $this->customer->id,
+            'total_quantity' => 1,
             'paid' => 1,
             'paid_amount' => 100,
         ]);

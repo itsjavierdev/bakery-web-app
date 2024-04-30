@@ -49,6 +49,7 @@ class SalesManageTest extends TestCase
             'customer_id' => $this->customer->id,
             'staff_id' => $this->staff->id,
             'paid' => 1,
+            'total_quantity' => 1,
             'paid_amount' => 100,
         ]);
 

@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->decimal('total', 7, 1);
             $table->decimal('paid_amount', 7, 1)->nullable();
             $table->boolean('paid')->default(false);
+            $table->integer('total_quantity');
             $table->string('notes')->nullable();
 
             $table->foreignId('customer_id')

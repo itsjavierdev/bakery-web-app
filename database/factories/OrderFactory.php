@@ -30,6 +30,7 @@ class OrderFactory extends Factory
             'paid_amount' => $paid_amount,
             'paid' => $paid_amount == $total,
             'address_id' => $address,
+            'total_quantity' => $this->faker->numberBetween(1, 100),
             'delivery_date' => $this->faker->dateTimeBetween($startDate, $endDate),
             'delivery_time_id' => \App\Models\DeliveryTime::factory(),
             'customer_id' => $address->customer_id, // Usa el customer_id del address generado

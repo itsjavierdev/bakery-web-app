@@ -1,11 +1,11 @@
 @font-face {
     font-family: "BakeryIcons";
-    src: url("../../public/icons/BakeryIcons.eot?ijdfgm");
-    src: url("../../public/icons/BakeryIcons.eot?ijdfgm#iefix")
+    src: url("../../public/icons/BakeryIcons.eot?8golh4");
+    src: url("../../public/icons/BakeryIcons.eot?8golh4#iefix")
             format("embedded-opentype"),
-        url("../../public/icons/BakeryIcons.ttf?ijdfgm") format("truetype"),
-        url("../../public/icons/BakeryIcons.woff?ijdfgm") format("woff"),
-        url("../../public/icons/BakeryIcons.svg?ijdfgm#BakeryIcons")
+        url("../../public/icons/BakeryIcons.ttf?8golh4") format("truetype"),
+        url("../../public/icons/BakeryIcons.woff?8golh4") format("woff"),
+        url("../../public/icons/BakeryIcons.svg?8golh4#BakeryIcons")
             format("svg");
     font-weight: normal;
     font-style: normal;
@@ -28,6 +28,18 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-money-mark-yesterday:before {
+    content: "\e93a";
+}
+.icon-cart-yesterday:before {
+    content: "\e93b";
+}
+.icon-chart-yesterday:before {
+    content: "\e93c";
+}
+.icon-chart:before {
+    content: "\e93d";
+}
 .icon-sidebar:before {
     content: "\e939";
 }
