@@ -16,8 +16,11 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+
+        $name = $this->faker->word . rand(20, 8000);
+
         return [
-            'name' => $this->faker->unique->word,
+            'name' => $name,
         ];
     }
 }

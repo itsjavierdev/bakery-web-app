@@ -18,12 +18,13 @@ class SaleFactory extends Factory
     {
         $total = $this->faker->randomFloat(2, 0, 99999);
         $paid_amount = $this->faker->randomFloat(2, 0, $total);
+        $total_quantity = $this->faker->numberBetween(1, 100);
 
         return [
             'total' => $total,
             'paid_amount' => $paid_amount,
             'paid' => $paid_amount == $total,
-            'total_quantity' => $this->faker->numberBetween(1, 100),
+            'total_quantity' => $total_quantity,
             'customer_id' => \App\Models\Customer::factory(),
             'staff_id' => \App\Models\Staff::factory(),
         ];

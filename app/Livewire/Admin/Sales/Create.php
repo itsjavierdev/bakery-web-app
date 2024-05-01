@@ -94,6 +94,8 @@ class Create extends Component
                 'quantity' => $product['quantity'],
                 'subtotal' => $product['subtotal'],
                 'by_bag' => $product['by_bag'],
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 

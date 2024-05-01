@@ -20,6 +20,11 @@
                 'bg-blue-600 text-white border-transparent hover:bg-blue-500 active:bg-blue-700 focus:ring-blue-500';
             break;
 
+        case 'green':
+            $color_classes =
+                'bg-green-700 text-white border-transparent hover:bg-green-600 active:bg-green-800 focus:ring-green-500';
+            break;
+
         default:
             $color_classes =
                 'bg-gray-800 text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:ring-indigo-500 ';

@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 "resources/css/app.css",
                 "resources/css/icons.css",
+                "resources/css/report.css",
                 "resources/js/app.js",
                 "resources/js/sidebar.js",
                 "resources/js/selectAllPermissions.js",

@@ -3,10 +3,10 @@
 @php
     $parts = explode(' ', $value);
     $total = $parts[0];
-    if (count($parts) > 1) {
+    if ($parts[1] != '') {
         $paid = $parts[1];
     } else {
-        $paid = 0;
+        $paid = '0';
     }
     if ($paid >= $total) {
         $status = 'paid';

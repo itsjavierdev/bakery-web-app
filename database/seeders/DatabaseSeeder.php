@@ -44,6 +44,6 @@ class DatabaseSeeder extends Seeder
 
         OrderDetail::factory(10)->create();
 
-        SaleDetail::factory(10)->create();
+        SaleDetail::factory(1)->create();
     }
 }

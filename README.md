@@ -120,7 +120,22 @@ Customer and admin parts are separates in different folders
          │  └─ Update.php
          │  └─ Detail.php
          │  └─ ...
+         ├─ Dashboard.  //some folders like dashboard have another folders for separate more (in this case separate teh different charts for different proposals)
+         │  └─ Sales.php
+         │  └─ Products.php
+         │  └─ ...
          └─ NavigationMenu.  //all the sidebar nav-links
+```
+
+#### Reports
+
+In this folder are the excel exports for reports
+
+```php
+└─ Exports
+   └─ Sales //reports by module
+      ├─ AllSalesExport 
+      └─ ...
 ```
 
 #### Views
@@ -129,6 +144,7 @@ Customer and admin parts are separates in different folders
 └─ resources
    └─ views
       ├─ components  //all components blade (jestream default and custom)
+      ├─ exports  //in this folder are the pdf exports for reports and proofs of payments
       ├─ layouts  //layout for all app
       ├─ livewire  //dinamic livewire components /(used in pages, or with a layout)
       └─ pages  //all static views
@@ -164,6 +180,7 @@ The components were separate in atoms, molecules, organisms, templates, and layo
   ├─ admin-header.blade.  //layout for almost everything function in admin, with a title or header (use app.blade.php)
   ├─ admin.blade.php  //layout for almost everything function in admin
   └─ guest.blade.php  //layout for the authentication flow pages
+  └─ report.blade.php  //layout for pdf export reports
 ```
 
 #### Pages and dinamics livewire components
@@ -185,6 +202,10 @@ all admin feature are in a admin folder
 |     │  └─ create.php
 |     │  └─ update.php
 |     │  └─ detail.php
+|     │  └─ ...
+|     ├─ Dashboard.  //some folders like dashboard have another folders for separate more (in this case separate teh different charts for different proposals)
+|     │  └─ Sales.php
+|     │  └─ Products.php
 |     │  └─ ...
 |     └─ navigation-menu.blade.php
 ├─ pages
@@ -214,7 +235,8 @@ All basics components with the theme application
         │  ├─ button.blade.php  //button simple with colors gray, blue, yellow, orange, red.
         │  ├─ button-rounded.blade.php  //button for icons 
         │  ├─ secondary-button.blade.php  //button simple white with outline
-        │  ├─ dropdown-link.blade.php  //a single item for dropdown
+        │  ├─ dropdown-link.blade.php  //a single item for dropdown with href
+        │  ├─ dropdown-link.blade.php  //a single item for dropdown with button
         │  ├─ logo.blade.php  //app logo in a tag
         │  ├─ date-format.blade.php  //formate a text (date) to isoFormat('DD MMM YYYY')
         │  ├─ modal.blade.php  //modal with alpine
@@ -231,6 +253,7 @@ All basics components with the theme application
         │  └─ orderby.blade.php  //order by a column for the data table mobile
         │  └─ search.blade.php  //search input with the by column filter
         │  └─ show-entries.blade.php  //how much entrie show in a page input component
+        │  └─ th-filter.blade.php  //th with filter for datatable
         ├─ organisms
         │  └─ datatable-propierties.blade.  //orderby search and show-entrie for the datatable
         │  └─ item-actions.blade.php  //all 4 action for the row data crud
@@ -245,6 +268,7 @@ All basics components with the theme application
         │  ├─ form-section.blade.php  //form with a title description and actions for button
         │  ├─ form-template.blade.php  //layout to create / update form, with content and footer actions
         │  ├─ permissions-card.blade.php  //layout to show the roles by group
+        │  ├─ summary-card.blade.php  //layout for card for summary in dashboard
         │  └─ section-title.blade.php  //for a section, set the title and description appart of the content (like profile sections)
 ```
 

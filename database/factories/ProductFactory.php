@@ -16,9 +16,12 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->word . rand(20, 8000);
+        $slug = $this->faker->word . rand(20, 8000);
+
         return [
-            'name' => $this->faker->unique->word,
-            'slug' => $this->faker->unique->word,
+            'name' => $name,
+            'slug' => $slug,
             'price' => $this->faker->randomFloat(2, 0, 1000),
             'description' => $this->faker->text,
             'bag_quantity' => $this->faker->randomNumber(2),
