@@ -22,7 +22,7 @@ class ProductFactory extends Factory
         return [
             'name' => $name,
             'slug' => $slug,
-            'price' => $this->faker->randomFloat(2, 0, 1000),
+            'price' => $this->faker->randomFloat(2, 0, 100),
             'description' => $this->faker->text,
             'bag_quantity' => $this->faker->randomNumber(2),
             'discontinued' => $this->faker->boolean,

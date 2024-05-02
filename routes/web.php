@@ -9,6 +9,7 @@ use App\Livewire\Admin\DeliveryTimes;
 use App\Livewire\Admin\Customers;
 use App\Livewire\Admin\Orders;
 use App\Livewire\Admin\Sales;
+use App\Livewire\Admin\Payments;
 
 include __DIR__ . '/livewire.php';
 
@@ -83,4 +84,12 @@ Route::middleware([
     Route::get('admin/ventas/create', Sales\Create::class)->name('ventas.create');
     Route::get('admin/ventas/{sale}/edit', Sales\Update::class)->name('ventas.edit');
     Route::get('admin/ventas/{sale}', Sales\Detail::class)->name('ventas.show');
+
+    //Sales routes
+    Route::get('admin/pagos', function () {
+        return view('pages.admin.payments.index');
+    })->name('pagos.index');
+    Route::get('admin/pagos/create', Payments\Create::class)->name('pagos.create');
+    Route::get('admin/pagos/{payment}/edit', Payments\Update::class)->name('pagos.edit');
+    Route::get('admin/pagos/{payment}', Payments\Detail::class)->name('pagos.show');
 });
