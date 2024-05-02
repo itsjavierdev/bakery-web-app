@@ -9,7 +9,9 @@ use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Livewire\Livewire;
 use Tests\TestCase;
+use App\Livewire\Admin\Payments;
 
 class PaymentManageTest extends TestCase
 {
@@ -79,5 +81,22 @@ class PaymentManageTest extends TestCase
 
         // Check if the sale without debt is not displayed
         $response->assertDontSee(' ' . $this->sale->id . ' ');
+    }
+
+    public function test_a_payment_can_be_added(): void
+    {
+        $this->actingAs($this->user);
+        // Verify that the sale has debt
+        $this->assertFalse($this->sale_with_debt->paid == 1);
+
+        Livewire::test(Payments\Add::class, ['sale' => $this->sale_with_debt->id])
+            ->set('paid_remaining', true)
+            ->call('add')
+            ->assertRedirect('admin/pagos')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Pago agregado correctamente.');
+
+        // Verify that the sale was paid successfully
+        $this->assertTrue(Sale::find($this->sale_with_debt->id)->paid == 1);
     }
 }

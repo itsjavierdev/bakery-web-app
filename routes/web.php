@@ -89,7 +89,7 @@ Route::middleware([
     Route::get('admin/pagos', function () {
         return view('pages.admin.payments.index');
     })->name('pagos.index');
-    Route::get('admin/pagos/create', Payments\Create::class)->name('pagos.create');
+    Route::get('admin/pagos/{sale}/add', Payments\Add::class)->name('pagos.add');
     Route::get('admin/pagos/{payment}/edit', Payments\Update::class)->name('pagos.edit');
     Route::get('admin/pagos/{payment}', Payments\Detail::class)->name('pagos.show');
 });

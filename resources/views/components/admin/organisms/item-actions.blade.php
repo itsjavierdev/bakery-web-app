@@ -2,10 +2,18 @@
 
 <td>
     <div class="flex flex-row md:gap-2 w-full md:w-auto md:p-2">
+
         @if (in_array('detail', $actions))
             <x-button-action>
                 <a tabindex="-1" href="{{ route($routesPrefix . '.show', [$item_id]) }}">
                     <i class="icon-bars text-2xl text-sky-700"></i>
+                </a>
+            </x-button-action>
+        @endif
+        @if (in_array('add-payment', $actions))
+            <x-button-action>
+                <a tabindex="-1" href="{{ route('pagos.add', [$item_id]) }}">
+                    <i class="icon-money-mark text-2xl text-green-700"></i>
                 </a>
             </x-button-action>
         @endif
