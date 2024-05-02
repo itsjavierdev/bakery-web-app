@@ -58,7 +58,7 @@ class Update extends Component
     }
     public function render()
     {
-        return view('livewire.admin.customers.update')->layout('layouts.admin-header', ['title' => 'Actualizar cliente', 'alignTitle' => 'center']);
+        return view('livewire.admin.customers.update')->layout('layouts.admin-header', ['title' => 'Actualizar cliente', 'titleAlign' => 'center']);
     }
     public function update()
     {

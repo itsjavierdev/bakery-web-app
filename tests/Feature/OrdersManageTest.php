@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\OrderDetail;
+use App\Models\Payment;
+use App\Models\Sale;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Order;
@@ -21,11 +23,13 @@ class OrdersManageTest extends TestCase
 
     protected $user;
     protected $order;
+    protected $order_without_payment;
     protected $address;
     protected $customer;
     protected $product;
     protected $delivery_time;
     protected $order_detail;
+    protected $order_detail_without_payment;
 
     protected function setUp(): void
     {
@@ -33,7 +37,9 @@ class OrdersManageTest extends TestCase
 
         $this->user = User::factory()->create();
 
-        $this->product = Product::factory()->create();
+        $this->product = Product::factory()->create([
+            'price' => 100
+        ]);
 
         $this->delivery_time = DeliveryTime::create([
             'time' => '10:00',
@@ -57,7 +63,7 @@ class OrdersManageTest extends TestCase
         $this->order = Order::create([
             'delivery_date' => '2021-01-01',
             'delivery_time_id' => $this->delivery_time->id,
-            'total' => 100,
+            'total' => 200,
             'address_id' => $this->address->id,
             'customer_id' => $this->customer->id,
             'total_quantity' => 1,
@@ -65,8 +71,28 @@ class OrdersManageTest extends TestCase
             'paid_amount' => 100,
         ]);
 
+        $this->order_without_payment = Order::create([
+            'delivery_date' => '2021-01-01',
+            'delivery_time_id' => $this->delivery_time->id,
+            'total' => 100,
+            'address_id' => $this->address->id,
+            'customer_id' => $this->customer->id,
+            'total_quantity' => 1,
+            'paid' => 0,
+            'paid_amount' => null,
+        ]);
+
         $this->order_detail = OrderDetail::create([
             'order_id' => $this->order->id,
+            'product_id' => $this->product->id,
+            'quantity' => 1,
+            'by_bag' => 0,
+            'product_price' => 100,
+            'subtotal' => 100,
+        ]);
+
+        $this->order_detail_without_payment = OrderDetail::create([
+            'order_id' => $this->order_without_payment->id,
             'product_id' => $this->product->id,
             'quantity' => 1,
             'by_bag' => 0,
@@ -143,22 +169,44 @@ class OrdersManageTest extends TestCase
         $response->assertSee($this->order_detail->subtotal);
     }
 
+    public function test_a_order_can_be_delivered(): void
+    {
+
+        $this->actingAs($this->user);
+        // Verify that the order is not delivered
+        $this->assertFalse(Order::where('id', $this->order->id)->where('delivered', true)->exists());
+
+        Livewire::test(Orders\Deliver::class)
+            ->call('delivery', $this->order->id)
+            ->set('new_paid', 50)
+            ->call('deliver')
+            ->assertDispatched('render')
+            ->assertDispatched('banner-message', style: 'success', message: 'Pedido entregado correctamente');
+
+        // Verify that the order was delivered in the database
+        $this->assertTrue(Order::where('id', $this->order->id)->where('delivered', true)->exists());
+        $this->assertTrue(Sale::where('total', $this->order->total)->exists());
+        $this->assertTrue(Payment::where('amount', 50)->exists());
+        $this->assertTrue(Payment::where('amount', 100)->exists());
+
+    }
+
     public function test_a_order_can_be_deleted(): void
     {
         // Verify that the order exists in the database
-        $this->assertTrue(Order::where('id', $this->order->id)->exists());
-        $this->assertTrue(OrderDetail::where('order_id', $this->order->id)->exists());
+        $this->assertTrue(Order::where('id', $this->order_without_payment->id)->exists());
+        $this->assertTrue(OrderDetail::where('order_id', $this->order_without_payment->id)->exists());
 
         Livewire::test(Orders\Delete::class)
-            ->call('confirmDelete', $this->order->id)
-            ->assertSet('delete_id', $this->order->id)
+            ->call('confirmDelete', $this->order_without_payment->id)
+            ->assertSet('delete_id', $this->order_without_payment->id)
             ->assertSet('open', true)
-            ->call('delete', $this->order->id)
+            ->call('delete', $this->order_without_payment->id)
             ->assertDispatched('render')
             ->assertDispatched('banner-message', style: 'success', message: 'Pedido eliminado correctamente');
 
         // Verify that the order was deleted from the database
-        $this->assertFalse(Order::where('id', $this->order->id)->exists());
-        $this->assertFalse(OrderDetail::where('order_id', $this->order->id)->exists());
+        $this->assertFalse(Order::where('id', $this->order_without_payment->id)->exists());
+        $this->assertFalse(OrderDetail::where('order_id', $this->order_without_payment->id)->exists());
     }
 }

@@ -124,7 +124,7 @@ class Update extends Component
         $this->order->update([
             'delivery_date' => $this->delivery_date,
             'total' => $this->total,
-            'paid_amount' => $this->total_paid,
+            'paid_amount' => $this->total_paid == null ? 0 : $this->total_paid,
             'paid' => $this->total_paid == $this->total ? true : false,
             'total_quantity' => $total_quantity,
             'notes' => $this->notes,
@@ -154,7 +154,7 @@ class Update extends Component
     public function updatedPaid($value)
     {
         if ($value) {
-            $this->total_paid = round($this->total, 1);
+            $this->total_paid = round($this->total, 2);
         } else {
             $this->total_paid = null;
         }

@@ -15,6 +15,7 @@ class Read extends Datatable
         return Order::query()->leftJoin('delivery_times', 'orders.delivery_time_id', '=', 'delivery_times.id')
             ->leftJoin('addresses', 'orders.address_id', '=', 'addresses.id')
             ->leftJoin('customers', 'orders.customer_id', '=', 'customers.id')
+            ->where('orders.delivered', false)
             ->select(
                 'orders.id AS id',
                 'addresses.address AS address',

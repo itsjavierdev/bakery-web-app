@@ -15,11 +15,10 @@
             @endforeach
         </x-inputs.select>
         <x-inputs.error for="category_id" />
-
     </x-inputs.group>
     <!--Price-->
     <x-inputs.group>
-        <x-inputs.label value="Precio" />
+        <x-inputs.label value="Precio por bolsa" />
         <x-inputs.text wire:model="price" />
         <x-inputs.error for="price" />
     </x-inputs.group>

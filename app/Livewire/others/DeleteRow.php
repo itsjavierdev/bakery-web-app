@@ -32,7 +32,13 @@ abstract class DeleteRow extends Component
     //confirmation messages defaults
     protected function confirmationMessages(): array
     {
-        return ['title' => 'Eliminar registro', 'description' => '¿Estás seguro de eliminar este registro?', 'success' => 'Registro eliminado correctamente', 'warning' => 'No puedes eliminar este registro porque tiene datos relacionados. Elimina los datos relacionados primero y luego intenta de nuevo.'];
+        return [
+            'title' => 'Eliminar registro',
+            'description' => '¿Estás seguro de eliminar este registro?',
+            'success' => 'Registro eliminado correctamente',
+            'warning' => 'No puedes eliminar este registro porque tiene datos relacionados. Elimina los datos relacionados primero y luego intenta de nuevo.',
+            'other' => 'No puedes eliminar este registro.'
+        ];
     }
 
     protected function relatedModels(): array
@@ -54,6 +60,13 @@ abstract class DeleteRow extends Component
     public function delete($id)
     {
         $row = $this->model()::find($id);
+
+        if ($this->otherValidations($id) === false) {
+            $this->warningBanner($this->confirmationMessages()['other']);
+            $this->reset();
+            return;
+        }
+
         // Verificar relaciones
         foreach ($this->relatedModels() as $relation) {
             if ($row->$relation()->exists()) {
@@ -62,7 +75,6 @@ abstract class DeleteRow extends Component
                 return;
             }
         }
-
 
         $row->delete();
         //if redirect after delete
@@ -75,6 +87,11 @@ abstract class DeleteRow extends Component
 
             $this->banner($this->confirmationMessages()['success']);
         }
-
     }
+
+    protected function otherValidations($id)
+    {
+        return true;
+    }
+
 }

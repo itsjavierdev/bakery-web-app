@@ -33,7 +33,11 @@ class SalesManageTest extends TestCase
 
         $this->user = User::factory()->create();
         //Create example data
-        $this->product = Product::factory()->create();
+        $this->product = Product::factory()->create(
+            [
+                'price' => 100,
+            ]
+        );
 
         $this->staff = Staff::factory()->create();
 
@@ -63,7 +67,7 @@ class SalesManageTest extends TestCase
         ]);
     }
 
-    public function test_a_order_can_be_created(): void
+    public function test_a_sale_can_be_created(): void
     {
         $this->actingAs($this->user);
 

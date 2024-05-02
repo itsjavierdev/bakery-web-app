@@ -25,7 +25,7 @@
     <!--Bag quantity-->
     <x-inputs.group>
         <x-inputs.label value="Cantidad por bolsa" />
-        <x-inputs.text wire:model="bag_quantity" />
+        <x-inputs.text type="number" wire:model="bag_quantity" />
         <x-inputs.error for="bag_quantity" />
     </x-inputs.group>
     <!--Description-->

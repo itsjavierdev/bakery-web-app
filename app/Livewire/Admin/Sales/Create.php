@@ -105,7 +105,7 @@ class Create extends Component
     public function updatedPaid($value)
     {
         if ($value) {
-            $this->total_paid = round($this->total, 1);
+            $this->total_paid = round($this->total, 2);
         } else {
             $this->total_paid = null;
         }

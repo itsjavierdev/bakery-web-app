@@ -85,11 +85,13 @@ class Update extends Component
     public function update()
     {
         $this->validate();
+
+        $price = $this->bag_quantity > 1 ? $this->price / $this->bag_quantity : $this->price;
         //update product
         $this->product->update([
             'name' => $this->name,
             'category_id' => $this->category_id,
-            'price' => $this->price,
+            'price' => $price,
             'bag_quantity' => $this->bag_quantity,
             'description' => $this->description,
         ]);

@@ -37,6 +37,24 @@ class Customer extends Model
         return $this->hasOne(CustomerAccount::class);
     }
 
+    //Mutators and Accessors
+    public function name(): Attribute
+    {
+        return Attribute::make(
+            set: function ($value) {
+                return ucwords(strtolower($value));
+            }
+        );
+    }
+    public function surname(): Attribute
+    {
+        return Attribute::make(
+            set: function ($value) {
+                return ucwords(strtolower($value));
+            }
+        );
+    }
+
     public function email(): Attribute
     {
         return Attribute::make(

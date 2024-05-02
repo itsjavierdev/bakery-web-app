@@ -16,12 +16,12 @@
                                 show = true;
                                 setTimeout(() => {
                                     show = false;
-                                }, 2000);"
+                                }, 5000);"
     x-init="setTimeout(() => {
         show = true;
         setTimeout(() => {
             show = false;
-        }, 2000);
+        }, 5000);
     }, 100);"
     class="fixed bottom-0 sm:bottom-5 rounded-none max-w-screen-sm inset-x-0 mx-auto z-50 p-2 sm:p-3 sm:rounded-lg"
     style="display: none;">

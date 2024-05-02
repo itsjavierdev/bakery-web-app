@@ -6,13 +6,17 @@
                 <p>{{ $sale->id }}</p>
             </x-detail-row>
 
-            <x-detail-row title="Cliente">
-                <p>{{ $sale->customer->name }} {{ $sale->customer->surname }}</p>
-            </x-detail-row>
+            @if ($sale->customer)
+                <x-detail-row title="Cliente">
+                    <p>{{ $sale->customer->name }} {{ $sale->customer->surname }}</p>
+                </x-detail-row>
+            @endif
+            @if ($sale->staff)
+                <x-detail-row title="Personal">
+                    <p>{{ $sale->staff->name }} {{ $sale->staff->surname }}</p>
+                </x-detail-row>
+            @endif
 
-            <x-detail-row title="Personal">
-                <p>{{ $sale->staff->name }} {{ $sale->staff->surname }}</p>
-            </x-detail-row>
 
             <x-detail-row isResponsive title="Productos" classContent="flex flex-wrap gap-4">
                 <x-table class="mt-2">

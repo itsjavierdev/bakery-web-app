@@ -1,5 +1,5 @@
 @props(['value'])
 
 <div>
-    {{ number_format($value, 1) }}
+    {{ number_format($value, 2) }}
 </div>

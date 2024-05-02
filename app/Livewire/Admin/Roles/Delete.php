@@ -7,6 +7,13 @@ use App\Livewire\Others\DeleteRow;
 
 class Delete extends DeleteRow
 {
+    public function relatedModels(): array
+    {
+        return [
+            'users'
+        ];
+    }
+
     public function model()
     {
         return Role::class;
@@ -20,8 +27,19 @@ class Delete extends DeleteRow
         return [
             'title' => 'Eliminar Rol',
             'description' => '¿Estás seguro de que quieres eliminar este rol?',
-            'success' => 'Rol eliminado correctamente'
+            'success' => 'Rol eliminado correctamente',
+            'warning' => 'No puedes eliminar un rol con usuarios asignados',
+            'other' => 'No puedes eliminar el rol Administrador'
         ];
+    }
+
+    public function otherValidations($id)
+    {
+        $role = Role::find($id);
+        if ($role->name == 'Administrador') {
+            return false;
+        }
+        return true;
     }
 }
 

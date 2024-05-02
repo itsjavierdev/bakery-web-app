@@ -10,4 +10,5 @@
         <livewire:admin.orders.read />
     </div>
     <livewire:admin.orders.delete />
+    <livewire:admin.orders.deliver />
 </x-admin-header>

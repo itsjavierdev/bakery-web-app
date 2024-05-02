@@ -12,10 +12,10 @@ return new class extends Migration {
     {
         Schema::create('sale_details', function (Blueprint $table) {
             $table->id();
-            $table->decimal('product_price', 4, 1);
+            $table->decimal('product_price', 5, 2);
             $table->integer('quantity');
             $table->boolean('by_bag');
-            $table->decimal('subtotal', 7, 1);
+            $table->decimal('subtotal', 8, 2);
 
             $table->foreignId('sale_id')
                 ->constrained()

@@ -56,7 +56,7 @@ class ProductManageTest extends TestCase
         Livewire::test(ProductsLivewire\Create::class)
             ->set('name', 'Rollito')
             ->set('category_id', $this->category->id)
-            ->set('price', 12.5)
+            ->set('price', 15)
             ->set('bag_quantity', '20')
             ->set('description', 'lorem ipsum')
             ->set('images', [UploadedFile::fake()->image('avatar.jpg')])
@@ -68,7 +68,7 @@ class ProductManageTest extends TestCase
         // Verify that the product was created in the database
         $this->assertTrue(Product::where('name', 'Rollito')->exists());
         $this->assertTrue(Product::where('category_id', $this->category->id)->exists());
-        $this->assertTrue(Product::where('price', 12.5)->exists());
+        $this->assertTrue(Product::where('price', 0.75)->exists());
         $this->assertTrue(Product::where('bag_quantity', '20')->exists());
         $this->assertTrue(Product::where('description', 'lorem ipsum')->exists());
         $product = Product::where('name', 'Rollito')->first();

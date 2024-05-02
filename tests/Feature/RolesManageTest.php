@@ -22,6 +22,7 @@ class RolesManageTest extends TestCase
     protected $permissionCreate;
     protected $permissionEdit;
     protected $role;
+    protected $role_without_users;
 
     protected function setUp(): void
     {
@@ -35,6 +36,7 @@ class RolesManageTest extends TestCase
 
         $this->role = Role::create(['name' => 'Administrador']);
         $this->role->givePermissionTo($this->permissionCreate);
+        $this->role_without_users = Role::create(['name' => 'Repartidor']);
     }
 
 
@@ -42,7 +44,7 @@ class RolesManageTest extends TestCase
     {
         // Create the role in live wire component
         Livewire::test(Roles\Create::class)
-            ->set('name', 'Repartidor')
+            ->set('name', 'Vendedor')
             ->set('selected_permissions', [$this->permissionCreate->id])
             ->call('save')
             ->assertRedirect('admin/roles')
@@ -53,7 +55,7 @@ class RolesManageTest extends TestCase
         $this->assertTrue(Role::where('name', 'Repartidor')->exists());
 
         // Verify that the role has the permission assigned
-        $role = Role::where('name', 'Repartidor')->first();
+        $role = Role::where('name', 'Vendedor')->first();
         $this->assertTrue($role->hasPermissionTo('roles.create'));
     }
 
@@ -90,15 +92,15 @@ class RolesManageTest extends TestCase
     {
         // Exceute the delete action in the live wire component
         Livewire::test(Roles\Delete::class)
-            ->call('confirmDelete', $this->role->id)
-            ->assertSet('delete_id', $this->role->id)
+            ->call('confirmDelete', $this->role_without_users->id)
+            ->assertSet('delete_id', $this->role_without_users->id)
             ->assertSet('open', true)
-            ->call('delete', $this->role->id)
+            ->call('delete', $this->role_without_users->id)
             ->assertDispatched('render')
             ->assertDispatched('banner-message', style: 'success', message: 'Rol eliminado correctamente');
 
         // Verify that the role was deleted from the database
-        $this->assertFalse(Role::where('id', $this->role->id)->exists());
+        $this->assertFalse(Role::where('id', $this->role_without_users->id)->exists());
     }
 
     public function test_can_view_role_details()

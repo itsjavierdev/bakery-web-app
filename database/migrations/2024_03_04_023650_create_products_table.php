@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name', 25)->unique();
             $table->string('description')->nullable();
-            $table->decimal('price', 4, 1);
+            $table->decimal('price', 5, 2);
             $table->integer('bag_quantity')->default(1);
             $table->boolean('discontinued')->default(false);
             $table->string('slug', 30)->unique();

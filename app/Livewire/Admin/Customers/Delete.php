@@ -20,7 +20,18 @@ class Delete extends DeleteRow
         return [
             'title' => 'Eliminar cliente',
             'description' => '¿Estás seguro de que quieres eliminar este cliente?',
-            'success' => 'Cliente eliminado correctamente'
+            'success' => 'Cliente eliminado correctamente',
+            'other' => 'No se puede eliminar este cliente porque tiene pedidos asociados'
         ];
+    }
+    protected function otherValidations($id)
+    {
+        $customer = Customer::find($id);
+
+        $pendingOrdersCount = $customer->orders()->where('delivered', false)->count();
+        if ($pendingOrdersCount > 0) {
+            return false; // El cliente tiene pedidos pendientes de entrega
+        }
+        return true;
     }
 }

@@ -33,7 +33,9 @@ class Update extends Component
     public function mount(Sale $sale)
     {
         $this->sale = Sale::find($sale->id);
-        $this->customer = ['id' => $this->sale->customer->id, 'name' => $this->sale->customer->name];
+        if ($this->sale->customer ?? false) {
+            $this->customer = ['id' => $this->sale->customer->id, 'name' => $this->sale->customer->name];
+        }
 
         // Get the products of the order
         $sale_details = SaleDetail::where('sale_id', $sale->id)->get();
@@ -79,8 +81,8 @@ class Update extends Component
     {
         $this->validate();
 
-        $salePaidAmount = round(floatval($this->sale->paid_amount), 1); // Redondear a 2 decimales
-        $totalWithTolerance = round($this->total + 1, 1);
+        $salePaidAmount = round(floatval($this->sale->paid_amount), 2); // Redondear a 2 decimales
+        $totalWithTolerance = round($this->total + 1, 2);
 
         if ($salePaidAmount > $totalWithTolerance) {
             $this->warningBanner("El total de la venta no puede ser menor al monto ya pagado.");

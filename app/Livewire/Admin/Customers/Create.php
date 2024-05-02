@@ -32,7 +32,7 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.admin.customers.create')->layout('layouts.admin-header', ['title' => 'Crear cliente', 'alignTitle' => 'center']);
+        return view('livewire.admin.customers.create')->layout('layouts.admin-header', ['title' => 'Crear cliente', 'titleAlign' => 'center']);
     }
 
     public function save()

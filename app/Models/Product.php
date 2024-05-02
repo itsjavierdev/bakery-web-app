@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Product extends Model
 {
@@ -46,5 +47,15 @@ class Product extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    //Mutators and Accessors
+    public function name(): Attribute
+    {
+        return Attribute::make(
+            set: function ($value) {
+                return ucwords(strtolower($value));
+            }
+        );
     }
 }

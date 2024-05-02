@@ -10,7 +10,7 @@
             </x-button-action>
         @endif
         @if (in_array('delivery', $actions))
-            <x-button-action>
+            <x-button-action wire:click="$dispatch('delivery', {id:{{ $item_id }}})">
                 <i class="icon-delivery text-2xl text-green-700"></i>
             </x-button-action>
         @endif

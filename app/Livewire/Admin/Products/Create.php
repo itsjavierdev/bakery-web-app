@@ -16,7 +16,7 @@ class Create extends Component
     public $name;
     public $category_id;
     public $price;
-    public $bag_quantity;
+    public $bag_quantity = 1;
     public $description;
     public $images = [];
     public $temporary_images = [];
@@ -31,8 +31,10 @@ class Create extends Component
     {
         $sorted_images = collect($this->temporary_images)->sortBy('position')->toArray();
 
-        return view('livewire.admin.products.create', ['sorted_images' => $sorted_images])->layout('layouts.admin-header', ['title' => 'Crear Producto', 'titleALign' => 'center']);
+        return view('livewire.admin.products.create', ['sorted_images' => $sorted_images])->layout('layouts.admin-header', ['title' => 'Crear Producto', 'titleAlign' => 'center']);
     }
+
+
     //validation rules
     public function rules()
     {
@@ -73,10 +75,12 @@ class Create extends Component
     {
         $this->validate();
 
+        $price = $this->bag_quantity > 1 ? $this->price / $this->bag_quantity : $this->price;
+
         $product = Product::create([
             'name' => $this->name,
             'category_id' => $this->category_id,
-            'price' => $this->price,
+            'price' => $price,
             'bag_quantity' => $this->bag_quantity,
             'description' => $this->description,
         ]);

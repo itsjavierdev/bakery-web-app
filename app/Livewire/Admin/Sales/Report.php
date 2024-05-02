@@ -181,7 +181,7 @@ class Report extends Component
         $this->open = true;
         $this->select = $value;
         switch ($value) {
-            case 'Sales':
+            case 'AllSales':
                 $this->modal_title = 'Ventas';
                 break;
             case 'ByProducts':
