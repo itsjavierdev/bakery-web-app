@@ -9,10 +9,9 @@ use App\Models\Staff;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
-use App\Livewire\Admin\Payments;
+use App\Livewire\Admin\Transactions\Payments;
 
 class PaymentManageTest extends TestCase
 {

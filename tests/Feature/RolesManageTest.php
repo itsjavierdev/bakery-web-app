@@ -8,7 +8,7 @@ use Tests\TestCase;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use App\Livewire\Admin\Roles;
+use App\Livewire\Admin\ManagementAdmin\Roles;
 use Carbon\Carbon;
 
 class RolesManageTest extends TestCase

@@ -7,7 +7,7 @@ use SebastianBergmann\Type\VoidType;
 use Tests\TestCase;
 use App\Models\DeliveryTime;
 use Livewire\Livewire;
-use App\Livewire\Admin\DeliveryTimes as DeliveryTimes;
+use App\Livewire\Admin\Parameters\DeliveryTimes as DeliveryTimes;
 use App\Models\User;
 use Carbon\Carbon;
 

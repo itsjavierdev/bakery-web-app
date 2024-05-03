@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use App\Livewire\Admin\Profile\UpdatePasswordForm;
+use App\Livewire\Admin\ManagementAdmin\Profile\UpdatePasswordForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 

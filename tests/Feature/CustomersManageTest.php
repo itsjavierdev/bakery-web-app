@@ -8,7 +8,7 @@ use App\Models\Customer;
 use App\Models\User;
 use App\Models\CustomerAccount;
 use Livewire\Livewire;
-use App\Livewire\Admin\Customers as CustomersLivewire;
+use App\Livewire\Admin\ManagementCustomers\Customers as CustomersLivewire;
 use Carbon\Carbon;
 
 class CustomersManageTest extends TestCase

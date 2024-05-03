@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Category;
-use App\Livewire\Admin\Products as ProductsLivewire;
+use App\Livewire\Admin\Parameters\Products as ProductsLivewire;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Carbon\Carbon;

@@ -12,7 +12,7 @@ use App\Models\Customer;
 use App\Models\Address;
 use App\Models\Product;
 use App\Models\DeliveryTime;
-use App\Livewire\Admin\Orders;
+use App\Livewire\Admin\Transactions\Orders;
 use Livewire\Livewire;
 use App\Models\User;
 

@@ -11,7 +11,7 @@ use App\Models\Sale;
 use App\Models\Customer;
 use App\Models\Product;
 use Livewire\Livewire;
-use App\Livewire\Admin\Sales;
+use App\Livewire\Admin\Transactions\Sales;
 use App\Models\User;
 
 class SalesManageTest extends TestCase

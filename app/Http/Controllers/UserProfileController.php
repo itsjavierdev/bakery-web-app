@@ -15,7 +15,7 @@ class UserProfileController extends Controller
      */
     public function show(Request $request)
     {
-        return view('pages.admin.profile.index', [
+        return view('pages.admin.management-admin.profile.index', [
             'request' => $request,
             'user' => $request->user(),
         ]);

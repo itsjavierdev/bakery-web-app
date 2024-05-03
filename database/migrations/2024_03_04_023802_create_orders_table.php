@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->foreignId('address_id')
                 ->nullable()
                 ->constrained()
-                ->onDelete('restrict');
+                ->onDelete('set null');
 
             $table->foreignId('delivery_time_id')
                 ->constrained()

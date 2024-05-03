@@ -5,35 +5,35 @@
     <x-nav-link href="{{ route('roles.index') }}" :active="Str::startsWith(request()->route()->getName(), 'roles.')">
         {{ __('Roles') }}
     </x-nav-link>
-    <x-nav-link href="{{ route('personal.index') }}" :active="Str::startsWith(request()->route()->getName(), 'personal.')">
+    <x-nav-link href="{{ route('staff.index') }}" :active="Str::startsWith(request()->route()->getName(), 'staff.')">
         {{ __('Personal') }}
     </x-nav-link>
 
-    <x-nav-link href="{{ route('categorias.index') }}" :active="Str::startsWith(request()->route()->getName(), 'categorias.')">
+    <x-nav-link href="{{ route('categories.index') }}" :active="Str::startsWith(request()->route()->getName(), 'categories.')">
         {{ __('Categorias') }}
     </x-nav-link>
 
-    <x-nav-link href="{{ route('productos.index') }}" :active="Str::startsWith(request()->route()->getName(), 'productos.')">
+    <x-nav-link href="{{ route('products.index') }}" :active="Str::startsWith(request()->route()->getName(), 'products.')">
         {{ __('Productos') }}
     </x-nav-link>
 
-    <x-nav-link href="{{ route('horarios.index') }}" :active="Str::startsWith(request()->route()->getName(), 'horarios.')">
+    <x-nav-link href="{{ route('deliverytimes.index') }}" :active="Str::startsWith(request()->route()->getName(), 'deliverytimes.')">
         {{ __('Horarios') }}
     </x-nav-link>
 
-    <x-nav-link href="{{ route('clientes.index') }}" :active="Str::startsWith(request()->route()->getName(), 'clientes.')">
+    <x-nav-link href="{{ route('customers.index') }}" :active="Str::startsWith(request()->route()->getName(), 'customers.')">
         {{ __('Clientes') }}
     </x-nav-link>
 
-    <x-nav-link href="{{ route('pedidos.index') }}" :active="Str::startsWith(request()->route()->getName(), 'pedidos.')">
+    <x-nav-link href="{{ route('orders.index') }}" :active="Str::startsWith(request()->route()->getName(), 'orders.')">
         {{ __('Pedidos') }}
     </x-nav-link>
 
-    <x-nav-link href="{{ route('ventas.index') }}" :active="Str::startsWith(request()->route()->getName(), 'ventas.')">
+    <x-nav-link href="{{ route('sales.index') }}" :active="Str::startsWith(request()->route()->getName(), 'sales.')">
         {{ __('Ventas') }}
     </x-nav-link>
 
-    <x-nav-link href="{{ route('pagos.index') }}" :active="Str::startsWith(request()->route()->getName(), 'pagos.')">
+    <x-nav-link href="{{ route('payments.index') }}" :active="Str::startsWith(request()->route()->getName(), 'payments.')">
         {{ __('Pagos') }}
     </x-nav-link>
 </nav>

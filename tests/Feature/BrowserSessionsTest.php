@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Livewire\Admin\Profile\LogoutOtherBrowserSessionsForm;
+use App\Livewire\Admin\ManagementAdmin\Profile\LogoutOtherBrowserSessionsForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 
