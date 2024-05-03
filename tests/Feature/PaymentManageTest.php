@@ -7,6 +7,7 @@ use App\Models\Payment;
 use App\Models\Sale;
 use App\Models\Staff;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -124,5 +125,23 @@ class PaymentManageTest extends TestCase
 
         // Verify that the sale was paid successfully
         $this->assertTrue(Sale::find($this->sale_with_debt->id)->paid == 1);
+    }
+
+    public function test_can_view_payments_details(): void
+    {
+        // Display the payment details
+        $response = $this->actingAs($this->user)->get('admin/pagos/' . $this->sale_with_debt->id);
+
+        // Verify that the payment details are displayed
+        $response->assertStatus(200);
+        $response->assertSee($this->sale_with_debt->id);
+        $response->assertSee($this->customer->name);
+        $response->assertSee($this->customer->surname);
+        $response->assertSee($this->sale_with_debt->total);
+        $response->assertSee($this->staff->name);
+        $response->assertSee($this->staff->surname);
+        $response->assertSee($this->payment_partial->amount);
+        $response->assertSee(Carbon::parse($this->payment_partial->created_at)->isoFormat('DD MMM YYYY'));
+        ;
     }
 }

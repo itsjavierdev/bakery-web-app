@@ -16,9 +16,12 @@ class PaymentFactory extends Factory
      */
     public function definition(): array
     {
-        $sale = \App\Models\Sale::factory()->create();
-        $staff = \App\Models\Staff::factory()->create();
         $customer = \App\Models\Customer::factory()->create();
+        $staff = \App\Models\Staff::factory()->create();
+        $sale = \App\Models\Sale::factory()->create([
+            'customer_id' => $customer->id,
+            'staff_id' => $staff->id,
+        ]);
 
         return [
             'sale_id' => $sale->id,

@@ -13,8 +13,6 @@ class Update extends Component
     public $total;
     public $remaining_amount;
 
-    public $open = false;
-
     public function render()
     {
         return view('livewire.admin.payments.update')->layout('layouts.admin-header', ['title' => 'Actualizar Pagos', 'titleAlign' => 'center']);
