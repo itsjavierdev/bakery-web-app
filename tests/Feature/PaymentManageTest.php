@@ -99,4 +99,30 @@ class PaymentManageTest extends TestCase
         // Verify that the sale was paid successfully
         $this->assertTrue(Sale::find($this->sale_with_debt->id)->paid == 1);
     }
+
+    public function test_a_payments_can_be_updated(): void
+    {
+        $this->actingAs($this->user);
+        // Verify that the sale has debt
+        $this->assertFalse($this->sale_with_debt->paid == 1);
+
+        Livewire::test(Payments\Update::class, ['sale' => $this->sale_with_debt])
+            ->set('payments', [
+                [
+                    'id' => $this->payment_partial->id,
+                    'staff_id' => $this->staff->id,
+                    'staff_name' => $this->staff->name,
+                    'staff_surname' => $this->staff->surname,
+                    'amount' => 200,
+                    'created_at' => $this->payment_partial->created_at,
+                ],
+            ])
+            ->call('update')
+            ->assertRedirect('admin/pagos')
+            ->assertSessionHas('flash.bannerStyle', 'success')
+            ->assertSessionHas('flash.banner', 'Pagos actualizado correctamente.');
+
+        // Verify that the sale was paid successfully
+        $this->assertTrue(Sale::find($this->sale_with_debt->id)->paid == 1);
+    }
 }

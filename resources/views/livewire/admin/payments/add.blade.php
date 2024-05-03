@@ -25,7 +25,7 @@
         <x-button wire:click="add">
             Agregar
         </x-button>
-        <a href="{{ route('horarios.index') }}">
+        <a href="{{ route('pagos.index') }}">
             <x-secondary-button>
                 Cancelar
             </x-secondary-button>
