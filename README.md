@@ -249,12 +249,14 @@ All basics components with the theme application
         │  ├─ date-format.blade.php  //formate a text (date) to isoFormat('DD MMM YYYY')
         │  ├─ modal.blade.php  //modal with alpine
         │  ├─ nav-link.blade.php  //single nav item for sidebar
+        │  ├─ nav-item.blade.php  //single nav item for select nav
         │  └─ section-border.blade.php  //border for separate sections responsive
         ├─ layouts
         │  ├─ sidebar.blade.php  //animated sidebar responsive
         │  └─ topbar.blade.php  //topbar for mobile (with a toggle button for sidebar in large screens)
         ├─ molecules
         │  ├─ dropdown.blade.php
+        │  ├─ nav-select.blade.php  //nav select with a group of nav
         │  ├─ detail-row.blade.php //a single row for show single data column in detail of a role for example
         │  ├─ th-filters.blade.php //a th with order filter
         │  └─ message-alert.blade.php  //success alert (warning and danger too)
