@@ -100,6 +100,8 @@ Components where separate in folders for each CRUD or HU
 
 Customer and admin parts are separates in different folders
 
+Each module in admin part have his own folder  (ManagementAdmin, ManagementCustomers, Paramenters, Transactions, Reports)
+
 ```php
 └─ app
    └─ Livewire
@@ -109,22 +111,23 @@ Customer and admin parts are separates in different folders
       │          └─ ...
       ├─ Others  //dont have and specifict section
       └─ Admin  
-         ├─ Profile
-         │  ├─ DeleteUserForm.php
-         │  ├─ LogoutOtherBrowserSessionsForm.php
-         │  └─ ...
-         ├─ Roles //Almost every section of the app, has a crud with that methods
-         │  ├─ Create.php
-         │  └─ Delete.php
-         │  └─ Read.php
-         │  └─ Update.php
-         │  └─ Detail.php
-         │  └─ ...
-         ├─ Dashboard.  //some folders like dashboard have another folders for separate more (in this case separate teh different charts for different proposals)
-         │  └─ Sales.php
-         │  └─ Products.php
-         │  └─ ...
-         └─ NavigationMenu.  //all the sidebar nav-links
+         └─ ManagementAdmin  
+             ├─ Profile
+             │  ├─ DeleteUserForm.php
+             │  ├─ LogoutOtherBrowserSessionsForm.php
+             │  └─ ...
+             ├─ Roles //Almost every section of the app, has a crud with that methods
+             │  ├─ Create.php
+             │  └─ Delete.php
+             │  └─ Read.php
+             │  └─ Update.php
+             │  └─ Detail.php
+             │  └─ ...
+             ├─ Dashboard.  //some folders like dashboard have another folders for separate more (in this case separate teh different charts for different proposals)
+             │  └─ Sales.php
+             │  └─ Products.php
+             │  └─ ...
+             └─ NavigationMenu.  //all the sidebar nav-links
 ```
 
 #### Reports
@@ -191,18 +194,22 @@ Except the "/" view (dashboard) that goes separately without any folder
 
 all admin feature are in a admin folder
 
+all modules are separate in different folders (management-admin, management-customers, paramenters, transactions, reports, and customers parts have her own folder outside of admin folder) 
+
 ```php
 ├─ livewire
 |  ├─ others  //dont have a specifict section
-|  └─ admin  //group of admin module
-|     ├─ profile  //(example) all section for the profile pages used in pages/profile/index.blade.php
-|     │  └─ logout-other-browser-sessions-form.blade.php
-|     │  └─ ...
-|     ├─ roles  //almost every section in the app has a CRUD, but the view just have create, update and detail, because delete and read use a abstract class
-|     │  └─ create.php
-|     │  └─ update.php
-|     │  └─ detail.php
-|     │  └─ ...
+|  └─ admin  //group of admin part
+|     ├─ management-admin  //group of admin module (roles, user, staff)
+|     |   ├─ profile  //(example) all section for the profile pages used in pages/profile/index.blade.php
+|     |   │  └─ logout-other-browser-sessions-form.blade.php
+|     |   │  └─ ...
+|     |   ├─ roles  //almost every section in the app has a CRUD, but the view just have create, update and detail, because delete and read use a abstract class
+|     |   │  └─ create.php
+|     |   │  └─ update.php
+|     |   │  └─ detail.php
+|     |   │  └─ ...
+|     │   └─ ...
 |     ├─ Dashboard.  //some folders like dashboard have another folders for separate more (in this case separate teh different charts for different proposals)
 |     │  └─ Sales.php
 |     │  └─ Products.php
@@ -210,12 +217,13 @@ all admin feature are in a admin folder
 |     └─ navigation-menu.blade.php
 ├─ pages
 |  ├─ admin  
-|  │  ├─ auth
-|  │  │  ├─ forgot-password.blade.php
-|  │  │  └─ ...
-|  │  ├─ profile
-|  │  │  └─ index.blade.php
-|  │  └─ dashboard.blade.php
+|  |  ├─ management-admin  
+|  |  │  ├─ auth
+|  |  │  │  ├─ forgot-password.blade.php
+|  |  │  │  └─ ...
+|  |  │  ├─ profile
+|  |  │  │  └─ index.blade.php
+|  |  │  └─ dashboard.blade.php
 ```
 
 #### All usable components
