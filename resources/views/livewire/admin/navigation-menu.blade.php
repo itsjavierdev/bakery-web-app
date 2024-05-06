@@ -3,6 +3,7 @@
         <i class="icon-chart text-xl"></i>
         {{ __('Dashboard') }}
     </x-nav-link>
+    <!--Admin Module-->
     @php
         $adminActive =
             Str::startsWith(request()->route()->getName(), 'roles.') ||
@@ -20,6 +21,7 @@
             </x-nav-item>
         </x-slot>
     </x-nav-select>
+    <!--Parameters Module-->
     @php
         $parametersActive =
             Str::startsWith(request()->route()->getName(), 'categories.') ||
@@ -43,6 +45,7 @@
             </x-nav-item>
         </x-slot>
     </x-nav-select>
+    <!--Transactions Module-->
     @php
         $salesActive =
             Str::startsWith(request()->route()->getName(), 'orders.') ||
@@ -66,6 +69,7 @@
             </x-nav-item>
         </x-slot>
     </x-nav-select>
+    <!--Customer Module-->
     @php
         $customersActive = Str::startsWith(request()->route()->getName(), 'customers.');
     @endphp
