@@ -12,13 +12,14 @@ return new class extends Migration {
     {
         Schema::create('company_contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('facebook', 50)->nullable();
-            $table->string('instagram', 50)->nullable();
-            $table->string('tiktok', 50)->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('tiktok')->nullable();
             $table->string('phone', 13)->nullable();
-            $table->string('email', 50)->nullable();
+            $table->string('email')->nullable();
 
             $table->foreignId('address_id')
+                ->nullable()
                 ->constrained()
                 ->onDelete('restrict');
 

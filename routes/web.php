@@ -6,6 +6,7 @@ use App\Livewire\Admin\ManagementAdmin\Staff;
 use App\Livewire\Admin\Parameters\Categories;
 use App\Livewire\Admin\Parameters\Products;
 use App\Livewire\Admin\Parameters\DeliveryTimes;
+use App\Livewire\Admin\Parameters\CompanyContact;
 use App\Livewire\Admin\ManagementCustomers\Customers;
 use App\Livewire\Admin\Transactions\Orders;
 use App\Livewire\Admin\Transactions\Sales;
@@ -85,11 +86,17 @@ Route::middleware([
     Route::get('admin/ventas/{sale}/edit', Sales\Update::class)->name('sales.edit');
     Route::get('admin/ventas/{sale}', Sales\Detail::class)->name('sales.show');
 
-    //Sales routes
+    //Payments routes
     Route::get('admin/pagos', function () {
         return view('pages.admin.transactions.payments.index');
     })->name('payments.index');
     Route::get('admin/pagos/{sale}/add', Payments\Add::class)->name('payments.add');
     Route::get('admin/pagos/{sale}/edit', Payments\Update::class)->name('payments.edit');
     Route::get('admin/pagos/{sale}', Payments\Detail::class)->name('payments.show');
+
+    //Sales routes
+    Route::get('admin/informacion', function () {
+        return view('pages.admin.parameters.company-contact.index');
+    })->name('company-contact.index');
+    Route::get('admin/información/edit', CompanyContact\Update::class)->name('company-contact.edit');
 });

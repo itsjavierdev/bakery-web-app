@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Address;
+use App\Models\CompanyContact;
 use App\Models\OrderDetail;
 use App\Models\Payment;
 use App\Models\Product;
@@ -48,5 +49,7 @@ class DatabaseSeeder extends Seeder
         SaleDetail::factory(1)->create();
 
         Payment::factory(10)->create();
+
+        CompanyContact::create([]);
     }
 }

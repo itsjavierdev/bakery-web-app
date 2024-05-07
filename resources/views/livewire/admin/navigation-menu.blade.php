@@ -43,6 +43,10 @@
             <x-nav-item href="{{ route('deliverytimes.index') }}" :active="Str::startsWith(request()->route()->getName(), 'deliverytimes.')">
                 {{ __('Horarios') }}
             </x-nav-item>
+
+            <x-nav-item href="{{ route('company-contact.index') }}" :active="Str::startsWith(request()->route()->getName(), 'company-contact.')">
+                {{ __('Información de la empresa') }}
+            </x-nav-item>
         </x-slot>
     </x-nav-select>
     <!--Transactions Module-->
