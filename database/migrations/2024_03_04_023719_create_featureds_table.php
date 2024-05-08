@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('title', 40)->nullable();
             $table->string('image');
+            $table->integer('position');
+            $table->boolean('is_active')->default(true);
             $table->boolean('has_filter')->default(true);
 
             $table->foreignId('product_id')

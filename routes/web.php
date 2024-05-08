@@ -7,6 +7,7 @@ use App\Livewire\Admin\Parameters\Categories;
 use App\Livewire\Admin\Parameters\Products;
 use App\Livewire\Admin\Parameters\DeliveryTimes;
 use App\Livewire\Admin\Parameters\CompanyContact;
+use App\Livewire\Admin\Parameters\Featured;
 use App\Livewire\Admin\ManagementCustomers\Customers;
 use App\Livewire\Admin\Transactions\Orders;
 use App\Livewire\Admin\Transactions\Sales;
@@ -94,9 +95,18 @@ Route::middleware([
     Route::get('admin/pagos/{sale}/edit', Payments\Update::class)->name('payments.edit');
     Route::get('admin/pagos/{sale}', Payments\Detail::class)->name('payments.show');
 
-    //Sales routes
+    //Company contact routes
     Route::get('admin/informacion', function () {
         return view('pages.admin.parameters.company-contact.index');
     })->name('company-contact.index');
     Route::get('admin/información/edit', CompanyContact\Update::class)->name('company-contact.edit');
+
+    //Featured routes
+    Route::get('admin/destacados', function () {
+        return view('pages.admin.parameters.featured.index');
+    })->name('featured.index');
+    Route::get('admin/destacados/create', Featured\Create::class)->name('featured.create');
+    Route::get('admin/destacados/{sale}/edit', Featured\Update::class)->name('featured.edit');
+    Route::get('admin/destacados/{sale}', Featured\Detail::class)->name('featured.show');
+
 });

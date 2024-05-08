@@ -6,9 +6,9 @@
     $inactiveClasses = 'text-gray-600 hover:bg-yellow-100 focus:bg-yellow-100 focus:bg-opacity-50 hover:bg-opacity-50';
 @endphp
 
-<div class="w-full" x-data="{ open: @json($active) }" x-cloak>
+<div class="inline-flex flex-col" x-data="{ open: @json($active) }" x-cloak>
     <button @click="open = ! open"
-        {{ $attributes->merge(['class' => 'w-full flex md:justify-between justify-between inline-flex items-center md:text-base text-xl px-2 py-4 md:py-2 leading-5 transition duration-150 ease-in-out gap-2 focus:outline-none cursor-pointer', ':class' => 'open ? \'' . $activeClasses . '\' : \'' . $inactiveClasses . '\'']) }}>
+        {{ $attributes->merge(['class' => 'flex md:justify-between justify-between inline-flex items-center md:text-base text-xl px-2 py-4 md:py-2 leading-5 transition duration-150 ease-in-out gap-2 focus:outline-none cursor-pointer mx-1', ':class' => 'open ? \'' . $activeClasses . '\' : \'' . $inactiveClasses . '\'']) }}>
         <div class="flex items-center gap-1">
 
             {{ $slot }}

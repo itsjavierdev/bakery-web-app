@@ -1,7 +1,7 @@
 <nav class="w-full flex flex-col gap-2 py-2">
     <x-nav-link href="{{ route('/') }}" :active="request()->routeIs('/')">
         <i class="icon-chart text-xl"></i>
-        {{ __('Dashboard') }}
+        Dashboard
     </x-nav-link>
     <!--Admin Module-->
     @php
@@ -14,10 +14,10 @@
         Administración
         <x-slot name="content">
             <x-nav-item href="{{ route('roles.index') }}" :active="Str::startsWith(request()->route()->getName(), 'roles.')">
-                {{ __('Roles') }}
+                Roles
             </x-nav-item>
             <x-nav-item href="{{ route('staff.index') }}" :active="Str::startsWith(request()->route()->getName(), 'staff.')">
-                {{ __('Personal') }}
+                Personal
             </x-nav-item>
         </x-slot>
     </x-nav-select>
@@ -26,26 +26,32 @@
         $parametersActive =
             Str::startsWith(request()->route()->getName(), 'categories.') ||
             Str::startsWith(request()->route()->getName(), 'products.') ||
-            Str::startsWith(request()->route()->getName(), 'deliverytimes.');
+            Str::startsWith(request()->route()->getName(), 'deliverytimes.') ||
+            Str::startsWith(request()->route()->getName(), 'company-contact.') ||
+            Str::startsWith(request()->route()->getName(), 'featured.');
     @endphp
     <x-nav-select :active="$parametersActive">
         <i class="icon-clipboard text-xl"></i>
         Parametros
         <x-slot name="content">
             <x-nav-item href="{{ route('categories.index') }}" :active="Str::startsWith(request()->route()->getName(), 'categories.')">
-                {{ __('Categorias') }}
+                Categorias
             </x-nav-item>
 
             <x-nav-item href="{{ route('products.index') }}" :active="Str::startsWith(request()->route()->getName(), 'products.')">
-                {{ __('Productos') }}
+                Productos
             </x-nav-item>
 
             <x-nav-item href="{{ route('deliverytimes.index') }}" :active="Str::startsWith(request()->route()->getName(), 'deliverytimes.')">
-                {{ __('Horarios') }}
+                Horarios
             </x-nav-item>
 
             <x-nav-item href="{{ route('company-contact.index') }}" :active="Str::startsWith(request()->route()->getName(), 'company-contact.')">
-                {{ __('Información de la empresa') }}
+                Información de la empresa
+            </x-nav-item>
+
+            <x-nav-item href="{{ route('featured.index') }}" :active="Str::startsWith(request()->route()->getName(), 'featured.')">
+                Imagenes destacadas
             </x-nav-item>
         </x-slot>
     </x-nav-select>
@@ -61,15 +67,15 @@
         Ventas
         <x-slot name="content">
             <x-nav-item href="{{ route('orders.index') }}" :active="Str::startsWith(request()->route()->getName(), 'orders.')">
-                {{ __('Pedidos') }}
+                Pedidos
             </x-nav-item>
 
             <x-nav-item href="{{ route('sales.index') }}" :active="Str::startsWith(request()->route()->getName(), 'sales.')">
-                {{ __('Ventas') }}
+                Ventas
             </x-nav-item>
 
             <x-nav-item href="{{ route('payments.index') }}" :active="Str::startsWith(request()->route()->getName(), 'payments.')">
-                {{ __('Pagos') }}
+                Pagos
             </x-nav-item>
         </x-slot>
     </x-nav-select>
@@ -83,7 +89,7 @@
         <x-slot name="content">
 
             <x-nav-item href="{{ route('customers.index') }}" :active="Str::startsWith(request()->route()->getName(), 'customers.')">
-                {{ __('Clientes') }}
+                Clientes
             </x-nav-item>
         </x-slot>
     </x-nav-select>
