@@ -141,7 +141,6 @@
 
     <!--Add customer, address, product modal-->
     <x-dialog-modal wire:model=open>
-        {{ $select }}
         <x-slot name="title">
             <h2 class="text-lg font-semibold">Seleccionar {{ $select }}</h2>
         </x-slot>

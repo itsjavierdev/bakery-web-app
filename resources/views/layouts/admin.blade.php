@@ -17,6 +17,8 @@
 
     <!-- Styles -->
     @livewireStyles
+
+    @stack('links')
 </head>
 
 <body class="font-sans antialiased">
