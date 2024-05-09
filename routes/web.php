@@ -106,7 +106,7 @@ Route::middleware([
         return view('pages.admin.parameters.featured.index');
     })->name('featured.index');
     Route::get('admin/destacados/create', Featured\Create::class)->name('featured.create');
-    Route::get('admin/destacados/{sale}/edit', Featured\Update::class)->name('featured.edit');
-    Route::get('admin/destacados/{sale}', Featured\Detail::class)->name('featured.show');
+    Route::get('admin/destacados/{featured}/edit', Featured\Update::class)->name('featured.edit');
+    Route::get('admin/destacados/{featured}', Featured\Detail::class)->name('featured.show');
 
 });

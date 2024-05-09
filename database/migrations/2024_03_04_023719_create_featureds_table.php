@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('featureds', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 40)->nullable();
+            $table->string('title', 100)->nullable();
             $table->string('image');
             $table->integer('position');
             $table->boolean('is_active')->default(true);
