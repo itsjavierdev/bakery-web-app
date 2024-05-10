@@ -78,6 +78,15 @@ class FeaturedManageTest extends TestCase
         $this->assertTrue(Featured::where('has_filter', 0)->exists());
     }
 
+    public function test_can_display_featured_detail(): void
+    {
+        $response = $this->actingAs($this->user)->get('admin/destacados/' . $this->featured->id);
+
+        $response->assertStatus(200);
+        $response->assertSee($this->featured->title);
+        $response->assertSee($this->product->name);
+    }
+
     public function test_a_featured_can_be_deleted(): void
     {
 
