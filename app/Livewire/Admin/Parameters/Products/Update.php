@@ -119,24 +119,21 @@ class Update extends Component
             if (isset($image['temp_id'])) {
                 $filename = uniqid() . '.' . $image['path']->getClientOriginalExtension();
 
-
-                // Resize and save the 128px image
-                $image128 = ImageManager::imagick()->read($image['path']->getRealPath());
-                $image128->cover(128, 128);
-                Storage::disk('public')->put("products/128/{$filename}", (string) $image128->encodeByExtension('jpg', 80));
-
-
-                // Resize and save the 240px image
-                $image240 = ImageManager::imagick()->read($image['path']->getRealPath());
-                $image240->cover(240, 240);
-
-                Storage::disk('public')->put("products/240/{$filename}", (string) $image240->encodeByExtension('jpg', 80));
-
                 // Resize and save the 400px image
                 $image400 = ImageManager::imagick()->read($image['path']->getRealPath());
                 $image400->cover(400, 400);
 
                 Storage::disk('public')->put("products/400/{$filename}", (string) $image400->encodeByExtension('jpg', 80));
+
+                // Resize and save the 240px image
+                $image240 = $image400->cover(240, 240);
+
+                Storage::disk('public')->put("products/240/{$filename}", (string) $image240->encodeByExtension('jpg', 80));
+
+                // Resize and save the 128px image
+                $image128 = $image240->cover(128, 128);
+
+                Storage::disk('public')->put("products/128/{$filename}", (string) $image128->encodeByExtension('jpg', 80));
 
                 // Save the common filename in the database
                 ProductImage::create([
@@ -169,7 +166,7 @@ class Update extends Component
             'bag_quantity' => 'required|integer|between:1,100',
             'description' => 'nullable|string|max:255',
             'new_images.*' => 'image|max:1024',
-            'images' => 'required|array|min:1',
+            'images' => 'required|array|min:1|max:4',
         ];
     }
     //Custom attributes names
