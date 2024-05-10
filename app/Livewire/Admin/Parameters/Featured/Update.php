@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Featured;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\On;
+use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Storage;
 
 class Update extends Component
@@ -42,13 +43,36 @@ class Update extends Component
         $this->validate();
 
         if ($this->new_image) {
-            Storage::delete($this->image);
-            $new_image = $this->new_image->store('featured');
+            Storage::disk('public')->delete([
+                "featured/720/{$this->image}",
+                "featured/378/{$this->image}",
+                "featured/160/{$this->image}",
+            ]);
+
+            $filename = uniqid() . '.' . $this->new_image->getClientOriginalExtension();
+
+            // Resize and save the 720px image
+            $image720 = ImageManager::imagick()->read($this->new_image->getRealPath());
+            $image720->cover(1280, 720);
+
+            Storage::disk('public')->put('featured/720/' . $filename, (string) $image720->encodeByExtension('jpg', 80));
+
+            // Resize and save the 378px image
+            $image378 = ImageManager::imagick()->read($this->new_image->getRealPath());
+            $image378->cover(672, 378);
+
+            Storage::disk('public')->put('featured/378/' . $filename, (string) $image378->encodeByExtension('jpg', 80));
+
+            // Resize and save the 160px image
+            $image160 = ImageManager::imagick()->read($this->new_image->getRealPath());
+            $image160->cover(284, 160);
+
+            Storage::disk('public')->put('featured/160/' . $filename, (string) $image160->encodeByExtension('jpg', 80));
         }
 
         $this->featured->update([
             'title' => $this->title,
-            'image' => $new_image ?? $this->image,
+            'image' => $filename ?? $this->image,
             'has_filter' => $this->put_filter,
             'product_id' => $this->product->id ?? null,
             'is_active' => $this->show,

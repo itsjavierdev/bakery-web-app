@@ -125,7 +125,7 @@
     </div>
     <!--Actions-->
     <x-slot name="footer">
-        <x-button wire:click="update">
+        <x-button wire:loading.attr="disabled" wire:click="update">
             Actualizar
         </x-button>
         <a href="{{ route('sales.index') }}">

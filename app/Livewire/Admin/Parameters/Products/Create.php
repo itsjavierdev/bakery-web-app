@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Category;
 use Livewire\WithFileUploads;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
 
 class Create extends Component
 {
@@ -73,6 +75,8 @@ class Create extends Component
 
     public function save()
     {
+
+
         $this->validate();
 
         $price = $this->bag_quantity > 1 ? $this->price / $this->bag_quantity : $this->price;
@@ -86,15 +90,38 @@ class Create extends Component
         ]);
 
         foreach ($this->temporary_images as $image) {
+            $filename = uniqid() . '.' . $image['path']->getClientOriginalExtension();
+
+
+            // Resize and save the 128px image
+            $image128 = ImageManager::imagick()->read($image['path']->getRealPath());
+            $image128->cover(128, 128);
+
+            Storage::disk('public')->put("products/128/{$filename}", (string) $image128->encodeByExtension('jpg', 80));
+
+            // Resize and save the 240px image
+            $image240 = ImageManager::imagick()->read($image['path']->getRealPath());
+            $image240->cover(240, 240);
+
+            Storage::disk('public')->put("products/240/{$filename}", (string) $image240->encodeByExtension('jpg', 80));
+
+            // Resize and save the 400px image
+            $image400 = ImageManager::imagick()->read($image['path']->getRealPath());
+            $image400->cover(400, 400);
+
+            Storage::disk('public')->put("products/400/{$filename}", (string) $image400->encodeByExtension('jpg', 80));
+
+            //Save the common filename in the database
             ProductImage::create([
                 'product_id' => $product->id,
-                'path' => $image['path']->store('products'),
+                'path' => $filename,
                 'position' => $image['position'],
             ]);
         }
 
         redirect()->to('admin/productos')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Producto creado correctamente');
     }
+
     public function updatedImages()
     {
         $position = 1;

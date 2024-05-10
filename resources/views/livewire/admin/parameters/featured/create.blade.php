@@ -20,7 +20,16 @@
     <!--Image-->
     <x-inputs.group>
         <x-inputs.label value="Imagen" />
-        <x-inputs.file wire:model="image" />
+
+        <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
+            x-on:livewire-upload-finish="uploading = false" x-on:livewire-upload-error="uploading = false"
+            x-on:livewire-upload-progress="progress = $event.detail.progress">
+            <x-inputs.file wire:model="image" accept="image/*" />
+
+            <div class="pt-2 w-full rounded-sm overflow-hidden" x-show="uploading">
+                <progress max="100" class="!w-full" x-bind:value="progress"></progress>
+            </div>
+        </div>
         <x-inputs.error for="image" />
         @if ($image)
             <div class="mt-3 relative {{ $put_filter ? 'content-banner' : '' }}">
@@ -41,7 +50,7 @@
     </x-inputs.label>
     <!--Actions-->
     <x-slot name="footer">
-        <x-button wire:click="save">
+        <x-button wire:click="save" wire:loading.attr="disabled" wire:target="save, image">
             Crear
         </x-button>
         <a href="{{ route('featured.index') }}">

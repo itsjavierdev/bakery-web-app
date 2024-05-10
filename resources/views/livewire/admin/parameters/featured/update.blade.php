@@ -34,7 +34,8 @@
             </div>
         @else
             <div class="mt-3 relative {{ $put_filter ? 'content-banner' : '' }}">
-                <img src="{{ asset('storage/' . $image) }}" class="w-full aspect-video object-cover rounded " />
+                <img src="{{ asset('storage/featured/378/' . $image) }}"
+                    class="w-full aspect-video object-cover rounded " />
                 @if ($title)
                     <p class="text-4xl text-white text-center italic absolute w-full h-full flex items-center justify-center z-50 top-0 left-0 [text-shadow:_0_4px_0_rgb(0_0_0_/_50%)]"
                         style="font-family: 'Caveat', cursive;">

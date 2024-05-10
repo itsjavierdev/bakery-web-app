@@ -7,7 +7,7 @@
     </x-inputs.group>
     <!--Actions-->
     <x-slot name="footer">
-        <x-button wire:click="save">
+        <x-button wire:click="save" wire:loading.attr="disabled">
             Crear
         </x-button>
         <a href="{{ route('categories.index') }}">

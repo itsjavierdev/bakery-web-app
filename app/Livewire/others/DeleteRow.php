@@ -76,7 +76,9 @@ abstract class DeleteRow extends Component
             }
         }
 
+        $this->otherDeletes($id);
         $row->delete();
+
         //if redirect after delete
         if ($this->redirect ?? false) {
             return redirect()->route($this->redirect)->with('flash.banner', $this->confirmationMessages()['success'])->with('flash.bannerStyle', 'success');
@@ -92,6 +94,11 @@ abstract class DeleteRow extends Component
     protected function otherValidations($id)
     {
         return true;
+    }
+
+    protected function otherDeletes($id)
+    {
+        //
     }
 
 }

@@ -44,7 +44,7 @@
 
     </div>
     <x-slot name="footer">
-        <x-button wire:click="update">
+        <x-button wire:click="update" wire:loading.attr="disabled">
             Actualizar
         </x-button>
         <a href="{{ route('company-contact.index') }}">

@@ -22,7 +22,7 @@
     </x-inputs.group>
     <!--Actions-->
     <x-slot name="footer">
-        <x-button wire:click="add">
+        <x-button wire:click="add" wire:loading.attr="disabled">
             Agregar
         </x-button>
         <a href="{{ route('payments.index') }}">

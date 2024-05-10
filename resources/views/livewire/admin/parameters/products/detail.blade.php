@@ -28,7 +28,7 @@
             </x-detail-row>
             <x-detail-row title="Imagenes" classContent="flex flex-wrap gap-4">
                 @foreach ($images as $image)
-                    <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $image->name }}"
+                    <img src="{{ asset('storage/products/128/' . $image->path) }}" alt="{{ $image->name }}"
                         class="w-32 h-32 object-cover rounded ">
                 @endforeach
             </x-detail-row>

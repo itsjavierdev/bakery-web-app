@@ -129,7 +129,7 @@
     </div>
     <!--Actions-->
     <x-slot name="footer">
-        <x-button wire:click="save">
+        <x-button wire:loading.attr="disabled" wire:click="save">
             Crear
         </x-button>
         <a href="{{ route('sales.index') }}">

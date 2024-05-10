@@ -23,7 +23,7 @@
             </x-detail-row>
             <div
                 class="m-4 md:m-10 relative rounded-lg overflow-hidden {{ $featured->has_filter ? 'content-banner' : '' }}">
-                <img src="{{ asset('storage/' . $featured->image) }}"
+                <img src="{{ asset('storage/featured/720/' . $featured->image) }}"
                     class="w-full aspect-video object-cover rounded " />
                 @if ($featured->title)
                     <p class="text-6xl text-white text-center absolute w-full h-full flex items-center justify-center z-50 top-0 left-0 [text-shadow:_0_1px_0_rgb(0_0_0_/_50%)]"

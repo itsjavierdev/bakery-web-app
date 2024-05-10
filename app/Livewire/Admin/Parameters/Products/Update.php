@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 
 class Update extends Component
 {
@@ -95,26 +96,52 @@ class Update extends Component
             'bag_quantity' => $this->bag_quantity,
             'description' => $this->description,
         ]);
-        //update images
+        // Update the position of the images
         foreach ($this->old_images as $old_image) {
             if (!collect($this->images)->contains('id', $old_image->id)) {
-                //delete images in the database that are not in the temporary array (user deleted)
-                Storage::delete($old_image->path);
+                // if the old images is not in the new images array, delete it
+                Storage::disk('public')->delete([
+                    "products/128/{$old_image->path}",
+                    "products/240/{$old_image->path}",
+                    "products/400/{$old_image->path}",
+                ]);
                 $old_image->delete();
             } else {
-                //update position of the images
+                // if the old image is in the new images array, update the position
                 $old_image->update([
                     'position' => collect($this->images)->firstWhere('id', $old_image->id)['position']
                 ]);
             }
         }
-        //add new images
+
+        // Add the new images
         foreach ($this->images as $image) {
             if (isset($image['temp_id'])) {
-                $path = $image['path']->store('products');
+                $filename = uniqid() . '.' . $image['path']->getClientOriginalExtension();
+
+
+                // Resize and save the 128px image
+                $image128 = ImageManager::imagick()->read($image['path']->getRealPath());
+                $image128->cover(128, 128);
+                Storage::disk('public')->put("products/128/{$filename}", (string) $image128->encodeByExtension('jpg', 80));
+
+
+                // Resize and save the 240px image
+                $image240 = ImageManager::imagick()->read($image['path']->getRealPath());
+                $image240->cover(240, 240);
+
+                Storage::disk('public')->put("products/240/{$filename}", (string) $image240->encodeByExtension('jpg', 80));
+
+                // Resize and save the 400px image
+                $image400 = ImageManager::imagick()->read($image['path']->getRealPath());
+                $image400->cover(400, 400);
+
+                Storage::disk('public')->put("products/400/{$filename}", (string) $image400->encodeByExtension('jpg', 80));
+
+                // Save the common filename in the database
                 ProductImage::create([
                     'product_id' => $this->product->id,
-                    'path' => $path,
+                    'path' => $filename,
                     'position' => $image['position']
                 ]);
             }

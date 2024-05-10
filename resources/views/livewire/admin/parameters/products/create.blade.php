@@ -36,7 +36,16 @@
     </x-inputs.group>
     <x-inputs.group>
         <x-inputs.label value="Imagenes" />
-        <x-inputs.file wire:model="images" accept="image/*" multiple />
+        <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
+            x-on:livewire-upload-finish="uploading = false" x-on:livewire-upload-error="uploading = false"
+            x-on:livewire-upload-progress="progress = $event.detail.progress">
+            <x-inputs.file wire:model="images" accept="image/*" multiple />
+
+            <div class="pt-2 w-full rounded-sm overflow-hidden" x-show="uploading">
+                <progress max="100" class="!w-full" x-bind:value="progress"></progress>
+            </div>
+        </div>
+
         <x-inputs.error for="images.*" />
         <x-inputs.error for="temporary_images" />
         <ul wire:sortable="updateImagesOrder" class="flex gap-5 flex-wrap  mt-5">
@@ -56,7 +65,7 @@
     </x-inputs.group>
     <!--Actions-->
     <x-slot name="footer">
-        <x-button wire:click="save">
+        <x-button wire:click="save" wire:loading.attr="disabled" wire:target="save, images">
             Crear
         </x-button>
         <a href="{{ route('products.index') }}">

@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Parameters\Featured;
 
 use App\Livewire\Others\DeleteRow;
 use App\Models\Featured;
+use Illuminate\Support\Facades\Storage;
 
 class Delete extends DeleteRow
 {
@@ -23,4 +24,16 @@ class Delete extends DeleteRow
             'success' => 'Imagen destacada eliminada correctamente',
         ];
     }
+
+    public function otherDeletes($id)
+    {
+        $featured = Featured::find($id);
+        Storage::disk('public')->delete([
+            "featured/720/{$featured->image}",
+            "featured/378/{$featured->image}",
+            "featured/160/{$featured->image}",
+        ]);
+
+    }
+
 }
