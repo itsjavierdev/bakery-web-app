@@ -11,7 +11,8 @@ class Delete extends DeleteRow
     {
         return [
             'orders',
-            'sales'
+            'sales',
+            'featured'
         ];
     }
 

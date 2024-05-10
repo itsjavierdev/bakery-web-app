@@ -25,7 +25,7 @@ class Product extends Model
 
     public function featured()
     {
-        return $this->belongsTo(Featured::class);
+        return $this->hasOne(Featured::class);
     }
 
     public function orders()

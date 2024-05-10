@@ -78,4 +78,22 @@ class FeaturedManageTest extends TestCase
         $this->assertTrue(Featured::where('has_filter', 0)->exists());
     }
 
+    public function test_a_featured_can_be_deleted(): void
+    {
+
+        $this->assertTrue(Featured::where('id', $this->featured->id)->exists());
+
+        // Exceute the delete action in the live wire component
+        Livewire::test(FeaturedLivewire\Delete::class)
+            ->call('confirmDelete', $this->featured->id)
+            ->assertSet('delete_id', $this->featured->id)
+            ->assertSet('open', true)
+            ->call('delete', $this->featured->id)
+            ->assertDispatched('render')
+            ->assertDispatched('banner-message', style: 'success', message: 'Imagen destacada eliminada correctamente');
+
+        // Verify that the category was deleted from the database
+        $this->assertFalse(Featured::where('id', $this->featured->id)->exists());
+    }
+
 }

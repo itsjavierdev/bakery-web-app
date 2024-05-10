@@ -2,12 +2,25 @@
 
 namespace App\Livewire\Admin\Parameters\Featured;
 
-use Livewire\Component;
+use App\Livewire\Others\DeleteRow;
+use App\Models\Featured;
 
-class Delete extends Component
+class Delete extends DeleteRow
 {
-    public function render()
+    public function model()
     {
-        return view('livewire.admin.parameters.featured.delete');
+        return Featured::class;
+    }
+    public function componentToRenderAfterDelete()
+    {
+        return Read::class;
+    }
+    protected function confirmationMessages(): array
+    {
+        return [
+            'title' => 'Eliminar Imagen Destacada',
+            'description' => '¿Estás seguro de que quieres eliminar esta imagen destacada?',
+            'success' => 'Imagen destacada eliminada correctamente',
+        ];
     }
 }
