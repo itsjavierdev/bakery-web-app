@@ -1,5 +1,8 @@
 <div>
-    <x-datatable-propierties />
+    @if ($this->filters() ?? false)
+        <x-datatable-propierties />
+    @endif
+
 
     <!--table in large screens-->
     <x-table class="hidden md:block">

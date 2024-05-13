@@ -1,4 +1,4 @@
-@props(['date_start', 'date_end', 'colspan'])
+@props(['date_start' => null, 'date_end' => null, 'colspan'])
 
 <!DOCTYPE html>
 <html lang="en">

@@ -31,7 +31,7 @@
             Str::startsWith(request()->route()->getName(), 'featured.');
     @endphp
     <x-nav-select :active="$parametersActive">
-        <i class="icon-clipboard text-xl"></i>
+        <i class="icon-other text-xl"></i>
         Parametros
         <x-slot name="content">
             <x-nav-item href="{{ route('categories.index') }}" :active="Str::startsWith(request()->route()->getName(), 'categories.')">
@@ -63,7 +63,7 @@
             Str::startsWith(request()->route()->getName(), 'payments.');
     @endphp
     <x-nav-select :active="$salesActive">
-        <i class="icon-cart text-xl"></i>
+        <i class="icon-money-mark text-xl"></i>
         Ventas
         <x-slot name="content">
             <x-nav-item href="{{ route('orders.index') }}" :active="Str::startsWith(request()->route()->getName(), 'orders.')">
@@ -94,4 +94,19 @@
         </x-slot>
     </x-nav-select>
 
+    <!--Customer Module-->
+    @php
+        $customersActive = Str::startsWith(request()->route()->getName(), 'reports.');
+    @endphp
+    <x-nav-select :active="$customersActive">
+        <i class="icon-clipboard text-xl"></i>
+        Reportes
+        <x-slot name="content">
+
+            <x-nav-item href="{{ route('reports.sales.index') }}">
+                Reporte de ventas
+            </x-nav-item>
+
+        </x-slot>
+    </x-nav-select>
 </nav>

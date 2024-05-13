@@ -110,4 +110,8 @@ Route::middleware([
     Route::get('admin/destacados/{featured}/edit', Featured\Update::class)->name('featured.edit');
     Route::get('admin/destacados/{featured}', Featured\Detail::class)->name('featured.show');
 
+    //Sales report routes
+    Route::get('admin/reports/sales', function () {
+        return view('pages.admin.reports.sales.index');
+    })->name('reports.sales.index');
 });
