@@ -30,5 +30,12 @@ class AppServiceProvider extends ServiceProvider
         Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/admin/templates');
         Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/admin/layouts');
         Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/layouts');
+
+
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/customer');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/customer/atoms');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/customer/molecules');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/customer/templates');
+        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/customer/layouts');
     }
 }

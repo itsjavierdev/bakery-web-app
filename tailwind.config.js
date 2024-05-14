@@ -19,6 +19,27 @@ export default {
             borderWidth: {
                 medium: "0.094rem",
             },
+            fontSize: {
+                title: ["32px", "38px"],
+            },
+            colors: {
+                "yellow-primary": "#FBEDCD",
+                "yellow-secondary": "#FDF9ED",
+                "brown-primary": "#4A1D1F",
+                "brown-secondary": "#381618",
+                "font-primary": "#272727",
+                border: "#555555",
+                "yellow-btn": "#dbc537",
+                "font-btn": "#382417",
+                footer: "#fc9f67",
+            },
+            height: {
+                500: "500px",
+            },
+            boxShadow: {
+                card: "0.5px 0.5px 2.5px 0.5px rgba(0, 0, 0, 0.2)",
+                "card-hover": "1px 1px 2.5px 1px rgba(0, 0, 0, 0.4)",
+            },
         },
     },
 
