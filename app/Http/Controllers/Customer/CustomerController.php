@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
-use Illuminate\Http\Request;
+
 use App\Models\Featured;
+use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
 {
@@ -12,12 +13,6 @@ class CustomerController extends Controller
         $featured = Featured::where('id', 1)->first();
 
         return view('pages.customer.index', compact('featured'));
-    }
-
-    public function test()
-    {
-
-        return view('pages.customer.test');
     }
 
 }

@@ -55,7 +55,7 @@
                     <div class="flex flex-col items-center pt-5 gap-5">
 
                         <x-customer-button class="w-full">
-                            {{ __('Log in') }}
+                            Registrarse
                         </x-customer-button>
 
                         <a class="underline text-font-primary hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-primary"

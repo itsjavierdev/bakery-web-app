@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Customer;
 use App\Models\Customer;
 use App\Models\CustomerAccount;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Http\Controllers\Controller;

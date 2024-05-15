@@ -1,5 +1,5 @@
 <nav class="w-full flex flex-col gap-2 py-2">
-    <x-nav-link href="{{ route('/') }}" :active="request()->routeIs('/')">
+    <x-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
         <i class="icon-chart text-xl"></i>
         Dashboard
     </x-nav-link>

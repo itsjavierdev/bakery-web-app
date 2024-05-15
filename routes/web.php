@@ -22,7 +22,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('admin', function () {
         return view('pages.admin.dashboard');
-    })->name('/');
+    })->name('admin');
     //Role routes
     Route::get('admin/roles', function () {
         return view('pages.admin.management-admin.roles.index');
