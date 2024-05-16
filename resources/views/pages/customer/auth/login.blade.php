@@ -33,7 +33,7 @@
                             {{ __('Log in') }}
                         </x-customer-button>
 
-                        <span class="tracking-normal">¿Aún no te has registrado? <a
+                        <span>¿Aún no te has registrado? <a
                                 class="underline text-font-primary hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-primary"
                                 href="{{ route('customer.register') }}">Crear una cuenta
                             </a></span>

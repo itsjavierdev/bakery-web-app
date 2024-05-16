@@ -15,4 +15,9 @@ class CustomerController extends Controller
         return view('pages.customer.index', compact('featured'));
     }
 
+    public function addresses()
+    {
+        return view('pages.customer.user.addresses');
+    }
+
 }

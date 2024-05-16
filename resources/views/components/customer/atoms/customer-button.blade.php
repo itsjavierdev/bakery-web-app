@@ -11,7 +11,7 @@
             break;
 
         case 'small':
-            $classSize = 'px-4 py-2 h-[36px] text-xs';
+            $classSize = 'px-4 py-2 h-9 text-xs';
             break;
 
         default:
@@ -29,7 +29,7 @@
             break;
 
         default:
-            # code...
+            $classVariant = 'bg-brown-primary text-white';
             break;
     }
 @endphp
