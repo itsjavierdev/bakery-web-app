@@ -22,7 +22,7 @@
             @endif
             <div class="w-1/4 ps-1 ">
                 <x-customer-button size="small" variant="secondary" class="text-[9px] w-full"
-                    wire:click="$dispatch('delete-address', {{ $address->id }})">eliminar</x-customer-button>
+                    wire:click="$dispatch('confirmDelete', {id: {{ $address->id }}})">eliminar</x-customer-button>
             </div>
         </div>
         <!--INFORMATION-->

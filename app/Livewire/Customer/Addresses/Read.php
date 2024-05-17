@@ -13,6 +13,8 @@ class Read extends Component
     public $addresses;
     public $previous = false;
 
+    protected $listeners = ['render'];
+
     public function render()
     {
         $this->addresses = Address::where('customer_id', Auth::guard('customer')->user()->customer->id)->get();

@@ -26,6 +26,8 @@
 </head>
 
 <body style="font-family: 'Montserrat', sans-serif;" class="bg-yellow-primary text-font-primary">
+
+    <x-message-alert />
     <header class="sticky top-0 w-full z-10 text-white bg-brown-primary">
         <nav class="md:flex md:items-center md:justify-between w-[92%] mx-auto">
             <div class="flex justify-between items-center ">

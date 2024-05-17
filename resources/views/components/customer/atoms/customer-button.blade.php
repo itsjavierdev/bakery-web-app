@@ -21,11 +21,13 @@
 
     switch ($variant) {
         case 'primary':
-            $classVariant = 'bg-brown-primary text-white';
+            $classVariant =
+                'bg-brown-primary text-white hover:bg-opacity-95 focus:bg-brown-secondary active:bg-brown-secondary';
             break;
 
         case 'secondary':
-            $classVariant = 'bg-transparent text-brown-primary border-medium border-brown-primary ';
+            $classVariant =
+                'bg-transparent text-brown-primary border-medium border-brown-primary hover:bg-brown-primary hover:bg-opacity-10 active:bg-transparent focus:bg-transparent';
             break;
 
         default:
@@ -35,6 +37,6 @@
 @endphp
 
 <button
-    {{ $attributes->merge(['type' => 'submit', 'class' => "inline-flex items-center justify-center px-4 py-2 h-14 rounded font-semibold  uppercase tracking-widest  focus:bg-opacity-95 focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-brown-primary active:bg-opacity-95 ransition ease-in-out duration-150 $classSize $classVariant"]) }}>
+    {{ $attributes->merge(['type' => 'submit', 'class' => "font-bold inline-flex items-center justify-center px-4 py-2 h-14 rounded uppercase tracking-widest focus:bg-opacity-95 focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-brown-primary active:bg-opacity-95 transition ease-in-out duration-150 $classSize $classVariant"]) }}>
     {{ $slot }}
 </button>

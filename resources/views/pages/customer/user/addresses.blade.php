@@ -6,4 +6,5 @@
     <div>
         <livewire:customer.addresses.read />
     </div>
+    <livewire:customer.addresses.delete />
 </x-customer>
