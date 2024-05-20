@@ -58,3 +58,18 @@ progress[value]::-webkit-progress-value {
 
 -webkit-animation: animate-stripes 5s linear infinite;
 animation: animate-stripes 5s linear infinite;
+
+/* .navbar-text {
+    text-shadow: 0 5px 0 rgb(0 0 0 / 50%);
+} */
+
+.header-inner {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.header-inner.sticky {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
