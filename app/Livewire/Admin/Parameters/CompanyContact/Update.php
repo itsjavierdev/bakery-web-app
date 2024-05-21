@@ -28,15 +28,17 @@ class Update extends Component
     public function mount()
     {
         $this->company_contact = CompanyContact::find(1);
-        $this->phone = $this->company_contact->phone;
-        $this->email = $this->company_contact->email;
-        $this->address = Address::find($this->company_contact->address_id) ?? null;
-        if ($this->address) {
-            $this->new_address = $this->address->address;
+        if ($this->company_contact) {
+            $this->phone = $this->company_contact->phone;
+            $this->email = $this->company_contact->email;
+            $this->address = Address::find($this->company_contact->address_id) ?? null;
+            if ($this->address) {
+                $this->new_address = $this->address->address;
+            }
+            $this->tiktok = $this->company_contact->tiktok;
+            $this->instagram = $this->company_contact->instagram;
+            $this->facebook = $this->company_contact->facebook;
         }
-        $this->tiktok = $this->company_contact->tiktok;
-        $this->instagram = $this->company_contact->instagram;
-        $this->facebook = $this->company_contact->facebook;
     }
 
     public function update()
@@ -51,13 +53,24 @@ class Update extends Component
                 'address' => $this->new_address,
             ]);
         }
+        if ($this->company_contact == null) {
+            $this->company_contact = CompanyContact::create([
+                'phone' => $this->phone ?? null,
+                'email' => $this->email ?? null,
+                'tiktok' => $this->tiktok ?? null,
+                'instagram' => $this->instagram ?? null,
+                'facebook' => $this->facebook ?? null,
+                'address_id' => $this->address->id ?? null,
+            ]);
+            return redirect()->to('admin/informacion')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Contacto de la empresa actualizado correctamente');
+        }
 
         $this->company_contact->update([
-            'phone' => $this->phone,
-            'email' => $this->email,
-            'tiktok' => $this->tiktok,
-            'instagram' => $this->instagram,
-            'facebook' => $this->facebook,
+            'phone' => $this->phone ?? null,
+            'email' => $this->email ?? null,
+            'tiktok' => $this->tiktok ?? null,
+            'instagram' => $this->instagram ?? null,
+            'facebook' => $this->facebook ?? null,
             'address_id' => $this->address->id ?? null,
         ]);
 

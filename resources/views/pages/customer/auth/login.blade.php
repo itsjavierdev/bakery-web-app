@@ -1,4 +1,6 @@
 <x-customer>
+    @push('pageTitle', 'Iniciar sesión')
+
     <div class="md:flex md:justify-center">
         <div class="px-4 md:px-0">
             <!--TITLE-->

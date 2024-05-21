@@ -24,7 +24,12 @@ class footer extends Component
     public function render(): View|Closure|string
     {
         $company_contact = CompanyContact::first() ?? null;
-        $address = Address::find($company_contact->address_id)->address ?? null;
+        $address = null;
+
+        if ($company_contact->address_id ?? null) {
+            $address = Address::find($company_contact->address_id)->address ?? null;
+        }
+
         return view('components.customer.layouts.footer', compact('company_contact', 'address'));
     }
 }

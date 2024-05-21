@@ -17,6 +17,9 @@
 
     <!-- Styles -->
     @livewireStyles
+
+
+    @stack('links')
 </head>
 
 <body style="font-family: 'Montserrat', sans-serif;" class="bg-yellow-primary text-font-primary">

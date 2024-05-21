@@ -5,19 +5,19 @@
                 <div class="max-w-full md:max-w-xs mr-36 flex flex-col gap-5 mb-10">
                     <h1 class="text-2xl mb-2">Síganos</h1>
                     @if ($company_contact->facebook)
-                        <a class="flex items-start gap-6" href="{{ $company_contact->facebook }}">
+                        <a class="flex items-start gap-6" href="{{ $company_contact->facebook }}" target="_blank">
                             <i class="icon-facebook text-2xl"></i>
                             <span>Facebook</span>
                         </a>
                     @endif
                     @if ($company_contact->instagram)
-                        <a class="flex items-start gap-6" href="{{ $company_contact->instagram }}">
+                        <a class="flex items-start gap-6" href="{{ $company_contact->instagram }}" target="_blank">
                             <i class="icon-instagram text-2xl"></i>
                             <span>Instagram</span>
                         </a>
                     @endif
                     @if ($company_contact->instagram)
-                        <a class="flex items-start gap-6" href="{{ $company_contact->instagram }}">
+                        <a class="flex items-start gap-6" href="{{ $company_contact->tiktok }}" target="_blank">
                             <i class="icon-tiktok text-2xl"></i>
                             <span>Tiktok</span>
                         </a>

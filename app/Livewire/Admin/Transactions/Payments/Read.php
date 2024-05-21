@@ -54,7 +54,7 @@ class Read extends Datatable
         return [
             'detail',
             'update',
-            'add-payment'
+            'add-payments'
         ];
     }
 

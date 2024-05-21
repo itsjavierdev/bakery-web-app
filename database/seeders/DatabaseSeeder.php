@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call(RoleSeeder::class);
 
-        Product::factory(10)->create();
+        // Product::factory(10)->create();
 
         Staff::factory(5)->create();
 
@@ -44,12 +44,12 @@ class DatabaseSeeder extends Seeder
             $user->assignRole('Administrador');
         }
 
-        OrderDetail::factory(10)->create();
+        // OrderDetail::factory(10)->create();
 
-        SaleDetail::factory(1)->create();
+        // SaleDetail::factory(1)->create();
 
-        Payment::factory(10)->create();
+        // Payment::factory(10)->create();
 
-        CompanyContact::create([]);
+        // CompanyContact::create([]);
     }
 }

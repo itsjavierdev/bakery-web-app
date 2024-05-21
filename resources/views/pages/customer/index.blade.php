@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@stack('pageTitle') - San Xavier</title>
+    <title>San Xavier</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Montserrat&family=Varela+Round&display=swap"
@@ -29,8 +29,8 @@
         <x-customer.layouts.navbar />
     @endif
 
-    <main class="max-w-6xl mx-auto justify-center py-7">
-        hola
+    <main>
+        <livewire:customer.products.recommended />
     </main>
 
     <x-customer.layouts.footer />

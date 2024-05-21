@@ -20,7 +20,13 @@ class Read extends Component
     {
 
         $this->company_contact = CompanyContact::find(1);
-        $this->address = Address::find($this->company_contact->address_id)->address ?? 'No hay dirección registrada';
+
+        if (!$this->company_contact == null) {
+            $this->address = Address::find($this->company_contact->address_id)->address ?? 'No hay dirección registrada';
+        } else {
+            $this->address = 'No hay dirección registrada';
+        }
+
 
     }
 }
