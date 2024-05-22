@@ -10,6 +10,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 
 
 Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
+Route::get('shop', [CustomerController::class, 'shop'])->name('customer.shop');
 
 
 Route::middleware([RedirectIfAuthenticated::class . ':customer'])->group(function () {

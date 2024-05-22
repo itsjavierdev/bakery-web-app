@@ -20,4 +20,9 @@ class CustomerController extends Controller
         return view('pages.customer.user.addresses');
     }
 
+    public function shop()
+    {
+        return view('pages.customer.products.shop');
+    }
+
 }
