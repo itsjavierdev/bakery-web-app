@@ -68,12 +68,3 @@
         </div>
     @endif
 </div>
-
-
-@push('js')
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-@endpush
-
-@push('links')
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-@endpush

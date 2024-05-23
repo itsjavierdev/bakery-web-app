@@ -27,7 +27,11 @@ class All extends Component
         if ($this->categoryOrder !== 'todos') {
             $query->where('category_id', $this->categoryOrder);
         }
-        $query->select('products.*', DB::raw('(SELECT path FROM product_images WHERE product_images.product_id = products.id ORDER BY position LIMIT 1) as first_image'));
+        $query->select(
+            'products.*',
+            DB::raw('(SELECT path FROM product_images WHERE product_images.product_id = products.id ORDER BY position LIMIT 1) as first_image'),
+            DB::raw('price * bag_quantity as total_price')
+        );
 
         //Search
         $query->where('name', 'like', '%' . $this->search . '%');

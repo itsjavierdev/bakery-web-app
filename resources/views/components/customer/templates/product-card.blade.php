@@ -10,7 +10,9 @@
                 <h5 class="text-lg text-center uppercase">{{ $product->name }}</h5>
             </div>
 
-            <h5>Bs {{ $product->price }}</h5>
+            <h5>Bs
+                {{ number_format($product->total_price, $product->total_price != floor($product->total_price) ? 1 : 0) }}
+            </h5>
             {{ $slot }}
 
         </div>
