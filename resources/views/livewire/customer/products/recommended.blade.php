@@ -10,13 +10,13 @@
                         <div class="flex flex-wrap sm:flex-nowrap justify-center gap-10">
                             @foreach ($group as $product)
                                 <div class="w-1/2">
-                                    <a href="">
-                                        <x-product-card :product="$product">
-                                            <x-customer-button size="medium" class="!w-full">
-                                                agregar al carrito
-                                            </x-customer-button>
-                                        </x-product-card>
-                                    </a>
+
+                                    <x-product-card :product="$product">
+                                        <x-customer-button size="medium" class="!w-full">
+                                            agregar al carrito
+                                        </x-customer-button>
+                                    </x-product-card>
+
                                 </div>
                             @endforeach
                         </div>
@@ -52,13 +52,13 @@
                         <div class="flex flex-wrap sm:flex-nowrap justify-center gap-10">
                             @foreach ($group as $product)
                                 <div class="w-1/2">
-                                    <a href="">
-                                        <x-product-card :product="$product">
-                                            <x-customer-button size="medium" class="!w-full">
-                                                agregar al carrito
-                                            </x-customer-button>
-                                        </x-product-card>
-                                    </a>
+
+                                    <x-product-card :product="$product">
+                                        <x-customer-button size="medium" class="!w-full">
+                                            agregar al carrito
+                                        </x-customer-button>
+                                    </x-product-card>
+
                                 </div>
                             @endforeach
                         </div>

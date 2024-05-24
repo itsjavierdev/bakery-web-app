@@ -32,7 +32,7 @@ class Update extends Component
         $this->categories = Category::all();
         $this->name = $product->name;
         $this->category_id = $product->category_id;
-        $this->price = $product->price;
+        $this->price = $product->price * $product->bag_quantity;
         $this->bag_quantity = $product->bag_quantity;
         $this->description = $product->description;
 

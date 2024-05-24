@@ -22,13 +22,11 @@
         @if ($products->count())
             <div class="w-full flex justify-center flex-wrap col-[2/3] row-[2/3] gap-5">
                 @foreach ($products as $product)
-                    <a href="">
-                        <x-product-card :product="$product">
-                            <x-customer-button size="medium" class="!w-full">
-                                agregar al carrito
-                            </x-customer-button>
-                        </x-product-card>
-                    </a>
+                    <x-product-card :product="$product">
+                        <x-customer-button size="medium" class="!w-full">
+                            agregar al carrito
+                        </x-customer-button>
+                    </x-product-card>
                 @endforeach
             </div>
         @else

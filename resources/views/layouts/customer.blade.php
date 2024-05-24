@@ -28,7 +28,7 @@
 
     <x-customer.layouts.navbar />
 
-    <main class="max-w-6xl mx-auto justify-center py-7">
+    <main {{ $attributes->merge(['class' => 'max-w-6xl mx-auto justify-center py-7']) }}>
         {{ $slot }}
     </main>
 

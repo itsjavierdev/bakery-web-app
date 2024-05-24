@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Models\Featured;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 
 class CustomerController extends Controller
 {
@@ -23,6 +24,13 @@ class CustomerController extends Controller
     public function shop()
     {
         return view('pages.customer.products.shop');
+    }
+
+    public function showProduct($productSlug)
+    {
+        $product = Product::where('slug', $productSlug)->first();
+
+        return view('pages.customer.products.detail', compact('product'));
     }
 
 }

@@ -28,10 +28,6 @@ export default {
                 "brown-primary": "#4A1D1F",
                 "brown-secondary": "#381618",
                 "font-primary": "#272727",
-                border: "#555555",
-                "yellow-btn": "#dbc537",
-                "font-btn": "#382417",
-                footer: "#fc9f67",
             },
             height: {
                 500: "500px",
