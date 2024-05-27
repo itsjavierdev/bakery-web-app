@@ -4,8 +4,8 @@ namespace App\Livewire\Admin\Parameters\Products;
 
 use App\Livewire\Others\Datatable;
 use App\Models\Product;
-use App\Views\Table\Column;
-use App\Views\Table\Filter;
+use App\View\Table\Column;
+use App\View\Table\Filter;
 
 class Read extends Datatable
 {

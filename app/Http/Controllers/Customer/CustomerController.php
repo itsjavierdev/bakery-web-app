@@ -33,4 +33,9 @@ class CustomerController extends Controller
         return view('pages.customer.products.detail', compact('product'));
     }
 
+    public function cart()
+    {
+        return view('pages.customer.cart.index');
+    }
+
 }

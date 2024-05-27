@@ -12,7 +12,8 @@
                                 <div class="w-1/2">
 
                                     <x-product-card :product="$product">
-                                        <x-customer-button size="medium" class="!w-full">
+                                        <x-customer-button size="medium" class="!w-full"
+                                            wire:click.prevent="$dispatch('addToCart', {product_id:{{ $product->id }}})">
                                             agregar al carrito
                                         </x-customer-button>
                                     </x-product-card>
@@ -54,7 +55,8 @@
                                 <div class="w-1/2">
 
                                     <x-product-card :product="$product">
-                                        <x-customer-button size="medium" class="!w-full">
+                                        <x-customer-button size="medium" class="!w-full"
+                                            wire:click.prevent="$dispatch('addToCart', {product_id:{{ $product->id }}})">
                                             agregar al carrito
                                         </x-customer-button>
                                     </x-product-card>
@@ -67,4 +69,5 @@
             </div>
         </div>
     @endif
+    <livewire:customer.cart.add-cart />
 </div>

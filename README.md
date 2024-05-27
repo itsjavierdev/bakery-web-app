@@ -339,7 +339,7 @@ class UsersTable extends Datatable
 Create the columns for show in the table
 
 ```php
-use App\Views\Table\Column;
+use App\View\Table\Column;
 
 public function columns() : array
 {

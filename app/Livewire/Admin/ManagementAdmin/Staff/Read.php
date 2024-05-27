@@ -3,8 +3,8 @@
 namespace App\Livewire\Admin\ManagementAdmin\Staff;
 
 use App\Livewire\Others\Datatable;
-use App\Views\Table\Column;
-use App\Views\Table\Filter;
+use App\View\Table\Column;
+use App\View\Table\Filter;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;

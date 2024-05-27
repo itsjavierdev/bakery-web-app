@@ -23,7 +23,8 @@
             <div class="w-full flex justify-center flex-wrap col-[2/3] row-[2/3] gap-5">
                 @foreach ($products as $product)
                     <x-product-card :product="$product">
-                        <x-customer-button size="medium" class="!w-full">
+                        <x-customer-button size="medium" class="!w-full"
+                            wire:click.prevent="$dispatch('addToCart', {product_id:{{ $product->id }}})">
                             agregar al carrito
                         </x-customer-button>
                     </x-product-card>
@@ -55,4 +56,5 @@
             @endforeach
         </div>
     </div>
+    <livewire:customer.cart.add-cart />
 </div>

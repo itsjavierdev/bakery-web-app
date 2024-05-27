@@ -3,8 +3,8 @@
 namespace App\Livewire\Admin\ManagementAdmin\Roles;
 
 use App\Livewire\Others\Datatable;
-use App\Views\Table\Column;
-use App\Views\Table\Filter;
+use App\View\Table\Column;
+use App\View\Table\Filter;
 use Spatie\Permission\Models\Role;
 
 

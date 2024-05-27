@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Views\Table;
+namespace App\View\Table;
 
 class Column
 {

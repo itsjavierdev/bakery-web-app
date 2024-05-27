@@ -18,6 +18,7 @@
              <li class="mx-4 my-6 md:my-0">
                  <a href="{{ route('customer.shop') }}" class="text-medium hover:text-yellow-primary">Tienda</a>
              </li>
+             <livewire:customer.cart.cart-button />
              <li>
                  @if (Route::has('customer.login'))
                      @if (Auth::guard('customer')->check())
