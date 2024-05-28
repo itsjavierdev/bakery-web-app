@@ -42,7 +42,7 @@
                         <h1>Subtotal</h1>
                         <h1>Bs {{ $total }}</h1>
                     </div>
-                    <a href="" class="w-full">
+                    <a href="{{ route('customer.checkout') }}" class="w-full">
                         <x-customer-button size="large" class="w-full">
                             <span class=" text-lg text-white">COMPRAR</span>
                         </x-customer-button>

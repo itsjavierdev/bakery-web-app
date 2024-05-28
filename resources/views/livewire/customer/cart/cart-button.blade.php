@@ -1,5 +1,5 @@
 <div
-    class="fixed md:relative md:bottom-0 md:right-0 bottom-10 right-10 w-16 h-16 md:w-0 md:h-0 flex justify-center items-center rounded-full bg-brown-primary border border-gray-50">
+    class="fixed md:relative md:bottom-0 md:right-0 bottom-10 right-10 w-16 h-16 md:w-0 md:h-0 flex justify-center items-center rounded-full bg-brown-primary border border-yellow-primary">
     <a href="{{ route('cart') }}" class="relative">
         <i class="icon-cart md:text-2xl text-4xl hover:text-yellow-primary"></i>
         @if (count($cart['products']) > 0)

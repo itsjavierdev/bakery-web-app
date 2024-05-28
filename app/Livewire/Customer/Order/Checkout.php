@@ -1,0 +1,110 @@
+<?php
+
+namespace App\Livewire\Customer\Order;
+
+use App\Models\Address;
+use App\Models\CompanyContact;
+use App\Models\DeliveryTime;
+use App\Models\OrderDetail;
+use Livewire\Component;
+use App\Livewire\Forms\Customer\Addresses\CheckoutAddress;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Rule;
+use App\Facades\Cart as CartFacade;
+use App\Models\Order;
+
+class Checkout extends Component
+{
+    public CheckoutAddress $checkoutAddress;
+
+    //Content
+    public $cart;
+    public $total;
+    public $times;
+    public $times_free;
+    public $address;
+    public $company_address;
+
+    //validation rules
+    #[Rule('required', as: 'información de envío')]
+    public $delivery;
+    #[Rule('required', as: 'dirección de entrega')]
+    public $delivery_time;
+    #[Rule('required|date|after_or_equal:today', as: 'fecha de entrega')]
+    public $delivery_date;
+    #[Rule('nullable|max:255', as: 'nota')]
+    public $description;
+
+    public function render()
+    {
+        return view('livewire.customer.order.checkout');
+    }
+
+    public function mount()
+    {
+        //set the cart and select values
+        $this->cart = CartFacade::get();
+        $this->total = CartFacade::total();
+        $this->address = Address::where('customer_id', Auth::guard('customer')->user()->customer->id)
+            ->where('is_active', 1)
+            ->first();
+
+        //all times for pickup
+        $this->times = DeliveryTime::all();
+        //just avaliable times for delivery
+        $this->times_free = DeliveryTime::where('available', 1)->get();
+
+        $company_info = CompanyContact::first();
+        $this->company_address = Address::where('id', $company_info->address_id)->first();
+
+    }
+
+    public function store()
+    {
+        $this->validate([
+            'delivery' => 'required',
+            'delivery_time' => 'required',
+            'delivery_date' => 'required|date|after_or_equal:today',
+        ]);
+
+        //create the order
+        $newOrder = new Order();
+        $newOrder->total = $this->total;
+        $newOrder->notes = $this->description;
+        $newOrder->customer_id = Auth::guard('customer')->user()->customer->id;
+        $newOrder->paid_amount = 0;
+        $newOrder->delivery_time_id = $this->delivery_time;
+        $newOrder->delivery_date = $this->delivery_date;
+        $newOrder->total_quantity = CartFacade::totalQuantity();
+
+        //if delivery, save the address
+        if ($this->delivery == 'delivery') {
+            //if the customer doesn't have an address, save it with a form
+            if ($this->address == null) {
+                $this->checkoutAddress->save();
+                $newOrder->address_id = $this->checkoutAddress->address->id;
+            } else {
+                //if the customer has an address, pick de choosen one
+                $newOrder->address_id = $this->address->id;
+            }
+        }
+        $newOrder->save();
+
+        //save the order details
+        foreach ($this->cart['products'] as $item) {
+            $newOrderDetails = new OrderDetail();
+            $newOrderDetails->order_id = $newOrder->id;
+            $newOrderDetails->product_id = $item['id'];
+            $newOrderDetails->quantity = $item['quantity'];
+            $newOrderDetails->product_price = $item['price'];
+            $newOrderDetails->subtotal = $item['subtotal'];
+            $newOrderDetails->by_bag = true;
+            $newOrderDetails->save();
+        }
+        //clear cart and redirect to thankyou page
+        CartFacade::clear();
+        return redirect()->route('customer.thankyou');
+    }
+
+
+}

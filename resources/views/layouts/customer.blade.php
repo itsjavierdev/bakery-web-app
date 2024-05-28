@@ -22,14 +22,16 @@
     @stack('links')
 </head>
 
-<body style="font-family: 'Montserrat', sans-serif;" class="bg-yellow-primary text-font-primary">
+<body style="font-family: 'Montserrat', sans-serif;" class="bg-brown-primary text-font-primary">
 
     <x-message-alert />
 
     <x-customer.layouts.navbar />
 
-    <main {{ $attributes->merge(['class' => 'max-w-6xl mx-auto justify-center py-7']) }}>
-        {{ $slot }}
+    <main class="bg-yellow-primary">
+        <div {{ $attributes->merge(['class' => 'max-w-6xl mx-auto justify-center py-7']) }}>
+            {{ $slot }}
+        </div>
     </main>
 
     <x-customer.layouts.footer />

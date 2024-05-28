@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Form;
 use App\Models\Address;
 
-class CreateFormAddress extends Form
+class CheckoutAddress extends Form
 {
     //Validation rules
     #[Rule('required|max:150', as: 'dirección')]
@@ -37,7 +37,5 @@ class CreateFormAddress extends Form
             $old_address->is_active = 0;
             $old_address->save();
         }
-
-        $this->reset();
     }
 }

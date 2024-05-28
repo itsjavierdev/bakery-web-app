@@ -38,4 +38,14 @@ class CustomerController extends Controller
         return view('pages.customer.cart.index');
     }
 
+    public function checkout()
+    {
+        return view('pages.customer.order.checkout');
+    }
+
+    public function thankyou()
+    {
+        return view('pages.customer.order.thankyou');
+    }
+
 }

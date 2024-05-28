@@ -27,4 +27,6 @@ Route::middleware([RedirectIfAuthenticated::class . ':customer'])->group(functio
 Route::middleware([RedirectIfNotAuthenticated::class . ':customer'])->group(function () {
     Route::post('cliente/logout', [AuthManager::class, 'logout'])->name('customer.logout');
     Route::get('cliente/direcciones', [CustomerController::class, 'addresses'])->name('customer.addresses');
+    Route::get('cliente/realizar-pedido', [CustomerController::class, 'checkout'])->name('customer.checkout');
+    Route::get('cliente/muchas-gracias', [CustomerController::class, 'thankyou'])->name('customer.thankyou');
 });

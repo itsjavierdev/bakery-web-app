@@ -17,7 +17,7 @@
             <li class="mx-4 my-6 md:my-0">
                 <a href="{{ route('customer.shop') }}" class="text-medium hover:text-yellow-primary">Tienda</a>
             </li>
-            <li class="mx-4">
+            <li class="mx-5">
                 <livewire:customer.cart.cart-button />
 
             </li>

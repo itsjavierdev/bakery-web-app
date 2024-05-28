@@ -60,9 +60,10 @@
                             Registrarse
                         </x-customer-button>
 
-                        <a class="underline text-font-primary hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-primary"
-                            href="{{ route('customer.register') }}">Crear una cuenta
-                        </a>
+                        <span>¿Ya tienes cuenta? <a
+                                class="underline text-font-primary hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-primary"
+                                href="{{ route('customer.login') }}">Inicia sesión
+                            </a></span>
                     </div>
 
                 </form>

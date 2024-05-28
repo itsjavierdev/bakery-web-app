@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('alias', 30)->unique()->nullable();
+            $table->string('alias', 30)->nullable();
             $table->string('address', 100);
             $table->string('reference', 80)->nullable();
             $table->boolean('is_active')->default(true);

@@ -39,9 +39,9 @@ class Read extends Component
 
     public function mount()
     {
-        $previousUrl = URL::previous();
+        $previous = URL::previous();
 
-        if (strpos($previousUrl, 'cliente/checkout') !== false) {
+        if (strpos($previous, 'cliente/realizar-pedido') !== false) {
             $this->previous = true;
         }
     }
