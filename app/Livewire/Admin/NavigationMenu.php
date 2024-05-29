@@ -20,6 +20,7 @@ class NavigationMenu extends Component
      *
      * @return \Illuminate\View\View
      */
+
     public function render()
     {
         return view('livewire.admin.navigation-menu');

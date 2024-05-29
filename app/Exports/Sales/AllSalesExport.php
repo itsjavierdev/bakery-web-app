@@ -48,7 +48,7 @@ class AllSalesExport implements FromCollection, WithHeadings, WithMapping, Shoul
             ->setBorderStyle(Border::BORDER_THIN);
 
 
-        $sheet->getStyle('D')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+        $sheet->getStyle('E')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
     }
 
     public function headings(): array
@@ -62,11 +62,11 @@ class AllSalesExport implements FromCollection, WithHeadings, WithMapping, Shoul
                 "Desde: $date_start_formatted Hasta: $date_end_formatted"
             ],
             [
+                'ID',
                 'Fecha',
                 'Personal',
                 'Cliente',
                 'Monto',
-                'cantidad productos',
             ]
         ];
     }
@@ -77,14 +77,13 @@ class AllSalesExport implements FromCollection, WithHeadings, WithMapping, Shoul
         $staff = $sale->staff->name . ' ' . $sale->staff->surname;
         $customer = $sale->customer->name . ' ' . $sale->customer->surname;
         $total = 'Bs ' . $sale->total;
-        $quantity = $sale->total_quantity;
 
         return [
+            $sale->id,
             $date,
             $staff,
             $customer,
             $total,
-            $quantity,
         ];
     }
 
