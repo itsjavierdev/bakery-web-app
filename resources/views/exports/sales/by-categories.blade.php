@@ -1,10 +1,9 @@
-<x-report date_start="{{ $date_start }}" date_end="{{ $date_end }}" colspan="5">
+<x-report date_start="{{ $date_start }}" date_end="{{ $date_end }}" colspan="4">
     @push('title', 'Ventas por categorías')
 
     <x-slot name="head">
         <th>Categoría</th>
         <th style="text-align: right;">Productos</th>
-        <th style="text-align: right;">Cantidad</th>
         <th style="text-align: right;">Monto total</th>
         <th style="text-align: right;">Porcentaje</th>
     </x-slot>
@@ -16,7 +15,6 @@
         <tr>
             <td>{{ $item->name }}</td>
             <td style="text-align: right;">{{ $item->total_products }}</td>
-            <td style="text-align: right;">{{ $item->quantity }}</td>
             <td style="text-align: right;">{{ $total_amount }}</td>
             <td style="text-align: right;">{{ $percentage }}</td>
         </tr>
@@ -29,7 +27,6 @@
         @endphp
         <tr>
             <td colspan="2"></td>
-            <td style="text-align: right;">{{ $total_quantity }}</td>
             <td style="text-align: right;">{{ $total_amount }}</td>
             <td style="text-align: right;">{{ $total_percentage }}</td>
         </tr>

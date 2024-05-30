@@ -87,15 +87,17 @@
                 <th colspan="{{ $colspan }}" class="title">@stack('title')
                 </th>
             </tr>
-            <tr>
-                @php
-                    $date_start_formatted = date('d/m/Y', strtotime($date_start));
-                    $date_end_formatted = date('d/m/Y', strtotime($date_end));
-                @endphp
-                <th colspan="{{ $colspan }}" class="dates">
-                    {{ "Desde $date_start_formatted hasta $date_end_formatted" }}
-                </th>
-            </tr>
+            @if ($date_start && $date_end)
+                <tr>
+                    @php
+                        $date_start_formatted = date('d/m/Y', strtotime($date_start));
+                        $date_end_formatted = date('d/m/Y', strtotime($date_end));
+                    @endphp
+                    <th colspan="{{ $colspan }}" class="dates">
+                        {{ "Desde $date_start_formatted hasta $date_end_formatted" }}
+                    </th>
+                </tr>
+            @endif
             <tr class="head">
                 {{ $head }}
             </tr>

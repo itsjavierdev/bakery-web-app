@@ -5,76 +5,81 @@
     </x-nav-link>
     <!--Admin Module-->
     @php
-        $adminActive =
-            Str::startsWith(request()->route()->getName(), 'roles.') ||
-            Str::startsWith(request()->route()->getName(), 'staff.');
+        $roles_active = Str::startsWith(request()->route()->getName(), 'roles.');
+        $staff_active = Str::startsWith(request()->route()->getName(), 'staff.');
+        $admin_active = $roles_active || $staff_active;
     @endphp
-    <x-nav-select :active="$adminActive">
+    <x-nav-select :active="$admin_active">
         <i class="icon-settings text-xl"></i>
         Administración
         <x-slot name="content">
-            <x-nav-item href="{{ route('roles.index') }}" :active="Str::startsWith(request()->route()->getName(), 'roles.')">
+            <x-nav-item href="{{ route('roles.index') }}" :active="$roles_active">
                 Roles
             </x-nav-item>
-            <x-nav-item href="{{ route('staff.index') }}" :active="Str::startsWith(request()->route()->getName(), 'staff.')">
+            <x-nav-item href="{{ route('staff.index') }}" :active="$staff_active">
                 Personal
             </x-nav-item>
         </x-slot>
     </x-nav-select>
     <!--Parameters Module-->
     @php
+        $categories_active = Str::startsWith(request()->route()->getName(), 'categories.');
+        $products_active = Str::startsWith(request()->route()->getName(), 'products.');
+        $deliverytimes_active = Str::startsWith(request()->route()->getName(), 'deliverytimes.');
+        $company_contact_active = Str::startsWith(request()->route()->getName(), 'company-contact.');
+        $featured_active = Str::startsWith(request()->route()->getName(), 'featured.');
         $parametersActive =
-            Str::startsWith(request()->route()->getName(), 'categories.') ||
-            Str::startsWith(request()->route()->getName(), 'products.') ||
-            Str::startsWith(request()->route()->getName(), 'deliverytimes.') ||
-            Str::startsWith(request()->route()->getName(), 'company-contact.') ||
-            Str::startsWith(request()->route()->getName(), 'featured.');
+            $categories_active ||
+            $products_active ||
+            $deliverytimes_active ||
+            $company_contact_active ||
+            $featured_active;
     @endphp
     <x-nav-select :active="$parametersActive">
         <i class="icon-other text-xl"></i>
         Parametros
         <x-slot name="content">
-            <x-nav-item href="{{ route('categories.index') }}" :active="Str::startsWith(request()->route()->getName(), 'categories.')">
+            <x-nav-item href="{{ route('categories.index') }}" :active="$categories_active">
                 Categorias
             </x-nav-item>
 
-            <x-nav-item href="{{ route('products.index') }}" :active="Str::startsWith(request()->route()->getName(), 'products.')">
+            <x-nav-item href="{{ route('products.index') }}" :active="$products_active">
                 Productos
             </x-nav-item>
 
-            <x-nav-item href="{{ route('deliverytimes.index') }}" :active="Str::startsWith(request()->route()->getName(), 'deliverytimes.')">
+            <x-nav-item href="{{ route('deliverytimes.index') }}" :active="$deliverytimes_active">
                 Horarios
             </x-nav-item>
 
-            <x-nav-item href="{{ route('company-contact.index') }}" :active="Str::startsWith(request()->route()->getName(), 'company-contact.')">
+            <x-nav-item href="{{ route('company-contact.index') }}" :active="$company_contact_active">
                 Información de la empresa
             </x-nav-item>
 
-            <x-nav-item href="{{ route('featured.index') }}" :active="Str::startsWith(request()->route()->getName(), 'featured.')">
+            <x-nav-item href="{{ route('featured.index') }}" :active="$featured_active">
                 Imagenes destacadas
             </x-nav-item>
         </x-slot>
     </x-nav-select>
     <!--Transactions Module-->
     @php
-        $salesActive =
-            Str::startsWith(request()->route()->getName(), 'orders.') ||
-            Str::startsWith(request()->route()->getName(), 'sales.') ||
-            Str::startsWith(request()->route()->getName(), 'payments.');
+        $order_active = Str::startsWith(request()->route()->getName(), 'orders.');
+        $sales_active = Str::startsWith(request()->route()->getName(), 'sales.');
+        $payments_active = Str::startsWith(request()->route()->getName(), 'payments.');
+        $transactions_active = $order_active || $sales_active || $payments_active;
     @endphp
-    <x-nav-select :active="$salesActive">
+    <x-nav-select :active="$transactions_active">
         <i class="icon-money-mark text-xl"></i>
         Ventas
         <x-slot name="content">
-            <x-nav-item href="{{ route('orders.index') }}" :active="Str::startsWith(request()->route()->getName(), 'orders.')">
+            <x-nav-item href="{{ route('orders.index') }}" :active="$order_active">
                 Pedidos
             </x-nav-item>
 
-            <x-nav-item href="{{ route('sales.index') }}" :active="Str::startsWith(request()->route()->getName(), 'sales.')">
+            <x-nav-item href="{{ route('sales.index') }}" :active="$sales_active">
                 Ventas
             </x-nav-item>
 
-            <x-nav-item href="{{ route('payments.index') }}" :active="Str::startsWith(request()->route()->getName(), 'payments.')">
+            <x-nav-item href="{{ route('payments.index') }}" :active="$payments_active">
                 Pagos
             </x-nav-item>
         </x-slot>
@@ -96,14 +101,15 @@
 
     <!--Customer Module-->
     @php
-        $customersActive = Str::startsWith(request()->route()->getName(), 'reports.');
+        $sales_report_active = Str::startsWith(request()->route()->getName(), 'reports.sales');
+        $reports_active = Str::startsWith(request()->route()->getName(), 'reports.');
     @endphp
-    <x-nav-select :active="$customersActive">
+    <x-nav-select :active="$reports_active">
         <i class="icon-clipboard text-xl"></i>
         Reportes
         <x-slot name="content">
 
-            <x-nav-item href="{{ route('reports.sales.index') }}">
+            <x-nav-item href="{{ route('reports.sales.index') }}" :active="$sales_report_active">
                 Reporte de ventas
             </x-nav-item>
 

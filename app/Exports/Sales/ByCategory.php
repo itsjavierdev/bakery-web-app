@@ -32,13 +32,13 @@ class ByCategory implements FromCollection, WithHeadings, WithMapping, ShouldAut
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->mergeCells('A1:E1');
-        $sheet->getStyle('A1:E1')->getFont()->setSize(16);
-        $sheet->getStyle('A1:E1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:E1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells('A1:D1');
+        $sheet->getStyle('A1:D1')->getFont()->setSize(16);
+        $sheet->getStyle('A1:D1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:D1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
-        $sheet->mergeCells('A2:E2');
-        $sheet->getStyle('A2:E2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells('A2:D2');
+        $sheet->getStyle('A2:D2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
         $sheet->getStyle('3')->getFont()->setBold(true);
 
@@ -47,8 +47,9 @@ class ByCategory implements FromCollection, WithHeadings, WithMapping, ShouldAut
             ->getAllBorders()
             ->setBorderStyle(Border::BORDER_THIN);
 
+        $sheet->getStyle('B')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+        $sheet->getStyle('C')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
         $sheet->getStyle('D')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
-        $sheet->getStyle('E')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
     }
 
     public function headings(): array
@@ -64,7 +65,6 @@ class ByCategory implements FromCollection, WithHeadings, WithMapping, ShouldAut
             [
                 'Categoría',
                 'Productos',
-                'Cantidad',
                 'Monto total',
                 'Porcentaje'
             ]
@@ -79,7 +79,6 @@ class ByCategory implements FromCollection, WithHeadings, WithMapping, ShouldAut
         return [
             $data->name,
             $data->total_products,
-            $data->quantity,
             $total_amount,
             $percentage
         ];

@@ -32,13 +32,13 @@ class ByProduct implements FromCollection, WithHeadings, WithMapping, ShouldAuto
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->mergeCells('A1:E1');
-        $sheet->getStyle('A1:E1')->getFont()->setSize(16);
-        $sheet->getStyle('A1:E1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:E1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells('A1:G1');
+        $sheet->getStyle('A1:G1')->getFont()->setSize(16);
+        $sheet->getStyle('A1:G1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:G1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
-        $sheet->mergeCells('A2:E2');
-        $sheet->getStyle('A2:E2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells('A2:G2');
+        $sheet->getStyle('A2:G2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
         $sheet->getStyle('3')->getFont()->setBold(true);
 
@@ -49,8 +49,11 @@ class ByProduct implements FromCollection, WithHeadings, WithMapping, ShouldAuto
 
 
         $sheet->getStyle('B')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+        $sheet->getStyle('C')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
         $sheet->getStyle('D')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
         $sheet->getStyle('E')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+        $sheet->getStyle('F')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+        $sheet->getStyle('G')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
 
 
     }
@@ -68,7 +71,9 @@ class ByProduct implements FromCollection, WithHeadings, WithMapping, ShouldAuto
             [
                 'Producto',
                 'Precio',
-                'Cantidad',
+                'Precio bolsa',
+                'Cantidad suelto',
+                'Cantidad paquete',
                 'Monto total',
                 'Porcentaje'
             ]
@@ -78,13 +83,16 @@ class ByProduct implements FromCollection, WithHeadings, WithMapping, ShouldAuto
     public function map($data): array
     {
         $price = 'Bs ' . number_format($data->price, 1, ',', '.');
+        $price_by_bag = 'Bs ' . number_format($data->price_by_bag, 1, ',', '.');
         $total_amount = 'Bs ' . number_format($data->total_amount, 1, ',', '.');
         $percentage = number_format($data->percentage, 1) . '%';
 
         return [
             $data->name,
             $price,
-            $data->quantity,
+            $price_by_bag,
+            $data->quantity_loose,
+            $data->quantity_by_bag,
             $total_amount,
             $percentage
         ];
