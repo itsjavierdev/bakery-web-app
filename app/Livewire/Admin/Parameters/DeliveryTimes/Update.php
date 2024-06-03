@@ -69,7 +69,7 @@ class Update extends Component
     public function mount(DeliveryTime $deliverytime)
     {
         $this->delivery_time = DeliveryTime::find($deliverytime->id);
-        $this->time = Carbon::createFromFormat('H:i:s', $this->delivery_time->time)->format('h:i');
+        $this->time = Carbon::createFromFormat('H:i:s', $this->delivery_time->time)->format('H:i');
         $this->available = $this->delivery_time->available ? true : false;
     }
     public function update()

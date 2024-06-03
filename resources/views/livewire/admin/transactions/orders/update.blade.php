@@ -84,7 +84,7 @@
                             <option value="">Seleccionar</option>
                             @foreach ($delivery_times as $delivery_time)
                                 <option value="{{ $delivery_time->id }}">
-                                    {{ Carbon\Carbon::createFromFormat('H:i:s', $delivery_time->time)->format('h:i') }}
+                                    {{ Carbon\Carbon::createFromFormat('H:i:s', $delivery_time->time)->format('H:i') }}
                                     {{ $delivery_time->available ? 'Gratis' : '' }}</option>
                             @endforeach
                         </x-inputs.select>

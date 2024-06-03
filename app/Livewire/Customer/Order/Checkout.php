@@ -54,8 +54,13 @@ class Checkout extends Component
         //just avaliable times for delivery
         $this->times_free = DeliveryTime::where('available', 1)->get();
 
-        $company_info = CompanyContact::first();
-        $this->company_address = Address::where('id', $company_info->address_id)->first();
+        $this->company_info = CompanyContact::first();
+        if ($this->company_info->address_id ?? false) {
+            $this->company_address = Address::where('id', $this->company_info->address_id)->first();
+        } else {
+            $this->company_address;
+
+        }
 
     }
 

@@ -34,13 +34,13 @@
                                 @if ($delivery == 'pickup')
                                     @foreach ($times as $time)
                                         <option value="{{ $time->id }}">
-                                            {{ Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('h:i') }}
+                                            {{ Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('H:i') }}
                                         </option>
                                     @endforeach
                                 @else
                                     @foreach ($times_free as $time)
                                         <option value="{{ $time->id }}">
-                                            {{ Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('h:i') }}
+                                            {{ Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('H:i') }}
                                         </option>
                                     @endforeach
                                 @endif
@@ -53,7 +53,11 @@
                 <div wire:click="$set('delivery', 'pickup')">
                     <x-checkout-input label="Recoger en el local" action="{{ $delivery === 'pickup' ? true : false }}"
                         nameInput="pickup" idInput="delivery">
-                        <p>Puede recoger su pedido en: {{ $company_address->address }}</p>
+                        @if (isset($company_address->address))
+                            <p>Puede recoger su pedido en: {{ $company_address->address }}</p>
+                        @else
+                            <p>Puede recoger su pedido en la sucursal</p>
+                        @endif
                     </x-checkout-input>
                 </div>
                 <!--Delivery-->

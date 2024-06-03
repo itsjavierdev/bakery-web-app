@@ -102,6 +102,7 @@
     <!--Customer Module-->
     @php
         $sales_report_active = Str::startsWith(request()->route()->getName(), 'reports.sales');
+        $orders_report_active = Str::startsWith(request()->route()->getName(), 'reports.orders');
         $reports_active = Str::startsWith(request()->route()->getName(), 'reports.');
     @endphp
     <x-nav-select :active="$reports_active">
@@ -111,6 +112,9 @@
 
             <x-nav-item href="{{ route('reports.sales.index') }}" :active="$sales_report_active">
                 Reporte de ventas
+            </x-nav-item>
+            <x-nav-item href="{{ route('reports.orders.index') }}" :active="$orders_report_active">
+                Reporte de pedidos
             </x-nav-item>
 
         </x-slot>
