@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Reports\Orders;
 
+use App\Exports\Orders\ExpiredOrders;
 use App\Models\Order;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -42,6 +43,9 @@ class Export extends Component
         switch ($this->report_by) {
             case 'all-orders':
                 return Excel::download(new AllOrders($start_date, $end_date, $data), "{$title}_{$start_date}_{$end_date}.xlsx");
+
+            case 'expired-orders':
+                return Excel::download(new ExpiredOrders($start_date, $end_date, $data), "{$title}_{$start_date}_{$end_date}.xlsx");
 
             default:
                 # code...
@@ -123,6 +127,20 @@ class Export extends Component
 
     public function queryExpiredOrders($start_date, $end_date)
     {
+        return Order::query()
+            ->leftJoin('delivery_times', 'orders.delivery_time_id', '=', 'delivery_times.id')
+            ->select(
+                'orders.*',
+                'orders.delivery_date as delivery_date',
+                'delivery_times.time as time',
+                'orders.total_quantity as total_quantity',
+            )
+            ->where('orders.delivered', false)
+            ->where(function ($query) use ($start_date, $end_date) {
+                $query->whereBetween(\DB::raw('CONCAT(orders.delivery_date, " ", delivery_times.time)'), [$start_date, $end_date]);
+            })
+            ->orderBy('orders.delivery_date')
+            ->orderBy('delivery_times.time');
 
     }
 
@@ -142,13 +160,13 @@ class Export extends Component
             if ($this->period == 'byDate') {
                 $rules = [
                     'report_by' => ['required'],
-                    'start_date' => ['required', 'date', 'before_or_equal:today'],
+                    'start_date' => ['required', 'date', 'before:today'],
                 ];
             } else {
                 $rules = [
                     'report_by' => ['required'],
-                    'start_date' => ['required', 'date', 'before_or_equal:today'],
-                    'end_date' => ['required', 'date', 'after_or_equal:start_date', 'before_or_equal:today'],
+                    'start_date' => ['required', 'date', 'before:today'],
+                    'end_date' => ['required', 'date', 'after_or_equal:start_date', 'before:today'],
                 ];
             }
         } else {
@@ -174,6 +192,15 @@ class Export extends Component
             'report_by' => 'tipo de reporte',
             'start_date' => 'fecha de inicio',
             'end_date' => 'fecha de fin',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'start_date.before' => 'La fecha de inicio no puede ser mayor a la fecha actual',
+            'start_date.after_or_equal' => 'La fecha de inicio no puede ser mayor a la fecha actual',
+            'end_date.before' => 'La fecha de fin no puede ser mayor a la fecha actual',
+            'end_date.after_or_equal' => 'La fecha de fin no puede ser menor a la fecha de inicio',
         ];
     }
 
