@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Reports\Orders;
 
 use App\Exports\Orders\ExpiredOrders;
+use App\Exports\Orders\Products;
 use App\Models\Order;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -37,6 +38,7 @@ class Export extends Component
         $title = $info[1];
 
 
+
         $start_date = date('d-m-Y', strtotime($dates['start_date']));
         $end_date = date('d-m-Y', strtotime($dates['end_date']));
 
@@ -46,6 +48,10 @@ class Export extends Component
 
             case 'expired-orders':
                 return Excel::download(new ExpiredOrders($start_date, $end_date, $data), "{$title}_{$start_date}_{$end_date}.xlsx");
+
+
+            case 'products':
+                return Excel::download(new Products($start_date, $end_date, $data), "{$title}_{$start_date}_{$end_date}.xlsx");
 
             default:
                 # code...
@@ -106,7 +112,6 @@ class Export extends Component
 
     public function queryAllOrders($start_date, $end_date)
     {
-
         return Order::query()
             ->leftJoin('delivery_times', 'orders.delivery_time_id', '=', 'delivery_times.id')
             ->leftJoin('addresses', 'orders.address_id', '=', 'addresses.id')
@@ -146,7 +151,19 @@ class Export extends Component
 
     public function queryProducts($start_date, $end_date)
     {
-
+        return \DB::table('order_details')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->select(
+                'products.name',
+                \DB::raw('SUM(CASE WHEN order_details.by_bag = false THEN order_details.quantity ELSE 0 END) as total_individual'),
+                \DB::raw('SUM(CASE WHEN order_details.by_bag = true THEN order_details.quantity ELSE 0 END) as total_by_bag'),
+                \DB::raw('SUM(order_details.subtotal) as total_amount')
+            )
+            ->where('orders.delivered', false)
+            ->whereBetween('orders.delivery_date', [$start_date, $end_date])
+            ->groupBy('products.name')
+            ->orderBy('products.name');
     }
 
     public function queryByTime($start_date, $end_date)
