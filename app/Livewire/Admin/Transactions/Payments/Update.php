@@ -12,6 +12,7 @@ class Update extends Component
     public $payments = [];
     public $total;
     public $remaining_amount;
+    public $previousUrl;
 
     public function render()
     {
@@ -20,6 +21,9 @@ class Update extends Component
 
     public function mount(Sale $sale)
     {
+
+        $this->previousUrl = url()->previous();
+
         $this->sale = $sale;
         $this->total = $sale->paid_amount;
         $payments = Payment::where('sale_id', $sale->id)->get();
@@ -57,7 +61,11 @@ class Update extends Component
             ]);
         }
 
-        return redirect()->to('admin/pagos')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Pagos actualizado correctamente.');
+        if (strpos($this->previousUrl, 'admin/deudas') !== false) {
+            return redirect()->to('admin/deudas')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Pagos actualizado correctamente.');
+        } else {
+            return redirect()->to('admin/pagos')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Pagos actualizado correctamente.');
+        }
     }
 
     public function updatedPayments()
@@ -81,10 +89,18 @@ class Update extends Component
 
     public function rules()
     {
-        return [
-            'payments.*.amount' => 'required|numeric|min:0.01|max:' . $this->sale->total,
-            'total' => 'required|numeric|min:0.01|max:' . $this->sale->total,
-        ];
+        if (count($this->payments) > 0) {
+            $rules = [
+                'payments.*.amount' => 'required|numeric|min:0.01|max:' . $this->sale->total,
+                'total' => 'required|numeric|min:0.01|max:' . $this->sale->total,
+            ];
+        } else {
+            $rules = [
+                'total' => 'required|numeric|min:0|max:' . $this->sale->total,
+            ];
+        }
+
+        return $rules;
     }
 
     public function validationAttributes()

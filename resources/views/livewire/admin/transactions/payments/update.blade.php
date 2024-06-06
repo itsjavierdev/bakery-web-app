@@ -11,68 +11,74 @@
         @endif
     </x-inputs.group>
     <!--Detail-->
-    <div class="w-full">
-        <x-inputs.group>
-            <x-inputs.label value="Detalle" />
-            <div>
-                <x-table>
-                    <thead class="border-b-medium border-gray-300">
-                        <tr>
-                            <x-th>Fecha</x-th>
-                            <x-th>Personal</x-th>
-                            <x-th>Monto</x-th>
-                            <x-th></x-th>
-                        </tr>
-                    </thead>
+    @if (count($payments) > 0)
+        <div class="w-full">
+            <x-inputs.group>
+                <x-inputs.label value="Detalle" />
+                <div>
+                    <x-table>
+                        <thead class="border-b-medium border-gray-300">
+                            <tr>
+                                <x-th>Fecha</x-th>
+                                <x-th>Personal</x-th>
+                                <x-th>Monto</x-th>
+                                <x-th></x-th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        @foreach ($payments as $index => $payment)
+                        <tbody>
+                            @foreach ($payments as $index => $payment)
+                                <x-tr>
+                                    <td class="p-2">
+                                        <x-date-format>
+                                            {{ $payment['created_at'] }}
+                                        </x-date-format>
+                                    </td>
+
+                                    <td class="p-2">
+                                        @if ($payment['staff_name'])
+                                            {{ $payment['staff_name'] }} {{ $payment['staff_surname'] }}
+                                        @endif
+                                    </td>
+
+                                    <td class="p-2">
+                                        <x-inputs.text type="number"
+                                            wire:model.change="payments.{{ $index }}.amount" />
+                                    </td>
+
+                                    <td class="p-2">
+                                        <x-button-rounded wire:click="deletePayment('{{ $payment['id'] }}')">
+                                            <i class="icon-trash text-2xl text-red-700"></i>
+                                        </x-button-rounded>
+                                    </td>
+                                </x-tr>
+                            @endforeach
+                        </tbody>
+
+                        <tfoot class="border-t-medium border-gray-300 bg-gray-100">
                             <x-tr>
-                                <td class="p-2">
-                                    <x-date-format>
-                                        {{ $payment['created_at'] }}
-                                    </x-date-format>
+                                <td class="px-2" colspan="2">
+                                    {{ $total ? 'TOTAL' : '' }}
                                 </td>
-
-                                <td class="p-2">
-                                    @if ($payment['staff_name'])
-                                        {{ $payment['staff_name'] }} {{ $payment['staff_surname'] }}
-                                    @endif
+                                <td class="px-2">
+                                    {{ $total ? $total : '' }}
                                 </td>
+                                <td class="px-2">
 
-                                <td class="p-2">
-                                    <x-inputs.text type="number"
-                                        wire:model.change="payments.{{ $index }}.amount" />
-                                </td>
-
-                                <td class="p-2">
-                                    <x-button-rounded wire:click="deletePayment('{{ $payment['id'] }}')">
-                                        <i class="icon-trash text-2xl text-red-700"></i>
-                                    </x-button-rounded>
                                 </td>
                             </x-tr>
-                        @endforeach
-                    </tbody>
-
-                    <tfoot class="border-t-medium border-gray-300 bg-gray-100">
-                        <x-tr>
-                            <td class="px-2" colspan="2">
-                                {{ $total ? 'TOTAL' : '' }}
-                            </td>
-                            <td class="px-2">
-                                {{ $total ? $total : '' }}
-                            </td>
-                            <td class="px-2">
-
-                            </td>
-                        </x-tr>
-                    </tfoot>
-                </x-table>
-            </div>
-            <x-inputs.error for="payments.*.amount"></x-inputs.error>
-            <x-inputs.error for="total"></x-inputs.error>
+                        </tfoot>
+                    </x-table>
+                </div>
+                <x-inputs.error for="payments.*.amount"></x-inputs.error>
+                <x-inputs.error for="total"></x-inputs.error>
+            </x-inputs.group>
+        </div>
+    @else
+        <x-inputs.group>
+            <p class="p-5 w-full text-center">No hay pagos</p>
         </x-inputs.group>
-    </div>
+    @endif
     <!--Totals-->
     <x-inputs.group>
         <div class="flex flex-row gap-3 w-full">

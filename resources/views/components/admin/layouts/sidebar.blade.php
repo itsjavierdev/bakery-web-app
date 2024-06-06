@@ -1,5 +1,5 @@
 <aside id="sidebar"
-    class="min-h-screen overflow-y-auto z-30 md:z-0 bg-yellow-50  md:relative top-0 left-0 fixed flex flex-col justify-between md:w-60 w-0 md:mx-1">
+    class="min-h-screen overflow-y-auto overflow-x-clip z-30 md:z-0 bg-yellow-50  md:relative top-0 left-0 fixed flex flex-col justify-between md:w-60 w-0 md:mx-1">
     <div>
         <div class="flex justify-center pt-3">
             <x-logo class="w-20  rounded-full p-2 self-center" />

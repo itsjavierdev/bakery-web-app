@@ -63,7 +63,7 @@ abstract class Datatable extends Component
             ->when($this->search !== '', function ($query) {
                 $this->searchQuery($query);
             })
-            ->orderBy($this->sort_by, $this->sort_direction)
+            ->reorder($this->sort_by, $this->sort_direction)
             ->paginate($this->per_page);
     }
 

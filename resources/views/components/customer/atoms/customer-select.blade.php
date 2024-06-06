@@ -2,7 +2,7 @@
 
 <select {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge([
     'class' =>
-        'md:w-auto w-full bg-transparent border border-brown-primary text-brown-primary rounded focus:border-brown-primary focus:ring-brown-primary placeholder-brown-primary',
+        'md:w-auto w-full bg-transparent border border-brown-primary text-brown-primary rounded focus:border-brown-primary focus:ring-brown-primary placeholder-brown-primary placeholder-opacity-70',
 ]) !!}>
     {{ $slot }}
 </select>

@@ -7,12 +7,15 @@ use App\Models\Customer;
 use App\Models\DeliveryTime;
 use App\Models\Product;
 use App\Models\Order;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
 class Create extends Component
 {
     public $delivery_times;
+    public $delivery_times_free;
+    public $delivery;
 
     public $add_customer = false;
     public $add_address = false;
@@ -29,6 +32,7 @@ class Create extends Component
     public $paid;
     public $delivery_time;
     public $delivery_date;
+    public $delivery_date_time;
 
     //details
     public $products = [];
@@ -36,7 +40,8 @@ class Create extends Component
 
     public function mount()
     {
-        $this->delivery_times = DeliveryTime::all();
+        $this->delivery_times = DeliveryTime::where('available', 1)->orderBy('time', 'asc')->get();
+        $this->delivery_times_free = DeliveryTime::where('for_delivery', 1)->where('available', 1)->orderBy('time', 'asc')->get();
     }
 
     public function render()
@@ -76,16 +81,19 @@ class Create extends Component
             ]);
             $this->customer['id'] = $customer->id;
         }
-        if ($this->address['id'] == null) {
-            if ($this->address['address'] != null) {
-                $address = Address::create([
-                    'address' => $this->address['address'],
-                    'reference' => $this->address['reference'],
-                    'customer_id' => $this->customer['id'],
-                ]);
-                $this->address['id'] = $address->id;
+        if ($this->delivery == 'delivery') {
+            if ($this->address['id'] == null) {
+                if ($this->address['address'] != null) {
+                    $address = Address::create([
+                        'address' => $this->address['address'],
+                        'reference' => $this->address['reference'],
+                        'customer_id' => $this->customer['id'],
+                    ]);
+                    $this->address['id'] = $address->id;
+                }
             }
         }
+
         $total_quantity = collect($this->products)->sum(function ($product) {
             // Si by_bag es true, multiplica la cantidad por bag_quantity
             return $product['by_bag'] ? $product['quantity'] * $product['bag_quantity'] : $product['quantity'];
@@ -101,6 +109,7 @@ class Create extends Component
             'total_quantity' => $total_quantity,
             'customer_id' => $this->customer['id'],
             'address_id' => $this->address['id'],
+            'picked_up' => $this->delivery == 'pickup' ? true : false,
             'delivery_time_id' => $this->delivery_time,
         ]);
 
@@ -119,7 +128,7 @@ class Create extends Component
         return redirect()->to('admin/pedidos')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Pedido creado correctamente');
     }
 
-
+    // Calculate the total paid
     public function updatedPaid($value)
     {
         if ($value) {
@@ -127,6 +136,16 @@ class Create extends Component
         } else {
             $this->total_paid = null;
         }
+    }
+
+    public function updatingDelivery()
+    {
+        $this->reset('delivery_time');
+    }
+
+    public function updateDelivery($value)
+    {
+        $this->delivery = $value;
     }
 
     // Open modal to select customer, address or product
@@ -147,6 +166,7 @@ class Create extends Component
         }));
     }
 
+    //Add products, addresses or customers with the modal
     #[On('add-products')]
     public function addProduct($id)
     {
@@ -208,15 +228,28 @@ class Create extends Component
     //validation rules
     public function rules()
     {
+        //default rules
         $rules = [
             'customer.name' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
-            'address.address' => 'nullable|string|min:5|max:100',
             'notes' => 'nullable|string|max:255',
             'products' => 'required|array|min:1',
             'products.*.quantity' => 'required|integer|min:1',
             'delivery_time' => 'required|exists:delivery_times,id',
             'delivery_date' => 'required|date|after_or_equal:today',
         ];
+        //when delivery dates and times are set make a rule to check if the delivery datetime is after the current date
+        $delivery_time = DeliveryTime::where('id', $this->delivery_time)->first();
+        if ($delivery_time && $this->delivery_date) {
+            $this->delivery_date_time = Carbon::parse("$this->delivery_date $delivery_time->time");
+            $rules['delivery_date_time'] = 'after_or_equal:now';
+        }
+
+        //if the delivery is pickup, the address is not required
+        if ($this->delivery == 'delivery') {
+            $rules['address.address'] = 'required|string|min:5|max:100';
+        }
+
+        //if want to add a new customer or address, set the rules
         if ($this->add_address) {
             $rules['address.address'] = 'required|string|min:5|max:100';
             $rules['address.reference'] = 'nullable|string|max:50';
@@ -228,6 +261,8 @@ class Create extends Component
             $rules['customer.email'] = 'nullable|string|email|max:255|unique:customers,email';
 
         }
+
+        //total paid must be less than the total amount
         $rules['total_paid'] = [
             'nullable',
             'numeric',
@@ -238,9 +273,7 @@ class Create extends Component
                 }
             },
         ];
-
         return $rules;
-
     }
     public function validationAttributes()
     {
@@ -257,6 +290,7 @@ class Create extends Component
             'products.*.quantity' => 'cantidad',
             'delivery_time' => 'hora de entrega',
             'delivery_date' => 'fecha de entrega',
+            'delivery_date_time' => 'Fecha y hora de entrega'
         ];
     }
 
@@ -266,6 +300,9 @@ class Create extends Component
             'customer.name.regex' => 'El campo cliente solo puede contener letras.',
             'customer.surname.regex' => 'El campo apellido cliente solo puede contener letras.',
             'products.*.quantity.min' => 'Los productos deben tener al menos una cantidad de 1.',
+            'delivery_date_time.after_or_equal' => 'La fecha y hora de entrega debe ser posterior a la actual',
+            'phone.min' => 'El teléfono no es valido.',
+            'phone.max' => 'El teléfono no es valido.',
         ];
     }
 

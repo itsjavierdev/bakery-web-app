@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Livewire\Admin\Parameters\Products;
+namespace App\Livewire\Admin\Transactions\Orders;
 
 use App\Livewire\Others\Datatable;
 use App\Models\Product;
 use App\View\Table\Column;
 use App\View\Table\Filter;
 
-class Read extends Datatable
+class Products extends Datatable
 {
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
         return Product::query()->leftJoin('categories', 'products.category_id', '=', 'categories.id')
-            ->select('products.*', 'categories.name AS category')->orderBy('discontinued', 'asc');
+            ->select('products.*', 'categories.name AS category')->where('discontinued', 0);
 
     }
     public function columns(): array
@@ -50,8 +50,10 @@ class Read extends Datatable
         ];
     }
 
+
     public function routesPrefix(): string
     {
         return 'products';
     }
+
 }

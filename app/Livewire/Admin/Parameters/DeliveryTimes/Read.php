@@ -20,6 +20,7 @@ class Read extends Datatable
             Column::make('id', 'ID')->isDefault(),
             Column::make('time', 'Hora')->isDefault()->component('admin.atoms.table.columns.time'),
             Column::make('available', 'Disponible')->isDefault()->component('admin.atoms.table.columns.boolean'),
+            Column::make('for_delivery', 'Disponible a domicilio')->isDefault()->component('admin.atoms.table.columns.boolean'),
         ];
     }
     public function filters(): array
@@ -28,6 +29,7 @@ class Read extends Datatable
             Filter::make('id', 'ID'),
             Filter::make('time', 'Hora'),
             Filter::make('available', 'Disponible'),
+            Filter::make('for_delivery', 'Disponible a domicilio'),
         ];
     }
 

@@ -19,7 +19,7 @@
     </x-inputs.group>
     <!--Image-->
     <x-inputs.group>
-        <x-inputs.label value="Imagen" />
+        <x-inputs.label value="Imagen" is_required />
         <x-inputs.file wire:model="new_image" />
         <x-inputs.error for="new_image" />
         @if ($new_image)

@@ -9,7 +9,7 @@
                 <div class="w-1/4 rounded gap-2 mx-2 first:ms-0 last:me-0"
                     wire:click="selectImage('{{ $image['id'] }}')">
                     <img src="{{ asset('storage/products/400/' . $image['path']) }}"
-                        class="w-auto rounded @if ($image['selected']) border-4 border-brown-primary @endif"
+                        class="w-auto rounded @if ($image['selected']) border-4 border-brown-primary opacity-80 @endif"
                         alt="">
                 </div>
             @endforeach

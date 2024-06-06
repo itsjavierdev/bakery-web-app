@@ -31,7 +31,9 @@ class All extends Component
             'products.*',
             DB::raw('(SELECT path FROM product_images WHERE product_images.product_id = products.id ORDER BY position LIMIT 1) as first_image'),
             DB::raw('price * bag_quantity as total_price')
-        );
+
+        )
+            ->where('discontinued', 0);
 
         //Search
         $query->where('name', 'like', '%' . $this->search . '%');

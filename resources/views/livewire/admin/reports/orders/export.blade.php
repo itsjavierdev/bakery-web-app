@@ -19,14 +19,14 @@
     </x-inputs.group>
     <!--Start Date-->
     <x-inputs.group class="w-full  ">
-        <x-inputs.label value="{{ $period == 'byDate' ? 'Día:' : 'Desde:' }}" />
+        <x-inputs.label value="{{ $period == 'byDate' ? 'Día:' : 'Desde:' }}" is_required />
         <x-inputs.date type="date" wire:model.change="start_date" />
         <x-inputs.error for="start_date" />
     </x-inputs.group>
     @if ($period == 'byMonths' || $period == 'byDates' || $report_by == 'resume')
         <!--End Date-->
-        <x-inputs.group class="w-full  ">
-            <x-inputs.label value="Hasta:" />
+        <x-inputs.group class="w-full">
+            <x-inputs.label value="Hasta:" is_required />
             <x-inputs.date type="date" wire:model.change="end_date" />
             <x-inputs.error for="end_date" />
         </x-inputs.group>

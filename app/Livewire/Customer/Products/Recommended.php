@@ -18,10 +18,10 @@ class Recommended extends Component
             DB::raw('(SELECT path FROM product_images WHERE product_images.product_id = products.id ORDER BY position LIMIT 1) as first_image'),
             DB::raw('price * bag_quantity as total_price')
         )
+            ->where('discontinued', 0)
             ->latest('created_at')
             ->take(4)
-            ->get()
-            ->chunk(2);
+            ->get();
 
         return view('livewire.customer.products.recommended', compact('recent_products'));
     }
@@ -40,11 +40,11 @@ class Recommended extends Component
             ->join('products', 'sale_details.product_id', '=', 'products.id')
             ->join('sales', 'sale_details.sale_id', '=', 'sales.id')
             ->where('sales.created_at', '>=', $last_month)
+            ->where('products.discontinued', 0)
             ->groupBy('products.id')
             ->orderByDesc('total_income')
             ->limit(4)
-            ->get()
-            ->chunk(2);
+            ->get();
 
     }
 }

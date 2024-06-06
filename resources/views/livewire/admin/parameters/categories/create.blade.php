@@ -1,7 +1,7 @@
 <x-form-template>
     <!--Name-->
     <x-inputs.group>
-        <x-inputs.label value="Nombre" />
+        <x-inputs.label value="Nombre" is_required />
         <x-inputs.text wire:model="name" />
         <x-inputs.error for="name" />
     </x-inputs.group>

@@ -19,37 +19,8 @@
                 </div>
             </x-checkout-section>
             <!--Delivery info-->
-            <x-checkout-section title="Información de envío">
+            <x-checkout-section title="Información de entrega">
                 <!--Pickup-->
-                <div class="p-3">
-                    <h4>Preferencia de entrega:</h4>
-                    <div class="w-full flex gap-3 mt-2">
-                        <div class="w-full">
-                            <x-input type="date" class="!w-full" wire:model="delivery_date" />
-                            <x-inputs.error for="delivery_date" />
-                        </div>
-                        <div class="w-full">
-                            <x-customer-select class="!w-full" :disabled="$delivery ? false : true" wire:model="delivery_time">
-                                <option value="">Seleccione una hora</option>
-                                @if ($delivery == 'pickup')
-                                    @foreach ($times as $time)
-                                        <option value="{{ $time->id }}">
-                                            {{ Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('H:i') }}
-                                        </option>
-                                    @endforeach
-                                @else
-                                    @foreach ($times_free as $time)
-                                        <option value="{{ $time->id }}">
-                                            {{ Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('H:i') }}
-                                        </option>
-                                    @endforeach
-                                @endif
-                            </x-customer-select>
-                            <x-inputs.error for="delivery_time" />
-                        </div>
-
-                    </div>
-                </div>
                 <div wire:click="$set('delivery', 'pickup')">
                     <x-checkout-input label="Recoger en el local" action="{{ $delivery === 'pickup' ? true : false }}"
                         nameInput="pickup" idInput="delivery">
@@ -92,6 +63,36 @@
                         @endif
                     </x-checkout-input>
                 </div>
+                <div class="py-3 mx-3 border-t border-brown-primary border-opacity-20">
+                    <h4>Preferencia de entrega:</h4>
+                    <div class="w-full flex gap-3 mt-2">
+                        <div class="w-full">
+                            <x-input type="date" class="!w-full" wire:model="delivery_date" />
+                            <x-inputs.error for="delivery_date" />
+                        </div>
+                        <div class="w-full">
+                            <x-customer-select class="!w-full" :disabled="$delivery ? false : true" wire:model="delivery_time">
+                                <option value="">Seleccione una hora</option>
+                                @if ($delivery == 'pickup')
+                                    @foreach ($times as $time)
+                                        <option value="{{ $time->id }}">
+                                            {{ Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('H:i') }}
+                                        </option>
+                                    @endforeach
+                                @else
+                                    @foreach ($times_free as $time)
+                                        <option value="{{ $time->id }}">
+                                            {{ Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('H:i') }}
+                                        </option>
+                                    @endforeach
+                                @endif
+                            </x-customer-select>
+                            <x-inputs.error for="delivery_time" />
+                        </div>
+
+                    </div>
+                    <x-inputs.error for="delivery_date_time" />
+                </div>
             </x-checkout-section>
             <x-inputs.error for="delivery" class="p-2" />
             <x-checkout-section title="Información adicional">
@@ -117,7 +118,7 @@
                         <h6>Bs{{ $product['subtotal'] }}</h6>
                     </div>
                 @endforeach
-                <div class=" flex justify-between text-lg py-1 px-5 border-t border-brown-primary">
+                <div class=" flex justify-between text-lg py-1 mx-5 border-t border-brown-primary border-opacity-20">
                     <h5>Total</h5>
                     <h6>Bs{{ $total }}</h6>
                 </div>

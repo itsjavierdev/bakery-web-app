@@ -8,7 +8,7 @@ use App\View\Table\Filter;
 use App\Models\Sale;
 use Illuminate\Support\Facades\DB;
 
-class Read extends Datatable
+class AllPayments extends Datatable
 {
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
@@ -22,7 +22,7 @@ class Read extends Datatable
                 DB::raw('CONCAT_WS(" ", NULLIF(customers.name,""), NULLIF(customers.surname,"")) AS customer'),
                 DB::raw('(sales.total - sales.paid_amount) as debt')
             )
-            ->where('sales.paid', false);
+            ->where('sales.paid', true);
     }
 
     public function columns(): array
@@ -53,12 +53,11 @@ class Read extends Datatable
         return [
             'detail',
             'update',
-            'add-payments'
         ];
     }
 
     public function routesPrefix(): string
     {
-        return 'debts';
+        return 'payments';
     }
 }

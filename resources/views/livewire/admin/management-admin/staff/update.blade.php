@@ -4,19 +4,19 @@
             <h2 class="text-lg text-gray-700 text-center font-medium w-full mb-4">Informacion del personal</h2>
             <!--Name-->
             <x-inputs.group>
-                <x-inputs.label value="Nombre" />
+                <x-inputs.label value="Nombre" is_required />
                 <x-inputs.text wire:model="staff_update.name" />
                 <x-inputs.error for="staff_update.name" />
             </x-inputs.group>
             <!--Surname-->
             <x-inputs.group>
-                <x-inputs.label value="Apellido" />
+                <x-inputs.label value="Apellido" is_required />
                 <x-inputs.text wire:model="staff_update.surname" />
                 <x-inputs.error for="staff_update.surname" />
             </x-inputs.group>
             <!--Phone-->
             <x-inputs.group>
-                <x-inputs.label value="Telefono" />
+                <x-inputs.label value="Telefono" is_required />
                 <x-inputs.text type="tel" wire:model="staff_update.phone" />
                 <x-inputs.error for="staff_update.phone" />
             </x-inputs.group>
@@ -24,12 +24,12 @@
             <x-inputs.group>
                 <div class="flex flex-row gap-4">
                     <div class="w-full">
-                        <x-inputs.label value="Carnet de identidad" />
+                        <x-inputs.label value="Carnet de identidad" is_required />
                         <x-inputs.text class="mt-2" wire:model="staff_update.CI_number" />
                         <x-inputs.error for="staff_update.CI_number" />
                     </div>
                     <div class="w-full">
-                        <x-inputs.label value="Extensión" />
+                        <x-inputs.label value="Extensión" is_required />
                         <x-inputs.select class="mt-2" wire:model="staff_update.CI_extension">
                             <option value="">Seleccionar</option>
                             @foreach ($extensions as $extension)
@@ -43,7 +43,7 @@
             </x-inputs.group>
             <!--Birthdate-->
             <x-inputs.group>
-                <x-inputs.label value="Fecha de nacimiento" />
+                <x-inputs.label value="Fecha de nacimiento" is_required />
                 <x-inputs.date wire:model="staff_update.birthdate" />
                 <x-inputs.error for="staff_update.birthdate" />
             </x-inputs.group>
@@ -103,7 +103,7 @@
             @if ($add_account || $has_account)
                 <!--Role-->
                 <x-inputs.group>
-                    <x-inputs.label value="Rol" />
+                    <x-inputs.label value="Rol" is_required />
                     <x-inputs.select wire:model="{{ $has_account ? 'user_update.role' : 'user_create.role' }}">
                         <option value="">Seleccionar</option>
                         @foreach ($roles as $role)
@@ -114,7 +114,7 @@
                 </x-inputs.group>
                 <!--Email-->
                 <x-inputs.group>
-                    <x-inputs.label value="Correo electronico" />
+                    <x-inputs.label value="Correo electronico" is_required />
                     <x-inputs.text wire:model="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
                     <x-inputs.error for="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
                 </x-inputs.group>
@@ -132,13 +132,13 @@
                 @if ($add_account)
                     <!--Password-->
                     <x-inputs.group>
-                        <x-inputs.label value="Contraseña" />
+                        <x-inputs.label value="Contraseña" is_required />
                         <x-inputs.text type="password" wire:model="user_create.password" />
                         <x-inputs.error for="user_create.password" />
                     </x-inputs.group>
                     <!--Confirm password-->
                     <x-inputs.group>
-                        <x-inputs.label value="Confirmar contraseña" />
+                        <x-inputs.label value="Confirmar contraseña" is_required />
                         <x-inputs.text type="password" wire:model="user_create.password_confirmation" />
                         <x-inputs.error for="user_create.password_confirmation" />
                     </x-inputs.group>

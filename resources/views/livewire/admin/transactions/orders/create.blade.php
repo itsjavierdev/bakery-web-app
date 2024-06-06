@@ -2,9 +2,11 @@
     <div class="flex flex-col lg:flex-row gap-5 lg:gap-10">
         <!--Data-->
         <div class="w-full">
-            <!--Customer-->
+            <!--Customer Info-->
+            <h3 class="w-full text-center">Información del cliente</h3>
             <x-inputs.group>
-                <x-inputs.label value="Cliente" />
+                <!--Select Customer or add a name-->
+                <x-inputs.label value="Cliente" is_required />
                 <div class="flex gap-2">
                     <x-inputs.text wire:model="customer.name" :disabled="$add_customer ? false : true" />
                     <x-secondary-button wire:click="toggleModal('cliente')" tabindex="-1"><i
@@ -19,17 +21,18 @@
                 </div>
                 <x-inputs.error for="customer.name" />
             </x-inputs.group>
+            <!--Add customer form-->
             @if ($add_customer)
                 <div class="pb-2">
                     <!--Surname-->
                     <x-inputs.group>
-                        <x-inputs.label value="Apellido" />
+                        <x-inputs.label value="Apellido" is_required />
                         <x-inputs.text wire:model="customer.surname" />
                         <x-inputs.error for="customer.surname" />
                     </x-inputs.group>
                     <!--Phone-->
                     <x-inputs.group>
-                        <x-inputs.label value="Telefono" />
+                        <x-inputs.label value="Telefono" is_required />
                         <x-inputs.text wire:model="customer.phone" />
                         <x-inputs.error for="customer.phone" />
                     </x-inputs.group>
@@ -39,59 +42,94 @@
                         <x-inputs.text wire:model="customer.email" />
                         <x-inputs.error for="customer.email" />
                     </x-inputs.group>
-                    <hr>
                 </div>
             @endif
-            <!--Address-->
-            <x-inputs.group>
-                <x-inputs.label value="Dirección" />
-                <div class="flex gap-2">
-                    <x-inputs.text wire:model="address.address" :disabled="$add_address ? false : true" />
-                    <x-secondary-button wire:click="toggleModal('dirección')" tabindex="-1"><i
-                            class="icon-bars text-2xl"></i></x-secondary-button>
-                    @if ($add_address)
-                        <x-secondary-button wire:click="$set('add_address', false)" tabindex="-1"><i
-                                class="icon-minus text-2xl"></i></x-secondary-button>
-                    @else
-                        <x-secondary-button wire:click="$set('add_address', true)" tabindex="-1"><i
-                                class="icon-plus text-2xl"></i></x-secondary-button>
-                    @endif
-                </div>
-                <x-inputs.error for="address.address" />
-            </x-inputs.group>
-            @if ($add_address)
-                <div class="pb-2">
-                    <!--Reference-->
-                    <x-inputs.group>
-                        <x-inputs.label value="Referencia" />
-                        <x-inputs.text wire:model="address.reference" />
-                        <x-inputs.error for="address.reference" />
-                    </x-inputs.group>
-                    <hr>
-                </div>
+            <hr class="my-3">
+            <!--Delivery info-->
+            <h3 class="w-full text-center">Información del entrega</h3>
+            <x-inputs.label value="Metodo de entrega" is_required />
+            <div class="flex  justify-around gap-3 my-3">
+                <!--Select delivery method-->
+                @if ($delivery == 'delivery')
+                    <x-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
+                        domicilio</x-button>
+                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida en
+                        sucursal</x-secondary-button>
+                @elseif ($delivery == 'pickup')
+                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
+                        domicilio</x-secondary-button>
+                    <x-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida
+                        en
+                        sucursal</x-button>
+                @else
+                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
+                        domicilio</x-secondary-button>
+                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida en
+                        sucursal</x-secondary-button>
+                @endif
+            </div>
+            <!--Select or add Address-->
+            @if ($delivery == 'delivery')
+                <x-inputs.group>
+                    <x-inputs.label value="Dirección" is_required />
+                    <div class="flex gap-2">
+                        <x-inputs.text wire:model="address.address" :disabled="$add_address ? false : true" />
+                        <x-secondary-button wire:click="toggleModal('dirección')" tabindex="-1"><i
+                                class="icon-bars text-2xl"></i></x-secondary-button>
+                        @if ($add_address)
+                            <x-secondary-button wire:click="$set('add_address', false)" tabindex="-1"><i
+                                    class="icon-minus text-2xl"></i></x-secondary-button>
+                        @else
+                            <x-secondary-button wire:click="$set('add_address', true)" tabindex="-1"><i
+                                    class="icon-plus text-2xl"></i></x-secondary-button>
+                        @endif
+                    </div>
+                    <x-inputs.error for="address.address" />
+                </x-inputs.group>
+                <!--Add address form-->
+                @if ($add_address)
+                    <div class="pb-2">
+                        <!--Reference-->
+                        <x-inputs.group>
+                            <x-inputs.label value="Referencia" />
+                            <x-inputs.text wire:model="address.reference" />
+                            <x-inputs.error for="address.reference" />
+                        </x-inputs.group>
+                    </div>
+                @endif
             @endif
             <!--Date-->
             <x-inputs.group>
                 <div class="flex flex-row gap-4 *:w-full">
                     <div>
-                        <x-inputs.label value="Fecha de entrega" />
+                        <x-inputs.label value="Fecha de entrega" is_required />
                         <x-inputs.date class="mt-2" wire:model="delivery_date" />
                         <x-inputs.error for="delivery_date" />
                     </div>
                     <div>
-                        <x-inputs.label value="Hora de entrega" />
-                        <x-inputs.select class="mt-2" wire:model="delivery_time">
+                        <x-inputs.label value="Hora de entrega" is_required />
+                        <x-inputs.select class="mt-2" wire:model="delivery_time" :disabled="$delivery ? false : true">
                             <option value="">Seleccionar</option>
-                            @foreach ($delivery_times as $delivery_time)
-                                <option value="{{ $delivery_time->id }}">
-                                    {{ Carbon\Carbon::createFromFormat('H:i:s', $delivery_time->time)->format('H:i') }}
-                                    {{ $delivery_time->available ? 'Gratis' : '' }}</option>
-                            @endforeach
+                            @if ($delivery == 'pickup')
+                                @foreach ($delivery_times as $time)
+                                    <option value="{{ $time->id }}">
+                                        {{ Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('H:i') }}
+                                    </option>
+                                @endforeach
+                            @else
+                                @foreach ($delivery_times_free as $time)
+                                    <option value="{{ $time->id }}">
+                                        {{ Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('H:i') }}
+                                    </option>
+                                @endforeach
+                            @endif
                         </x-inputs.select>
                         <x-inputs.error for="delivery_time" />
                     </div>
                 </div>
+                <x-inputs.error for="delivery_date_time" />
             </x-inputs.group>
+            <hr class="my-3">
             <!--Comments-->
             <x-inputs.group>
                 <x-inputs.label value="Nota" />
@@ -111,8 +149,9 @@
         </div>
         <!--Detail-->
         <div class="w-full">
+            <h3 class="w-full text-center mb-6">Detalle de productos <span class="text-red-500">*</span></h3>
             <x-inputs.group>
-                <x-inputs.label value="Detalle" />
+
                 <div>
                     <x-table>
                         <thead class="border-b-medium border-gray-300">
@@ -206,7 +245,7 @@
             @elseif ($select == 'dirección')
                 <livewire:admin.management-customers.addresses.select add customer_id="{{ $customer['id'] }}" />
             @else
-                <livewire:admin.parameters.products.read add />
+                <livewire:admin.transactions.orders.products add />
             @endif
         </x-slot>
         <x-slot name="footer">

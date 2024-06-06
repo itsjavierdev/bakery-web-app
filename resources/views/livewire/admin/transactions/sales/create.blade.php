@@ -4,7 +4,7 @@
         <div class="w-full">
             <!--Customer-->
             <x-inputs.group>
-                <x-inputs.label value="Cliente" />
+                <x-inputs.label value="Cliente" is_required />
                 <div class="flex gap-2">
                     <x-inputs.text wire:model="customer.name" :disabled="$add_customer ? false : true" />
                     <x-secondary-button wire:click="toggleModal('cliente')" tabindex="-1"><i
@@ -23,13 +23,13 @@
                 <div class="pb-2">
                     <!--Surname-->
                     <x-inputs.group>
-                        <x-inputs.label value="Apellido" />
+                        <x-inputs.label value="Apellido" is_required />
                         <x-inputs.text wire:model="customer.surname" />
                         <x-inputs.error for="customer.surname" />
                     </x-inputs.group>
                     <!--Phone-->
                     <x-inputs.group>
-                        <x-inputs.label value="Telefono" />
+                        <x-inputs.label value="Telefono" is_required />
                         <x-inputs.text wire:model="customer.phone" />
                         <x-inputs.error for="customer.phone" />
                     </x-inputs.group>
@@ -56,7 +56,7 @@
         <!--Detail-->
         <div class="w-full">
             <x-inputs.group>
-                <x-inputs.label value="Detalle" />
+                <x-inputs.label value="Detalle" is_required />
                 <div>
                     <x-table>
                         <thead class="border-b-medium border-gray-300">

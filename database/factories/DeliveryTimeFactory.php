@@ -18,7 +18,8 @@ class DeliveryTimeFactory extends Factory
     {
         return [
             'time' => fake()->unique()->time(),
-            'available' => $this->faker->boolean(),
+            'for_delivery' => $this->faker->boolean(),
+            'available' => true,
         ];
     }
 }

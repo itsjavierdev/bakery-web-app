@@ -6,10 +6,10 @@ use App\Models\Address;
 use App\Models\CompanyContact;
 use App\Models\DeliveryTime;
 use App\Models\OrderDetail;
+use Carbon\Carbon;
 use Livewire\Component;
 use App\Livewire\Forms\Customer\Addresses\CheckoutAddress;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Rule;
 use App\Facades\Cart as CartFacade;
 use App\Models\Order;
 
@@ -26,14 +26,11 @@ class Checkout extends Component
     public $company_address;
 
     //validation rules
-    #[Rule('required', as: 'información de envío')]
     public $delivery;
-    #[Rule('required', as: 'dirección de entrega')]
     public $delivery_time;
-    #[Rule('required|date|after_or_equal:today', as: 'fecha de entrega')]
     public $delivery_date;
-    #[Rule('nullable|max:255', as: 'nota')]
     public $description;
+    public $delivery_date_time;
 
     public function render()
     {
@@ -50,9 +47,9 @@ class Checkout extends Component
             ->first();
 
         //all times for pickup
-        $this->times = DeliveryTime::all();
-        //just avaliable times for delivery
-        $this->times_free = DeliveryTime::where('available', 1)->get();
+        $this->times = DeliveryTime::where('available', 1)->orderBy('time', 'asc')->get();
+        //just available times for delivery
+        $this->times_free = DeliveryTime::where('for_delivery', 1)->where('available', 1)->orderBy('time', 'asc')->get();
 
         $this->company_info = CompanyContact::first();
         if ($this->company_info->address_id ?? false) {
@@ -66,12 +63,7 @@ class Checkout extends Component
 
     public function store()
     {
-        $this->validate([
-            'delivery' => 'required',
-            'delivery_time' => 'required',
-            'delivery_date' => 'required|date|after_or_equal:today',
-        ]);
-
+        $this->validate($this->rules(), [], $this->validationAttributes());
         //create the order
         $newOrder = new Order();
         $newOrder->total = $this->total;
@@ -111,5 +103,36 @@ class Checkout extends Component
         return redirect()->route('customer.thankyou');
     }
 
+    public function rules()
+    {
+        $rules = [
+            'delivery' => 'required',
+            'delivery_date' => 'required|date',
+            'delivery_time' => 'required',
+        ];
+        $delivery_time = DeliveryTime::where('id', $this->delivery_time)->first();
+        if ($delivery_time && $this->delivery_date) {
+            $this->delivery_date_time = Carbon::parse("$this->delivery_date $delivery_time->time");
+            $rules['delivery_date_time'] = 'after_or_equal:now';
+        }
+        return $rules;
+    }
 
+    public function validationAttributes()
+    {
+        return [
+            'delivery' => 'información de entrega',
+            'delivery_time' => 'hora de entrega',
+            'delivery_date' => 'fecha de entrega',
+            'delivery_date_time' => 'Fecha y hora de entrega'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'delivery_date_time.after_or_equal' => 'La fecha y hora de entrega debe ser posterior a la actual',
+            'delivery.required' => 'La información de entrega es requerida',
+        ];
+    }
 }

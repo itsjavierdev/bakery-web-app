@@ -19,37 +19,38 @@
                     @csrf
 
                     <div>
-                        <x-customer-label for="name" value="{{ __('Name') }}" />
+                        <x-customer-label for="name" value="{{ __('Name') }}" is_required />
                         <x-input id="name" class="block mt-1 w-96" type="text" name="name" :value="old('name')"
                             required autofocus autocomplete="name" />
                     </div>
 
                     <div class="mt-4">
-                        <x-customer-label for="surname" value="{{ __('Apellido') }}" />
+                        <x-customer-label for="surname" value="{{ __('Apellido') }}" is_required />
                         <x-input id="surname" class="block mt-1 w-96" type="text" name="surname" :value="old('surname')"
                             required autofocus autocomplete="surname" />
                     </div>
 
                     <div class="mt-4">
-                        <x-customer-label for="email" value="{{ __('Email') }}" />
+                        <x-customer-label for="email" value="{{ __('Email') }}" is_required />
                         <x-input id="email" class="block mt-1 w-96" type="email" name="email" :value="old('email')"
                             required autocomplete="username" />
                     </div>
 
                     <div class="mt-4">
-                        <x-customer-label for="phone" value="{{ __('Telefono') }}" />
+                        <x-customer-label for="phone" value="{{ __('Telefono') }}" is_required />
                         <x-input id="phone" class="block mt-1 w-96" type="text" name="phone" :value="old('phone')"
                             required autocomplete="phone" />
                     </div>
 
                     <div class="mt-4">
-                        <x-customer-label for="password" value="{{ __('Password') }}" />
+                        <x-customer-label for="password" value="{{ __('Password') }}" is_required />
                         <x-input id="password" class="block mt-1 w-96" type="password" name="password" required
                             autocomplete="new-password" />
                     </div>
 
                     <div class="mt-4">
-                        <x-customer-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                        <x-customer-label for="password_confirmation" value="{{ __('Confirm Password') }}"
+                            is_required />
                         <x-input id="password_confirmation" class="block mt-1 w-96" type="password"
                             name="password_confirmation" required autocomplete="new-password" />
                     </div>

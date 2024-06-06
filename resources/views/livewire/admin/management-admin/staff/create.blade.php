@@ -4,19 +4,19 @@
             <h2 class="text-lg text-gray-700 text-center font-medium w-full mb-4">Informacion del personal</h2>
             <!--Name-->
             <x-inputs.group>
-                <x-inputs.label value="Nombre" />
+                <x-inputs.label value="Nombre" is_required />
                 <x-inputs.text wire:model="staff_create.name" />
                 <x-inputs.error for="staff_create.name" />
             </x-inputs.group>
             <!--Surname-->
             <x-inputs.group>
-                <x-inputs.label value="Apellido" />
+                <x-inputs.label value="Apellido" is_required />
                 <x-inputs.text wire:model="staff_create.surname" />
                 <x-inputs.error for="staff_create.surname" />
             </x-inputs.group>
             <!--Phone-->
             <x-inputs.group>
-                <x-inputs.label value="Telefono" />
+                <x-inputs.label value="Telefono" is_required />
                 <x-inputs.text type="tel" wire:model="staff_create.phone" />
                 <x-inputs.error for="staff_create.phone" />
             </x-inputs.group>
@@ -24,12 +24,12 @@
             <x-inputs.group>
                 <div class="flex flex-row gap-4 *:w-full">
                     <div>
-                        <x-inputs.label value="Carnet de identidad" />
+                        <x-inputs.label value="Carnet de identidad" is_required />
                         <x-inputs.text class="mt-2" wire:model="staff_create.CI_number" />
                         <x-inputs.error for="staff_create.CI_number" />
                     </div>
                     <div>
-                        <x-inputs.label value="Extensión" />
+                        <x-inputs.label value="Extensión" is_required />
                         <x-inputs.select class="mt-2" wire:model="staff_create.CI_extension">
                             <option value="">Seleccionar</option>
                             @foreach ($extensions as $extension)
@@ -43,7 +43,7 @@
             </x-inputs.group>
             <!--Birthdate-->
             <x-inputs.group>
-                <x-inputs.label value="Fecha de nacimiento" />
+                <x-inputs.label value="Fecha de nacimiento" is_required />
                 <x-inputs.date wire:model="staff_create.birthdate" />
                 <x-inputs.error for="staff_create.birthdate" />
             </x-inputs.group>
@@ -74,7 +74,7 @@
             @if ($add_account)
                 <!--Role-->
                 <x-inputs.group>
-                    <x-inputs.label value="Rol" />
+                    <x-inputs.label value="Rol" is_required />
                     <x-inputs.select wire:model="user_create.role">
                         <option value="">Seleccionar</option>
                         @foreach ($roles as $role)
@@ -85,19 +85,19 @@
                 </x-inputs.group>
                 <!--Email-->
                 <x-inputs.group>
-                    <x-inputs.label value="Correo electronico" />
+                    <x-inputs.label value="Correo electronico" is_required />
                     <x-inputs.text wire:model="user_create.email" />
                     <x-inputs.error for="user_create.email" />
                 </x-inputs.group>
                 <!--Password-->
                 <x-inputs.group>
-                    <x-inputs.label value="Contraseña" />
+                    <x-inputs.label value="Contraseña" is_required />
                     <x-inputs.text type="password" wire:model="user_create.password" />
                     <x-inputs.error for="user_create.password" />
                 </x-inputs.group>
                 <!--Confirm password-->
                 <x-inputs.group>
-                    <x-inputs.label value="Confirmar contraseña" />
+                    <x-inputs.label value="Confirmar contraseña" is_required />
                     <x-inputs.text type="password" wire:model="user_create.password_confirmation" />
                     <x-inputs.error for="user_create.password_confirmation" />
                 </x-inputs.group>

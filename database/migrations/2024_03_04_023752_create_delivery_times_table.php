@@ -13,7 +13,8 @@ return new class extends Migration {
         Schema::create('delivery_times', function (Blueprint $table) {
             $table->id();
             $table->time('time');
-            $table->boolean('available')->default(false);
+            $table->boolean('for_delivery')->default(false);
+            $table->boolean('available')->default(true);
             $table->timestamps();
         });
     }

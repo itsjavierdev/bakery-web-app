@@ -31,7 +31,7 @@
                                  <x-dropdown align="left" width="w-40">
                                      <x-slot name="trigger">
                                          <button type="button"
-                                             class="inline-flex items-center px-3 py-1.5 border border-transparent text-base leading-4 font-medium rounded-md text-white bg-brown-primary hover:text-yellow-primary focus:outline-none focus:bg-brown-secondary active:brown-secondary transition ease-in-out duration-150">
+                                             class="inline-flex items-center px-3 py-1.5 border border-transparent text-base leading-4 font-medium rounded-md text-white bg-transparent hover:text-yellow-primary focus:outline-none focus:bg-transparent active:bg-transparent transition ease-in-out duration-150">
                                              {{ Auth::guard('customer')->user()->customer->name }}
 
                                              <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"

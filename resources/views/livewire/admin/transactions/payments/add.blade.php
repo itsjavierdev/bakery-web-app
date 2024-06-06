@@ -12,7 +12,7 @@
     </x-inputs.group>
     <!--Paid amount-->
     <x-inputs.group>
-        <x-inputs.label value="Monto a abonar" />
+        <x-inputs.label value="Monto a abonar" is_required />
         <x-inputs.text type="number" wire:model.change="paid_amount" :disabled="$paid_remaining ? true : false" />
         <x-inputs.error for="paid_amount" />
         <x-inputs.label class="mt-2">

@@ -19,7 +19,7 @@
     </x-inputs.group>
     <!--Image-->
     <x-inputs.group>
-        <x-inputs.label value="Imagen" />
+        <x-inputs.label value="Imagen" is_required />
 
         <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
             x-on:livewire-upload-finish="uploading = false" x-on:livewire-upload-error="uploading = false"

@@ -1,13 +1,13 @@
 <x-form-template>
     <!--Name-->
     <x-inputs.group>
-        <x-inputs.label value="Nombre" />
+        <x-inputs.label value="Nombre" is_required />
         <x-inputs.text wire:model="name" />
         <x-inputs.error for="name" />
     </x-inputs.group>
     <!--Category-->
     <x-inputs.group>
-        <x-inputs.label value="Categoria" />
+        <x-inputs.label value="Categoria" is_required />
         <x-inputs.select wire:model="category_id">
             <option value="">Seleccionar</option>
             @foreach ($categories as $category)
@@ -18,13 +18,13 @@
     </x-inputs.group>
     <!--Price-->
     <x-inputs.group>
-        <x-inputs.label value="Precio por bolsa" />
+        <x-inputs.label value="Precio por bolsa" is_required />
         <x-inputs.text wire:model="price" />
         <x-inputs.error for="price" />
     </x-inputs.group>
     <!--Bag quantity-->
     <x-inputs.group>
-        <x-inputs.label value="Cantidad por bolsa" />
+        <x-inputs.label value="Cantidad por bolsa" is_required />
         <x-inputs.text type="number" wire:model="bag_quantity" />
         <x-inputs.error for="bag_quantity" />
     </x-inputs.group>
@@ -35,7 +35,7 @@
         <x-inputs.error for="description" />
     </x-inputs.group>
     <x-inputs.group>
-        <x-inputs.label value="Imagenes" />
+        <x-inputs.label value="Imagenes" is_required />
         <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
             x-on:livewire-upload-finish="uploading = false" x-on:livewire-upload-error="uploading = false"
             x-on:livewire-upload-progress="progress = $event.detail.progress">

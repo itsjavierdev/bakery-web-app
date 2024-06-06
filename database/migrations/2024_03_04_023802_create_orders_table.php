@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->decimal('paid_amount', 8, 2)->nullable();
             $table->boolean('paid')->default(false);
             $table->integer('total_quantity');
+            $table->boolean('picked_up');
             $table->boolean('delivered')->default(false);
             $table->string('notes')->nullable();
 

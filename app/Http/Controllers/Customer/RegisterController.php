@@ -69,7 +69,7 @@ class RegisterController extends Controller
         ]);
 
         if ($customer && $user) {
-            return redirect()->route('customer.login');
+            return redirect()->route('customer.login')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Registro exitoso');
         } else {
             return redirect()->route('customer.register')->with('error', 'Algo salió mal, intente nuevamente');
         }

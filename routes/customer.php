@@ -7,6 +7,7 @@ use App\Http\Controllers\Customer\RegisterController;
 use App\Http\Controllers\Customer\LoginController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\RedirectIfCartIsEmpty;
 
 
 Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
@@ -27,6 +28,6 @@ Route::middleware([RedirectIfAuthenticated::class . ':customer'])->group(functio
 Route::middleware([RedirectIfNotAuthenticated::class . ':customer'])->group(function () {
     Route::post('cliente/logout', [AuthManager::class, 'logout'])->name('customer.logout');
     Route::get('cliente/direcciones', [CustomerController::class, 'addresses'])->name('customer.addresses');
-    Route::get('cliente/realizar-pedido', [CustomerController::class, 'checkout'])->name('customer.checkout');
+    Route::get('cliente/realizar-pedido', [CustomerController::class, 'checkout'])->middleware([RedirectIfCartIsEmpty::class])->name('customer.checkout');
     Route::get('cliente/muchas-gracias', [CustomerController::class, 'thankyou'])->name('customer.thankyou');
 });

@@ -8,7 +8,7 @@
 
 <div class="inline-flex flex-col" x-data="{ open: @json($active) }" x-cloak>
     <button @click="open = ! open"
-        {{ $attributes->merge(['class' => 'flex md:justify-between justify-between inline-flex items-center md:text-base text-xl px-2 py-4 md:py-2 leading-5 transition duration-150 ease-in-out gap-2 focus:outline-none cursor-pointer mx-1', ':class' => 'open ? \'' . $activeClasses . '\' : \'' . $inactiveClasses . '\'']) }}>
+        {{ $attributes->merge(['class' => 'flex md:justify-between justify-between inline-flex items-center md:text-lg text-xl px-2 py-4 md:py-2 leading-5 transition duration-150 ease-in-out gap-2 focus:outline-none cursor-pointer mx-1', ':class' => 'open ? \'' . $activeClasses . '\' : \'' . $inactiveClasses . '\'']) }}>
         <div class="flex items-center gap-1">
 
             {{ $slot }}

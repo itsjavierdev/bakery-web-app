@@ -34,7 +34,7 @@ class UpdateFormStaff extends Form
             'name' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
             'surname' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
             'phone' => 'required|integer|min:60000000|max:80090000|unique:staff,phone,' . $this->staff_id,
-            'CI_number' => 'required|string|regex:/^\d+$/|min:8|max:8',
+            'CI_number' => 'required|string|regex:/^\d+$/|min:5|max:10',
             'CI_extension' => ['required', 'string', 'max:2', Rule::in(['SC', 'CB', 'LP', 'PO', 'OR', 'CH', 'TJ', 'BE', 'PA'])],
             'CI' => 'unique:staff,CI,' . $this->staff_id,
             'birthdate' => 'required|date|before:' . $maxDate . '|after:' . $minDate,

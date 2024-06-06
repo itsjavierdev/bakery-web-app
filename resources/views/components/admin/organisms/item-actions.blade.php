@@ -12,7 +12,7 @@
         @endif
         @if (in_array('add-payments', $actions))
             <x-button-action>
-                <a tabindex="-1" href="{{ route('payments.add', [$item_id]) }}">
+                <a tabindex="-1" href="{{ route('debts.add', [$item_id]) }}">
                     <i class="icon-money-mark text-2xl text-green-700"></i>
                 </a>
             </x-button-action>

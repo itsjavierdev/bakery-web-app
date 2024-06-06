@@ -64,8 +64,9 @@
     @php
         $order_active = Str::startsWith(request()->route()->getName(), 'orders.');
         $sales_active = Str::startsWith(request()->route()->getName(), 'sales.');
+        $debts_active = Str::startsWith(request()->route()->getName(), 'debts.');
         $payments_active = Str::startsWith(request()->route()->getName(), 'payments.');
-        $transactions_active = $order_active || $sales_active || $payments_active;
+        $transactions_active = $order_active || $sales_active || $payments_active || $debts_active;
     @endphp
     <x-nav-select :active="$transactions_active">
         <i class="icon-money-mark text-xl"></i>
@@ -78,6 +79,11 @@
             <x-nav-item href="{{ route('sales.index') }}" :active="$sales_active">
                 Ventas
             </x-nav-item>
+
+            <x-nav-item href="{{ route('debts.all') }}" :active="$debts_active">
+                Deudas
+            </x-nav-item>
+
 
             <x-nav-item href="{{ route('payments.index') }}" :active="$payments_active">
                 Pagos

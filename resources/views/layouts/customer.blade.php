@@ -28,7 +28,7 @@
 
     <x-customer.layouts.navbar />
 
-    <main class="bg-yellow-primary">
+    <main class="bg-yellow-primary min-h-[83vh]">
         <div {{ $attributes->merge(['class' => 'max-w-6xl mx-auto justify-center py-7']) }}>
             {{ $slot }}
         </div>

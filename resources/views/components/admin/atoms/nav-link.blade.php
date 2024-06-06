@@ -8,6 +8,6 @@
 @endphp
 
 <a
-    {{ $attributes->merge(['class' => "justify-start inline-flex items-center md:text-base text-xl md:py-2 px-2 py-4 mx-1 leading-5 transition duration-150 ease-in-out gap-2 focus:outline-none $classes"]) }}>
+    {{ $attributes->merge(['class' => "justify-start inline-flex items-center text-xl md:text-lg md:py-2 px-2 py-4 mx-1 leading-5 transition duration-150 ease-in-out gap-2 focus:outline-none $classes"]) }}>
     {{ $slot }}
 </a>

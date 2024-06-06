@@ -23,6 +23,7 @@ class Read extends Datatable
                 'orders.paid as paid',
                 'orders.paid_amount',
                 'orders.total AS total',
+                'orders.picked_up AS picked_up',
                 DB::raw('CONCAT(orders.delivery_date, " ", delivery_times.time) AS delivery_datetime'),
                 DB::raw('CONCAT_WS(" ", NULLIF(customers.name, ""), NULLIF(customers.surname, "")) AS customer'),
                 DB::raw('CONCAT_WS(" ", NULLIF(customers.phone,""), NULLIF(customers.email,"")) AS customer_info'),
@@ -35,7 +36,7 @@ class Read extends Datatable
         return [
             Column::make('id', 'ID')->isDefault(),
             Column::make('delivery_datetime', 'Fecha entrega')->component('admin.atoms.table.columns.orders.delivery-date')->isDefault(),
-            Column::make('address', 'Dirección')->isDefault(),
+            Column::make('address', 'Dirección')->isDefault()->component('admin.atoms.table.columns.orders.delivery-method'),
             Column::make('customer', 'Cliente')->isDefault(),
             Column::make('customer_info', 'Información cliente')->component('admin.atoms.table.columns.orders.customer-info'),
             Column::make('total', 'Total'),

@@ -68,6 +68,7 @@ class OrdersManageTest extends TestCase
             'customer_id' => $this->customer->id,
             'total_quantity' => 1,
             'paid' => 1,
+            'picked_up' => 0,
             'paid_amount' => 100,
         ]);
 
@@ -79,6 +80,7 @@ class OrdersManageTest extends TestCase
             'customer_id' => $this->customer->id,
             'total_quantity' => 1,
             'paid' => 0,
+            'picked_up' => 0,
             'paid_amount' => null,
         ]);
 

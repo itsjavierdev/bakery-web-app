@@ -92,7 +92,7 @@ class PaymentManageTest extends TestCase
         Livewire::test(Payments\Add::class, ['sale' => $this->sale_with_debt->id])
             ->set('paid_remaining', true)
             ->call('add')
-            ->assertRedirect('admin/pagos')
+            ->assertRedirect('admin/deudas')
             ->assertSessionHas('flash.bannerStyle', 'success')
             ->assertSessionHas('flash.banner', 'Pago agregado correctamente.');
 

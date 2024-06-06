@@ -25,7 +25,7 @@ class DeliveryTimesManageTest extends TestCase
         $this->user = User::factory()->create();
         $this->delivery_time = DeliveryTime::create([
             'time' => '10:00',
-            'available' => true
+            'for_delivery' => true
         ]);
     }
     public function test_a_delivery_time_can_be_created(): void
@@ -33,7 +33,7 @@ class DeliveryTimesManageTest extends TestCase
         // Create the delivery time in live wire component
         Livewire::test(DeliveryTimes\Create::class)
             ->set('time', '11:00')
-            ->set('available', false)
+            ->set('for_delivery', false)
             ->call('save')
             ->assertRedirect('admin/horarios')
             ->assertSessionHas('flash.bannerStyle', 'success')

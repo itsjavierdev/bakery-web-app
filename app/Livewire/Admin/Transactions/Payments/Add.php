@@ -50,7 +50,7 @@ class Add extends Component
             'customer_id' => $this->sale->customer_id,
         ]);
 
-        return redirect()->to('admin/pagos')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Pago agregado correctamente.');
+        return redirect()->to('admin/deudas')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Pago agregado correctamente.');
     }
 
     public function rules()

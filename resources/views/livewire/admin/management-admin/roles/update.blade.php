@@ -1,12 +1,12 @@
 <x-form-template>
     <x-inputs.group>
-        <x-inputs.label value="Nombre" />
+        <x-inputs.label value="Nombre" is_required />
         <x-inputs.text wire:model="name" />
         <x-inputs.error for="name" />
 
     </x-inputs.group>
     <div>
-        <h3>Permisos</h3>
+        <h3>Permisos <span class="text-red-500 text">*</span></h3>
         <div class="flex flex-wrap -mx-2 mt-2">
             @foreach ($permissions as $module => $modulePermissions)
                 <x-permissions-card>

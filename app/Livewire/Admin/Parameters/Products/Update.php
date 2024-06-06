@@ -21,6 +21,7 @@ class Update extends Component
     public $price;
     public $bag_quantity;
     public $description;
+    public $discontinued;
     public $old_images = []; //images that are already in the database
     public $new_images = []; //images introduced by the user
     public $images = []; //all images
@@ -35,6 +36,7 @@ class Update extends Component
         $this->price = $product->price * $product->bag_quantity;
         $this->bag_quantity = $product->bag_quantity;
         $this->description = $product->description;
+        $this->discontinued = $product->discontinued ? true : false;
 
         $this->old_images = ProductImage::where('product_id', $product->id)->get();
 
@@ -95,6 +97,7 @@ class Update extends Component
             'price' => $price,
             'bag_quantity' => $this->bag_quantity,
             'description' => $this->description,
+            'discontinued' => $this->discontinued ? '1' : '0',
         ]);
         // Update the position of the images
         foreach ($this->old_images as $old_image) {
@@ -167,6 +170,7 @@ class Update extends Component
             'description' => 'nullable|string|max:255',
             'new_images.*' => 'image|max:1024',
             'images' => 'required|array|min:1|max:4',
+            'discontinued' => 'boolean',
         ];
     }
     //Custom attributes names
@@ -180,6 +184,7 @@ class Update extends Component
             'description' => 'descripción',
             'new_images.*' => 'imágenes',
             'images' => 'imágenes',
+            'discontinued' => 'descatalogado',
         ];
     }
     //Custom messages error

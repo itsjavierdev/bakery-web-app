@@ -1,13 +1,13 @@
 <x-form-template>
     <!--Nombre-->
     <x-inputs.group>
-        <x-inputs.label value="Nombre" />
+        <x-inputs.label value="Nombre" is_required />
         <x-inputs.text wire:model="name" />
         <x-inputs.error for="name" />
     </x-inputs.group>
     <!--Category-->
     <x-inputs.group>
-        <x-inputs.label value="Categorías" />
+        <x-inputs.label value="Categorías" is_required />
         <x-inputs.select wire:model="category_id">
             <option value="">Seleccionar</option>
             @foreach ($categories as $category)
@@ -18,13 +18,13 @@
     </x-inputs.group>
     <!--Price-->
     <x-inputs.group>
-        <x-inputs.label value="Precio" />
+        <x-inputs.label value="Precio" is_required />
         <x-inputs.text wire:model="price" />
         <x-inputs.error for="price" />
     </x-inputs.group>
     <!--Bag quantity-->
     <x-inputs.group>
-        <x-inputs.label value="Cantidad por bolsa" />
+        <x-inputs.label value="Cantidad por bolsa" is_required />
         <x-inputs.text type="number" wire:model="bag_quantity" />
         <x-inputs.error for="bag_quantity" />
     </x-inputs.group>
@@ -36,7 +36,7 @@
     </x-inputs.group>
     <!--Images-->
     <x-inputs.group>
-        <x-inputs.label value="Imagenes" />
+        <x-inputs.label value="Imagenes" is_required />
         <!--Input images-->
         <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
             x-on:livewire-upload-finish="uploading = false" x-on:livewire-upload-error="uploading = false"
@@ -78,6 +78,14 @@
                 @endif
             @endforeach
         </ul>
+    </x-inputs.group>
+    <!--Discontinued-->
+    <x-inputs.group>
+        <x-inputs.label>
+            <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="discontinued" />
+            <span>Descatalogado</span>
+        </x-inputs.label>
+        <x-inputs.error for="discontinued" />
     </x-inputs.group>
     <x-slot name="footer">
         <x-button wire:loading.attr="disabled" wire:target="update, new_images" wire:click="update">
