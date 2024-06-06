@@ -10,6 +10,7 @@ use Livewire\Component;
 use Livewire\Attributes\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Orders\AllOrders;
+use App\Exports\Orders\ByTime;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class Export extends Component
@@ -37,8 +38,6 @@ class Export extends Component
         $data = $info[0]->get();
         $title = $info[1];
 
-
-
         $start_date = date('d-m-Y', strtotime($dates['start_date']));
         $end_date = date('d-m-Y', strtotime($dates['end_date']));
 
@@ -49,13 +48,13 @@ class Export extends Component
             case 'expired-orders':
                 return Excel::download(new ExpiredOrders($start_date, $end_date, $data), "{$title}_{$start_date}_{$end_date}.xlsx");
 
-
             case 'products':
                 return Excel::download(new Products($start_date, $end_date, $data), "{$title}_{$start_date}_{$end_date}.xlsx");
 
+            case 'by-time':
+                return Excel::download(new ByTime($start_date, $end_date, $data), "{$title}_{$start_date}_{$end_date}.xlsx");
             default:
-                # code...
-                break;
+                return Excel::download(new Products($start_date, $end_date, $data), "{$title}_{$start_date}_{$end_date}.xlsx");
         }
     }
 
@@ -92,9 +91,9 @@ class Export extends Component
             case 'products':
                 return [$this->queryProducts($start_date, $end_date), 'Productos_Por_Entregar'];
             case 'by-time':
-                return [$this->queryProducts($start_date, $end_date), 'Horas_Con_Más_Pedidos'];
+                return [$this->queryByTime($start_date, $end_date), 'Horas_Con_Más_Pedidos'];
             default:
-                return [$this->queryByTime($start_date, $end_date), 'Pedidos_Por_Entregar'];
+                return [$this->queryAllOrders($start_date, $end_date), 'Pedidos_Por_Entregar'];
         }
     }
 
@@ -168,7 +167,18 @@ class Export extends Component
 
     public function queryByTime($start_date, $end_date)
     {
-
+        return \DB::table('delivery_times')
+            ->join('orders', 'delivery_times.id', '=', 'orders.delivery_time_id')
+            ->select(
+                'delivery_times.time as time',
+                \DB::raw('COUNT(orders.id) as total_orders'),
+                \DB::raw('SUM(CASE WHEN orders.address_id IS NOT NULL THEN 1 ELSE 0 END) as address_orders'),
+                \DB::raw('SUM(CASE WHEN orders.address_id IS NULL THEN 1 ELSE 0 END) as no_address_orders')
+            )
+            ->whereBetween('orders.delivery_date', [$start_date, $end_date])
+            ->groupBy('delivery_times.time')
+            ->orderBy('total_orders', 'desc');
+        ;
     }
 
     public function rules()
