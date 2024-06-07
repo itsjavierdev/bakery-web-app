@@ -15,11 +15,8 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $role_admin = Role::create(['name' => 'Administrador']);
-        $role_deliver = Role::create(['name' => 'Repartidor']);
-        $role_sales = Role::create(['name' => 'Encargado de ventas']);
-        $role_orders = Role::create(['name' => 'Encargado de pedidos']);
 
-        Permission::create(['name' => 'dashboard', 'description' => 'Ver', 'module' => 'Panel', 'action' => 'read'])->syncRoles([$role_admin, $role_deliver, $role_orders, $role_sales]);
+        Permission::create(['name' => 'dashboard', 'description' => 'Ver', 'module' => 'Panel', 'action' => 'read'])->syncRoles([$role_admin]);
 
         Permission::create(['name' => 'roles.create', 'description' => 'Crear', 'module' => 'Roles', 'action' => 'create'])->assignRole($role_admin);
         Permission::create(['name' => 'roles.read', 'description' => 'Ver', 'module' => 'Roles', 'action' => 'read'])->assignRole($role_admin);
@@ -32,7 +29,6 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'staff.delete', 'description' => 'Eliminar', 'module' => 'Personal', 'action' => 'delete'])->assignRole($role_admin);
 
         Permission::create(['name' => 'user.create', 'description' => 'Crear', 'module' => 'Usuario', 'action' => 'create'])->assignRole($role_admin);
-        Permission::create(['name' => 'user.read', 'description' => 'Ver', 'module' => 'Usuario', 'action' => 'read'])->assignRole($role_admin);
         Permission::create(['name' => 'user.update', 'description' => 'Editar', 'module' => 'Usuario', 'action' => 'update'])->assignRole($role_admin);
         Permission::create(['name' => 'user.delete', 'description' => 'Eliminar', 'module' => 'Usuario', 'action' => 'delete'])->assignRole($role_admin);
 
@@ -48,10 +44,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'products.update', 'description' => 'Editar', 'module' => 'Productos', 'action' => 'update'])->assignRole($role_admin);
         Permission::create(['name' => 'products.delete', 'description' => 'Eliminar', 'module' => 'Productos', 'action' => 'delete'])->assignRole($role_admin);
 
-        Permission::create(['name' => 'featureds.create', 'description' => 'Crear', 'module' => 'Detacados', 'action' => 'create'])->assignRole($role_admin);
-        Permission::create(['name' => 'featureds.read', 'description' => 'Ver', 'module' => 'Detacados', 'action' => 'read'])->assignRole($role_admin);
-        Permission::create(['name' => 'featureds.update', 'description' => 'Editar', 'module' => 'Detacados', 'action' => 'update'])->assignRole($role_admin);
-        Permission::create(['name' => 'featureds.delete', 'description' => 'Eliminar', 'module' => 'Detacados', 'action' => 'delete'])->assignRole($role_admin);
+        Permission::create(['name' => 'featured.create', 'description' => 'Crear', 'module' => 'Detacados', 'action' => 'create'])->assignRole($role_admin);
+        Permission::create(['name' => 'featured.read', 'description' => 'Ver', 'module' => 'Detacados', 'action' => 'read'])->assignRole($role_admin);
+        Permission::create(['name' => 'featured.update', 'description' => 'Editar', 'module' => 'Detacados', 'action' => 'update'])->assignRole($role_admin);
+        Permission::create(['name' => 'featured.delete', 'description' => 'Eliminar', 'module' => 'Detacados', 'action' => 'delete'])->assignRole($role_admin);
 
         Permission::create(['name' => 'deliverytimes.create', 'description' => 'Crear', 'module' => 'Horas de entrega', 'action' => 'create'])->assignRole($role_admin);
         Permission::create(['name' => 'deliverytimes.read', 'description' => 'Ver', 'module' => 'Horas de entrega', 'action' => 'read'])->assignRole($role_admin);
@@ -72,14 +68,25 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'sales.update', 'description' => 'Editar', 'module' => 'Ventas', 'action' => 'update'])->assignRole($role_admin);
         Permission::create(['name' => 'sales.delete', 'description' => 'Eliminar', 'module' => 'Ventas', 'action' => 'delete'])->assignRole($role_admin);
 
+        Permission::create(['name' => 'debts.add', 'description' => 'Agregar', 'module' => 'Pagos', 'action' => 'add'])->assignRole($role_admin);
+        Permission::create(['name' => 'debts.read', 'description' => 'Ver', 'module' => 'Deudas', 'action' => 'read'])->assignRole($role_admin);
+        Permission::create(['name' => 'debts.update', 'description' => 'Editar', 'module' => 'Deudas', 'action' => 'update'])->assignRole($role_admin);
+
+
+        Permission::create(['name' => 'payments.read', 'description' => 'Ver', 'module' => 'Pagos', 'action' => 'read'])->assignRole($role_admin);
+        Permission::create(['name' => 'payments.update', 'description' => 'Editar', 'module' => 'Pagos', 'action' => 'update'])->assignRole($role_admin);
+        Permission::create(['name' => 'payments.delete', 'description' => 'Eliminar', 'module' => 'Pagos', 'action' => 'delete'])->assignRole($role_admin);
+
+
         Permission::create(['name' => 'customers.create', 'description' => 'Crear', 'module' => 'Clientes', 'action' => 'create'])->assignRole($role_admin);
         Permission::create(['name' => 'customers.read', 'description' => 'Ver', 'module' => 'Clientes', 'action' => 'read'])->assignRole($role_admin);
         Permission::create(['name' => 'customers.update', 'description' => 'Editar', 'module' => 'Clientes', 'action' => 'update'])->assignRole($role_admin);
         Permission::create(['name' => 'customers.delete', 'description' => 'Eliminar', 'module' => 'Clientes', 'action' => 'delete'])->assignRole($role_admin);
 
-        Permission::create(['name' => 'payments.create', 'description' => 'Crear', 'module' => 'Pagos', 'action' => 'create'])->assignRole($role_admin);
-        Permission::create(['name' => 'payments.read', 'description' => 'Ver', 'module' => 'Pagos', 'action' => 'read'])->assignRole($role_admin);
-        Permission::create(['name' => 'payments.update', 'description' => 'Editar', 'module' => 'Pagos', 'action' => 'update'])->assignRole($role_admin);
-        Permission::create(['name' => 'payments.delete', 'description' => 'Eliminar', 'module' => 'Pagos', 'action' => 'delete'])->assignRole($role_admin);
+        Permission::create(['name' => 'sales_report.trigger', 'description' => 'Generar', 'module' => 'Reporte de ventas', 'action' => 'trigger'])->assignRole($role_admin);
+
+        Permission::create(['name' => 'orders_report.trigger', 'description' => 'Generar', 'module' => 'Reporte de pedidos', 'action' => 'trigger'])->assignRole($role_admin);
+
+        Permission::create(['name' => 'proof.trigger', 'description' => 'Generar', 'module' => 'Comprobante', 'action' => 'trigger'])->assignRole($role_admin);
     }
 }

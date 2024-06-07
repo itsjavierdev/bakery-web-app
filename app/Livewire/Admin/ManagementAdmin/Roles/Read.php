@@ -6,6 +6,7 @@ use App\Livewire\Others\Datatable;
 use App\View\Table\Column;
 use App\View\Table\Filter;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 
 class Read extends Datatable
@@ -13,7 +14,10 @@ class Read extends Datatable
 
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
-        return Role::query();
+        $user = Auth::user();
+
+        return Role::query()->where('id', '!=', 1);
+        //return Role::query()->where('id', '!=', 1)->where('id', '!=', $user->roles->first()->id);
     }
 
     public function columns(): array

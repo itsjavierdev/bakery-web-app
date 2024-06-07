@@ -47,7 +47,7 @@
         <x-button wire:click="update" wire:loading.attr="disabled">
             Actualizar
         </x-button>
-        <a href="{{ route('company-contact.index') }}">
+        <a href="{{ route('companycontact.index') }}">
             <x-secondary-button>
                 Cancelar
             </x-secondary-button>

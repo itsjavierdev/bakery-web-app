@@ -22,7 +22,9 @@
                                 <x-th>Fecha</x-th>
                                 <x-th>Personal</x-th>
                                 <x-th>Monto</x-th>
-                                <x-th></x-th>
+                                @can('payments.delete')
+                                    <x-th></x-th>
+                                @endcan
                             </tr>
                         </thead>
 
@@ -45,12 +47,13 @@
                                         <x-inputs.text type="number"
                                             wire:model.change="payments.{{ $index }}.amount" />
                                     </td>
-
-                                    <td class="p-2">
-                                        <x-button-rounded wire:click="deletePayment('{{ $payment['id'] }}')">
-                                            <i class="icon-trash text-2xl text-red-700"></i>
-                                        </x-button-rounded>
-                                    </td>
+                                    @can('payments.delete')
+                                        <td class="p-2">
+                                            <x-button-rounded wire:click="deletePayment('{{ $payment['id'] }}')">
+                                                <i class="icon-trash text-2xl text-red-700"></i>
+                                            </x-button-rounded>
+                                        </td>
+                                    @endcan
                                 </x-tr>
                             @endforeach
                         </tbody>
@@ -63,9 +66,10 @@
                                 <td class="px-2">
                                     {{ $total ? $total : '' }}
                                 </td>
-                                <td class="px-2">
-
-                                </td>
+                                @can('payments.delete')
+                                    <td class="px-2">
+                                    </td>
+                                @endcan
                             </x-tr>
                         </tfoot>
                     </x-table>

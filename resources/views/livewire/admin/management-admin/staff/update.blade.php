@@ -61,75 +61,86 @@
             <!--Add and account button-->
             <div class="flex justify-center mb-1">
                 <x-inputs.label class="flex justify-center items-center cursor-pointer gap-1 w-fit">
-                    <!--Change button in add account-->
-                    @if (!$has_account)
-                        @if ($add_account)
-                            <x-button-rounded wire:click="$set('add_account', false)">
-                                <i class="icon-minus text-2xl text-red-700"></i>
-                            </x-button-rounded>
-                        @else
-                            <x-button-rounded wire:click="$set('add_account', true)">
-                                <i class="icon-plus text-2xl text-green-700"></i>
-                            </x-button-rounded>
-                        @endif
-                    @endif
-                    @if ($has_account)
-                        <div class="w-10"></div>
-                    @endif
-                    <h2 class="text-lg text-gray-700 text-center font-medium">Cuenta en el sistema</h2>
-                    @if (!$has_account)
-                        <div class="w-10"></div>
-                    @endif
-                    <!--Delete account button-->
-                    @if ($has_account)
-                        <x-dropdown width="">
-                            <x-slot name="trigger">
-                                <x-button-rounded tabindex="-1">
-                                    <i class="icon-dots text-lg text-gray-700"></i>
+                    @can('user.create')
+                        <!--Change button in add account-->
+                        @if (!$has_account)
+                            @if ($add_account)
+                                <x-button-rounded wire:click="$set('add_account', false)">
+                                    <i class="icon-minus text-2xl text-red-700"></i>
                                 </x-button-rounded>
-                            </x-slot>
-                            <x-slot name="content">
-                                <x-button color="red"
-                                    wire:click="$dispatch('confirmDelete', {id: {{ $user_update->user->id }}})">
-                                    Eliminar cuenta
-                                </x-button>
-                            </x-slot>
-                        </x-dropdown>
-                        <livewire:admin.management-admin.users.delete redirect="personal.index" />
+                            @else
+                                <x-button-rounded wire:click="$set('add_account', true)">
+                                    <i class="icon-plus text-2xl text-green-700"></i>
+                                </x-button-rounded>
+                            @endif
+                        @endif
+                    @endcan
+
+                    @can('user.delete')
+                        @if ($has_account)
+                            <div class="w-10"></div>
+                        @endif
+                    @endcan
+
+                    @if ($has_account)
+                        @canany(['user.update', 'user.delete'])
+                            <h2 class="text-lg text-gray-700 text-center font-medium py-1">Cuenta en el sistema</h2>
+                        @endcanany
+                    @else
+                        @can('user.create')
+                            <h2 class="text-lg text-gray-700 text-center font-medium py-1">Cuenta en el sistema</h2>
+                        @endcan
                     @endif
+
+                    @can('user.create')
+                        @if (!$has_account)
+                            <div class="w-10"></div>
+                        @endif
+                    @endcan
+
+                    @can('user.delete')
+                        <!--Delete account button-->
+                        @if ($has_account)
+                            <x-dropdown width="">
+                                <x-slot name="trigger">
+                                    <x-button-rounded tabindex="-1">
+                                        <i class="icon-dots text-lg text-gray-700"></i>
+                                    </x-button-rounded>
+                                </x-slot>
+                                <x-slot name="content">
+                                    <x-button color="red"
+                                        wire:click="$dispatch('confirmDelete', {id: {{ $user_update->user->id }}})">
+                                        Eliminar cuenta
+                                    </x-button>
+                                </x-slot>
+                            </x-dropdown>
+                            <livewire:admin.management-admin.users.delete redirect="personal.index" />
+                        @endif
+                    @endcan
                 </x-inputs.label>
             </div>
-            <!--Account form-->
-            @if ($add_account || $has_account)
-                <!--Role-->
-                <x-inputs.group>
-                    <x-inputs.label value="Rol" is_required />
-                    <x-inputs.select wire:model="{{ $has_account ? 'user_update.role' : 'user_create.role' }}">
-                        <option value="">Seleccionar</option>
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->name }}</option>
-                        @endforeach
-                    </x-inputs.select>
-                    <x-inputs.error for="{{ $has_account ? 'user_update.role' : 'user_create.role' }}" />
-                </x-inputs.group>
-                <!--Email-->
-                <x-inputs.group>
-                    <x-inputs.label value="Correo electronico" is_required />
-                    <x-inputs.text wire:model="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
-                    <x-inputs.error for="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
-                </x-inputs.group>
-                @if ($has_account)
-                    <!--Is active-->
-                    <x-inputs.group>
-                        <x-inputs.label>
-                            <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="user_update.is_active" />
-                            <span>Cuenta activa</span>
-                        </x-inputs.label>
 
-                        <x-inputs.error for="user_update.is_active" />
-                    </x-inputs.group>
-                @endif
+            @can('user.create')
+
+                <!--Account form-->
                 @if ($add_account)
+                    <!--Role-->
+                    <x-inputs.group>
+                        <x-inputs.label value="Rol" is_required />
+                        <x-inputs.select wire:model="{{ $has_account ? 'user_update.role' : 'user_create.role' }}">
+                            <option value="">Seleccionar</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </x-inputs.select>
+                        <x-inputs.error for="{{ $has_account ? 'user_update.role' : 'user_create.role' }}" />
+                    </x-inputs.group>
+                    <!--Email-->
+                    <x-inputs.group>
+                        <x-inputs.label value="Correo electronico" is_required />
+                        <x-inputs.text wire:model="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
+                        <x-inputs.error for="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
+                    </x-inputs.group>
                     <!--Password-->
                     <x-inputs.group>
                         <x-inputs.label value="Contraseña" is_required />
@@ -143,8 +154,38 @@
                         <x-inputs.error for="user_create.password_confirmation" />
                     </x-inputs.group>
                 @endif
+            @endcan
 
-            @endif
+            @can('user.update')
+                @if ($has_account)
+                    <!--Role-->
+                    <x-inputs.group>
+                        <x-inputs.label value="Rol" is_required />
+                        <x-inputs.select wire:model="{{ $has_account ? 'user_update.role' : 'user_create.role' }}">
+                            <option value="">Seleccionar</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </x-inputs.select>
+                        <x-inputs.error for="{{ $has_account ? 'user_update.role' : 'user_create.role' }}" />
+                    </x-inputs.group>
+                    <!--Email-->
+                    <x-inputs.group>
+                        <x-inputs.label value="Correo electronico" is_required />
+                        <x-inputs.text wire:model="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
+                        <x-inputs.error for="{{ $has_account ? 'user_update.email' : 'user_create.email' }}" />
+                    </x-inputs.group>
+                    <!--Is active-->
+                    <x-inputs.group>
+                        <x-inputs.label>
+                            <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="user_update.is_active" />
+                            <span>Cuenta activa</span>
+                        </x-inputs.label>
+
+                        <x-inputs.error for="user_update.is_active" />
+                    </x-inputs.group>
+                @endif
+            @endcan
         </div>
     </div>
 

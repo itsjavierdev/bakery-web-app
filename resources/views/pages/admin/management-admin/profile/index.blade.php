@@ -8,7 +8,7 @@
                     <x-section-border />
                 @endif
             @else
-                @livewire('profile.admin.profile-information')
+                <livewire:admin.management-admin.profile.profile-information />
                 <x-section-border />
             @endcan
 

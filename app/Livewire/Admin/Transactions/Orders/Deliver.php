@@ -76,12 +76,14 @@ class Deliver extends Component
             'delivered' => true,
         ]);
 
-        Payment::create([
-            'sale_id' => $sale->id,
-            'amount' => $this->order->paid_amount,
-            'customer_id' => $this->order->customer_id,
-            'staff_id' => $this->order->staff_id,
-        ]);
+        if ($paid_amount == 0) {
+            Payment::create([
+                'sale_id' => $sale->id,
+                'amount' => $this->order->paid_amount,
+                'customer_id' => $this->order->customer_id,
+                'staff_id' => $this->order->staff_id,
+            ]);
+        }
 
         Payment::create([
             'sale_id' => $sale->id,
