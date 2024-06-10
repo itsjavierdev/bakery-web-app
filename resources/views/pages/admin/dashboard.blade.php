@@ -1,5 +1,5 @@
 <x-admin-header title="Panel">
-    @can('sales_report.trigger')
+    @can('sales_report.generate')
         <div class="p-6">
             <livewire:admin.dashboard.summary />
             <hr />

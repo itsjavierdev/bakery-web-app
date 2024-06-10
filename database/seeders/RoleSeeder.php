@@ -83,10 +83,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'customers.update', 'description' => 'Editar', 'module' => 'Clientes', 'action' => 'update'])->assignRole($role_admin);
         Permission::create(['name' => 'customers.delete', 'description' => 'Eliminar', 'module' => 'Clientes', 'action' => 'delete'])->assignRole($role_admin);
 
-        Permission::create(['name' => 'sales_report.trigger', 'description' => 'Generar', 'module' => 'Reporte de ventas', 'action' => 'trigger'])->assignRole($role_admin);
+        Permission::create(['name' => 'sales_report.generate', 'description' => 'Generar', 'module' => 'Reporte de ventas', 'action' => 'generate'])->assignRole($role_admin);
 
-        Permission::create(['name' => 'orders_report.trigger', 'description' => 'Generar', 'module' => 'Reporte de pedidos', 'action' => 'trigger'])->assignRole($role_admin);
+        Permission::create(['name' => 'orders_report.generate', 'description' => 'Generar', 'module' => 'Reporte de pedidos', 'action' => 'generate'])->assignRole($role_admin);
 
-        Permission::create(['name' => 'proof.trigger', 'description' => 'Generar', 'module' => 'Comprobante', 'action' => 'trigger'])->assignRole($role_admin);
+        Permission::create(['name' => 'vouchers.generate', 'description' => 'Generar', 'module' => 'Comprobante', 'action' => 'generate'])->assignRole($role_admin);
     }
 }

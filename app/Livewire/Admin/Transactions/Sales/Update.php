@@ -16,6 +16,7 @@ class Update extends Component
 
     public $sale;
     public $add_customer = false;
+    public $paid_amount;
 
     //modal
     public $open = false;
@@ -35,6 +36,7 @@ class Update extends Component
         if ($this->sale->customer ?? false) {
             $this->customer = ['id' => $this->sale->customer->id, 'name' => $this->sale->customer->name];
         }
+        $this->paid_amount = $this->sale->paid_amount;
 
         // Get the products of the order
         $sale_details = SaleDetail::where('sale_id', $sale->id)->get();
@@ -108,6 +110,7 @@ class Update extends Component
             'customer_id' => $this->customer['id'],
             'total_quantity' => $total_quantity,
             'staff_id' => auth()->user()->staff->id,
+            'paid' => $this->paid_amount == $this->total ? true : false,
         ]);
 
 

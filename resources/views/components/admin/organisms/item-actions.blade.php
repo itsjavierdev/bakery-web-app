@@ -59,5 +59,11 @@
             </x-button-action>
         @endif
 
+        @if (in_array('print', $actions))
+            <x-button-action wire:click="$dispatch('confirmGenerateSale', {id: {{ $item_id }} })">
+                <i class="icon-print text-2xl text-green-700"></i>
+            </x-button-action>
+        @endif
+
     </div>
 </td>

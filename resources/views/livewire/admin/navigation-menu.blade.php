@@ -1,5 +1,5 @@
 <nav class="w-full flex flex-col gap-2 py-2">
-    @can('sales_report.trigger')
+    @can('sales_report.generate')
         <x-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
             <i class="icon-chart text-xl"></i>
             Dashboard
@@ -133,24 +133,29 @@
     @php
         $sales_report_active = Str::startsWith(request()->route()->getName(), 'reports.sales');
         $orders_report_active = Str::startsWith(request()->route()->getName(), 'reports.orders');
-        $reports_active = Str::startsWith(request()->route()->getName(), 'reports.');
+        $vouchers_generate = Str::startsWith(request()->route()->getName(), 'vouchers');
+        $reports_active = Str::startsWith(request()->route()->getName(), 'reports.') || $vouchers_generate;
     @endphp
-    @canany(['sales_report.trigger', 'orders_report.trigger'])
+    @canany(['sales_report.generate', 'orders_report.generate'])
         <x-nav-select :active="$reports_active">
             <i class="icon-clipboard text-xl"></i>
             Reportes
             <x-slot name="content">
-                @can('sales_report.trigger')
+                @can('sales_report.generate')
                     <x-nav-item href="{{ route('reports.sales.index') }}" :active="$sales_report_active">
                         Reporte de ventas
                     </x-nav-item>
                 @endcan
-                @can('orders_report.trigger')
+                @can('orders_report.generate')
                     <x-nav-item href="{{ route('reports.orders.index') }}" :active="$orders_report_active">
                         Reporte de pedidos
                     </x-nav-item>
                 @endcan
-
+                @can('vouchers.generate')
+                    <x-nav-item href="{{ route('vouchers.index') }}" :active="$vouchers_generate">
+                        Comprobantes
+                    </x-nav-item>
+                @endcan
             </x-slot>
         </x-nav-select>
     @endcanany

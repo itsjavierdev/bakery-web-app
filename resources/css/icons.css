@@ -1,11 +1,11 @@
 @font-face {
     font-family: "BakeryIcons";
-    src: url("../../public/icons/BakeryIcons.eot?19j6v9");
-    src: url("../../public/icons/BakeryIcons.eot?19j6v9#iefix")
+    src: url("../../public/icons/BakeryIcons.eot?bgo8l6");
+    src: url("../../public/icons/BakeryIcons.eot?bgo8l6#iefix")
             format("embedded-opentype"),
-        url("../../public/icons/BakeryIcons.ttf?19j6v9") format("truetype"),
-        url("../../public/icons/BakeryIcons.woff?19j6v9") format("woff"),
-        url("../../public/icons/BakeryIcons.svg?19j6v9#BakeryIcons")
+        url("../../public/icons/BakeryIcons.ttf?bgo8l6") format("truetype"),
+        url("../../public/icons/BakeryIcons.woff?bgo8l6") format("woff"),
+        url("../../public/icons/BakeryIcons.svg?bgo8l6#BakeryIcons")
             format("svg");
     font-weight: normal;
     font-style: normal;
@@ -28,6 +28,9 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-print:before {
+    content: "\e940";
+}
 .icon-spin:before {
     content: "\e93f";
 }
