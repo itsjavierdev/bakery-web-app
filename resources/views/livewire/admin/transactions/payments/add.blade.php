@@ -25,7 +25,7 @@
         <x-button wire:click="add" wire:loading.attr="disabled">
             Agregar
         </x-button>
-        <a href="{{ route('payments.index') }}">
+        <a href="{{ route('debts.all') }}">
             <x-secondary-button>
                 Cancelar
             </x-secondary-button>

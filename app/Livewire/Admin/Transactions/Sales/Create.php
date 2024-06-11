@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Transactions\Sales;
 
+use App\Livewire\Admin\Reports\Vouchers\SaleVoucher;
 use App\Models\Customer;
 use App\Models\Payment;
 use App\Models\Sale;
@@ -99,7 +100,7 @@ class Create extends Component
             ]);
         }
 
-        return redirect()->to('admin/ventas')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Venta creada correctamente');
+        return redirect()->route('sales.success', ['sale' => $sale]);
     }
 
     public function updatedPaid($value)

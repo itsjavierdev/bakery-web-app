@@ -23,7 +23,7 @@
             show = false;
         }, 5000);
     }, 100);"
-    class="fixed bottom-0 sm:bottom-5 rounded-none max-w-screen-sm inset-x-0 mx-auto z-50 p-2 sm:p-3 sm:rounded-lg"
+    class="fixed bottom-0 sm:bottom-5 rounded-none max-w-screen-sm inset-x-0 mx-auto z-[100] p-2 sm:p-3 sm:rounded-lg"
     style="display: none;">
     <div class="py-0 px-3">
         <div class="flex items-center justify-between flex-wrap ">

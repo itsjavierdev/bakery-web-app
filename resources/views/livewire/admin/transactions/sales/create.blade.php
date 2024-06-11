@@ -1,4 +1,5 @@
 <x-form-template>
+    <livewire:admin.reports.vouchers.sale-voucher />
     <div class="flex flex-col lg:flex-row gap-5 lg:gap-10">
         <!--Data-->
         <div class="w-full">

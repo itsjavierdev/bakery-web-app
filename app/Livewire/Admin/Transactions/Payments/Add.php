@@ -43,14 +43,14 @@ class Add extends Component
             'paid' => $this->sale->paid_amount + $this->paid_amount >= $this->sale->total ? '1' : '0',
         ]);
 
-        Payment::create([
+        $payment = Payment::create([
             'sale_id' => $this->sale->id,
             'amount' => $this->paid_amount,
             'staff_id' => auth()->user()->staff->id,
             'customer_id' => $this->sale->customer_id,
         ]);
 
-        return redirect()->to('admin/deudas')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Pago agregado correctamente.');
+        return redirect()->route('debts.success', ['payment' => $payment]);
     }
 
     public function rules()

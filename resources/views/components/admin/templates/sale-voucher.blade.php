@@ -92,9 +92,9 @@
                 @foreach ($sale_details as $detail)
                     <tr>
                         <td>{{ $products->where('id', $detail->product_id)->first()->name }}</td>
-                        <td>Bs{{ number_format($detail->product_price, 1) }}</td>
+                        <td>Bs{{ $detail->product_price }}</td>
                         <td>{{ $detail->quantity }}</td>
-                        <td>Bs{{ number_format($detail->subtotal, 1) }}</td>
+                        <td>Bs{{ $detail->subtotal }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -103,19 +103,19 @@
                     <td class="total-title" colspan="3" style="text-align: right; padding: 0;">
                         Total:
                     </td>
-                    <td class="total-quantity">Bs{{ number_format($sale->total, 1) }}</td>
+                    <td class="total-quantity">Bs{{ $sale->total }}</td>
                 </tr>
                 <tr>
                     <td class="total-title" colspan="3" style="text-align: right; padding: 0;">
                         Total pagado:
                     </td>
-                    <td class="total-quantity">Bs{{ number_format($sale->paid_amount, 1) }}</td>
+                    <td class="total-quantity">Bs{{ $sale->paid_amount }}</td>
                 </tr>
                 <tr>
                     <td class="total-title" colspan="3" style="text-align: right; padding: 0;">
                         Total pendiente:
                     </td>
-                    <td class="total-quantity">Bs{{ number_format($sale->total - $sale->paid_amount, 1) }}</td>
+                    <td class="total-quantity">Bs{{ $sale->total - $sale->paid_amount }}</td>
                 </tr>
             </tfoot>
         </table>

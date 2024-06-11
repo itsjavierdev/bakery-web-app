@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Transactions\Orders;
 
+use App\Livewire\Admin\Reports\Vouchers\SaleVoucher;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
@@ -76,7 +77,7 @@ class Deliver extends Component
             'delivered' => true,
         ]);
 
-        if ($paid_amount == 0) {
+        if ($this->order->paid_amount > 0) {
             Payment::create([
                 'sale_id' => $sale->id,
                 'amount' => $this->order->paid_amount,
@@ -85,12 +86,16 @@ class Deliver extends Component
             ]);
         }
 
-        Payment::create([
-            'sale_id' => $sale->id,
-            'amount' => $this->new_paid,
-            'customer_id' => $this->order->customer_id,
-            'staff_id' => auth()->user()->staff->id,
-        ]);
+        if ($this->new_paid > 0) {
+            Payment::create([
+                'sale_id' => $sale->id,
+                'amount' => $this->new_paid,
+                'customer_id' => $this->order->customer_id,
+                'staff_id' => auth()->user()->staff->id,
+            ]);
+        }
+
+        $this->dispatch('confirmGenerateSale', id: $sale->id)->to(SaleVoucher::class);
         $this->dispatch('render')->to(Read::class);
 
         $this->reset();

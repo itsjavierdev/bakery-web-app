@@ -31,8 +31,6 @@ class AllPayments extends Datatable
             Column::make('id', 'ID')->isDefault(),
             Column::make('customer', 'Cliente')->isDefault(),
             Column::make('total', 'Total')->isDefault(),
-            Column::make('paid_amount', 'Total pagado')->isDefault(),
-            Column::make('debt', 'Deuda')->isDefault(),
             Column::make('created_at', 'Fecha de registro')->isDefault(),
         ];
     }
@@ -43,7 +41,6 @@ class AllPayments extends Datatable
             Filter::make('customers.name', 'Nombre cliente'),
             Filter::make('customers.surname', 'Apellido cliente'),
             Filter::make('sales.total', 'Total'),
-            Filter::make('sales.paid_amount', 'Total pagado'),
             Filter::make('sales.created_at', 'Fecha de registro')->date(),
         ];
     }

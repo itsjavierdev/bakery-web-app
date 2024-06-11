@@ -1,4 +1,4 @@
-<x-confirmation-modal wire:model="open">
+<x-confirmation-modal wire:model="open" not_danger>
     <x-slot name="title">Comprobante de venta</x-slot>
     <x-slot name="content">¿Quieres generar el comprobante de esta venta?</x-slot>
     <x-slot name="footer">

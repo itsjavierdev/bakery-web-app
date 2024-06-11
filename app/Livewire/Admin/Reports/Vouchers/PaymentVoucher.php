@@ -27,6 +27,7 @@ class PaymentVoucher extends Component
     public function generatePayment($id)
     {
         $payment = Payment::find($id);
+        $customer = $payment->customer->name . ' ' . $payment->customer->surname;
         $pdf = PDF::loadView('exports.payment-voucher.single', ['payment' => $payment])
             ->setPaper([0, 0, 204, 654], 'portrait')  // Establecer una longitud grande
             ->setOptions([
@@ -40,7 +41,7 @@ class PaymentVoucher extends Component
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, "Comprobante_Pago.pdf");
+        }, "Comprobante_Pago_{$customer}_Venta_N_{$payment->sale_id}.pdf");
 
     }
 }

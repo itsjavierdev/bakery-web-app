@@ -25,6 +25,7 @@ Route::middleware([
     Route::get('admin/ventas/create', Sales\Create::class)->middleware('can:sales.create')->name('sales.create');
     Route::get('admin/ventas/{sale}/edit', Sales\Update::class)->middleware('can:sales.update')->name('sales.edit');
     Route::get('admin/ventas/{sale}', Sales\Detail::class)->middleware('can:sales.read')->name('sales.show');
+    Route::get('admin/ventas-realizada/{sale}', Sales\Success::class)->middleware('can:sales.create')->name('sales.success');
 
     //Payments routes
     Route::get('admin/deudas', function () {
@@ -34,7 +35,7 @@ Route::middleware([
     Route::get('admin/deudas/{sale}/add', Payments\Add::class)->middleware('can:debts.add')->name('debts.add');
     Route::get('admin/deudas/{sale}/edit', Payments\Update::class)->middleware('can:debts.update')->name('debts.edit');
     Route::get('admin/deudas/{sale}', Payments\Detail::class)->middleware('can:debts.read')->name('debts.show');
-
+    Route::get('admin/pago-realizado/{payment}', Payments\Success::class)->middleware('can:debts.add')->name('debts.success');
 
     Route::get('admin/pagos', function () {
         return view('pages.admin.transactions.payments.all-payments');

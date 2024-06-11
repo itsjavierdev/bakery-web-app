@@ -23,6 +23,6 @@ class SalesDetail extends Component
     }
     public function render()
     {
-        return view('livewire.admin.reports.vouchers.sales-detail')->layout('layouts.admin-header', ['title' => 'Detalle de venta', 'titleAlign' => 'center']);
+        return view('livewire.admin.reports.vouchers.sales-detail')->layout('layouts.admin-header', ['title' => 'Detalle de pagos', 'titleAlign' => 'center']);
     }
 }

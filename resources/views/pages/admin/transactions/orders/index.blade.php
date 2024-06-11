@@ -13,4 +13,5 @@
     </div>
     <livewire:admin.transactions.orders.delete />
     <livewire:admin.transactions.orders.deliver />
+    <livewire:admin.reports.vouchers.sale-voucher />
 </x-admin-header>

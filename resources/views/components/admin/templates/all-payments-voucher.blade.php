@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Comprobante de pago</title>
+    <title>Comprobante de venta</title>
     <style>
         body {
             font-family: 'Courier New', Courier, monospace;
@@ -27,6 +27,10 @@
         .content table {
             width: 100%;
             border-collapse: collapse;
+        }
+
+        tbody {
+            border-bottom: 1px dotted #000;
         }
 
         .content th,
@@ -53,11 +57,6 @@
             border-bottom: 1px dotted #000;
         }
 
-        .payment-title {
-            text-align: center;
-            border-top: 1px dotted #000;
-        }
-
         @page {
             margin: 0.1cm;
         }
@@ -71,52 +70,54 @@
         <p>Tel: +591 {{ $company_contact->phone }}</p>
     </div>
     <div>
-        <h4 class="voucher-title">COMPROBANTE DE PAGO</h4>
-    </div>
-    <div class="info-header">
-        <p>Fecha: {{ $payment->created_at }}</p>
-        <p>Cliente: {{ $payment->customer->name . ' ' . $payment->customer->surname }}</p>
-        <p>Teléfono: +591 {{ $payment->customer->phone }}</p>
+        <h4 class="voucher-title">COMPROBANTE DE PAGOS</h4>
     </div>
     <div class="content">
+        <p>Venta N°: {{ $sale->id }}</p>
+        <p>Fecha: {{ $sale->created_at }}</p>
+        <p>Cliente: {{ $sale->customer->name . ' ' . $sale->customer->surname }}</p>
+        <p>Teléfono: +591 {{ $sale->customer->phone }}</p>
+
         <table>
             <thead>
                 <tr>
-                    <th colspan="2">Detalles del pago</th>
+                    <th>Fecha</th>
+                    <th>Monto</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Monto pagado:</td>
-                    <td>Bs{{ $payment->amount }}</td>
-
-                </tr>
-                <tr>
-                    <td>Venta asociada: </td>
-                    <td>Venta #{{ $sale->id }}</td>
-                </tr>
-                <tr>
-                    <td>Total de la venta</td>
-                    <td>Bs{{ $sale->total }}</td>
-                </tr>
-                <tr>
-                    <td>Saldo anterior</td>
-                    <td>Bs{{ $previous_balance }}</td>
-                </tr>
-
-                <tr>
-                    <td>Saldo actual</td>
-                    <td>Bs{{ $sale->total - $sale->paid_amount }}</td>
-                </tr>
+                @foreach ($payments as $payment)
+                    <tr>
+                        <td>{{ $payment->created_at->format('d/m/Y') }}</td>
+                        <td>Bs{{ $payment->amount }}</td>
+                    </tr>
+                @endforeach
             </tbody>
-
+            <tfoot>
+                <tr>
+                    <td class="total-title" colspan="1" style="text-align: right; padding: 0;">
+                        Total de la venta:
+                    </td>
+                    <td class="total-quantity">Bs{{ $sale->total }}</td>
+                </tr>
+                <tr>
+                    <td class="total-title" colspan="1" style="text-align: right; padding: 0;">
+                        Total pagado:
+                    </td>
+                    <td class="total-quantity">Bs{{ $sale->paid_amount }}</td>
+                </tr>
+                <tr>
+                    <td class="total-title" colspan="1" style="text-align: right; padding: 0;">
+                        Total pendiente:
+                    </td>
+                    <td class="total-quantity">Bs{{ $sale->total - $sale->paid_amount }}</td>
+                </tr>
+            </tfoot>
         </table>
     </div>
-    <div style="border-top: 1px dotted #000">
-        <p>Recibido por: {{ $payment->staff->name . ' ' . $payment->staff->surname }}</p>
-    </div>
+
     <div class="footer">
-        <p>Gracias por su pago</p>
+        <p>Gracias por sus pagos</p>
     </div>
 </body>
 

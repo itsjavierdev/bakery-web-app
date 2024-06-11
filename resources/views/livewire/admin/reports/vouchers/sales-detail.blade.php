@@ -1,5 +1,6 @@
 <div class="p-6">
     <livewire:admin.reports.vouchers.payment-voucher />
+    <livewire:admin.reports.vouchers.all-payments-voucher />
     <x-detail-show>
         <div>
             <x-detail-row title="Codigo venta">

@@ -15,7 +15,7 @@
     } else {
         $status = 'not-paid';
         $classes = 'bg-red-500';
-        $not_paid = round($total - $paid, 1);
+        $not_paid = round($total - $paid, 2);
         $content = "$not_paid";
     }
 @endphp

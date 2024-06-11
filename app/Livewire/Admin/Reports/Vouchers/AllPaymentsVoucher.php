@@ -2,33 +2,34 @@
 
 namespace App\Livewire\Admin\Reports\Vouchers;
 
+use App\Models\Payment;
 use App\Models\Sale;
 use Livewire\Component;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class SaleVoucher extends Component
+class AllPaymentsVoucher extends Component
 {
     public $sale_id;
-    public $open = false;
+    public $open_modal = false;
 
 
-    protected $listeners = ['generateSale', 'confirmGenerateSale'];
-
+    protected $listeners = ['generatePayments', 'confirmGenerateSale'];
     public function render()
     {
-        return view('livewire.admin.reports.vouchers.sale-voucher');
+        return view('livewire.admin.reports.vouchers.all-payments-voucher');
     }
 
     public function confirmGenerateSale($id)
     {
         $this->sale_id = $id;
-        $this->open = true;
+        $this->open_modal = true;
     }
-    public function generateSale($id)
+    public function generatePayments($id)
     {
         $sale = Sale::find($id);
+        $customer = $sale->customer->name . ' ' . $sale->customer->surname;
 
-        $pdf = PDF::loadView('exports.sale-voucher.sale-voucher', ['sale' => $sale])
+        $pdf = PDF::loadView('exports.payment-voucher.all', ['sale' => $sale])
             ->setPaper([0, 0, 204, 654], 'portrait')  // Establecer una longitud grande
             ->setOptions([
                 'dpi' => 72,
@@ -37,12 +38,11 @@ class SaleVoucher extends Component
                 'isRemoteEnabled' => true,
             ]);
 
-
         $this->reset();
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, "Comprobante_Venta_N_{$sale->id}.pdf");
+        }, "Comprobante_Pagos_{$customer}_Venta_N_{$sale->id}.pdf");
 
     }
 }
