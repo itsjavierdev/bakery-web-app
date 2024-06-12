@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Reports\Sales;
 
+use App\Exports\Sales\BySingleStaff;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Sale;
@@ -19,12 +20,16 @@ use App\Exports\Sales\Daily;
 use App\Exports\Sales\Monthly;
 use App\Exports\Sales\Annual;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\On;
 
 class Export extends Component
 {
     public $period = 'daily';
     public $start_date;
     public $end_date;
+
+    public $staff = ['id' => null, 'name' => null];
+    public $open = false;
     public $report_by = "resume";
 
 
@@ -67,6 +72,8 @@ class Export extends Component
                 return Excel::download(new ByCustomer($start_date, $end_date, $data), "{$title}_{$start_date}_{$end_date}.xlsx");
             case 'all-sales':
                 return Excel::download(new AllSalesExport($start_date, $end_date, $data), "{$title}_{$start_date}_{$end_date}.xlsx");
+            case 'by-single-staff':
+                return Excel::download(new BySingleStaff($start_date, $end_date, $data, $this->staff['id']), "{$title}_{$start_date}_{$end_date}.xlsx");
 
             default:
                 if ($this->period == 'daily') {
@@ -110,6 +117,12 @@ class Export extends Component
                     echo $pdf->stream();
                 }, "{$title}.pdf");
             }
+        } elseif ($this->report_by == 'by-single-staff') {
+            $staff = Staff::find($this->staff['id']);
+            $pdf = Pdf::loadView('exports.sales.by-single-staff', ['data' => $data, 'date_start' => $start_date, 'date_end' => $end_date, 'staff' => $staff]);
+            return response()->streamDownload(function () use ($pdf) {
+                echo $pdf->stream();
+            }, "{$title}_{$start_date}_{$end_date}.pdf");
         } else {
             $pdf = Pdf::loadView('exports.sales.' . $this->report_by, ['data' => $data, 'date_start' => $start_date, 'date_end' => $end_date]);
             return response()->streamDownload(function () use ($pdf) {
@@ -244,6 +257,13 @@ class Export extends Component
         ;
     }
 
+    public function queryBySingleStaff($start_date, $end_date)
+    {
+        return Sale::query()->where('staff_id', $this->staff['id'])
+            ->whereBetween('created_at', [$start_date, $end_date])
+            ->orderBy('created_at', 'asc');
+    }
+
     public function getDates()
     {
         switch ($this->period) {
@@ -298,6 +318,11 @@ class Export extends Component
             case 'all-sales':
                 return [$this->queryAllSales($dates['start_date'], $dates['end_date']), 'Ventas'];
 
+            case 'by-single-staff':
+
+                $staff = Staff::find($this->staff['id']);
+                return [$this->queryBySingleStaff($dates['start_date'], $dates['end_date']), "Ventas_{$staff->name}_{$staff->surname}"];
+
             default:
                 if ($this->period == 'daily') {
                     return [$this->queryDailySales($dates['start_date'], $dates['end_date']), 'Ventas_Diarias'];
@@ -309,6 +334,24 @@ class Export extends Component
         }
     }
 
+    public function toggleModal($value)
+    {
+        if ($value == '') {
+            $this->open = false;
+            return;
+        }
+        $this->open = true;
+    }
+
+    #[On('add-staff')]
+    public function addStaff($id)
+    {
+        $this->staff = [
+            'id' => $id,
+            'name' => Staff::find($id)->name
+        ];
+        $this->open = false;
+    }
 
     public function updatedPeriod($value)
     {
@@ -338,6 +381,9 @@ class Export extends Component
                 'start_date' => 'required',
                 'report_by' => 'required',
             ];
+            if ($this->report_by == 'by-single-staff') {
+                $rules['staff.name'] = 'required';
+            }
 
             if ($this->period !== 'byMonth' && $this->period !== 'byDate') {
                 $rules['end_date'] = 'required|after:start_date';
@@ -353,6 +399,7 @@ class Export extends Component
             'start_date' => 'desde',
             'end_date' => 'hasta',
             'report_by' => 'Agrupar por',
+            'staff.name' => 'Personal',
         ];
     }
 }
