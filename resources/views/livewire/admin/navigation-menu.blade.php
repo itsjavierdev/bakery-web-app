@@ -1,10 +1,10 @@
 <nav class="w-full flex flex-col gap-2 py-2">
-    @can('sales_report.generate')
+    {{-- @can('sales_report.generate')
         <x-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
             <i class="icon-chart text-xl"></i>
             Dashboard
         </x-nav-link>
-    @endcan
+    @endcan --}}
     <!--Admin Module-->
     @php
         $roles_active = Str::startsWith(request()->route()->getName(), 'roles.');
@@ -68,11 +68,11 @@
                         Información de la empresa
                     </x-nav-item>
                 @endcan
-                @can('featured.read')
+                {{-- @can('featured.read')
                     <x-nav-item href="{{ route('featured.index') }}" :active="$featured_active">
                         Imagenes destacadas
                     </x-nav-item>
-                @endcan
+                @endcan --}}
             </x-slot>
         </x-nav-select>
     @endcanany

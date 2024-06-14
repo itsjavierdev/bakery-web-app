@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('name', 25);
             $table->string('surname', 25);
             $table->string('phone', 13)->unique();
-            $table->string('CI', 11)->unique();
+            $table->string('CI', 13)->unique();
             $table->date('birthdate');
             $table->boolean('is_employed')->default(true);
             $table->timestamps();

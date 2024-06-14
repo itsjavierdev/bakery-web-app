@@ -20,12 +20,12 @@
         </div>
         <!--Products-->
         @if ($products->count())
-            <div class="w-full flex justify-center flex-wrap col-[2/3] row-[2/3] gap-5">
+            <div class="w-full h-fit flex justify-center flex-wrap col-[2/3] row-[2/3] gap-5">
                 @foreach ($products as $product)
                     <x-product-card :product="$product">
-                        <x-customer-button size="medium" class="!w-full"
+                        <x-customer-button size="small" class="!w-full"
                             wire:click.prevent="$dispatch('addToCart', {product_id:{{ $product->id }}})">
-                            agregar al carrito
+                            agregar
                         </x-customer-button>
                     </x-product-card>
                 @endforeach
@@ -39,7 +39,7 @@
         <!--Pagination-->
         @if ($products->hasPages())
             <div class="col-[1/3] row-[3/4] px-6 py-3">
-                {{ $products->links() }}
+                {{ $products->links(data: ['scrollTo' => 'main']) }}
             </div>
         @endif
         <!--Filter by category-->

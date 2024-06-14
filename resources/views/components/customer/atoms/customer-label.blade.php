@@ -2,7 +2,7 @@
 
 
 <div class="flex gap-2">
-    <label {{ $attributes->merge(['class' => 'block font-bold text-sm text-font-primary']) }}>
+    <label {{ $attributes->merge(['class' => 'block font-medium text-sm text-font-primary']) }}>
         {{ $value ?? $slot }}
     </label>
     @if ($value ?? true)

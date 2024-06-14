@@ -1,4 +1,4 @@
-<x-customer>
+<x-customer :register="false">
     @push('pageTitle', 'Iniciar sesión')
 
     <div class="md:flex md:justify-center">

@@ -46,7 +46,7 @@ class Create extends Component
             'price' => 'required|numeric|between:0,999.9',
             'bag_quantity' => 'required|integer|between:1,100',
             'description' => 'nullable|string|max:255',
-            'images.*' => 'image|max:1024',
+            'images.*' => 'image|max:2048',
             'temporary_images' => 'required|array|min:1|max:4',
         ];
     }
@@ -85,6 +85,7 @@ class Create extends Component
             'name' => $this->name,
             'category_id' => $this->category_id,
             'price' => $price,
+            'price_by_bag' => $this->price,
             'bag_quantity' => $this->bag_quantity,
             'description' => $this->description,
         ]);

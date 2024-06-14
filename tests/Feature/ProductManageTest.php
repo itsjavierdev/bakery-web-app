@@ -159,6 +159,5 @@ class ProductManageTest extends TestCase
         $response->assertSee($this->product->slug);
         $response->assertSee($this->category->name);
         $response->assertSee(Carbon::parse($this->product->created_at)->isoFormat('DD MMM YYYY'));
-        $response->assertSee(Carbon::parse($this->product->updated_at)->isoFormat('DD MMM YYYY'));
     }
 }

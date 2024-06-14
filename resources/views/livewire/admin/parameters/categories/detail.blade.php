@@ -14,9 +14,6 @@
                     <x-date-format>{{ $category->created_at }}</x-date-format>
                 </x-detail-row>
 
-                <x-detail-row title="Fecha de modificación">
-                    <x-date-format>{{ $category->updated_at }}</x-date-format>
-                </x-detail-row>
             </div>
             <x-slot name="actions">
                 <x-item-actions :actions="$actions" routesPrefix="categories" item_id="{{ $category->id }}" />

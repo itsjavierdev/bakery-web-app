@@ -6,12 +6,14 @@
         <div class="flex flex-col gap-5 items-center p-5 order-1 md:order-2">
             <x-title txtsize="3xl" class="pt-0">{{ $product->name }}</x-title>
             <span class="text-xl">Bs
-                {{ $product->price * $product->bag_quantity }}</span>
+                {{ number_format($product->price_by_bag, 1, ',', '.') }}</span>
         </div>
 
         <!--DESCRIPTION-->
         <div class="p-5 flex flex-col gap-5 order-3 md:order-3">
-            <p><strong class="font-bold text-md">Incluye:</strong> {{ $product->bag_quantity }} unidades</p>
+            @if ($product->bag_quantity > 1)
+                <p><strong class="font-bold text-md">Incluye:</strong> {{ $product->bag_quantity }} unidades</p>
+            @endif
             <p class="text-start text-pretty">{{ $product->description }}</p>
             <form wire:submit.prevent="addToCart" class="flex gap-2 w-full">
                 <x-input-quantity class="h-[58px]" wire:model.change="quantity" />

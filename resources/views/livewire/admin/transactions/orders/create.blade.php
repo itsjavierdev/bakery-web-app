@@ -46,28 +46,34 @@
             @endif
             <hr class="my-3">
             <!--Delivery info-->
-            <h3 class="w-full text-center">Información del entrega</h3>
-            <x-inputs.label value="Metodo de entrega" is_required />
-            <div class="flex  justify-around gap-3 my-3">
-                <!--Select delivery method-->
-                @if ($delivery == 'delivery')
-                    <x-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
-                        domicilio</x-button>
-                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida en
-                        sucursal</x-secondary-button>
-                @elseif ($delivery == 'pickup')
-                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
-                        domicilio</x-secondary-button>
-                    <x-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida
-                        en
-                        sucursal</x-button>
-                @else
-                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
-                        domicilio</x-secondary-button>
-                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida en
-                        sucursal</x-secondary-button>
-                @endif
-            </div>
+            <x-inputs.group>
+                <h3 class="w-full text-center">Información del entrega</h3>
+                <x-inputs.label value="Metodo de entrega" is_required />
+                <div class="flex  justify-around gap-3 my-3">
+                    <!--Select delivery method-->
+                    @if ($delivery == 'delivery')
+                        <x-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
+                            domicilio</x-button>
+                        <x-secondary-button class="!w-full justify-center"
+                            wire:click="updateDelivery('pickup')">Recogida en
+                            sucursal</x-secondary-button>
+                    @elseif ($delivery == 'pickup')
+                        <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio
+                            a
+                            domicilio</x-secondary-button>
+                        <x-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida
+                            en
+                            sucursal</x-button>
+                    @else
+                        <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio
+                            a
+                            domicilio</x-secondary-button>
+                        <x-secondary-button class="!w-full justify-center"
+                            wire:click="updateDelivery('pickup')">Recogida en
+                            sucursal</x-secondary-button>
+                    @endif
+                </div>
+            </x-inputs.group>
             <!--Select or add Address-->
             @if ($delivery == 'delivery')
                 <x-inputs.group>

@@ -24,7 +24,7 @@ class Cart
             $cart['products'][$existingProductIndex]['quantity'] += $quantity;
             $cart['products'][$existingProductIndex]['subtotal'] = $cart['products'][$existingProductIndex]['quantity'] * $cart['products'][$existingProductIndex]['subtotal_price'];
         } else {
-            $total_price = $product->bag_quantity * $product->price;
+            $total_price = $product->price_by_bag;
             // Si el producto no está en el carrito, agrégalo con los nuevos campos
             $productToAdd = [
                 'id' => $product->id,
@@ -32,8 +32,8 @@ class Cart
                 'price' => $product->price,
                 'quantity' => $quantity,
                 'bag_quantity' => $product->bag_quantity,
-                'subtotal' => $quantity * $total_price,
-                'subtotal_price' => $total_price,
+                'subtotal' => $quantity * $product->price_by_bag,
+                'subtotal_price' => $product->price_by_bag,
             ];
             array_push($cart['products'], $productToAdd);
         }

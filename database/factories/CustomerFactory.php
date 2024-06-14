@@ -16,11 +16,14 @@ class CustomerFactory extends Factory
      */
     public function definition(): array
     {
+        $phone = $this->faker->numberBetween(60000000, 80090000);
+
         return [
             "name" => $this->faker->firstName(),
             "surname" => $this->faker->lastName(),
-            'phone' => fake()->unique()->randomNumber(8),
+            'phone' => $phone,
             'email' => $this->faker->unique()->safeEmail(),
+            'verified' => $this->faker->boolean(),
         ];
     }
 }

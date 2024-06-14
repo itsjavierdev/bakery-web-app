@@ -1,7 +1,7 @@
 <div>
     @if (count($cart['products']) > 0)
 
-        <div class="md:flex justify-center gap-6 mt-9 pb-48 ">
+        <div class="md:flex justify-center gap-6 mt-9  mx-0 md:mx-4">
             <!--PRODUCTS-->
             <div class="basis-2/3 rounded">
                 <div class="h-fit rounded-t-lg md:rounded-lg  overflow-hidden">
@@ -12,24 +12,39 @@
                                     src="{{ asset('storage/products/128/' . $product['first_image']) }}" alt="">
                             </div>
                             <div class="basis-3/6">
-                                <h1 class="text-lg  uppercase">{{ $product['name'] }}</h1>
-                                <span class="font-thin">Bs{{ $product['subtotal_price'] }}</span>
+                                <h1 class="text-lg font-medium">{{ $product['name'] }}</h1>
+                                <span class=""> Bs{{ $product['subtotal_price'] }}</span>
+                                @if ($product['bag_quantity'] > 1)
+                                    <p class="text-gray-500">{{ $product['bag_quantity'] }} unidades</p>
+                                @endif
                             </div>
-                            <div class="basis-2/6 flex justify-around items-center gap-2">
+                            <div class="basis-3/6 lg:basis-2/6 flex justify-around items-center gap-2">
                                 <form wire:submit.prevent="updateQuantity({{ $product['id'] }})"
                                     class="flex gap-3 items-center ">
                                     <x-input-quantity type="number" wire:model.defer="quantities.{{ $product['id'] }}"
                                         min="1" />
-                                    <span>Bs {{ $product['subtotal'] }}</span>
-                                    <button type="submit"
-                                        class="border-2 flex justify-center items-center rounded-full min-w-9 min-h-9 border-brown-primary text-brown-primary text-lg"><i
-                                            class="icon-spin"></i></button>
+                                    <div>
+                                        <span class="text-nowrap">Bs {{ $product['subtotal'] }}</span>
+                                        @if ($product['bag_quantity'] > 1)
+                                            <p class="text-nowrap text-gray-500">
+                                                {{ $product['bag_quantity'] * $product['quantity'] . ' unidades' }}
+                                            </p>
+                                        @else
+                                            <p class="min-w-24"></p>
+                                        @endif
+                                    </div>
+                                    <div class="flex flex-col md:flex-row gap-1">
+                                        <button type="submit"
+                                            class="border-2 flex justify-center items-center rounded-full min-w-8 min-h-8 border-brown-primary text-brown-primary text-lg"><i
+                                                class="icon-spin"></i></button>
+                                        <button
+                                            class="border-2 flex justify-center items-center rounded-full min-w-8 min-h-8 border-brown-primary text-brown-primary text-lg"
+                                            wire:click="removeFromCart({{ $product['id'] }})">
+                                            <i class="icon-trash "></i>
+                                        </button>
+                                    </div>
                                 </form>
-                                <button
-                                    class="border-2 flex justify-center items-center rounded-full min-w-9 min-h-9 border-brown-primary text-brown-primary text-lg"
-                                    wire:click="removeFromCart({{ $product['id'] }})">
-                                    <i class="icon-trash "></i>
-                                </button>
+
                             </div>
                         </div>
                     @endforeach

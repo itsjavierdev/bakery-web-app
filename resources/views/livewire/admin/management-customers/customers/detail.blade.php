@@ -29,6 +29,11 @@
                         <i class="icon-x text-red-500 text-lg"></i>
                     @endif
                 </x-detail-row>
+
+                <x-detail-row title="Verificado">
+                    <x-columns.boolean value="{{ $customer->verified }}" />
+                </x-detail-row>
+
                 <x-detail-row title="Direcciones" classContent="flex flex-wrap -mx-2 mt-2" isResponsive>
                     @foreach ($addresses as $address)
                         <x-permissions-card>
@@ -44,10 +49,6 @@
 
                 <x-detail-row title="Fecha de registro">
                     <x-date-format>{{ $customer->created_at }}</x-date-format>
-                </x-detail-row>
-
-                <x-detail-row title="Fecha de modificación">
-                    <x-date-format>{{ $customer->updated_at }}</x-date-format>
                 </x-detail-row>
             </div>
             <x-slot name="actions">

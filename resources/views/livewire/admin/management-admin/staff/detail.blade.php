@@ -30,9 +30,6 @@
                 <x-detail-row title="Fecha de registro">
                     <x-date-format>{{ $staff->created_at }}</x-date-format>
                 </x-detail-row>
-                <x-detail-row title="Fecha de modificación">
-                    <x-date-format>{{ $staff->updated_at }}</x-date-format>
-                </x-detail-row>
                 @if ($this->user)
                     <x-detail-row title="Correo electronico">
                         <p>{{ $user->email }}</p>

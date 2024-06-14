@@ -51,7 +51,7 @@ class Create extends Component
             // In case the quantity is empty, set it to 0
             if (is_numeric($product['quantity']) && is_numeric($product['bag_quantity'])) {
                 $this->products[$key]['subtotal'] = $product['by_bag'] ?
-                    $product['price'] * $product['quantity'] * $product['bag_quantity'] :
+                    $product['price_by_bag'] * $product['quantity'] :
                     $product['price'] * $product['quantity'];
             } else {
                 $this->products[$key]['subtotal'] = 0;
@@ -184,13 +184,18 @@ class Create extends Component
         //if the product is set as exisiting product, update the quantity
         if ($existing_product_key !== null) {
             $this->products[$existing_product_key]['quantity'] += 1;
-            $this->products[$existing_product_key]['subtotal'] += $product->price;
+            if ($this->products[$existing_product_key]['by_bag']) {
+                $this->products[$existing_product_key]['subtotal'] += $product->price_by_bag;
+            } else {
+                $this->products[$existing_product_key]['subtotal'] += $product->price;
+            }
         } else {
             //if the product is not in the list, add it
             $new_product = [
                 'id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,
+                'price_by_bag' => $product->price_by_bag,
                 'bag_quantity' => $product->bag_quantity,
                 'quantity' => 1,
                 'by_bag' => false,

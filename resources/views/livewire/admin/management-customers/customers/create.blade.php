@@ -23,6 +23,14 @@
         <x-inputs.text wire:model="email" />
         <x-inputs.error for="email" />
     </x-inputs.group>
+    <!--Is verified-->
+    <x-inputs.group>
+        <x-inputs.label>
+            <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="verified" />
+            <span>Verificado</span>
+        </x-inputs.label>
+        <x-inputs.error for="verified" />
+    </x-inputs.group>
     <!--Actions-->
     <x-slot name="footer">
         <x-button wire:click="save" wire:loading.attr="disabled">

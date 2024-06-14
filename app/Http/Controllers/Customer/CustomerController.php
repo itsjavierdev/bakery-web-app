@@ -47,5 +47,9 @@ class CustomerController extends Controller
     {
         return view('pages.customer.order.thankyou');
     }
+    public function notVerified()
+    {
+        return view('pages.customer.errors.not-verified');
+    }
 
 }

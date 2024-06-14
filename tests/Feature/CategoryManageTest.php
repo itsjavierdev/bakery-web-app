@@ -73,7 +73,6 @@ class CategoryManageTest extends TestCase
         $response->assertSee($this->category->id);
         $response->assertSee($this->category->name);
         $response->assertSee(Carbon::parse($this->category->created_at)->isoFormat('DD MMM YYYY'));
-        $response->assertSee(Carbon::parse($this->category->updated_at)->isoFormat('DD MMM YYYY'));
     }
 
     public function test_a_category_can_be_deleted()

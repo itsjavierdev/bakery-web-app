@@ -53,7 +53,7 @@ class UpdateInformationForm extends Component
         'TJ',
         'CH',
         'PA',
-        'BN'
+        'BE'
     ];
 
     public function mount()

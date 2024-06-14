@@ -32,7 +32,7 @@ class Update extends Component
         'TJ',
         'CH',
         'PA',
-        'BN'
+        'BE'
     ];
     protected $listeners = ['render'];
     //Mount data in inputs

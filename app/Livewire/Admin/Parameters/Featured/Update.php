@@ -93,7 +93,7 @@ class Update extends Component
         return [
             'product.id' => 'nullable|exists:products,id',
             'title' => 'nullable|string|max:255',
-            'new_image' => 'nullable|image|max:1024',
+            'new_image' => 'nullable|image|max:2048',
             'put_filter' => 'nullable|boolean',
             'show' => 'nullable|boolean',
         ];

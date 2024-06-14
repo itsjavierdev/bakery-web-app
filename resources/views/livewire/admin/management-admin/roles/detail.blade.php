@@ -14,10 +14,6 @@
                     <x-date-format>{{ $role->created_at }}</x-date-format>
                 </x-detail-row>
 
-                <x-detail-row title="Fecha de modificación">
-                    <x-date-format>{{ $role->updated_at }}</x-date-format>
-                </x-detail-row>
-
                 <x-detail-row title="Permisos" classContent="flex flex-wrap -mx-2 mt-2" isResponsive>
                     @foreach ($permissions as $module => $modulePermissions)
                         <x-permissions-card>

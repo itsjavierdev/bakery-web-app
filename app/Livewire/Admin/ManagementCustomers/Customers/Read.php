@@ -15,7 +15,7 @@ class Read extends Datatable
 
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
-        return Customer::query()->select('*', DB::raw('CONCAT_WS(" ", NULLIF(name, ""), NULLIF(surname, "")) AS full_name'));
+        return Customer::query()->select('*', 'verified', DB::raw('CONCAT_WS(" ", NULLIF(name, ""), NULLIF(surname, "")) AS full_name'))->orderBy('verified', 'asc');
     }
 
     public function columns(): array
@@ -25,6 +25,7 @@ class Read extends Datatable
             Column::make('full_name', 'Nombre completo')->isDefault(),
             Column::make('phone', 'Telefono')->isDefault(),
             Column::make('email', 'Correo electronico')->isDefault(),
+            Column::make('verified', 'Verificado')->isDefault()->component('admin.atoms.table.columns.boolean'),
             Column::make('created_at', 'Fecha de registro')->isDefault(),
         ];
     }

@@ -1,3 +1,5 @@
+@props(['register_bg' => 'bg-yellow-secondary', 'register' => true])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -9,7 +11,10 @@
     <title>@stack('pageTitle') - San Xavier</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Montserrat&family=Varela+Round&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap"
         rel="stylesheet">
 
     <!-- Scripts -->
@@ -34,7 +39,7 @@
         </div>
     </main>
 
-    <x-customer.layouts.footer />
+    <x-customer.layouts.footer bg_color="{{ $register_bg }}" register="{{ $register }}" />
 
     @livewireScripts
 

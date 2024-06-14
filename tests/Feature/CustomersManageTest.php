@@ -117,6 +117,5 @@ class CustomersManageTest extends TestCase
         $response->assertSee($this->customer->phone);
         $response->assertSee($this->customer->email);
         $response->assertSee(Carbon::parse($this->customer->created_at)->isoFormat('DD MMM YYYY'));
-        $response->assertSee(Carbon::parse($this->customer->updated_at)->isoFormat('DD MMM YYYY'));
     }
 }

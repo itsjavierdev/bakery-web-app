@@ -1,12 +1,16 @@
-<x-customer>
+<x-customer :register="false">
     @push('pageTitle', 'Registrarse')
 
     <div class="md:flex md:justify-center">
         <div class="px-4 md:px-0">
             <!--TITLE-->
             <x-title class="mb-10 pt-10">Crear cuenta</x-title>
+            <div class="bg-white rounded p-5 mt-10 w-full mb-4 md:w-[600px]">
+                <p>Complete el formulario para registrarse como cliente comercial. Nuestro equipo verificará su
+                    información antes de activar su cuenta.</p>
+            </div>
             <!--FORM-->
-            <div class="bg-white rounded p-5 my-10 w-full md:w-[450px] ">
+            <div class="bg-white rounded p-5 mb-10 w-full md:w-[600px] ">
                 <!--VALIDATIONS-->
                 <x-inputs.validation-errors class="mb-4" />
                 @if (session('status'))

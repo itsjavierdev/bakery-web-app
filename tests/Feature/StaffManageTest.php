@@ -121,6 +121,5 @@ class StaffManageTest extends TestCase
         $response->assertSee($this->staff->CI);
         $response->assertSee(Carbon::parse($this->staff->birthdate)->isoFormat('DD MMM YYYY'));
         $response->assertSee(Carbon::parse($this->staff->created_at)->isoFormat('DD MMM YYYY'));
-        $response->assertSee(Carbon::parse($this->staff->updated_at)->isoFormat('DD MMM YYYY'));
     }
 }

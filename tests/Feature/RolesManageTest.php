@@ -112,7 +112,6 @@ class RolesManageTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee($this->role->name);
         $response->assertSee(Carbon::parse($this->role->created_at)->isoFormat('DD MMM YYYY'));
-        $response->assertSee(Carbon::parse($this->role->updated_at)->isoFormat('DD MMM YYYY'));
         $response->assertSee($this->permissionCreate->module);
         $response->assertSee($this->permissionCreate->description);
     }

@@ -70,6 +70,7 @@ class Checkout extends Component
         $newOrder->notes = $this->description;
         $newOrder->customer_id = Auth::guard('customer')->user()->customer->id;
         $newOrder->paid_amount = 0;
+        $newOrder->picked_up = $this->delivery == 'pickup' ? 1 : 0;
         $newOrder->delivery_time_id = $this->delivery_time;
         $newOrder->delivery_date = $this->delivery_date;
         $newOrder->total_quantity = CartFacade::totalQuantity();
@@ -101,6 +102,11 @@ class Checkout extends Component
         //clear cart and redirect to thankyou page
         CartFacade::clear();
         return redirect()->route('customer.thankyou');
+    }
+
+    public function updatingDelivery()
+    {
+        $this->reset('delivery_time');
     }
 
     public function rules()

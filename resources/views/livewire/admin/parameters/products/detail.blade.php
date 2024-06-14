@@ -14,6 +14,9 @@
             <x-detail-row title="Cantidad por bolsa">
                 <p>{{ $product->bag_quantity }}</p>
             </x-detail-row>
+            <x-detail-row title="Precio por bolsa">
+                <p>{{ $product->price_by_bag }}</p>
+            </x-detail-row>
             <x-detail-row title="Vigente">
                 <x-columns.inverted-boolean value="{{ $product->discontinued }}" />
             </x-detail-row>
@@ -34,9 +37,6 @@
             </x-detail-row>
             <x-detail-row title="Fecha de registro">
                 <x-date-format>{{ $product->created_at }}</x-date-format>
-            </x-detail-row>
-            <x-detail-row title="Fecha de modificación">
-                <x-date-format>{{ $product->updated_at }}</x-date-format>
             </x-detail-row>
 
         </div>

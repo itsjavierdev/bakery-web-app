@@ -17,6 +17,8 @@ class Create extends Component
     public $phone;
     #[Rule('nullable|string|email|max:255|unique:customers,email', as: 'correo electronico')]
     public $email = '';
+    #[Rule('boolean')]
+    public $verified = false;
 
     //Custom messages error
     public function messages()
@@ -42,7 +44,8 @@ class Create extends Component
             'name' => $this->name,
             'surname' => $this->surname,
             'phone' => $this->phone,
-            'email' => $this->email
+            'email' => $this->email,
+            'verified' => $this->verified ? true : false
         ]);
 
         return redirect()->to('admin/clientes')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Cliente creado correctamente');

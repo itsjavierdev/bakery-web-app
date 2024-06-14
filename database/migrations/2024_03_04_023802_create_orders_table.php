@@ -32,8 +32,9 @@ return new class extends Migration {
                 ->onDelete('set null');
 
             $table->foreignId('delivery_time_id')
+                ->nullable()
                 ->constrained()
-                ->onDelete('restrict')
+                ->onDelete('set null')
                 ->after('address_id');
 
             $table->timestamps();

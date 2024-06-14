@@ -63,7 +63,7 @@ class Read extends Component
 
         if ($index !== false) {
             $cart['products'][$index]['quantity'] = $this->quantities[$productId];
-            $total_price = $cart['products'][$index]['bag_quantity'] * $cart['products'][$index]['price'];
+            $total_price = $cart['products'][$index]['subtotal_price'];
             $cart['products'][$index]['subtotal'] = $cart['products'][$index]['quantity'] * $total_price;
             $cart['products'][$index]['subtotal_price'] = $total_price;
 

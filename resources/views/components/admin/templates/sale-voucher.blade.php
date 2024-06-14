@@ -92,7 +92,8 @@
                 @foreach ($sale_details as $detail)
                     <tr>
                         <td>{{ $products->where('id', $detail->product_id)->first()->name }}</td>
-                        <td>Bs{{ $detail->product_price }}</td>
+                        <td>Bs{{ $detail->by_bag ? $products->where('id', $detail->product_id)->first()->price_by_bag : $detail->product_price }}
+                        </td>
                         <td>{{ $detail->quantity }}</td>
                         <td>Bs{{ $detail->subtotal }}</td>
                     </tr>
@@ -109,7 +110,7 @@
                     <td class="total-title" colspan="3" style="text-align: right; padding: 0;">
                         Total pagado:
                     </td>
-                    <td class="total-quantity">Bs{{ $sale->paid_amount }}</td>
+                    <td class="total-quantity">Bs{{ $sale->paid_amount == 0 ? '0' : $sale->paid_amount }}</td>
                 </tr>
                 <tr>
                     <td class="total-title" colspan="3" style="text-align: right; padding: 0;">

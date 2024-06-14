@@ -1,4 +1,4 @@
-<div class="md:flex justify-around gap-7 mx-5">
+<div class="md:flex justify-around gap-7 md:mx-5">
     <div class="w-full">
         <!--Customer information-->
         <div class="bg-white border border-border rounded px-5 pb-5 mb-7">
@@ -113,7 +113,7 @@
                     <div class="flex justify-between text-md py-1 px-5">
                         <h5 class="uppercase">{{ $product['name'] }}
                             <span class="lowercase">x</span>
-                            {{ $product['quantity'] }}
+                            {{ $product['quantity'] * $product['bag_quantity'] }}
                         </h5>
                         <h6>Bs{{ $product['subtotal'] }}</h6>
                     </div>

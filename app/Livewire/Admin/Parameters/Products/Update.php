@@ -33,7 +33,7 @@ class Update extends Component
         $this->categories = Category::all();
         $this->name = $product->name;
         $this->category_id = $product->category_id;
-        $this->price = $product->price * $product->bag_quantity;
+        $this->price = $product->price_by_bag;
         $this->bag_quantity = $product->bag_quantity;
         $this->description = $product->description;
         $this->discontinued = $product->discontinued ? true : false;
@@ -95,6 +95,7 @@ class Update extends Component
             'name' => $this->name,
             'category_id' => $this->category_id,
             'price' => $price,
+            'price_by_bag' => $this->price,
             'bag_quantity' => $this->bag_quantity,
             'description' => $this->description,
             'discontinued' => $this->discontinued ? '1' : '0',
@@ -168,7 +169,7 @@ class Update extends Component
             'price' => 'required|numeric|between:0,999.9',
             'bag_quantity' => 'required|integer|between:1,100',
             'description' => 'nullable|string|max:255',
-            'new_images.*' => 'image|max:1024',
+            'new_images.*' => 'image|max:2048',
             'images' => 'required|array|min:1|max:4',
             'discontinued' => 'boolean',
         ];

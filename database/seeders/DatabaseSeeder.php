@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Address;
 use App\Models\CompanyContact;
+use App\Models\Customer;
 use App\Models\OrderDetail;
 use App\Models\Payment;
 use App\Models\Product;
@@ -23,33 +24,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
         $this->call(RoleSeeder::class);
 
         User::factory()->create([
             'email' => 'test@example.com',
         ])->assignRole('Administrador');
-        // Product::factory(10)->create();
 
-        Staff::factory(5)->create();
+        $users = User::factory(10)->create();
 
-
-        User::factory()->create([
-            'email' => 'javier@gmail.com',
-        ])->assignRole('Administrador');
-
-        $users = User::factory(20)->create();
+        $roles = ['Encargado de ventas', 'Repartidor', 'Encargado de pedidos', 'Encargado de contenidos'];
 
         foreach ($users as $user) {
-            $user->assignRole('Administrador');
+            $user->assignRole($roles[array_rand($roles)]);
         }
 
-        // OrderDetail::factory(10)->create();
+        $this->call(CategorySeeder::class);
+        // $this->call(ProductSeeder::class);
+        $this->call(DeliveryTimeSeeder::class);
 
-        // SaleDetail::factory(1)->create();
-
-        // Payment::factory(10)->create();
-
-        // CompanyContact::create([]);
+        Customer::factory(10)->create();
     }
 }

@@ -43,12 +43,12 @@ Route::middleware([
     Route::get('admin/información/edit', CompanyContact\Update::class)->middleware('can:companycontact.update')->name('companycontact.edit');
 
     //Featured routes
-    Route::get('admin/destacados', function () {
-        return view('pages.admin.parameters.featured.index');
-    })->middleware('can:featured.read')->name('featured.index');
-    Route::get('admin/destacados/create', Featured\Create::class)->middleware('can:featured.create')->name('featured.create');
-    Route::get('admin/destacados/reordenar', Featured\Reorder::class)->middleware('can:featured.update')->name('featured.reorder');
-    Route::get('admin/destacados/{featured}/edit', Featured\Update::class)->middleware('can:featured.update')->name('featured.edit');
-    Route::get('admin/destacados/{featured}', Featured\Detail::class)->middleware('can:featured.read')->name('featured.show');
+    // Route::get('admin/destacados', function () {
+    //     return view('pages.admin.parameters.featured.index');
+    // })->middleware('can:featured.read')->name('featured.index');
+    // Route::get('admin/destacados/create', Featured\Create::class)->middleware('can:featured.create')->name('featured.create');
+    // Route::get('admin/destacados/reordenar', Featured\Reorder::class)->middleware('can:featured.update')->name('featured.reorder');
+    // Route::get('admin/destacados/{featured}/edit', Featured\Update::class)->middleware('can:featured.update')->name('featured.edit');
+    // Route::get('admin/destacados/{featured}', Featured\Detail::class)->middleware('can:featured.read')->name('featured.show');
 
 });

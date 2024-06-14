@@ -8,12 +8,12 @@ use App\Http\Controllers\Customer\LoginController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfCartIsEmpty;
+use App\Http\Middleware\CheckVerified;
 
 
 Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
 Route::get('shop', [CustomerController::class, 'shop'])->name('customer.shop');
 Route::get('/producto/{productSlug}', [CustomerController::class, 'showProduct'])->name('show-product');
-Route::get('/carrito', [CustomerController::class, 'cart'])->name('cart');
 
 
 Route::middleware([RedirectIfAuthenticated::class . ':customer'])->group(function () {
@@ -28,6 +28,8 @@ Route::middleware([RedirectIfAuthenticated::class . ':customer'])->group(functio
 Route::middleware([RedirectIfNotAuthenticated::class . ':customer'])->group(function () {
     Route::post('cliente/logout', [AuthManager::class, 'logout'])->name('customer.logout');
     Route::get('cliente/direcciones', [CustomerController::class, 'addresses'])->name('customer.addresses');
-    Route::get('cliente/realizar-pedido', [CustomerController::class, 'checkout'])->middleware([RedirectIfCartIsEmpty::class])->name('customer.checkout');
+    Route::get('cliente/realizar-pedido', [CustomerController::class, 'checkout'])->middleware([RedirectIfCartIsEmpty::class, CheckVerified::class . ':customer'])->name('customer.checkout');
     Route::get('cliente/muchas-gracias', [CustomerController::class, 'thankyou'])->name('customer.thankyou');
+    Route::get('cliente/no-verificado', [CustomerController::class, 'notVerified'])->name('customer.not.verified');
+    Route::get('/carrito', [CustomerController::class, 'cart'])->middleware([CheckVerified::class . ':customer'])->name('cart');
 });

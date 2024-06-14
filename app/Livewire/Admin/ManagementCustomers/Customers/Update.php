@@ -14,6 +14,7 @@ class Update extends Component
     public $surname;
     public $phone;
     public $email;
+    public $verified;
 
     //validation rules
     public function rules()
@@ -22,7 +23,8 @@ class Update extends Component
             'name' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
             'surname' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
             'phone' => 'required|integer|min:60000000|max:80090000|unique:customers,phone,' . $this->customer->id,
-            'email' => 'nullable|string|email|max:255|unique:customers,email,' . $this->customer->id
+            'email' => 'nullable|string|email|max:255|unique:customers,email,' . $this->customer->id,
+            'verified' => 'boolean'
         ];
 
     }
@@ -33,7 +35,8 @@ class Update extends Component
             'name' => 'nombre',
             'surname' => 'apellido',
             'phone' => 'teléfono',
-            'email' => 'correo electrónico'
+            'email' => 'correo electrónico',
+            'verified' => 'verificado'
         ];
     }
     //Custom messages error
@@ -55,6 +58,7 @@ class Update extends Component
         $this->surname = $this->customer->surname;
         $this->phone = $this->customer->phone;
         $this->email = $this->customer->email;
+        $this->verified = $this->customer->verified == '1' ? true : false;
     }
     public function render()
     {
@@ -67,7 +71,8 @@ class Update extends Component
             'name' => $this->name,
             'surname' => $this->surname,
             'phone' => $this->phone,
-            'email' => $this->email
+            'email' => $this->email,
+            'verified' => $this->verified ? true : false
         ]);
 
         return redirect()->to('admin/clientes')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Cliente actualizado correctamente');

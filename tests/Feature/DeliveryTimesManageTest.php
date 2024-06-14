@@ -63,7 +63,7 @@ class DeliveryTimesManageTest extends TestCase
         $response->assertSee($this->delivery_time->id);
         $response->assertSee($this->delivery_time->time);
         $response->assertSee(Carbon::parse($this->delivery_time->created_at)->isoFormat('DD MMM YYYY'));
-        $response->assertSee(Carbon::parse($this->delivery_time->updated_at)->isoFormat('DD MMM YYYY'));
+
     }
 
     public function test_a_delivery_time_can_be_updated(): void
