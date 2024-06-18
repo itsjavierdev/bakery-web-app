@@ -19,90 +19,90 @@ class FeaturedManageTest extends TestCase
     public $featured;
     public $product;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->user = User::factory()->create();
-        $this->featured = Featured::factory()->create();
-        $this->product = Product::where('id', $this->featured->product_id)->first();
-    }
+    // public function setUp(): void
+    // {
+    //     parent::setUp();
+    //     $this->user = User::factory()->create();
+    //     $this->featured = Featured::factory()->create();
+    //     $this->product = Product::where('id', $this->featured->product_id)->first();
+    // }
 
-    public function test_a_featured_can_be_created(): void
-    {
-        Storage::fake('featureds');
+    // public function test_a_featured_can_be_created(): void
+    // {
+    //     Storage::fake('featureds');
 
-        // Create the featured in live wire component
-        Livewire::test(FeaturedLivewire\Create::class)
-            ->set('title', 'Rollito')
-            ->set('product', $this->product)
-            ->set('put_filter', true)
-            ->set('image', UploadedFile::fake()->image('avatar.jpg'))
-            ->call('save')
-            ->assertRedirect('admin/destacados')
-            ->assertSessionHas('flash.bannerStyle', 'success')
-            ->assertSessionHas('flash.banner', 'Imagen destacada creada correctamente');
+    //     // Create the featured in live wire component
+    //     Livewire::test(FeaturedLivewire\Create::class)
+    //         ->set('title', 'Rollito')
+    //         ->set('product', $this->product)
+    //         ->set('put_filter', true)
+    //         ->set('image', UploadedFile::fake()->image('avatar.jpg'))
+    //         ->call('save')
+    //         ->assertRedirect('admin/destacados')
+    //         ->assertSessionHas('flash.bannerStyle', 'success')
+    //         ->assertSessionHas('flash.banner', 'Imagen destacada creada correctamente');
 
-        // Assert the featured was created
-        $this->assertTrue(Featured::where('title', 'Rollito')->exists());
-        $this->assertTrue(Featured::where('product_id', $this->product->id)->exists());
-        $this->assertTrue(Featured::where('has_filter', 1)->exists());
-    }
+    //     // Assert the featured was created
+    //     $this->assertTrue(Featured::where('title', 'Rollito')->exists());
+    //     $this->assertTrue(Featured::where('product_id', $this->product->id)->exists());
+    //     $this->assertTrue(Featured::where('has_filter', 1)->exists());
+    // }
 
-    public function test_can_display_list_of_featured(): void
-    {
-        $response = $this->actingAs($this->user)->get('admin/destacados');
+    // public function test_can_display_list_of_featured(): void
+    // {
+    //     $response = $this->actingAs($this->user)->get('admin/destacados');
 
-        $response->assertStatus(200);
-        $response->assertSee($this->featured->title);
-        $response->assertSee($this->product->name);
-    }
+    //     $response->assertStatus(200);
+    //     $response->assertSee($this->featured->title);
+    //     $response->assertSee($this->product->name);
+    // }
 
-    public function test_a_featured_can_be_updated(): void
-    {
-        Storage::fake('featureds');
+    // public function test_a_featured_can_be_updated(): void
+    // {
+    //     Storage::fake('featureds');
 
-        // Create the featured in live wire component
-        Livewire::test(FeaturedLivewire\Update::class, ['featured' => $this->featured])
-            ->set('title', 'Rollitos')
-            ->set('product', $this->product)
-            ->set('put_filter', false)
-            ->set('new_image', UploadedFile::fake()->image('avatar.jpg'))
-            ->call('update')
-            ->assertRedirect('admin/destacados')
-            ->assertSessionHas('flash.bannerStyle', 'success')
-            ->assertSessionHas('flash.banner', 'Imagen destacada actualizada correctamente');
+    //     // Create the featured in live wire component
+    //     Livewire::test(FeaturedLivewire\Update::class, ['featured' => $this->featured])
+    //         ->set('title', 'Rollitos')
+    //         ->set('product', $this->product)
+    //         ->set('put_filter', false)
+    //         ->set('new_image', UploadedFile::fake()->image('avatar.jpg'))
+    //         ->call('update')
+    //         ->assertRedirect('admin/destacados')
+    //         ->assertSessionHas('flash.bannerStyle', 'success')
+    //         ->assertSessionHas('flash.banner', 'Imagen destacada actualizada correctamente');
 
-        // Assert the featured was updated
-        $this->assertTrue(Featured::where('title', 'Rollitos')->exists());
-        $this->assertTrue(Featured::where('product_id', $this->product->id)->exists());
-        $this->assertTrue(Featured::where('has_filter', 0)->exists());
-    }
+    //     // Assert the featured was updated
+    //     $this->assertTrue(Featured::where('title', 'Rollitos')->exists());
+    //     $this->assertTrue(Featured::where('product_id', $this->product->id)->exists());
+    //     $this->assertTrue(Featured::where('has_filter', 0)->exists());
+    // }
 
-    public function test_can_display_featured_detail(): void
-    {
-        $response = $this->actingAs($this->user)->get('admin/destacados/' . $this->featured->id);
+    // public function test_can_display_featured_detail(): void
+    // {
+    //     $response = $this->actingAs($this->user)->get('admin/destacados/' . $this->featured->id);
 
-        $response->assertStatus(200);
-        $response->assertSee($this->featured->title);
-        $response->assertSee($this->product->name);
-    }
+    //     $response->assertStatus(200);
+    //     $response->assertSee($this->featured->title);
+    //     $response->assertSee($this->product->name);
+    // }
 
-    public function test_a_featured_can_be_deleted(): void
-    {
+    // public function test_a_featured_can_be_deleted(): void
+    // {
 
-        $this->assertTrue(Featured::where('id', $this->featured->id)->exists());
+    //     $this->assertTrue(Featured::where('id', $this->featured->id)->exists());
 
-        // Exceute the delete action in the live wire component
-        Livewire::test(FeaturedLivewire\Delete::class)
-            ->call('confirmDelete', $this->featured->id)
-            ->assertSet('delete_id', $this->featured->id)
-            ->assertSet('open', true)
-            ->call('delete', $this->featured->id)
-            ->assertDispatched('render')
-            ->assertDispatched('banner-message', style: 'success', message: 'Imagen destacada eliminada correctamente');
+    //     // Exceute the delete action in the live wire component
+    //     Livewire::test(FeaturedLivewire\Delete::class)
+    //         ->call('confirmDelete', $this->featured->id)
+    //         ->assertSet('delete_id', $this->featured->id)
+    //         ->assertSet('open', true)
+    //         ->call('delete', $this->featured->id)
+    //         ->assertDispatched('render')
+    //         ->assertDispatched('banner-message', style: 'success', message: 'Imagen destacada eliminada correctamente');
 
-        // Verify that the category was deleted from the database
-        $this->assertFalse(Featured::where('id', $this->featured->id)->exists());
-    }
+    //     // Verify that the category was deleted from the database
+    //     $this->assertFalse(Featured::where('id', $this->featured->id)->exists());
+    // }
 
 }

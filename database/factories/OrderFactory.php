@@ -2,6 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
+use App\Models\Customer;
+use App\Models\DeliveryTime;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 
@@ -17,23 +22,44 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
-        $address = \App\Models\Address::factory()->create();
+        $picked_up = $this->faker->boolean();
 
-        $startDate = Carbon::now();
-        $endDate = Carbon::now()->addMonth();
-
-        $total = $this->faker->randomFloat(2, 0, 99999);
-        $paid_amount = $this->faker->randomFloat(2, 0, $total);
+        $customer = Customer::inRandomOrder()->first();
+        $delivery_date = $this->faker->dateTimeBetween('+1 day', '+1 week');
+        $deliveryTime = DeliveryTime::inRandomOrder()->first();
 
         return [
-            'total' => $total,
-            'paid_amount' => $paid_amount,
-            'paid' => $paid_amount == $total,
-            'address_id' => $address,
-            'total_quantity' => $this->faker->numberBetween(1, 100),
-            'delivery_date' => $this->faker->dateTimeBetween($startDate, $endDate),
-            'delivery_time_id' => \App\Models\DeliveryTime::factory(),
-            'customer_id' => $address->customer_id, // Usa el customer_id del address generado
+            'total' => $this->faker->randomFloat(2, 0, 99999),
+            'paid_amount' => null,
+            'paid' => false,
+            'address_id' => $picked_up ? null : Address::where('customer_id', $customer->id)->inRandomOrder()->first()->id,
+            'picked_up' => $picked_up,
+            'total_quantity' => $this->faker->numberBetween(1, 10),
+            'delivery_date' => $delivery_date,
+            'delivery_time_id' => $deliveryTime,
+            'customer_id' => $customer->id, // Usa el customer_id del address generado
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Order $order) {
+            $numOrderDetails = $this->faker->numberBetween(2, 3);
+
+            $customer_id = $order->customer_id;
+            $delivery_date = $order->delivery_date;
+
+            OrderDetail::factory($numOrderDetails)->create([
+                'order_id' => $order->id,
+            ]);
+
+            $total = OrderDetail::where('order_id', $order->id)->sum('subtotal');
+
+            $order->update([
+                'total_quantity' => OrderDetail::where('order_id', $order->id)->sum('quantity'),
+                'total' => $total,
+            ]);
+
+        });
     }
 }

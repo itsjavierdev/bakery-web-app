@@ -18,13 +18,17 @@ class ProductFactory extends Factory
     {
         $name = $this->faker->word . rand(20, 8000);
         $slug = $this->faker->word . rand(20, 8000);
+        $price_by_bag = $this->faker->randomFloat(2, 1, 100);
+        $bag_quantity = $this->faker->numberBetween(1, 99);
+        $price = $price_by_bag / $bag_quantity;
 
         return [
             'name' => $name,
             'slug' => $slug,
-            'price' => $this->faker->randomFloat(2, 0, 100),
+            'price' => $price,
             'description' => $this->faker->text,
-            'bag_quantity' => $this->faker->randomNumber(2),
+            'bag_quantity' => $bag_quantity,
+            'price_by_bag' => $price_by_bag,
             'discontinued' => $this->faker->boolean,
             'category_id' => \App\Models\Category::factory(),
         ];

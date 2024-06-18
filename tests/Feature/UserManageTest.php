@@ -9,6 +9,7 @@ use App\Models\Staff;
 use Livewire\Livewire;
 use App\Livewire\Admin\ManagementAdmin\Staff as StaffLivewire;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserManageTest extends TestCase
 {
@@ -25,6 +26,19 @@ class UserManageTest extends TestCase
     {
         parent::setUp();
         $this->role = Role::create(['name' => 'Administrador']);
+
+        Permission::create(['name' => 'staff.create', 'description' => 'Crear', 'module' => 'Personal', 'action' => 'create'])->syncRoles([$this->role]);
+        Permission::create(['name' => 'staff.read', 'description' => 'Ver', 'module' => 'Personal', 'action' => 'read'])->syncRoles([$this->role]);
+        Permission::create(['name' => 'staff.update', 'description' => 'Editar', 'module' => 'Personal', 'action' => 'update'])->syncRoles([$this->role]);
+        Permission::create(['name' => 'staff.delete', 'description' => 'Eliminar', 'module' => 'Personal', 'action' => 'delete'])->syncRoles([$this->role]);
+
+        Permission::create(['name' => 'user.create', 'description' => 'Crear', 'module' => 'Usuario', 'action' => 'create'])->syncRoles([$this->role]);
+        Permission::create(['name' => 'user.update', 'description' => 'Editar', 'module' => 'Usuario', 'action' => 'update'])->syncRoles([$this->role]);
+        Permission::create(['name' => 'user.delete', 'description' => 'Eliminar', 'module' => 'Usuario', 'action' => 'delete'])->syncRoles([$this->role]);
+
+        $this->user = User::factory()->create();
+        $this->user->assignRole('Administrador');
+
         //Create example data
         $this->user = User::factory()->create()->assignRole($this->role);
         $this->another_user = User::factory()->create()->assignRole($this->role);

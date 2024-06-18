@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,18 +17,22 @@ class SaleDetailFactory extends Factory
      */
     public function definition(): array
     {
-        $product = \App\Models\Product::factory()->create();
-        $price = $product->price;
+        // Get a random Product from the database
+        $product = Product::inRandomOrder()->first();
+
+        // Define the SaleDetail attributes
         $quantity = $this->faker->numberBetween(1, 10);
-        $subtotal = $price * $quantity;
+        $by_bag = true;
+        $subtotal = $by_bag ? $product->price_by_bag * $quantity : $product->price * $quantity;
 
         return [
-            'sale_id' => \App\Models\Sale::factory(),
             'product_id' => $product->id,
             'quantity' => $quantity,
-            'product_price' => $price,
+            'product_price' => $product->price,
             'subtotal' => $subtotal,
-            'by_bag' => $this->faker->boolean(),
+            'by_bag' => $by_bag,
+            'created_at' => $this->faker->dateTimeBetween('now', 'now'),
+            'updated_at' => $this->faker->dateTimeBetween('now', 'now'),
         ];
     }
 }

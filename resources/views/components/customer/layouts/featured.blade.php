@@ -119,12 +119,6 @@
              tienda.
          </p>
      </div>
-
-
-     @if ($featured->product_id)
-         <a href="" class="w-full h-full absolute justify-center items-center top-0 left-0 z-10">
-         </a>
-     @endif
  </section>
 
  @push('js')

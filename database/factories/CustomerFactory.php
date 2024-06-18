@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +25,17 @@ class CustomerFactory extends Factory
             "surname" => $this->faker->lastName(),
             'phone' => $phone,
             'email' => $this->faker->unique()->safeEmail(),
-            'verified' => $this->faker->boolean(),
+            'verified' => true,
         ];
+
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Customer $customer) {
+            Address::factory()->create([
+                'customer_id' => $customer->id,
+            ]);
+        });
     }
 }

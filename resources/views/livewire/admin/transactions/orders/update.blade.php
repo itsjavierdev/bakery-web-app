@@ -45,29 +45,36 @@
                 </div>
             @endif
             <hr class="my-3">
+
             <!--Delivery info-->
-            <h3 class="w-full text-center">Información del entrega</h3>
-            <x-inputs.label value="Metodo de entrega" is_required />
-            <div class="flex  justify-around gap-3 my-3">
-                <!--Select delivery method-->
-                @if ($delivery == 'delivery')
-                    <x-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
-                        domicilio</x-button>
-                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida en
-                        sucursal</x-secondary-button>
-                @elseif ($delivery == 'pickup')
-                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
-                        domicilio</x-secondary-button>
-                    <x-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida
-                        en
-                        sucursal</x-button>
-                @else
-                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
-                        domicilio</x-secondary-button>
-                    <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida en
-                        sucursal</x-secondary-button>
-                @endif
-            </div>
+            <x-inputs.group>
+                <h3 class="w-full text-center">Información del entrega</h3>
+                <x-inputs.label value="Metodo de entrega" is_required />
+                <div class="flex  justify-around gap-3 my-3">
+                    <!--Select delivery method-->
+                    @if ($delivery == 'delivery')
+                        <x-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio a
+                            domicilio</x-button>
+                        <x-secondary-button class="!w-full justify-center"
+                            wire:click="updateDelivery('pickup')">Recogida en
+                            sucursal</x-secondary-button>
+                    @elseif ($delivery == 'pickup')
+                        <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio
+                            a
+                            domicilio</x-secondary-button>
+                        <x-button class="!w-full justify-center" wire:click="updateDelivery('pickup')">Recogida
+                            en
+                            sucursal</x-button>
+                    @else
+                        <x-secondary-button class="!w-full justify-center" wire:click="updateDelivery('delivery')">Envio
+                            a
+                            domicilio</x-secondary-button>
+                        <x-secondary-button class="!w-full justify-center"
+                            wire:click="updateDelivery('pickup')">Recogida en
+                            sucursal</x-secondary-button>
+                    @endif
+                </div>
+            </x-inputs.group>
             <!--Select or add Address-->
             @if ($delivery == 'delivery')
                 <x-inputs.group>
@@ -158,6 +165,7 @@
                             <tr>
                                 <x-th>Producto</x-th>
                                 <x-th>Precio</x-th>
+                                <x-th>Precio Bolsa</x-th>
                                 <x-th>Cantidad</x-th>
                                 <x-th>Paquete</x-th>
                                 <x-th>Subtotal</x-th>
@@ -174,6 +182,9 @@
 
                                     <td class="p-2">
                                         {{ $product['price'] }}
+                                    </td>
+                                    <td class="p-2">
+                                        {{ $product['price_by_bag'] }}
                                     </td>
                                     <td class="p-2">
                                         <x-inputs.text type="number"
@@ -201,7 +212,7 @@
 
                         <tfoot class="border-t-medium border-gray-300 bg-gray-100">
                             <x-tr>
-                                <td class="px-2" colspan="4">
+                                <td class="px-2" colspan="5">
                                     {{ $total ? 'TOTAL' : '' }}
                                 </td>
                                 <td class="px-2">

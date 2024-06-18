@@ -3,13 +3,14 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use SebastianBergmann\Type\VoidType;
 use Tests\TestCase;
 use App\Models\DeliveryTime;
 use Livewire\Livewire;
 use App\Livewire\Admin\Parameters\DeliveryTimes as DeliveryTimes;
 use App\Models\User;
 use Carbon\Carbon;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DeliveryTimesManageTest extends TestCase
 {
@@ -22,7 +23,16 @@ class DeliveryTimesManageTest extends TestCase
     {
         parent::setUp();
 
+        $role = Role::create(['name' => 'Administrador']);
+
+        Permission::create(['name' => 'deliverytimes.create', 'description' => 'Crear', 'module' => 'Horas de entrega', 'action' => 'create'])->syncRoles([$role]);
+        Permission::create(['name' => 'deliverytimes.read', 'description' => 'Ver', 'module' => 'Horas de entrega', 'action' => 'read'])->syncRoles([$role]);
+        Permission::create(['name' => 'deliverytimes.update', 'description' => 'Editar', 'module' => 'Horas de entrega', 'action' => 'update'])->syncRoles([$role]);
+        Permission::create(['name' => 'deliverytimes.delete', 'description' => 'Eliminar', 'module' => 'Horas de entrega', 'action' => 'delete'])->syncRoles([$role]);
+
         $this->user = User::factory()->create();
+        $this->user->assignRole('Administrador');
+
         $this->delivery_time = DeliveryTime::create([
             'time' => '10:00',
             'for_delivery' => true

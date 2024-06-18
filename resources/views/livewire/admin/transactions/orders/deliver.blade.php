@@ -35,6 +35,7 @@
                             <tr>
                                 <x-th>Producto</x-th>
                                 <x-th>Precio</x-th>
+                                <x-th>Precio Bolsa</x-th>
                                 <x-th>Cantidad</x-th>
                                 <x-th>Paquete</x-th>
                                 <x-th>Subtotal</x-th>
@@ -52,6 +53,9 @@
                                         {{ $detail->product_price }}
                                     </td>
                                     <td class="p-2">
+                                        {{ $products->where('id', $detail->product_id)->first()->price_by_bag }}
+                                    </td>
+                                    <td class="p-2">
                                         {{ $detail->quantity }}
                                     </td>
                                     <td class="p-2 flex items-center justify-center">
@@ -67,7 +71,7 @@
 
                         <tfoot class="border-t-medium border-gray-300 bg-gray-100">
                             <x-tr>
-                                <td class="p-2" colspan="4">
+                                <td class="p-2" colspan="5">
                                     TOTAL
                                 </td>
                                 <td class="p-2">
@@ -80,7 +84,7 @@
 
                 <div class="flex flex-row gap-3 w-full">
                     <x-inputs.disabled title="Pagos" class="w-full">
-                        <p>{{ $order->paid_amount }}</p>
+                        <p>{{ $order->paid_amount ?? '0' }}</p>
                     </x-inputs.disabled>
                     <x-inputs.disabled title="Deuda" class="w-full">
                         <p>{{ $debt }}</p>

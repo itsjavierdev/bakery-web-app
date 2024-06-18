@@ -17,9 +17,10 @@ class CategorySeeder extends Seeder
         $category1->name = "Panes";
         $category1->save();
 
-        $category2 = new Category;
-        $category2->name = "Empanadas";
-        $category2->save();
+
+        $category5 = new Category;
+        $category5->name = "Tortillas";
+        $category5->save();
 
         $category3 = new Category;
         $category3->name = "Horneados típicos";
@@ -29,16 +30,21 @@ class CategorySeeder extends Seeder
         $category4->name = "Especiales";
         $category4->save();
 
-        $category5 = new Category;
-        $category5->name = "Tortas";
-        $category5->save();
+        // $category5 = new Category;
+        // $category5->name = "Tortas";
+        // $category5->save();
 
-        $category6 = new Category;
-        $category6->name = "Salteñas";
-        $category6->save();
+        // $category6 = new Category;
+        // $category6->name = "Salteñas";
+        // $category6->save();
 
         $category7 = new Category;
         $category7->name = "Otros";
         $category7->save();
+
+
+        $category2 = new Category;
+        $category2->name = "Empanadas";
+        $category2->save();
     }
 }

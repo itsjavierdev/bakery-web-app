@@ -24,6 +24,7 @@
                         <tr>
                             <x-th>Producto</x-th>
                             <x-th>Precio</x-th>
+                            <x-th>Precio Bolsa</x-th>
                             <x-th>Cantidad</x-th>
                             <x-th>Paquete</x-th>
                             <x-th>Subtotal</x-th>
@@ -39,6 +40,10 @@
 
                                 <td class="p-2">
                                     {{ $detail->product_price }}
+                                </td>
+
+                                <td class="p-2">
+                                    {{ $products->where('id', $detail->product_id)->first()->price_by_bag }}
                                 </td>
                                 <td class="p-2">
                                     {{ $detail->quantity }}
@@ -56,7 +61,7 @@
 
                     <tfoot class="border-t-medium border-gray-300 bg-gray-100">
                         <x-tr>
-                            <td class="p-2" colspan="4">
+                            <td class="p-2" colspan="5">
                                 TOTAL
                             </td>
                             <td class="p-2">

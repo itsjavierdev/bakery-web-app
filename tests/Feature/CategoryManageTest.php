@@ -9,6 +9,8 @@ use Livewire\Livewire;
 use App\Livewire\Admin\Parameters\Categories as CategoriesLivewire;
 use App\Models\User;
 use Carbon\Carbon;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class CategoryManageTest extends TestCase
 {
@@ -21,7 +23,15 @@ class CategoryManageTest extends TestCase
     {
         parent::setUp();
 
+        $role = Role::create(['name' => 'Administrador']);
+
+        Permission::create(['name' => 'categories.create', 'description' => 'Crear', 'module' => 'Categorías', 'action' => 'create'])->syncRoles([$role]);
+        Permission::create(['name' => 'categories.read', 'description' => 'Ver', 'module' => 'Categorías', 'action' => 'read'])->syncRoles([$role]);
+        Permission::create(['name' => 'categories.update', 'description' => 'Editar', 'module' => 'Categorías', 'action' => 'update'])->syncRoles([$role]);
+        Permission::create(['name' => 'categories.delete', 'description' => 'Eliminar', 'module' => 'Categorías', 'action' => 'delete'])->syncRoles([$role]);
+
         $this->user = User::factory()->create();
+        $this->user->assignRole('Administrador');
         $this->category = Category::factory()->create();
     }
     public function test_a_category_can_be_created(): void

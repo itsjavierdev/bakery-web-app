@@ -29,10 +29,15 @@ class RolesManageTest extends TestCase
         parent::setUp();
 
         //Create example data
-        $this->user = User::factory()->create();
+        $role = Role::create(['name' => 'Roles']);
 
-        $this->permissionCreate = Permission::create(['name' => 'roles.create', 'description' => 'Crear', 'module' => 'Roles', 'action' => 'create']);
-        $this->permissionEdit = Permission::create(['name' => 'roles.edit', 'description' => 'Editar', 'module' => 'Roles', 'action' => 'edit']);
+        $this->permissionCreate = Permission::create(['name' => 'roles.create', 'description' => 'Crear', 'module' => 'Roles', 'action' => 'create'])->syncRoles([$role]);
+        $this->permissionRead = Permission::create(['name' => 'roles.read', 'description' => 'Ver', 'module' => 'Roles', 'action' => 'read'])->syncRoles([$role]);
+        $this->permissionEdit = Permission::create(['name' => 'roles.update', 'description' => 'Editar', 'module' => 'Roles', 'action' => 'update'])->syncRoles([$role]);
+
+        $this->user = User::factory()->create();
+        $this->user->assignRole('Roles');
+
 
         $this->role = Role::create(['name' => 'Administrador']);
         $this->role->givePermissionTo($this->permissionCreate);
@@ -84,7 +89,7 @@ class RolesManageTest extends TestCase
 
         // Verify that the role has the permission assigned
         $role = Role::where('name', 'Super Admin')->first();
-        $this->assertTrue($role->hasPermissionTo('roles.edit'));
+        $this->assertTrue($role->hasPermissionTo('roles.update'));
         $this->assertFalse($role->hasPermissionTo('roles.create'));
     }
 

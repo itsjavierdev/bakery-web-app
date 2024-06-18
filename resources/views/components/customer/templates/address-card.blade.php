@@ -27,10 +27,9 @@
         </div>
         <!--Information-->
         <div class="flex flex-col gap-3 bg-yellow-secondary p-3">
-            <span class="font-bold">{{ $address->alias }}</span>
-            <span class="font-thin">{{ $address->address }},
-                <span>{{ $address->reference }}</span></span>
-            <span class="font-thin">{{ $address->city }}</span>
+            <span class="font-medium">{{ $address->alias }}</span>
+            <span>{{ $address->address }},
+                <span class="font-light">{{ $address->reference }}</span></span>
         </div>
     </div>
 </div>

@@ -30,11 +30,7 @@
 
     <x-message-alert />
 
-    @if ($featured)
-        <x-customer.layouts.featured />
-    @else
-        <x-customer.layouts.navbar />
-    @endif
+    <x-customer.layouts.featured />
 
 
     <main class="bg-yellow-primary min-h-[83vh]">

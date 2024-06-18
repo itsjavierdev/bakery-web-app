@@ -32,13 +32,13 @@ class Products implements FromCollection, WithHeadings, WithMapping, ShouldAutoS
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->mergeCells('A1:D1');
-        $sheet->getStyle('A1:D1')->getFont()->setSize(16);
-        $sheet->getStyle('A1:D1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:D1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells('A1:E1');
+        $sheet->getStyle('A1:E1')->getFont()->setSize(16);
+        $sheet->getStyle('A1:E1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:E1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
-        $sheet->mergeCells('A2:D2');
-        $sheet->getStyle('A2:D2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells('A2:E2');
+        $sheet->getStyle('A2:E2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
         $sheet->getStyle('3')->getFont()->setBold(true);
 
@@ -50,6 +50,7 @@ class Products implements FromCollection, WithHeadings, WithMapping, ShouldAutoS
         $sheet->getStyle('B')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
         $sheet->getStyle('C')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
         $sheet->getStyle('D')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+        $sheet->getStyle('F')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
     }
 
     public function headings(): array
@@ -66,6 +67,7 @@ class Products implements FromCollection, WithHeadings, WithMapping, ShouldAutoS
                 'Producto',
                 'Cantidad suelta',
                 'Cantidad por bolsa',
+                'Cantidad Total',
                 'Monto total',
             ]
         ];
@@ -77,6 +79,7 @@ class Products implements FromCollection, WithHeadings, WithMapping, ShouldAutoS
             $data->name,
             $data->total_individual,
             $data->total_by_bag,
+            $data->total_quantity,
             'Bs ' . $data->total_amount,
         ];
     }

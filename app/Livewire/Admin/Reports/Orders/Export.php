@@ -157,7 +157,8 @@ class Export extends Component
                 'products.name',
                 \DB::raw('SUM(CASE WHEN order_details.by_bag = false THEN order_details.quantity ELSE 0 END) as total_individual'),
                 \DB::raw('SUM(CASE WHEN order_details.by_bag = true THEN order_details.quantity ELSE 0 END) as total_by_bag'),
-                \DB::raw('SUM(order_details.subtotal) as total_amount')
+                \DB::raw('SUM(order_details.subtotal) as total_amount'),
+                \DB::raw('SUM(CASE WHEN order_details.by_bag = true THEN order_details.quantity * products.bag_quantity ELSE 0 END)+ SUM(CASE WHEN order_details.by_bag = false THEN order_details.quantity ELSE 0 END) as total_quantity')
             )
             ->where('orders.delivered', false)
             ->whereBetween('orders.delivery_date', [$start_date, $end_date])

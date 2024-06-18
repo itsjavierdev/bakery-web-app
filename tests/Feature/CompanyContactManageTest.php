@@ -2,17 +2,20 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Address;
 use App\Models\CompanyContact;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 use App\Livewire\Admin\Parameters\CompanyContact as CompanyContactLivewire;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class CompanyContactManageTest extends TestCase
 {
+
+    use RefreshDatabase;
     public $company_contact;
     public $address;
     public $user;
@@ -21,7 +24,13 @@ class CompanyContactManageTest extends TestCase
     {
         parent::setUp();
 
+        $role = Role::create(['name' => 'Administrador']);
+
+        Permission::create(['name' => 'companycontact.read', 'description' => 'Ver', 'module' => 'Información de contacto', 'action' => 'read'])->syncRoles([$role]);
+        Permission::create(['name' => 'companycontact.update', 'description' => 'Editar', 'module' => 'Información de contacto', 'action' => 'update'])->syncRoles([$role]);
+
         $this->user = User::factory()->create();
+        $this->user->assignRole('Administrador');
 
         $this->address = Address::create([
             'address' => 'Bolivar 123',

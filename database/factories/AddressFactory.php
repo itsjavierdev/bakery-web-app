@@ -17,9 +17,9 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'alias' => $this->faker->unique()->word(),
+            'alias' => 'Negocio',
             'address' => $this->faker->address(),
-            'reference' => $this->faker->text(80),
+            'reference' => $this->faker->text(50),
             'customer_id' => \App\Models\Customer::factory(),
         ];
     }

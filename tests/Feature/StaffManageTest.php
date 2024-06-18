@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Staff;
 use Tests\TestCase;
 use Carbon\Carbon;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class StaffManageTest extends TestCase
 {
@@ -21,8 +23,18 @@ class StaffManageTest extends TestCase
     {
         parent::setUp();
 
-        //Create example data
+        //Create example data$role = Role::create(['name' => 'Administrador']);
+
+        $role = Role::create(['name' => 'Administrador']);
+
+        Permission::create(['name' => 'staff.create', 'description' => 'Crear', 'module' => 'Personal', 'action' => 'create'])->syncRoles([$role]);
+        Permission::create(['name' => 'staff.read', 'description' => 'Ver', 'module' => 'Personal', 'action' => 'read'])->syncRoles([$role]);
+        Permission::create(['name' => 'staff.update', 'description' => 'Editar', 'module' => 'Personal', 'action' => 'update'])->syncRoles([$role]);
+        Permission::create(['name' => 'staff.delete', 'description' => 'Eliminar', 'module' => 'Personal', 'action' => 'delete'])->syncRoles([$role]);
+
         $this->user = User::factory()->create();
+        $this->user->assignRole('Administrador');
+
         $this->staff = Staff::create([
             'name' => 'Javier',
             'surname' => 'Vargas',

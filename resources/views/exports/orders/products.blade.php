@@ -5,6 +5,7 @@
         <th>Productos</th>
         <th style="text-align: right;">Cantidad suelta</th>
         <th style="text-align: right;">Cantidad por bolsa</th>
+        <th style="text-align: right;">Cantidad total</th>
         <th style="text-align: right;">Monto total</th>
     </x-slot>
     @foreach ($data as $item)
@@ -12,6 +13,8 @@
             <td>{{ $item->name }}</td>
             <td style="text-align: right;">{{ $item->total_individual }}</td>
             <td style="text-align: right;">{{ $item->total_by_bag }}</td>
+            <td style="text-align: right;">{{ $item->total_quantity }}
+            </td>
             <td style="text-align: right;">{{ 'Bs ' . $item->total_amount }}</td>
         </tr>
     @endforeach
@@ -20,11 +23,13 @@
             $total_amount = 'Bs ' . number_format($data->sum('total_amount'), 1, ',', '.');
             $total_individual = $data->sum('total_individual');
             $total_by_bag = $data->sum('total_by_bag');
+            $total_quantity = $data->sum('total_quantity');
         @endphp
         <tr>
             <td colspan="1"></td>
             <td style="text-align: right;">{{ $total_individual }}</td>
             <td style="text-align: right;">{{ $total_by_bag }}</td>
+            <td style="text-align: right;">{{ $total_quantity }}</td>
             <td style="text-align: right;">{{ $total_amount }}</td>
         </tr>
     </x-slot>

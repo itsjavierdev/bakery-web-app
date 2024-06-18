@@ -14,7 +14,8 @@ use Carbon\Carbon;
 use Livewire\Livewire;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use App\Livewire\UploadPhoto;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class ProductManageTest extends TestCase
 {
@@ -29,9 +30,20 @@ class ProductManageTest extends TestCase
     {
         parent::setUp();
 
-        $this->category = Category::factory()->create();
+
+        $role = Role::create(['name' => 'Administrador']);
+
+        Permission::create(['name' => 'products.create', 'description' => 'Crear', 'module' => 'Productos', 'action' => 'create'])->syncRoles([$role]);
+        Permission::create(['name' => 'products.read', 'description' => 'Ver', 'module' => 'Productos', 'action' => 'read'])->syncRoles([$role]);
+        Permission::create(['name' => 'products.update', 'description' => 'Editar', 'module' => 'Productos', 'action' => 'update'])->syncRoles([$role]);
+        Permission::create(['name' => 'products.delete', 'description' => 'Eliminar', 'module' => 'Productos', 'action' => 'delete'])->syncRoles([$role]);
 
         $this->user = User::factory()->create();
+        $this->user->assignRole('Administrador');
+
+
+        $this->category = Category::factory()->create();
+
         $this->product = Product::factory()->create([
             'price' => 100.5,
             'category_id' => $this->category->id,

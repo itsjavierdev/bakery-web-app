@@ -59,6 +59,7 @@
                             <tr>
                                 <x-th>Producto</x-th>
                                 <x-th>Precio</x-th>
+                                <x-th>Precio Bolsa</x-th>
                                 <x-th>Cantidad</x-th>
                                 <x-th>Paquete</x-th>
                                 <x-th>Subtotal</x-th>
@@ -75,6 +76,10 @@
 
                                     <td class="p-2">
                                         {{ $product['price'] }}
+                                    </td>
+
+                                    <td class="p-2">
+                                        {{ $product['price_by_bag'] }}
                                     </td>
                                     <td class="p-2">
                                         <x-inputs.text type="number"
@@ -102,7 +107,7 @@
 
                         <tfoot class="border-t-medium border-gray-300 bg-gray-100">
                             <x-tr>
-                                <td class="px-2" colspan="4">
+                                <td class="px-2" colspan="5">
                                     {{ $total ? 'TOTAL' : '' }}
                                 </td>
                                 <td class="px-2">

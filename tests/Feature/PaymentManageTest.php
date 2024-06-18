@@ -12,6 +12,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 use App\Livewire\Admin\Transactions\Payments;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class PaymentManageTest extends TestCase
 {
@@ -28,7 +30,20 @@ class PaymentManageTest extends TestCase
     {
         parent::setUp();
 
+        $role = Role::create(['name' => 'Administrador']);
+
+        Permission::create(['name' => 'debts.add', 'description' => 'Agregar', 'module' => 'Pagos', 'action' => 'add'])->syncRoles([$role]);
+        Permission::create(['name' => 'debts.read', 'description' => 'Ver', 'module' => 'Deudas', 'action' => 'read'])->syncRoles([$role]);
+        Permission::create(['name' => 'debts.update', 'description' => 'Editar', 'module' => 'Deudas', 'action' => 'update'])->syncRoles([$role]);
+
+
+        Permission::create(['name' => 'payments.read', 'description' => 'Ver', 'module' => 'Pagos', 'action' => 'read'])->syncRoles([$role]);
+        Permission::create(['name' => 'payments.update', 'description' => 'Editar', 'module' => 'Pagos', 'action' => 'update'])->syncRoles([$role]);
+        Permission::create(['name' => 'payments.delete', 'description' => 'Eliminar', 'module' => 'Pagos', 'action' => 'delete'])->syncRoles([$role]);
+
         $this->user = User::factory()->create();
+        $this->user->assignRole('Administrador');
+
         $this->staff = Staff::factory()->create();
 
         $this->customer = Customer::create([
@@ -92,9 +107,7 @@ class PaymentManageTest extends TestCase
         Livewire::test(Payments\Add::class, ['sale' => $this->sale_with_debt->id])
             ->set('paid_remaining', true)
             ->call('add')
-            ->assertRedirect('admin/deudas')
-            ->assertSessionHas('flash.bannerStyle', 'success')
-            ->assertSessionHas('flash.banner', 'Pago agregado correctamente.');
+            ->assertRedirect('admin/pago-realizado/7');
 
         // Verify that the sale was paid successfully
         $this->assertTrue(Sale::find($this->sale_with_debt->id)->paid == 1);

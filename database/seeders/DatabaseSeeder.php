@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\OrderDetail;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\Sale;
 use App\Models\SaleDetail;
 use App\Models\User;
 use App\Models\Staff;
@@ -38,10 +39,14 @@ class DatabaseSeeder extends Seeder
             $user->assignRole($roles[array_rand($roles)]);
         }
 
+        $this->call(CompanyContactSeeder::class);
         $this->call(CategorySeeder::class);
-        // $this->call(ProductSeeder::class);
+        $this->call(ProductSeeder::class);
+        $this->call(ProductImageSeeder::class);
         $this->call(DeliveryTimeSeeder::class);
-
         Customer::factory(10)->create();
+        Sale::factory(10)->create();
+        Order::factory(10)->create();
+
     }
 }

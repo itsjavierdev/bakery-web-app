@@ -15,6 +15,8 @@ use App\Models\DeliveryTime;
 use App\Livewire\Admin\Transactions\Orders;
 use Livewire\Livewire;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class OrdersManageTest extends TestCase
 {
@@ -35,7 +37,16 @@ class OrdersManageTest extends TestCase
     {
         parent::setUp();
 
+        $role = Role::create(['name' => 'Administrador']);
+
+        Permission::create(['name' => 'orders.create', 'description' => 'Crear', 'module' => 'Pedidos', 'action' => 'create'])->syncRoles([$role]);
+        Permission::create(['name' => 'orders.read', 'description' => 'Ver', 'module' => 'Pedidos', 'action' => 'read'])->syncRoles([$role]);
+        Permission::create(['name' => 'orders.update', 'description' => 'Editar', 'module' => 'Pedidos', 'action' => 'update'])->syncRoles([$role]);
+        Permission::create(['name' => 'orders.delete', 'description' => 'Eliminar', 'module' => 'Pedidos', 'action' => 'delete'])->syncRoles([$role]);
+        Permission::create(['name' => 'orders.delivery', 'description' => 'Enviar', 'module' => 'Pedidos', 'action' => 'delivery'])->syncRoles([$role]);
+
         $this->user = User::factory()->create();
+        $this->user->assignRole('Administrador');
 
         $this->product = Product::factory()->create([
             'price' => 100

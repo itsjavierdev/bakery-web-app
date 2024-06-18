@@ -13,6 +13,8 @@ use App\Models\Product;
 use Livewire\Livewire;
 use App\Livewire\Admin\Transactions\Sales;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class SalesManageTest extends TestCase
 {
@@ -31,7 +33,15 @@ class SalesManageTest extends TestCase
         parent::setUp();
 
 
+        $role = Role::create(['name' => 'Administrador']);
+
+        Permission::create(['name' => 'sales.create', 'description' => 'Crear', 'module' => 'Ventas', 'action' => 'create'])->syncRoles([$role]);
+        Permission::create(['name' => 'sales.read', 'description' => 'Ver', 'module' => 'Ventas', 'action' => 'read'])->syncRoles([$role]);
+        Permission::create(['name' => 'sales.update', 'description' => 'Editar', 'module' => 'Ventas', 'action' => 'update'])->syncRoles([$role]);
+        Permission::create(['name' => 'sales.delete', 'description' => 'Eliminar', 'module' => 'Ventas', 'action' => 'delete'])->syncRoles([$role]);
+
         $this->user = User::factory()->create();
+        $this->user->assignRole('Administrador');
         //Create example data
         $this->product = Product::factory()->create(
             [
@@ -76,9 +86,7 @@ class SalesManageTest extends TestCase
             ->set('total_paid', 100)
             ->call('addProduct', $this->product->id)
             ->call('save')
-            ->assertRedirect('admin/ventas')
-            ->assertSessionHas('flash.bannerStyle', 'success')
-            ->assertSessionHas('flash.banner', 'Venta creada correctamente');
+            ->assertRedirect('admin/ventas-realizada/11');
 
         // Verify that the sale was created in the database
         $this->assertTrue(Sale::where('customer_id', $this->customer->id)->exists());

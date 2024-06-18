@@ -10,6 +10,8 @@ use App\Models\CustomerAccount;
 use Livewire\Livewire;
 use App\Livewire\Admin\ManagementCustomers\Customers as CustomersLivewire;
 use Carbon\Carbon;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class CustomersManageTest extends TestCase
 {
@@ -23,7 +25,15 @@ class CustomersManageTest extends TestCase
         parent::setUp();
 
         //Create example data
+        $role = Role::create(['name' => 'Administrador']);
+
+        Permission::create(['name' => 'customers.create', 'description' => 'Crear', 'module' => 'Clientes', 'action' => 'create'])->syncRoles([$role]);
+        Permission::create(['name' => 'customers.read', 'description' => 'Ver', 'module' => 'Clientes', 'action' => 'read'])->syncRoles([$role]);
+        Permission::create(['name' => 'customers.update', 'description' => 'Editar', 'module' => 'Clientes', 'action' => 'update'])->syncRoles([$role]);
+        Permission::create(['name' => 'customers.delete', 'description' => 'Eliminar', 'module' => 'Clientes', 'action' => 'delete'])->syncRoles([$role]);
+
         $this->user = User::factory()->create();
+        $this->user->assignRole('Administrador');
 
         $this->customer = Customer::create([
             'name' => 'Javier',
