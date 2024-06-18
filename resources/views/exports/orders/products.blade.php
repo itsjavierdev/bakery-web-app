@@ -1,4 +1,4 @@
-<x-report date_start="{{ $date_start }}" date_end="{{ $date_end }}" colspan="4">
+<x-report date_start="{{ $date_start }}" date_end="{{ $date_end }}" colspan="5">
     @push('title', 'Productos por entregar')
 
     <x-slot name="head">

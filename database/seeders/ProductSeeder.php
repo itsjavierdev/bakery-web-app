@@ -36,7 +36,7 @@ class ProductSeeder extends Seeder
         $product3->price = 1.67;
         $product3->price_by_bag = 20;
         $product3->bag_quantity = 12;
-        $product3->description = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, nisi?';
+        $product3->description = 'Rellenas de queso, jamón, salsa de tomate y choclo';
         $product3->category_id = 6;
         $product3->save();
 

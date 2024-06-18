@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Livewire\Admin\Transactions\Orders\Deliver;
 use App\Models\Address;
 use App\Models\Customer;
 use App\Models\DeliveryTime;
@@ -26,7 +27,8 @@ class OrderFactory extends Factory
 
         $customer = Customer::inRandomOrder()->first();
         $delivery_date = $this->faker->dateTimeBetween('+1 day', '+1 week');
-        $deliveryTime = DeliveryTime::inRandomOrder()->first();
+        $pickupTime = DeliveryTime::inRandomOrder()->first();
+        $deliveryTime = DeliveryTime::where('for_delivery', 1)->inRandomOrder()->first();
 
         return [
             'total' => $this->faker->randomFloat(2, 0, 99999),
@@ -36,7 +38,7 @@ class OrderFactory extends Factory
             'picked_up' => $picked_up,
             'total_quantity' => $this->faker->numberBetween(1, 10),
             'delivery_date' => $delivery_date,
-            'delivery_time_id' => $deliveryTime,
+            'delivery_time_id' => $picked_up ? $pickupTime->id : $deliveryTime->id,
             'customer_id' => $customer->id, // Usa el customer_id del address generado
         ];
     }

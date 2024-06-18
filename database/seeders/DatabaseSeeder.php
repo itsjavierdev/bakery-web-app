@@ -2,18 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Address;
-use App\Models\CompanyContact;
 use App\Models\Customer;
-use App\Models\OrderDetail;
-use App\Models\Payment;
-use App\Models\Product;
 use App\Models\Sale;
-use App\Models\SaleDetail;
 use App\Models\User;
-use App\Models\Staff;
-use App\Models\Category;
-use App\Models\DeliveryTime;
 use App\Models\Order;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -28,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
 
         User::factory()->create([
-            'email' => 'test@example.com',
+            'email' => 'admin@sanxavier.com',
         ])->assignRole('Administrador');
 
         $users = User::factory(10)->create();
@@ -45,8 +36,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductImageSeeder::class);
         $this->call(DeliveryTimeSeeder::class);
         Customer::factory(10)->create();
-        Sale::factory(10)->create();
-        Order::factory(10)->create();
+        Sale::factory(600)->create();
+        Order::factory(140)->create();
 
     }
 }

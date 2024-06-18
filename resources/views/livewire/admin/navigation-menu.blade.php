@@ -1,10 +1,10 @@
 <nav class="w-full flex flex-col gap-2 py-2">
-    {{-- @can('sales_report.generate')
+    @can('sales_report.generate')
         <x-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
             <i class="icon-chart text-xl"></i>
             Dashboard
         </x-nav-link>
-    @endcan --}}
+    @endcan
     <!--Admin Module-->
     @php
         $roles_active = Str::startsWith(request()->route()->getName(), 'roles.');

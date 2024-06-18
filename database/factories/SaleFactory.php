@@ -58,9 +58,16 @@ class SaleFactory extends Factory
             ]);
 
 
+
             // Calculate total and paid_amount based on SaleDetail subtotals
             $total = SaleDetail::where('sale_id', $sale->id)->sum('subtotal');
-            $paid_amount = $this->faker->randomFloat(0, 0, $total);
+            if ($sale->customer->sales()->where('id', '<', $sale->id)->exists()) {
+                // Si no es la primera venta del cliente, paid_amount es igual a total
+                $paid_amount = $total;
+            } else {
+                // Si es la primera venta del cliente, paid_amount es aleatorio entre 0 y total
+                $paid_amount = $this->faker->randomFloat(0, 0, $total);
+            }
 
 
             // Create Payment instance
