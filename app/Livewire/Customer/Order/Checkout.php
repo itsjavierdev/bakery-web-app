@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Customer\Order;
 
+use App\Mail\NewOrder;
+use App\Mail\OrderConfirmation;
 use App\Models\Address;
 use App\Models\CompanyContact;
 use App\Models\DeliveryTime;
 use App\Models\OrderDetail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use App\Livewire\Forms\Customer\Addresses\CheckoutAddress;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +27,7 @@ class Checkout extends Component
     public $times_free;
     public $address;
     public $company_address;
+    public $company_info;
 
     //validation rules
     public $delivery;
@@ -99,6 +103,9 @@ class Checkout extends Component
             $newOrderDetails->by_bag = true;
             $newOrderDetails->save();
         }
+        Mail::to(Auth::guard('customer')->user()->customer->email)->send(new OrderConfirmation($newOrder));
+        Mail::to($this->company_info->email)->send(new NewOrder($newOrder));
+
         //clear cart and redirect to thankyou page
         CartFacade::clear();
         return redirect()->route('customer.thankyou');

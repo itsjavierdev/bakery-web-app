@@ -44,6 +44,7 @@ class CustomersManageTest extends TestCase
         $this->customer_account = CustomerAccount::create([
             'customer_id' => $this->customer->id,
             'password' => '12345678',
+            'email_verified_at' => now(),
         ]);
     }
 

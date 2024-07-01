@@ -5,12 +5,19 @@
         <div class="px-4 md:px-0">
             <!--TITLE-->
             <x-title class="mb-10 pt-10">Crear cuenta</x-title>
-            <div class="bg-white rounded p-5 mt-10 w-full mb-4 md:w-[600px]">
+            <div class="w-full flex justify-center pb-5">
+                <span>¿Ya tienes cuenta? <a
+                    class="underline text-font-primary hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-primary"
+                    href="{{ route('customer.login') }}">Inicia sesión
+                </a></span>
+            </div>
+            <!--div class="bg-white rounded p-5 mt-10 w-full mb-4 md:w-[450px]">
                 <p>Complete el formulario para registrarse como cliente comercial. Nuestro equipo verificará su
                     información antes de activar su cuenta.</p>
-            </div>
+            </-div-->
             <!--FORM-->
-            <div class="bg-white rounded p-5 mb-10 w-full md:w-[600px] ">
+            <div class="bg-white rounded p-5 mb-10 w-full md:w-[450px] ">
+                
                 <!--VALIDATIONS-->
                 <x-inputs.validation-errors class="mb-4" />
                 @if (session('status'))
@@ -65,12 +72,22 @@
                             Registrarse
                         </x-customer-button>
 
-                        <span>¿Ya tienes cuenta? <a
-                                class="underline text-font-primary hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-primary"
-                                href="{{ route('customer.login') }}">Inicia sesión
-                            </a></span>
+                     
                     </div>
-
+                    <div>
+                        <div class="w-full flex items-center justify-center my-4 py-5">
+                            <div class="flex items-center w-full">
+                                <hr class="flex-grow border-gray-300">
+                                <p class="px-4 text-sm">o también puedes</p>
+                                <hr class="flex-grow border-gray-300">
+                            </div>
+                        </div>
+                        <a href="/google-auth/redirect" class="px-4 py-2 border flex gap-2 border-slate-200 bg-white dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150 justify-center">
+                            <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
+                            <span>Continuar con Google</span>
+                        </a>
+                      
+                    </div>
                 </form>
             </div>
         </div>

@@ -27,7 +27,7 @@
 </head>
 
 <body style="font-family: 'Montserrat', sans-serif;" class="bg-brown-primary text-font-primary">
-
+ 
     <x-message-alert />
 
     <x-customer.layouts.featured />

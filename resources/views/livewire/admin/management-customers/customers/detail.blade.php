@@ -30,7 +30,7 @@
                     @endif
                 </x-detail-row>
 
-                <x-detail-row title="Verificado">
+                <x-detail-row title="Aprobado">
                     <x-columns.boolean value="{{ $customer->verified }}" />
                 </x-detail-row>
 

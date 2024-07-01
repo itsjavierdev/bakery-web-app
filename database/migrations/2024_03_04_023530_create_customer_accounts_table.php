@@ -13,7 +13,9 @@ return new class extends Migration {
         Schema::create('customer_accounts', function (Blueprint $table) {
             $table->id();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
+            $table->string('google_id')->nullable();
 
             $table->foreignId('customer_id')
                 ->constrained()

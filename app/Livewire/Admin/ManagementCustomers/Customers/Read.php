@@ -15,13 +15,23 @@ class Read extends Datatable
 
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
-        return Customer::query()->select('*', 'verified', DB::raw('CONCAT_WS(" ", NULLIF(name, ""), NULLIF(surname, "")) AS full_name'))->orderBy('verified', 'asc');
+        return Customer::query()
+            ->select('customers.*', 'verified', DB::raw('CONCAT_WS(" ", NULLIF(name, ""), NULLIF(surname, "")) AS full_name'))
+            ->leftJoin('customer_accounts', 'customers.id', '=', 'customer_accounts.customer_id')
+            ->whereNotNull('phone')
+            ->where('phone', '!=', '')
+            ->where(function ($query) {
+
+                $query->whereNull('customer_accounts.customer_id')
+                    ->orWhereNotNull('customer_accounts.email_verified_at');
+            })
+            ->orderBy('verified', 'asc');
     }
 
     public function columns(): array
     {
         return [
-            Column::make('id', 'ID')->isDefault(),
+            Column::make('customers.id', 'ID')->isDefault(),
             Column::make('full_name', 'Nombre completo')->isDefault(),
             Column::make('phone', 'Telefono')->isDefault(),
             Column::make('email', 'Correo electronico')->isDefault(),
@@ -32,7 +42,7 @@ class Read extends Datatable
     public function filters(): array
     {
         return [
-            Filter::make('id', 'ID'),
+            Filter::make('customers.id', 'ID'),
             Filter::make('name', 'Nombre'),
             Filter::make('surname', 'Apellido'),
             Filter::make('phone', 'Telefono'),

@@ -27,7 +27,7 @@
     <x-inputs.group>
         <x-inputs.label>
             <x-inputs.checkbox class="mr-2 mb-0.5" wire:model="verified" />
-            <span>Verificado</span>
+            <span>Aprobado</span>
         </x-inputs.label>
         <x-inputs.error for="verified" />
     </x-inputs.group>

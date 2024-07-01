@@ -4,8 +4,8 @@
     <section class="flex min-h-[75vh] justify-center items-center py-10">
 
         <div class="max-w-md flex flex-col items-center justify-center text-center gap-10">
-            <span class="text-3xl">Aun no estas verificado</span>
-            <p>Un miembro de nuestro equipo se pondrá en contacto contigo para confirmar algunos detalles.</p>
+            <span class="text-3xl">Tu cuenta aún está en revisión</span>
+            <p>Nuestro equipo está verificando la información de tu negocio. Nos pondremos en contacto contigo pronto para completar el proceso.</p>
             <a href="/" class="max-w-xs">
                 <x-customer-button variant="secondary" size="large" class="w-full mt-10">VOLVER
                     AL

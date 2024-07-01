@@ -5,8 +5,15 @@
         <div class="px-4 md:px-0">
             <!--TITLE-->
             <x-title class="mb-10 pt-10">Iniciar sesión</x-title>
+            <div class="w-full flex justify-center pb-5">
+                <span>¿No tienes cuenta? <a
+                    class="underline text-font-primary hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-primary"
+                    href="{{ route('customer.register') }}">Crear una cuenta
+                </a></span>
+            </div>
             <!--FORM-->
-            <div class="bg-white rounded p-5 my-10 w-full md:w-[450px]">
+            <div class="bg-white rounded p-5 mb-10 w-full md:w-[450px]">
+
                 <!--VALIDATIONS-->
                 <x-inputs.validation-errors class="mb-4" />
                 @if (session('status'))
@@ -17,7 +24,7 @@
 
                 <form method="POST" action="{{ route('customer.login.post') }}">
                     @csrf
-
+                   
                     <div>
                         <x-customer-label for="email" value="{{ __('Email') }}" />
                         <x-input id="email" class="block mt-1 w-96" type="email" name="email" :value="old('email')"
@@ -35,14 +42,26 @@
                             {{ __('Log in') }}
                         </x-customer-button>
 
-                        <span>¿Aún no te has registrado? <a
-                                class="underline text-font-primary hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-primary"
-                                href="{{ route('customer.register') }}">Crear una cuenta
-                            </a></span>
+                       
+                           
                     </div>
-
+                    <div>
+                        <div class="w-full flex items-center justify-center my-4 py-6">
+                            <div class="flex items-center w-full">
+                                <hr class="flex-grow border-gray-300">
+                                <p class="px-4 text-sm">o también puedes</p>
+                                <hr class="flex-grow border-gray-300">
+                            </div>
+                        </div>
+                        <a href="/google-auth/redirect" class="px-4 py-2 border flex gap-2 border-slate-200 bg-white dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150 justify-center">
+                            <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
+                            <span>Continuar con Google</span>
+                        </a>
+                      
+                    </div>
                 </form>
             </div>
+                            
         </div>
     </div>
 

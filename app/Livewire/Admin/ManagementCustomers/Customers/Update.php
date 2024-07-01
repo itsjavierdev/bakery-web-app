@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Admin\ManagementCustomers\Customers;
 
+use App\Mail\CustomerApproved;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use App\Models\Customer;
 
@@ -20,8 +22,8 @@ class Update extends Component
     public function rules()
     {
         return [
-            'name' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
-            'surname' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
+            'name' => 'required|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:40',
+            'surname' => 'nullable|regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/|min:3|max:25',
             'phone' => 'required|integer|min:60000000|max:80090000|unique:customers,phone,' . $this->customer->id,
             'email' => 'nullable|string|email|max:255|unique:customers,email,' . $this->customer->id,
             'verified' => 'boolean'
@@ -67,6 +69,12 @@ class Update extends Component
     public function update()
     {
         $this->validate();
+
+        $currentVerified = $this->customer->verified == 1;
+        $newVerified = $this->verified == 1;
+
+        $isVerifiedChanged = $currentVerified === false && $newVerified === true;
+
         $this->customer->update([
             'name' => $this->name,
             'surname' => $this->surname,
@@ -74,6 +82,10 @@ class Update extends Component
             'email' => $this->email,
             'verified' => $this->verified ? true : false
         ]);
+
+        if ($isVerifiedChanged) {
+            Mail::to($this->customer->email)->send(new CustomerApproved($this->customer));
+        }
 
         return redirect()->to('admin/clientes')->with('flash.bannerStyle', 'success')->with('flash.banner', 'Cliente actualizado correctamente');
     }

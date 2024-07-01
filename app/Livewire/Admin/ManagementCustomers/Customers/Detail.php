@@ -16,7 +16,7 @@ class Detail extends Component
     public function mount(Customer $customer)
     {
         $this->customer = $customer;
-        $this->has_account = $customer->user ? true : false;
+        $this->has_account = $customer->customerAccount ? true : false;
         $this->addresses = Address::where('customer_id', $customer->id)->get();
     }
     public function render()
