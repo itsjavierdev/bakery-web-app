@@ -1,4 +1,4 @@
-# System for Bakery San Xavier
+# Sistema para la panaderia "San Xavier"
 
 Este proyecto, un sistema de panadería, proporciona una sólida plataforma para que la panadería San Xaview agilice sus operaciones y permita a los clientes realizar cómodamente sus pedidos en línea. Cuenta con una interfaz fácil de usar para navegar por los productos, un sistema de carrito de la compra seguro y un proceso para realizar pedido de manera fluida. La aplicación está diseñada para mejorar la eficiencia de la panadería digitalizando el proceso de pedido y proporcionando una experiencia en línea fluida a los clientes. Y una parte de administración para el personal y el propietario de la panadería para administrar el contenido de la parte del cliente, y recibir y crear pedidos, y ver análisis de los productos, ventas y otras funciones. Los desarrolladores pueden explorar el código base para entender los detalles de implementación.
 
