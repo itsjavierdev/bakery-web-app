@@ -1,5 +1,5 @@
 <x-admin-header title="Panel">
-    {{-- @can('sales_report.generate')
+    @can('sales_report.generate')
         <div class="p-6">
             <livewire:admin.dashboard.summary />
             <hr />
@@ -14,5 +14,5 @@
             <h2 class="text-2xl text">
             </h2>
         </div>
-    @endcan --}}
+    @endcan
 </x-admin-header>

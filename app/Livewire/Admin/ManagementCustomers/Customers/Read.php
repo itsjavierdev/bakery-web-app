@@ -36,7 +36,7 @@ class Read extends Datatable
             Column::make('phone', 'Telefono')->isDefault(),
             Column::make('email', 'Correo electronico')->isDefault(),
             Column::make('verified', 'Verificado')->isDefault()->component('admin.atoms.table.columns.boolean'),
-            Column::make('created_at', 'Fecha de registro')->isDefault(),
+            Column::make('customers.created_at', 'Fecha de registro')->isDefault(),
         ];
     }
     public function filters(): array
@@ -46,7 +46,7 @@ class Read extends Datatable
             Filter::make('name', 'Nombre'),
             Filter::make('surname', 'Apellido'),
             Filter::make('phone', 'Telefono'),
-            Filter::make('created_at', 'Fecha de registro')->date(),
+            Filter::make('customers.created_at', 'Fecha de registro')->date(),
         ];
     }
 
