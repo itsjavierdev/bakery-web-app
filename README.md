@@ -1,178 +1,179 @@
-<p>   
-    <img src="https://github.com/itsjavierdev/bakery-admin/assets/156542069/07c18365-f44e-48f7-8c9a-8ed801165ed2" alt="logo" align="left" width="80" height="auto" ></img>
-</p>
-
 # System for Bakery San Xavier
 
-This project, an Bakery System, provides a robust platform for the bakery San Xaview to streamline their operations and enable customers to conveniently place orders online. It features a user-friendly interface for product browsing, a secure shopping cart system, and a seamless checkout process. The application is designed to enhance the efficiency of bakery businesses by digitizing the ordering process and providing a smooth online experience for customers. And a admin part for the staff and the bakery owner to administrate the content of the customer part content, and receive and create orders, and see the analytics products, sales and others functions. Developers can explore the codebase to understand the implementation details.
+Este proyecto, un sistema de panadería, proporciona una sólida plataforma para que la panadería San Xaview agilice sus operaciones y permita a los clientes realizar cómodamente sus pedidos en línea. Cuenta con una interfaz fácil de usar para navegar por los productos, un sistema de carrito de la compra seguro y un proceso para realizar pedido de manera fluida. La aplicación está diseñada para mejorar la eficiencia de la panadería digitalizando el proceso de pedido y proporcionando una experiencia en línea fluida a los clientes. Y una parte de administración para el personal y el propietario de la panadería para administrar el contenido de la parte del cliente, y recibir y crear pedidos, y ver análisis de los productos, ventas y otras funciones. Los desarrolladores pueden explorar el código base para entender los detalles de implementación.
 
-## 💻 Technologies:
+
+## 💻 Tecnologías:
 
 ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white) ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
-## 👩🏻‍💻 Installation:
+## 👩🏻‍💻 Intalación:
 
-First you have to configure your laravel environment
+Primero debes configurar el entorno de desarrollo de laravel
 
-Then clone this repository with
+Luego clona el repositorio con:
 
 ```
-git clone git@github.com:itsjavierdev/bakery-system.git
+git clone git@github.com:itsjavierdev/bakery-web-app.git
 ```
 
-### Run all this command lines in the laragon terminal
+### Corre estos comandos en la terminal
 
-Install composer and node module
+Installa composer y los modulos de node
 
 ```
 composer install
 npm i
 ```
 
-Create .env and generate encryption key
+Crea .env y genera una llave de encriptación
 
 ```
 cp .env.example .env
 php artisan key:generate
 ```
 
-Clean cache in framework
+Limpia el cache del Framework
 
 ```
 composer dump-autoload
 ```
 
-Create symbolic link from public folder to storage folder
+Crea el enlace simbolico en el el fichero public de fichero storage
 
 ```
 php artisan storage:link
 ```
 
-Run the migrations, to set the database and seeders
+Corre las migraciones, para configurar la base de datos y llenarla de datos de prueba
 
 ```
 php artisan migrate --seed
 ```
 
-## 🏃🏻‍♂️ Run the aplication:
+## 🏃🏻‍♂️ Corre la aplicación:
 
-#### Run these two command line in different terminal
+#### Corre estos dos comandos en distintas terminales
 
-For run the styles
+Para correr los estilos
 
 ```
 npm run dev
 ```
 
-For run the server
+Para correr el server
 
 ```
 php artisan serve
 ```
 
-## 🔑 First Authenticate:
+## 🔑 Primera autenticación:
 
 #### Email
 
 `test@example.com`
 
-#### Password
+#### Contraseña
 
 `password`
 
-## 📁 File Structure guide
+## 📁 Guia de la estructura de carpetas
 
-#### Controllers
+#### Controladores
 
-I use livewire so, the controllers just was used for static routes controller with and without params
+Al usar livewire, los controladores se usaron para las rutas estaticas con o sin parametros
 
 ```php
 └─  app
    └─  Http
       └─ Controllers
+         ├─ Customer.php            //controladores para la autenticación del cliente
+         │  ├─ AuthManager.php
+         │  └─ ... 
          ├─ Controller.php
-         └─ UserProfileController.php  //controller for set the profile user account
+         └─ UserProfileController.php  //ccontrolador para la información del usuario del personal
 ```
 
-#### Livewire components
+#### Componentes de livewire
 
-Components where separate in folders for each CRUD or HU
+Los componentes se separaron en carpetas para cada CRUD o HU
 
-Customer and admin parts are separates in different folders
+El aparatdo de cliente y adminitración fueron separados en diferentes carpetas
 
-Each module in admin part have his own folder  (ManagementAdmin, ManagementCustomers, Paramenters, Transactions, Reports)
+Cada modulo en el apartado de administracion tiene su propia carpeta (ManagementAdmin, ManagementCustomers, Paramenters, Transactions, Reports)
 
 ```php
 └─ app
    └─ Livewire
-      ├─ Forms  //for separate validation rules in livewire components with more than one
-      │  └─ Admin //are separate in same livewire folder sections
+      ├─ Forms  //para reglas de validación separadas en componentes livewire con más de una
+      │  └─ Admin //con la mismas secciones de la carpeta livewire
       │      └─ Staff
       │          └─ ...
-      ├─ Others  //dont have and specifict section
+      ├─ Others  //para los que no tiene una sección espécifica
       └─ Admin  
          └─ ManagementAdmin  
              ├─ Profile
              │  ├─ DeleteUserForm.php
              │  ├─ LogoutOtherBrowserSessionsForm.php
              │  └─ ...
-             ├─ Roles //Almost every section of the app, has a crud with that methods
+             ├─ Roles //Casi todas las seccioens de la app, tienen un crud con estos metodos
              │  ├─ Create.php
              │  └─ Delete.php
              │  └─ Read.php
              │  └─ Update.php
              │  └─ Detail.php
              │  └─ ...
-             ├─ Dashboard.  //some folders like dashboard have another folders for separate more (in this case separate teh different charts for different proposals)
+             ├─ Dashboard.  //algunas carpetas como como el dashboard tiene otras carpetas mas (en este caso se separan los diferentes propositos de los gráficos)
              │  └─ Sales.php
              │  └─ Products.php
              │  └─ ...
-             └─ NavigationMenu.  //all the sidebar nav-links
+             └─ NavigationMenu.  //todos los nav-links de la sidebar
 ```
 
-#### Reports
+#### Reportes
 
-In this folder are the excel exports for reports
+En esta carpeta se encuentran los reportes a excel
+
 
 ```php
 └─ Exports
-   └─ Sales //reports by module
+   └─ Sales //reportes según el modulo
       ├─ AllSalesExport 
       └─ ...
 ```
 
-#### Views
+#### Vistas
 
 ```php
 └─ resources
    └─ views
-      ├─ components  //all components blade (jestream default and custom)
-      ├─ exports  //in this folder are the pdf exports for reports and proofs of payments
-      ├─ layouts  //layout for all app
-      ├─ livewire  //dinamic livewire components /(used in pages, or with a layout)
-      └─ pages  //all static views
+      ├─ components  //todos los componentes blade
+      ├─ exports  //reportes o exportaciones a pdf
+      ├─ layouts  //layouts para la aplicación
+      ├─ livewire  //componentes dinámicos de livewire /(usados en pages, o con un layout)
+      └─ pages  //todas las vistas estaticas
 ```
 
-#### Components
+#### Componentes
 
-The components were separate in atoms, molecules, organisms, templates, and layout
+Los componentes se separaron in atoms, molecules, organisms, templates, and layout
 
 ```php
 ├─ components
     └─ admin
-        ├─ atoms  //all basics components, generally a html tag with styles and/or functionality
-        │  ├─ inputs  //all inputs components (text, checkbox, date, label, error)
-        │  ├─ table  //all table tags html components (th, tr, table)
-        │  │  ├─ columns  //columns customize for the table (where go a single row and column data)
+        ├─ atoms  //todos los componentes básicos, generalmente una etiqueta html personalizada en estilo o funcionalidad
+        │  ├─ inputs  //componentes inputs personalizados (text, checkbox, date, label, error) 
+        │  ├─ table  //las etiquetas html de table (th, tr, table)
+        │  │  ├─ columns  //columnas personalizadas para la tabla (formatea la información asignada por el datatable)
         │  │  └─ ...
         │  └─ ...
-        ├─ layouts  //all components used in layout for all pages (sidebar, topbar)
+        ├─ layouts  //componentes usados como layout (sidebar, topbar)
         │  └─ ...
-        ├─ molecules  //more complex components, generally use more than one html tag, and some atoms components
+        ├─ molecules  //componentes mas complejos que usan mas de una etiqueta html, u otros componentes atoms
         │  └─ ...
-        ├─ organisms  //more complex components, generally use some atoms and molecules components
+        ├─ organisms  //componentes aun más complejos que utilizan componentes atoms o molecules
         │  └─ ...
-        └─ templates  //blade components that is used like a template for some section (use mora than one x-slot)
+        └─ templates  //componetes que se usan como plantilla para alguna sección (usan mas de un x-slot)
             └─ ...
 ```
 
@@ -180,37 +181,37 @@ The components were separate in atoms, molecules, organisms, templates, and layo
 
 ```php
 ├─ layouts
-  ├─ admin-header.blade.  //layout for almost everything function in admin, with a title or header (use app.blade.php)
-  ├─ admin.blade.php  //layout for almost everything function in admin
-  └─ guest.blade.php  //layout for the authentication flow pages
-  └─ report.blade.php  //layout for pdf export reports
+  ├─ admin-header.blade.  //layout para cada funcion en la parte administrativa con su titulo o encabezado (usa app.blade.php)
+  ├─ admin.blade.php  //layout para casi todas las funciones administrativas que no requieran titulo o encabezado (o requieran uno mas personalizado)
+  └─ guest.blade.php  //layout para el flujo de autenticación
+  └─ report.blade.php  //layout para los reportes a pdf
 ```
 
-#### Pages and dinamics livewire components
+#### Pages y componentes dinamicos de livewire
 
-In pages folder goes the static views in separate folders for each HU flow that has a static view
-In livewire folder goes the livewire components that is used in a pages view or a view dinamic used with a layout
-Except the "/" view (dashboard) that goes separately without any folder
+En el fichero "pages" van las vistas estaticas con carpetas separads para cada crud que tiene una vista estatica
+En el fichero livewire vas los componentes livewire que se usan en un archivo de pages o una vista dinamica con un layout 
+Excepto por la vista dashboard "/" que va separada sin ninguna carpeta
 
-all admin feature are in a admin folder
+todas las caracteristicas del apartado administrativo estan en la carpeta admin
 
-all modules are separate in different folders (management-admin, management-customers, paramenters, transactions, reports, and customers parts have her own folder outside of admin folder) 
+todos los modulos se separaron en diferentes carpetas (management-admin, management-customers, paramenters, transactions, reports, y customers) 
 
 ```php
 ├─ livewire
-|  ├─ others  //dont have a specifict section
-|  └─ admin  //group of admin part
-|     ├─ management-admin  //group of admin module (roles, user, staff)
-|     |   ├─ profile  //(example) all section for the profile pages used in pages/profile/index.blade.php
+|  ├─ others  //sin sección especifica
+|  └─ admin  //parte adminsitrativa
+|     ├─ management-admin  //modulo admin (roles, usuario, personal)
+|     |   ├─ profile  //(ejemplo) todas las secciones para la pages profile pages/profile/index.blade.php
 |     |   │  └─ logout-other-browser-sessions-form.blade.php
 |     |   │  └─ ...
-|     |   ├─ roles  //almost every section in the app has a CRUD, but the view just have create, update and detail, because delete and read use a abstract class
+|     |   ├─ roles  //casi cada sección en la app tiene un CRUD, pero las vista solo tiene create, update y detail porque delete y read usan una clase abstracta
 |     |   │  └─ create.php
 |     |   │  └─ update.php
 |     |   │  └─ detail.php
 |     |   │  └─ ...
 |     │   └─ ...
-|     ├─ Dashboard.  //some folders like dashboard have another folders for separate more (in this case separate teh different charts for different proposals)
+|     ├─ Dashboard.  //algunas carpetas como como el dashboard tiene otras carpetas mas (en este caso se separan los diferentes propositos de los gráficos)
 |     │  └─ Sales.php
 |     │  └─ Products.php
 |     │  └─ ...
@@ -226,7 +227,7 @@ all modules are separate in different folders (management-admin, management-cust
 |  |  │  └─ dashboard.blade.php
 ```
 
-#### All usable components
+#### Todos los componentes usables
 
 All basics components with the theme application
 
@@ -236,61 +237,59 @@ All basics components with the theme application
         ├─ atoms
         │  ├─ inputs
         │  │  └─ //checkbox, date, txt, select, label, error, validation-error(list), group (div for group label, error and input with styles)
-        │  ├─ table  //all table tags html components (th, tr, table)
-        │  │  ├─ columns  //columns customize for the table (where go a single row and column data)
+        │  ├─ table  //etiquetas table de html (th, tr, table)
+        │  │  ├─ columns  //componentes que usa la datatable para formatear ciertos datos
         │  │  └─ table, th, td
-        │  ├─ button-action.blade.php  //button responsive for the row data crud
-        │  ├─ button.blade.php  //button simple with colors gray, blue, yellow, orange, red.
-        │  ├─ button-rounded.blade.php  //button for icons 
-        │  ├─ secondary-button.blade.php  //button simple white with outline
-        │  ├─ dropdown-link.blade.php  //a single item for dropdown with href
-        │  ├─ dropdown-link.blade.php  //a single item for dropdown with button
-        │  ├─ logo.blade.php  //app logo in a tag
-        │  ├─ date-format.blade.php  //formate a text (date) to isoFormat('DD MMM YYYY')
-        │  ├─ modal.blade.php  //modal with alpine
-        │  ├─ nav-link.blade.php  //single nav item for sidebar
-        │  ├─ nav-item.blade.php  //single nav item for select nav
-        │  └─ section-border.blade.php  //border for separate sections responsive
+        │  ├─ button-action.blade.php  //botones responsivo para cada fila de la tabla en un crud
+        │  ├─ button.blade.php  //boton simple con diferentes colores como gray, blue, yellow, orange, red.
+        │  ├─ button-rounded.blade.php  //boton redondeado para iconos
+        │  ├─ secondary-button.blade.php  //boton simple con solo borde
+        │  ├─ dropdown-link.blade.php  //elemento para la lista de un dropdown
+        │  ├─ logo.blade.php  //logo de la aplicación en una etiqueta
+        │  ├─ date-format.blade.php  //formatea un texto (fecha) al isoFormat('DD MMM YYYY')
+        │  ├─ modal.blade.php  //modal con alpine
+        │  ├─ nav-link.blade.php  //nav link para la sidebar
+        │  ├─ nav-item.blade.php  //nav item para la sidebar
+        │  └─ section-border.blade.php  //borde responsivo para separar secciones
         ├─ layouts
-        │  ├─ sidebar.blade.php  //animated sidebar responsive
-        │  └─ topbar.blade.php  //topbar for mobile (with a toggle button for sidebar in large screens)
+        │  ├─ sidebar.blade.php  //sidebar responsive animada
+        │  └─ topbar.blade.php  //topbar necesaria para celulares (con el boton de abrir sidebar)
         ├─ molecules
         │  ├─ dropdown.blade.php
-        │  ├─ nav-select.blade.php  //nav select with a group of nav
+        │  ├─ nav-select.blade.php  //sección seleccionada del sidebar
         │  ├─ detail-row.blade.php //a single row for show single data column in detail of a role for example
-        │  ├─ th-filters.blade.php //a th with order filter
-        │  └─ message-alert.blade.php  //success alert (warning and danger too)
-        │  └─ orderby.blade.php  //order by a column for the data table mobile
-        │  └─ search.blade.php  //search input with the by column filter
-        │  └─ show-entries.blade.php  //how much entrie show in a page input component
-        │  └─ th-filter.blade.php  //th with filter for datatable
+        │  └─ message-alert.blade.php  //mensaje o alerta de confirmación (warning y danger también)
+        │  └─ orderby.blade.php  //ordenar por columna para el datatable de celulares
+        │  └─ search.blade.php  //input de buscar con filtro por columna
+        │  └─ show-entries.blade.php  //cuantas filas mostrar por pagina
+        │  └─ th-filter.blade.php  //un th con filtros de ordenar (asc y desc)
         ├─ organisms
-        │  └─ datatable-propierties.blade.  //orderby search and show-entrie for the datatable
-        │  └─ item-actions.blade.php  //all 4 action for the row data crud
-        │  └─ settings-dropdown.blade.php  //dropdown for user responsive isMobile prop (for change from sidebar to topbar)
+        │  └─ datatable-propierties.blade.  //ordenar por y mostrar x filas para la datatable
+        │  └─ item-actions.blade.php  //las 5 diferentes acciones para cada fila en una datatable de un crud
+        │  └─ settings-dropdown.blade.php  //dropdown responsive para mostrar el usuario
         └─ templates
-        │  ├─ card-mobile.blade.php  //cards component for a table responsive
-        │  ├─ detail-show.blade.php  //template for detail view
-        │  ├─ action-section.blade.php  //template with a title, description, and a main content
-        │  ├─ authentication-card.blade.php  //template for authentication flow pages
-        │  ├─ confirmation-modal.blade.php  //modal for confirmations like delete something, with a title, content and footer for the buttons
-        │  ├─ dialog-modal.blade.php  //dialog-modal, for forms in a modal, with title, a content and footer for the buttons
-        │  ├─ form-section.blade.php  //form with a title description and actions for button
-        │  ├─ form-template.blade.php  //layout to create / update form, with content and footer actions
-        │  ├─ permissions-card.blade.php  //layout to show the roles by group
-        │  ├─ summary-card.blade.php  //layout for card for summary in dashboard
-        │  └─ section-title.blade.php  //for a section, set the title and description appart of the content (like profile sections)
+        │  ├─ card-mobile.blade.php  //componente de carta para una datatable responsiva
+        │  ├─ detail-show.blade.php  //plantilla para el detalle (de un cliente, pedido, etc)
+        │  ├─ action-section.blade.php  //plantilla con title, description, and a main content 
+        │  ├─ authentication-card.blade.php  //plantilla para las paginas del flujo de autenticación
+        │  ├─ confirmation-modal.blade.php  //modal para confirmar alguna eliminación con title, content, y footer para los botones del modal
+        │  ├─ dialog-modal.blade.php  //dialog-modal para los formularios en un modal, con title, content y footer para los botnes de acción
+        │  ├─ form-section.blade.php  //formulario con un title, descriptión y actions del formulario
+        │  ├─ form-template.blade.php  //layourt para los formularios de crear o actualizar
+        │  ├─ permissions-card.blade.php  //layout para mostrar roles por grupo de roles
+        │  ├─ summary-card.blade.php  //layout para la tarjeta de resumen en el dashboard
+        │  └─ section-title.blade.php  //para cada seccion con title y description (como las profile section)
 ```
 
-## How use some components
+## Como usar algunos componentes
 
-#### Message alert
+#### Mensaje de alerta/confirmación
 
-The file is in resources/views/components/molecules
+Este se encuentra en resources/views/components/molecules
 
-A component or message alerts like success, warning, and error
+Un componente para mensajes de alerta exitosa, peligro o error
 
-use in a php class with for the same view with livewire:
+usar en una clase php para la misma vista con livewire:
 
 ```php
 use Laravel\Jetstream\InteractsWithBanner;
@@ -299,18 +298,18 @@ use InteractsWithBanner;
 
 public function proof()
 {
-    $this->banner('Message') //success (green)
-    $this->dangerBanner('Message') //danger (red)
-    $this->warningBanner('Message') //warning (gray)
+    $this->banner('Message') //Exitoso (verde)
+    $this->dangerBanner('Message') //peligro (rojo)
+    $this->warningBanner('Message') //precaución (gris)
 }
 ```
 
-or in a redirect with:
+o en una redirección con:
 
 ```php
 public function proof()
 {
-    session()->flash('flash.bannerStyle', 'success');  (success, danger) (if dont passed this session flash, default is warning)
+    session()->flash('flash.bannerStyle', 'success'); //(success, danger) (si no pasas esta session flash, la default es warning)
     session()->flash('flash.banner', 'message');
     return redirect()->ro('route')
 }
@@ -318,15 +317,15 @@ public function proof()
 
 #### Datable
 
-A livewire component abstract for show data with filters (orderby, pagination, search)
+un componente livewire abstracto para mostrar lista de información con filtros (ordenar por, paginación, busqueda)
 
-Make a livewire component with
+Crea un componente livewire con
 
 ```
 php artisan make:livewire example
 ```
 
-Extends that
+Hereda de:
 
 ```php
 use App\Livewire\Others\Datatable;
@@ -336,7 +335,7 @@ class UsersTable extends Datatable
 }
 ```
 
-Create the columns for show in the table
+Crea las columnas para mostrar en la tabla
 
 ```php
 use App\View\Table\Column;
@@ -355,7 +354,7 @@ public function columns() : array
 }
 ```
 
-Set the columns for search filter
+Coloca las columnas para los filtros de busqueda por
 
 ```php
  public function filters(): array
@@ -368,8 +367,10 @@ Set the columns for search filter
             Filter::make('created_at', 'Fecha de registro')->date(),
         ];
     }
+```
 
-Create an array to set the actions buttons you are going to use
+Crea un array para establecer los botones de acción que se usaran en la tabla
+
 
 ```php
 public function actions() : array
@@ -383,7 +384,7 @@ public function actions() : array
 }
 ```
 
-Add the name of the used model and pass it
+agrega el nombre del modelo a usar para pasarlo, o poner una query especifica de este
 
 ```php
 use App\Models\User;
@@ -394,7 +395,7 @@ public function query() : \Illuminate\Database\Eloquent\Builder
 }
 ```
 
-Set routes prefix (for update, detail or some router prefix name)
+Establece el prefijo de ruta (para update, detail, o algun prefijo de ruta que nos redigira los botones)
 
 ```php
 public function routesPrefix(): string
@@ -403,9 +404,9 @@ public function routesPrefix(): string
     }
 ```
 
-Remove the render method of your livewire class
+Remueve el metodo render de la clase livewire
 
-And finally add the component to the view
+Y finalmente agrega el componente a la vista
 
 ``` html
    <livewire:example>
@@ -413,15 +414,17 @@ And finally add the component to the view
 
 #### DeleteRow 
 
-A livewire component abstract for delete row with the delete button in a datatable, or other site
+Un componente livewire abstracto para borrar una fila con el boton de eliminar en un datatable u otro sitio
 
-It open a modal confirmation to delete, an with the confirm delete de row of the model
+Este abre un modal de confimación de eliminación, y luego eliminar la fila o lo deseado
 
-Make a livewire component with
+Crea un componente livewire con
 
 ```
 php artisan make:livewire ExampleDelete
 ```
+
+Hereda de:
 
 ```php
 use App\Livewire\Others\DeleteRow;
@@ -431,7 +434,7 @@ class ExampleDelete extends DeleteRow
 }
 ```
 
-Passes the model 
+Pasa el modelo
 
 ```php
 use App\Models\Model;
@@ -442,7 +445,8 @@ public function model()
 }
 ```
 
-Passes the class to re render after the delete (to show the changes)
+pasa la clase que se requiera re-renderizar luego de eliminar (para mostrar cambios)
+
 
 ```php
 public function componentToRenderAfterDelete()
@@ -451,7 +455,7 @@ public function componentToRenderAfterDelete()
 }
 ```
 
-Set the confirmation messages, pasa un array vacio para poner los valores por defecto
+Establece los mensajes de confirmacion, o un array vacio para los valores por defecto
 
 ```php
 protected function confirmationMessages(): array
@@ -464,7 +468,8 @@ protected function confirmationMessages(): array
 }
 ```
 
-if has related model (category with products relateds) passes the model/s name to confirm before it
+si tiene un modelo relacionado (category y products se relacionan, y tiene restricciones) pasa el modelo para realizar la confirmación antes
+
 
 ```php
 public function relatedModels(): array
@@ -473,8 +478,10 @@ public function relatedModels(): array
     }
 
 ```
-Put the livewire component in your page, can passes a route name if wanna redirect after delete
+
+Pon el componente livewire en la page, ademas de poder pasar una ruta en caso de querer redirigir luego de eliminar
 
 ```php
 <livewire:example redirect="example.index">
 ```
+
