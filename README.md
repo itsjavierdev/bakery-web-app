@@ -1,13 +1,26 @@
+<p>
+    <img src="https://github.com/user-attachments/assets/273dd76c-0942-4f23-a584-2031598aa680" alt="logo" align="left" width="70" height="auto"></img>
+</p>
+
+
 # Sistema para la panaderia "San Xavier"
 
 Este proyecto, un sistema de panadería, proporciona una sólida plataforma para que la panadería San Xaview agilice sus operaciones y permita a los clientes realizar cómodamente sus pedidos en línea. Cuenta con una interfaz fácil de usar para navegar por los productos, un sistema de carrito de la compra seguro y un proceso para realizar pedido de manera fluida. La aplicación está diseñada para mejorar la eficiencia de la panadería digitalizando el proceso de pedido y proporcionando una experiencia en línea fluida a los clientes. Y una parte de administración para el personal y el propietario de la panadería para administrar el contenido de la parte del cliente, y recibir y crear pedidos, y ver análisis de los productos, ventas y otras funciones. Los desarrolladores pueden explorar el código base para entender los detalles de implementación.
 
 
+## Contenido:
+
+- [Tecnologías](#-tecnologías)
+- [Instalación](#-instalación)
+- [Guia de la estructura de carpetas](#-guia-de-la-estructura-de-carpetas)
+- [Guía uso de componentes](#guía-uso-de-componentes)
+- [Imágenes de la aplicación](#imagenes-de-la-aplicación)
+
 ## 💻 Tecnologías:
 
 ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white) ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
-## 👩🏻‍💻 Intalación:
+## 👩🏻‍💻 Instalación:
 
 Primero debes configurar el entorno de desarrollo de laravel
 
@@ -281,7 +294,7 @@ All basics components with the theme application
         │  └─ section-title.blade.php  //para cada seccion con title y description (como las profile section)
 ```
 
-## Como usar algunos componentes
+## Guía uso de componentes
 
 #### Mensaje de alerta/confirmación
 
@@ -484,4 +497,114 @@ Pon el componente livewire en la page, ademas de poder pasar una ruta en caso de
 ```php
 <livewire:example redirect="example.index">
 ```
+
+## Imagenes de la Aplicación
+
+### Apartado de realizar pedido por el cliente
+
+#### Vista principal
+
+![HomePage](https://github.com/user-attachments/assets/6c995fa6-658a-4bb5-9b27-211ac31e6674)
+
+#### Vista tienda/todos los productos
+
+![Shop](https://github.com/user-attachments/assets/300e5b50-e5a6-4de6-9d83-46b1ad80f251)
+
+#### Vista detalle de un producto
+
+![DetailProduct](https://github.com/user-attachments/assets/d53bc886-d34c-4ce1-929b-841f60d0fef3)
+
+#### Vista Carrito
+
+![Cart](https://github.com/user-attachments/assets/35cc70c4-8b23-4a8f-8f2d-9be2ba3d0f18)
+
+#### Vista Gestionar Direcciones
+
+![direcciones](https://github.com/user-attachments/assets/ef42df3d-5ad9-44c3-a2be-5f82ce547df7)
+
+#### Vista Checkout/Realizar Pedido
+
+![checkout](https://github.com/user-attachments/assets/e745fcc1-108a-47a8-9378-bf1dae17ff7d)
+
+#### Vista Registro de cliente
+
+![RegistrarCliente](https://github.com/user-attachments/assets/7f5cbe54-5d22-41e2-8fac-9fcf220688cb)
+
+#### Vista Inicio de sesión del cliente
+
+![LoginCliente](https://github.com/user-attachments/assets/7751a2f5-a8cb-49bc-8594-105ca693ee18)
+
+### Apartado Administrativo del sistema
+
+#### Vista inicio de sesión del personal
+
+<img width="1512" alt="login personal" src="https://github.com/user-attachments/assets/9678a9a4-ec15-4c04-b750-d7306ae84321" />
+
+#### Vista dashboard
+
+<img width="1512" alt="dashboard" src="https://github.com/user-attachments/assets/0ffa0721-af39-48d9-a0f3-cf20cbb783da" />
+
+#### Vista agregar rol
+
+<img width="1512" alt="gestionar roles" src="https://github.com/user-attachments/assets/5096f295-f379-427a-ac10-b94096166201" />
+
+#### Vista agregar producto
+
+<img width="1512" alt="gestionar productos" src="https://github.com/user-attachments/assets/90e4d24a-be4d-4fe9-9d32-389c73e3b51a" />
+
+#### Vista principal información de contacto de la empresa
+
+<img width="1512" alt="gestionar info de la empresa" src="https://github.com/user-attachments/assets/3d318826-7dbf-41d7-9734-d6757b8997b8" />
+
+#### Vista principal gestionar pedidos
+
+<img width="1512" alt="gestionar pedidos" src="https://github.com/user-attachments/assets/428f0479-cdf1-4a10-92a8-d9d65cf33e7d" />
+
+#### Vista entregar pedido
+
+<img width="1512" alt="entregar pedido" src="https://github.com/user-attachments/assets/2569be2f-f079-438b-9770-973f044a2d23" />
+
+#### Vista reportes de ventas
+
+<img width="1512" alt="reportes de ventas" src="https://github.com/user-attachments/assets/2304fec3-fb84-4b81-bbc5-3580706a383d" />
+
+#### Vista reporte de pedidos
+
+<img width="1512" alt="reporte de pedidos" src="https://github.com/user-attachments/assets/6b6fe410-14b4-49ed-9a68-aa583d2aab65" />
+
+### Ejemplo algunos reportes
+
+#### Reporte de productos por entregar
+
+<img width="1512" alt="reporte de productos por entregar" src="https://github.com/user-attachments/assets/c938400b-91b9-4aae-a1c2-8f8404657c19" />
+
+#### Reporte de ventas por productos
+
+<img width="1511" alt="reporte de ventas por productos" src="https://github.com/user-attachments/assets/86069e50-d845-416c-9fc4-b674c646fc27" />
+
+#### Reporte de ventas diarias por un rango de fechas
+
+<img width="1512" alt="reporte de ventas diarias" src="https://github.com/user-attachments/assets/7c8de5f8-68cf-4d4b-92b1-03f0e7fd412f" />
+
+#### Comprobante de venta
+
+<img width="1512" alt="Comprobante de venta" src="https://github.com/user-attachments/assets/1fe406cb-f4fa-49d1-95bd-23039a4edc9b" />
+
+#### Comprobante de pago 
+
+<img width="1512" alt="Comprobante de pago" src="https://github.com/user-attachments/assets/46518f0d-94c3-41e2-83f4-b98eb968195f" />
+
+### Algunos email que envia la aplicación
+
+#### Correo de verificar correo electronico del cliente
+
+![verificar email cliente](https://github.com/user-attachments/assets/9f951440-4343-4f48-a4c0-ce556fa17173)
+
+#### Correo de confirmación de pedido
+
+![confirmacion pedido cliente](https://github.com/user-attachments/assets/7397b55c-303f-454f-bf89-dfde13315d90)
+
+
+
+
 
